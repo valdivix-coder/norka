@@ -2,7 +2,7 @@
 
 **Actualizado:** 20 de noviembre de 2026.
 
-**Estado:** el repositorio está preparado y sin código. La Fase 0 (descubrimiento y diseño) no ha comenzado.
+**Estado:** el repositorio está preparado y sin código. La Fase 0 (descubrimiento y diseño) está entregada en la rama `fase-0` y espera aprobación.
 
 **Hecho**
 - Prompt maestro v7 en `docs/PROMPT-MAESTRO.md`.
@@ -11,12 +11,12 @@
 - Repositorio renombrado a «norka» (20 de noviembre de 2026).
 - Archivos SVG exactos de la marca en `docs/marca/svg/`.
 - Instrucciones para agentes (`AGENTS.md`) y guía de arranque (`docs/ARRANQUE.md`).
+- Documento de [Fase 0](fases/FASE-0.md), con fuentes, mapa de pantallas y preguntas. Última migración: ninguna.
 
 **Sigue**
-1. La propietaria abre el agente de código en este repositorio y pega `docs/PROMPT-DE-ARRANQUE.md`.
-2. El ejecutor entrega la Fase 0 en `docs/fases/FASE-0.md` (rama `fase-0`), sin código.
-3. La propietaria responde las preguntas y escribe «apruebo la fase 0».
+1. Simón revisa la Fase 0 y responde las preguntas del apartado 2.
+2. Para aprobar esta entrega, Simón escribe «apruebo la fase 0».
 
 **Pendiente fuera del código**
-- Verificar que «norka» esté libre como marca, dominio y nombre en las tiendas (lo investiga la Fase 0).
+- Verificar el registro de marca en INAPI y el título exacto en las consolas de tiendas. La Fase 0 documenta los dominios y coincidencias encontrados.
 - Confirmar con una persona hablante de mapuzungun el significado del nombre antes de publicarlo.
