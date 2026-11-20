@@ -2,7 +2,7 @@
 
 **Actualizado:** 20 de noviembre de 2026.
 
-**Estado:** el repositorio está preparado y sin código. La Fase 0 (descubrimiento y diseño) está entregada en la rama `fase-0` y espera aprobación.
+**Estado:** el repositorio está preparado y sin código. La Fase 0 (descubrimiento y diseño) está aprobada por Simón el 20 de noviembre de 2026. Su aprobación y sus siete decisiones están registradas en la rama `fase-0`.
 
 **Hecho**
 - Prompt maestro v7 en `docs/PROMPT-MAESTRO.md`.
@@ -15,8 +15,8 @@
 - Siete decisiones de Simón registradas en el apartado 2 de la Fase 0. El prompt maestro se acepta como base general.
 
 **Sigue**
-1. Las siete preguntas del apartado 2 están respondidas y registradas en el documento de la Fase 0.
-2. Para aprobar esta entrega, Simón escribe «apruebo la fase 0».
+1. Tarea 1.1 de la Fase 1, Base. Crear la estructura y el proyecto local siguiendo la sección 9.1 y preparar el glosario.
+2. Mantener una tarea por respuesta y registrar evidencia según la sección 14.
 
 **Pendiente fuera del código**
 - Verificar el registro de marca en INAPI y el título exacto en las consolas de tiendas. La Fase 0 documenta los dominios y coincidencias encontrados.
