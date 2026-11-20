@@ -4,7 +4,7 @@ Se actualiza al cerrar cada tarea, con evidencia. Estados: pendiente · en curso
 
 | Fase | Contenido | Estado | Evidencia | Documento |
 | --- | --- | --- | --- | --- |
-| 0 | Descubrimiento y diseño (sin código) | entregada (espera aprobación) | Guía de 45 páginas, fuentes fechadas y verificación documental en el apartado 9 | [FASE-0.md](fases/FASE-0.md) |
+| 0 | Descubrimiento y diseño (sin código) | entregada (espera aprobación) | Guía de 45 páginas, fuentes fechadas, siete respuestas de Simón en el apartado 2 y verificación documental en el apartado 9 | [FASE-0.md](fases/FASE-0.md) |
 | 1 | Base | pendiente | — | `docs/fases/FASE-1.md` |
 | 2 | Captura | pendiente | — | `docs/fases/FASE-2.md` |
 | 3 | Centro de control | pendiente | — | `docs/fases/FASE-3.md` |
