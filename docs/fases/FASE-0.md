@@ -54,6 +54,20 @@ Los pagos se registran a mano y los tratamientos repiten las indicaciones que in
 
    Recomiendo A. La tabla específica de sonidos asigna «hecho» a tareas, tomas y pagos y permite apagarlo desde Perfil.
 
+### Respuestas de Simón registradas el 20 de noviembre de 2026
+
+- Pregunta 1, opción A. Lista de palabras de pausa aprobada tal como está en 6.19.
+- Pregunta 2, opción B. El dominio se decidirá después de verificar la marca y el título en las tiendas.
+- Pregunta 3, opción A. Día del Niño el segundo domingo de agosto.
+- Pregunta 4, opción A. Evaluar Supabase Cron sin costo adicional y medir que cumple.
+- Pregunta 5, opción A. Excluir de la descarga comentarios, notas de cambio, aportes y datos de otras personas. Esta decisión resuelve la contradicción señalada sobre la exportación.
+- Pregunta 6, opción A. Reutilizar la app web dentro de un contenedor para el empaquetado de prueba de iPhone y Android en 10.4.
+- Pregunta 7, opción A. Usar el sonido «hecho», sin voz ni palabras, con la opción de apagarlo desde Perfil. Esta decisión resuelve la contradicción señalada sobre el sonido.
+- Criterio general expresado por Simón. Acepta las sugerencias del prompt maestro como base en general.
+- Preferencia de conversación. Presentar las decisiones de una en una, con contexto y selección múltiple. Mantener las opciones también en el mensaje para que pueda responder con una letra.
+
+Las siete preguntas de este apartado están respondidas. La aprobación de la Fase 0 se registra cuando Simón escribe «apruebo la fase 0». Las comprobaciones técnicas y las otras contradicciones identificadas en el apartado 9 siguen abiertas para la tarea correspondiente.
+
 ## 3. Verificación del nombre «norka»
 
 Consultas del 20 de noviembre de 2026.
@@ -219,16 +233,16 @@ El Decreto 1110 de 1976 señala el **tercer miércoles de octubre**. En 2026, el
 
 **Puedo trabajar las fases 1 a 10 en su rama y orden, con aprobación por fase. Hay tareas que todavía no puedo garantizar tal como están escritas.**
 
-- **1.3 y 9.3.** La guía 9.1 indica marcar «Hecho» sin sonido, mientras la guía 9.4 y el prompt maestro 10.3–10.4 incluyen ese sonido. Se necesita la decisión del apartado 2 antes de implementar ese comportamiento. Para **1.3/9.6**, la escala tipográfica cerrada de la guía 5 omite medidas como los 30 y 22 px del anillo de 7.4 y los 10 px de la cabecera 7.16. El margen a 360 px es 18 px en 6.1 y 20 px en la lista de 14. Se necesita resolver qué especificación rige esos valores antes de la tarea visual correspondiente.
+- **1.3 y 9.3.** La guía 9.1 indica marcar «Hecho» sin sonido, mientras la guía 9.4 y el prompt maestro 10.3–10.4 incluyen ese sonido. Simón aprobó el sonido «hecho» en el apartado 2. Para **1.3/9.6**, la escala tipográfica cerrada de la guía 5 omite medidas como los 30 y 22 px del anillo de 7.4 y los 10 px de la cabecera 7.16. El margen a 360 px es 18 px en 6.1 y 20 px en la lista de 14. Se necesita resolver qué especificación rige esos valores antes de la tarea visual correspondiente.
 - **1.4, 1.7, 1.8 y migraciones posteriores.** Puedo preparar migraciones, consultas antes y después y vuelta atrás. La confirmación de aplicarlas corresponde a Simón según 9.2. Para **1.5** se requieren las credenciales de Google y la prueba en el teléfono. Apple y Facebook quedan sujetos al apartado 7.
 - **2.6 y 2.9.** La evaluación real necesita acceso a Gemini desde el servidor y una cuota útil de costo cero. Las mediciones en el teléfono las hace Simón. La puerta de la fase depende de resultados medidos.
 - **3.7, 5.5 y 6.3.** La composición de la guía 10.2 ubica tratamientos antes de los ámbitos en la ficha; el orden de interacción de 6.4 los enumera después. La guía 10.8 ubica una fila Ajustes en Familia; el prompt maestro 8 sitúa Ajustes dentro de Perfil. Se requiere aclarar el orden y la entrada antes de implementarlos.
-- **4.3 y 6.4.** Vercel Hobby por sí solo no cumple el máximo de cinco minutos de 9.2.16. El candidato de costo cero necesita la aprobación del apartado 2 y una prueba. La recepción en dispositivos es una verificación adicional.
-- **5.2 a 5.5.** La fecha del Día del Niño se resuelve con la decisión del apartado 2. El listado de 13.5 muestra 5.8 después de 5.9 y 5.10, mientras la regla general pide orden numérico. Antes de llegar a 5.8 hace falta confirmar el orden. La regla R11 también figura en 4.3 y en 5.8; se requiere confirmar el reparto del trabajo antes de programarla.
+- **4.3 y 6.4.** Vercel Hobby por sí solo no cumple el máximo de cinco minutos de 9.2.16. Simón aprobó evaluar Supabase Cron sin costo adicional. Sigue siendo necesaria la prueba. La recepción en dispositivos es una verificación adicional.
+- **5.2 a 5.5.** Simón aprobó el segundo domingo de agosto para el Día del Niño. El listado de 13.5 muestra 5.8 después de 5.9 y 5.10, mientras la regla general pide orden numérico. Antes de llegar a 5.8 hace falta confirmar el orden. La regla R11 también figura en 4.3 y en 5.8; se requiere confirmar el reparto del trabajo antes de programarla.
 - **4.7, 6.6, 7.5, 8.11, 8.12 y 9.9.** Puedo preparar pruebas, guiones y planillas. Las puertas requieren recorridos de Simón y, donde corresponde, pruebas con cinco personas o con dos teléfonos.
 - **9.2, 9.3 y 9.7.** La cabecera a 60 cuadros por segundo, el comportamiento de sonido en silencio y el rendimiento exigen medición en dispositivos reales. Estos resultados están NO VERIFICADOS hasta ejecutar los recorridos de las secciones 10 y 12.
-- **10.2.** La exportación requiere decidir la contradicción del apartado 2 antes de construirla.
-- **10.4.** Este entorno es Linux y no tiene Xcode. La compilación y firma local de iOS requieren acceso a macOS con Xcode o a un entorno que lo proporcione, y las cuentas o credenciales que exija el modo de distribución de prueba elegido. Se requiere aprobar la ruta de empaquetado y confirmar recursos compatibles con el presupuesto de la v1. La aceptación en las tiendas queda NO VERIFICADA hasta su revisión futura.
+- **10.2.** Simón resolvió la contradicción con las exclusiones de descarga registradas en el apartado 2.
+- **10.4.** Este entorno es Linux y no tiene Xcode. La compilación y firma local de iOS requieren acceso a macOS con Xcode o a un entorno que lo proporcione, y las cuentas o credenciales que exija el modo de distribución de prueba elegido. Simón aprobó la ruta del contenedor web. Se requiere confirmar recursos compatibles con el presupuesto de la v1. La aceptación en las tiendas queda NO VERIFICADA hasta su revisión futura.
 
 **Evidencia y vuelta atrás.** `pdfinfo` devolvió `Title: norka · Guía gráfica 2.0` y `Pages: 45`. `git hash-object` devolvió `342d249a085fb51dad50836c243a8059bb30465d` para el prompt maestro y `af1133fb4184e7a000d7d5f1a7db16b15a3aa111` para el PDF leído. Se leyó primero `AGENTS.md` y `docs/AHORA.md`, luego el prompt maestro y la guía y, después, `README.md` y `docs/IMPLEMENTATION_STATUS.md`. Esta entrega se revisa en GitHub. La Fase 0 no tiene arnés ni una app que abrir en el teléfono. La vuelta atrás consiste en revertir el cambio documental en `fase-0`. Como evidencia de publicación se entrega el enlace al cambio en GitHub.
 
