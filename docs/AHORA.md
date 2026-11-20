@@ -12,9 +12,10 @@
 - Archivos SVG exactos de la marca en `docs/marca/svg/`.
 - Instrucciones para agentes (`AGENTS.md`) y guía de arranque (`docs/ARRANQUE.md`).
 - Documento de [Fase 0](fases/FASE-0.md), con fuentes, mapa de pantallas y preguntas. Última migración: ninguna.
+- Siete decisiones de Simón registradas en el apartado 2 de la Fase 0. El prompt maestro se acepta como base general.
 
 **Sigue**
-1. Simón revisa la Fase 0 y responde las preguntas del apartado 2.
+1. Las siete preguntas del apartado 2 están respondidas y registradas en el documento de la Fase 0.
 2. Para aprobar esta entrega, Simón escribe «apruebo la fase 0».
 
 **Pendiente fuera del código**
