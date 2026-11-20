@@ -2,7 +2,7 @@
 
 **Actualizado:** 20 de noviembre de 2026.
 
-**Estado:** el repositorio está preparado y sin código. La Fase 0 (descubrimiento y diseño) está aprobada por Simón el 20 de noviembre de 2026. Su aprobación y sus siete decisiones están registradas en la rama `fase-0`.
+**Estado:** Fase 0 aprobada por Simón el 20 de noviembre de 2026. Fase 1 en curso, rama `fase-1`. Tarea 1.1 entregada con arranque local y compilación comprobados.
 
 **Hecho**
 - Prompt maestro v7 en `docs/PROMPT-MAESTRO.md`.
@@ -14,8 +14,10 @@
 - Documento de [Fase 0](fases/FASE-0.md), con fuentes, mapa de pantallas y preguntas. Última migración: ninguna.
 - Siete decisiones de Simón registradas en el apartado 2 de la Fase 0. El prompt maestro se acepta como base general.
 
+- Estructura de 9.1, glosario con 37 términos y base Next.js comprobada con HTTP 200. Evidencia y vuelta atrás en [Fase 1](fases/FASE-1.md).
+
 **Sigue**
-1. Tarea 1.1 de la Fase 1, Base. Crear la estructura y el proyecto local siguiendo la sección 9.1 y preparar el glosario.
+1. Tarea 1.2, arnés mínimo con tipos, linter, fronteras de capas e integración continua.
 2. Mantener una tarea por respuesta y registrar evidencia según la sección 14.
 
 **Pendiente fuera del código**
