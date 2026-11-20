@@ -17,6 +17,7 @@ Aplicación para repartir y recordar las responsabilidades de una familia: quié
 | [`docs/AHORA.md`](docs/AHORA.md) | Dónde quedó el trabajo y qué sigue (una página) |
 | [`docs/IMPLEMENTATION_STATUS.md`](docs/IMPLEMENTATION_STATUS.md) | Estado de las fases 0 a 10, con evidencia |
 | [`docs/fases/`](docs/fases/) | Un documento por fase, con evidencia, límites y vuelta atrás |
+| [`docs/marca/svg/`](docs/marca/svg/) | Los tres archivos SVG exactos de la marca (logotipo, isotipo «Órbita» e isotipo reducido) |
 | [`docs/marca/referencia/`](docs/marca/referencia/) | Imágenes de referencia de la marca (no son fuente de verdad; manda el PDF) |
 | [`AGENTS.md`](AGENTS.md) | Instrucciones para cualquier agente (Claude Code, Codex, etc.) |
 

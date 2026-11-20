@@ -11,7 +11,7 @@
 - **Nunca inventes** datos, APIs, precios ni políticas. Lo que no pudiste comprobar va como «NO VERIFICADO: …» con la forma de comprobarlo. Nunca digas «listo» sin evidencia.
 - Si algo no está escrito, **pregunta** (regla 0.7 del prompt maestro). No lo decidas solo.
 - **Ramas:** cada fase va en su rama (`fase-0`, `fase-1`, …). Nada se fusiona en `main` sin su aprobación escrita.
-- **Marca:** logotipo «norka» e isotipo «Órbita», ya decididos. Se copian del código SVG de la guía (sección 3). Nunca se redibujan, optimizan ni modifican. Todo se dibuja con el componente `Marca`.
+- **Marca:** logotipo «norka» e isotipo «Órbita», ya decididos. Se copian de los archivos de `docs/marca/svg/` (son el código de la sección 3.4 de la guía; no copies el código desde el PDF, porque se corta). Nunca se redibujan, optimizan ni modifican. Todo se dibuja con el componente `Marca`.
 - **Reacciones:** son 5 y todas de apoyo. No existe «Tengo una duda» ni la cara con monóculo.
 - **Buen trato:** la app habla de tareas, no de personas, y no toma partido. Sirve igual a adultos separados. Palabras prohibidas y reglas: sección 6.19.
 - **Sin APIs de OpenAI, Anthropic ni otros proveedores: la única IA de la aplicación es Gemini, desde el servidor. Presupuesto adicional cero.** Nada de secretos en el repositorio, el navegador ni los registros.

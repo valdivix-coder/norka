@@ -25,7 +25,7 @@ Antes de seguir, comprueba que los dos primeros archivos existen y que los pudis
 
 ## Lo que ya está decidido (no lo preguntes de nuevo)
 
-- **Marca:** logotipo «norka» (la «o» es la manilla y la «a» es la puerta) e isotipo «Órbita». Está dibujada en la sección 3 de la guía, con su código SVG. NO la rediseñes, no la redibujes y no la optimices.
+- **Marca:** logotipo «norka» (la «o» es la manilla y la «a» es la puerta) e isotipo «Órbita». Está dibujada en la sección 3 de la guía. Su código SVG exacto está en `docs/marca/svg/` (cópialo de ahí, no del PDF: en el PDF las líneas largas se cortan). NO la rediseñes, no la redibujes y no la optimices.
 - **Nombre:** se escribe «norka», siempre en minúsculas. NO escribas el significado del nombre en ningún texto de la app, página pública ni ficha de tienda hasta que Simón lo confirme por escrito.
 - **Reacciones:** son 5 y todas de apoyo. No existe «Tengo una duda» ni la cara con monóculo. Si te parece buena idea reponerla, NO lo hagas.
 - **Buen trato:** la app sirve igual a familias de cualquier forma, incluidos adultos separados que crían en dos casas. Sección 6.19 del prompt maestro.
