@@ -24,7 +24,7 @@ El ejecutor te lo pedirá cuando llegue el momento. Ten presente que se necesita
 | --- | --- | --- |
 | Fase 1 | Cuenta de Supabase y de Vercel | Base de datos y publicación |
 | Fase 2 | Clave de Gemini (servidor) | La única IA de la app |
-| Fase 5 | Credenciales de entrada con Google, Apple y Facebook | Iniciar sesión (los costos de Apple y Facebook los verifica la Fase 0) |
+| Fase 1 (tarea 1.5) | Credenciales de entrada con Google, Apple y Facebook | Iniciar sesión (los costos de Apple y Facebook los verifica la Fase 0) |
 | Fase 10 | Cuentas de Google Play y App Store, según la ruta que apruebes en la Fase 0 | Publicar |
 
 Las migraciones de base de datos las aplicas tú en Supabase; el ejecutor te las deja listas con su vuelta atrás.
