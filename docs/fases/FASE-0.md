@@ -66,7 +66,7 @@ Los pagos se registran a mano y los tratamientos repiten las indicaciones que in
 - Criterio general expresado por Simón. Acepta las sugerencias del prompt maestro como base en general.
 - Preferencia de conversación. Presentar las decisiones de una en una, con contexto y selección múltiple. Mantener las opciones también en el mensaje para que pueda responder con una letra.
 
-Las siete preguntas de este apartado están respondidas. La aprobación de la Fase 0 se registra cuando Simón escribe «apruebo la fase 0». Las comprobaciones técnicas y las otras contradicciones identificadas en el apartado 9 siguen abiertas para la tarea correspondiente.
+Las siete preguntas de este apartado están respondidas. Simón aprobó la Fase 0 el 20 de noviembre de 2026 con el mensaje «Apruebo la fase 0». Las comprobaciones técnicas y las otras contradicciones identificadas en el apartado 9 siguen abiertas para la tarea correspondiente.
 
 ## 3. Verificación del nombre «norka»
 
@@ -248,4 +248,4 @@ El Decreto 1110 de 1976 señala el **tercer miércoles de octubre**. En 2026, el
 
 **Lista de control de 14.2.** 1 Sí, solo Fase 0. 2 No aplica, el arnés se crea en 1.2. 3 Sí, vocabulario de 5.1 para el producto. 4 a 8 No aplica, sin datos ni pantallas implementados. 9 Sí, el mapa y las preguntas usan trato neutral. 10 y 11 No aplica, sin valores visuales implementados ni datos guardados. 12 Sí, documentos actualizados en la rama. 13 a 15 No aplica, sin acciones, motor ni formularios implementados. 16 Sí, «norka» en minúsculas, sin dibujar la marca. 17 a 19 No aplica, sin cambios a Actividad, mensajes ni movimiento. 20 Sí para la redacción de la entrega, con la verificación en la app reservada a 8.12.
 
-La Fase 0 queda entregada para revisión. La aprobación se registra cuando Simón escribe «apruebo la fase 0».
+**Fase 0 aprobada por Simón el 20 de noviembre de 2026.** Su mensaje fue «Apruebo la fase 0». Las siete decisiones del apartado 2 forman parte de la aprobación. La siguiente tarea es 1.1, Base.
