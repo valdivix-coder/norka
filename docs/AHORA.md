@@ -2,7 +2,7 @@
 
 **Actualizado:** 21 de noviembre de 2026.
 
-**Estado:** Fase 0 aprobada por Simón el 20 de noviembre de 2026. Fase 1 en curso, rama `fase-1`. Tarea 1.4 preparada y probada en una base temporal. Pendiente identificar el proyecto de Supabase y que Simón aplique la migración 0001. Última migración aplicada en Supabase: ninguna confirmada.
+**Estado:** Fase 0 aprobada por Simón el 20 de noviembre de 2026. Fase 1 en curso, rama `fase-1`. Tarea 1.4 preparada y probada en una base temporal. Proyecto norka creado en Neuralia, región São Paulo, referencia `yplhlooidqzqhrjbwrdp`, activo y saludable. Comprobación previa remota aprobada. Pendiente que Simón aplique la migración 0001. Última migración aplicada en Supabase: ninguna confirmada.
 
 **Hecho**
 - Prompt maestro v7 en `docs/PROMPT-MAESTRO.md`.

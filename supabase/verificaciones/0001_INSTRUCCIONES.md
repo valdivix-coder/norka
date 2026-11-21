@@ -4,7 +4,7 @@ La tarea 1.4 está preparada para que Simón aplique el cambio. La sección 9.2.
 
 ## Antes de aplicar
 
-Primero hay que identificar el proyecto de norka. La conexión disponible muestra dos proyectos, «Ideafix» y «valdivix-coder's Project». El destino está pendiente de confirmación.
+El destino confirmado es **norka**, en **Neuralia**, región São Paulo. Referencia `yplhlooidqzqhrjbwrdp`. [Abrir el editor SQL de norka](https://supabase.com/dashboard/project/yplhlooidqzqhrjbwrdp/sql/new). El proyecto figura ACTIVE_HEALTHY. La comprobación previa remota confirmó las seis tablas ausentes y los tres roles esperados.
 
 1. Abrir el proyecto confirmado en Supabase y entrar en **SQL Editor**.
 2. Copiar el contenido de [0001_antes.sql](0001_antes.sql) en una consulta nueva y ejecutar **Run**.

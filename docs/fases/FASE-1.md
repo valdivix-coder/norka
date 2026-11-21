@@ -332,3 +332,27 @@ Lista de control de 14.2 para esta tarea
 18. No aplica.
 19. No aplica.
 20. Sí, las relaciones permiten distintos adultos y formas de familia.
+
+#### Proyecto real preparado
+
+Simón autorizó crear norka en Supabase. Se creó en Neuralia, región São Paulo, con el costo de creación informado de USD 0 mensuales y referencia `yplhlooidqzqhrjbwrdp`. Estado comprobado ACTIVE_HEALTHY, PostgreSQL 17.12.
+
+Se ejecutaron consultas de solo lectura en el proyecto. Resultado de la comprobación previa:
+
+```text
+cuentas       existe=false
+identidades   existe=false
+familias      existe=false
+integrantes   existe=false
+invitaciones  existe=false
+preferencias  existe=false
+anon          bypassrls=false
+authenticated bypassrls=false
+service_role  bypassrls=true
+```
+
+La aplicación de 0001 continúa pendiente de Simón según 9.2.10. Se actualizó el instructivo con el enlace directo al proyecto.
+
+Consulta de precios solicitada por Simón, 21 de noviembre de 2026. El plan pagado de entrada es Pro, USD 25 mensuales por organización, con USD 10 de crédito de cómputo. Un proyecto Micro consume aproximadamente USD 10 al mes. Tres proyectos Micro en la misma organización Pro cuestan aproximadamente USD 45 al mes antes de impuestos y consumos adicionales. Los precios de cómputo se calculan por hora. La organización conserva el plan gratuito.
+
+Fuentes oficiales [precios](https://supabase.com/pricing) y [facturación](https://supabase.com/docs/guides/platform/billing-faq).
