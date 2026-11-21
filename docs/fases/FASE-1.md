@@ -154,7 +154,7 @@ Hay 20 pruebas, que incluyen dependencias prohibidas, rutas internas permitidas 
 
 Se detectó que typescript-eslint todavía rechaza TypeScript 7. La versión de TypeScript se ajustó a 6.0.3, compatible con el linter instalado, y se verificaron tipos y compilación. La instalación limpia con `npm ci` terminó con código 0. npm muestra advertencias de compatibilidad declarada entre ESLint 10 y algunos plugins incluidos por Next.js. La documentación instalada de Next.js indica soporte para ESLint 10 y advierte de estas declaraciones de plugins. Las comprobaciones ejecutadas pasaron.
 
-El entorno de integración usa Node.js 24 y el proyecto declara Node.js 24 o superior para las herramientas instaladas. La configuración de integración solo tiene permiso de lectura del contenido del repositorio.
+El entorno de integración usa Node.js 24 y el proyecto declara Node.js 24 o superior para las herramientas instaladas. La configuración de integración solo tiene permiso de lectura del contenido del repositorio. GitHub señaló una advertencia de obsolescencia en las acciones v4 durante la primera comprobación. Se actualizaron a actions/checkout v7.0.1 y actions/setup-node v7.1.0, versiones estables verificadas en sus repositorios oficiales. Ambas declaran Node.js 24 en action.yml.
 
 Se leyó la documentación incluida en los paquetes instalados, la configuración distribuida de eslint-config-next y las guías de Next.js para ESLint y `next typegen`. El linter recomendó nombrar el objeto exportado de la regla. Se corrigió ese archivo. También se reemplazó la propiedad obsoleta `argument` por `source` al revisar tipos de importación. Las pruebas conservaron sus expectativas.
 
