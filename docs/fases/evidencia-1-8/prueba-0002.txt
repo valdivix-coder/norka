@@ -1,0 +1,1 @@
+0002 OK: familia anterior y nueva con un hogar y 8 ámbitos. service_role crea la familia y sus datos en una transacción. Borrado, cambio de tipo y archivo del hogar rechazados. Dos tablas con RLS y permisos correctos.

@@ -388,3 +388,51 @@ Lista de control del cierre
 18. No aplica.
 19. No aplica.
 20. Sí, sin cambios a reglas ni textos de coordinación.
+
+### Avance autorizado de 1.5, 1.6 y 1.8
+
+Simón autorizó agrupar el trabajo independiente dentro de la fase 1. Se mantiene la aprobación escrita como puerta de la fase 2.
+
+**1.5, dependencia externa.** Se consultó el endpoint público de ajustes de Supabase y confirmó google=false, apple=false, facebook=false. El entorno local carece de las variables de acceso necesarias. Las búsquedas por norka y parentis en la conexión de Vercel no devolvieron proyectos. NO VERIFICADO: entrada real, salida, sesión y enlace de identidades. Se requiere habilitar Google y configurar las variables privadas antes de comprobar el recorrido.
+
+**1.6, almacén.** Se creó el puerto AlmacenFamilia, el adaptador en memoria y el adaptador REST de Supabase para personas a cargo y ámbitos. El adaptador se crea con una familia fija, filtra cada consulta y verifica también las respuestas. Las actualizaciones exigen la revisión anterior y devuelven conflicto con la versión actual cuando existe. El adaptador en memoria evita compartir referencias mutables. Ocho pruebas nuevas cubren estos casos. Se usa fetch de la plataforma, sin dependencias adicionales.
+
+El adaptador del servidor recibe su clave de servicio desde configuración privada. Sus errores no copian respuestas del servidor. .env.example incluye únicamente nombres de variables. NO VERIFICADO: integración contra las tablas reales, pendiente de 0002 y de configurar la clave privada en el servidor. La fábrica debe recibir la familia de la sesión verificada al conectar las pantallas. La tarea 1.6 tiene sus piezas y pruebas, y conserva pendiente esa integración.
+
+**1.8, preparación.** Se entregó 0002 con sus consultas antes/después y vuelta atrás. Crea personas_a_cargo y ambitos, RLS y permisos de servidor, y un disparador transaccional que crea El hogar y los ocho ámbitos para cada familia. Incluye familias anteriores. Protege el hogar contra borrado, archivo y cambio de tipo. El núcleo valida cumpleaños y guarda con revisión. NO VERIFICADO: aplicación en Supabase y pantallas de agregar, editar y archivar. [Instrucciones de 0002](../../supabase/verificaciones/0002_INSTRUCCIONES.md).
+
+**Evidencia**
+
+```text
+Test Files  3 passed (3)
+     Tests  33 passed (33)
+Arnés mínimo aprobado.
+```
+
+La primera ejecución de las pruebas nuevas encontró que Vitest no resolvía el alias de importación usado por los adaptadores. Se corrigieron los imports del código a rutas relativas. Las expectativas de las pruebas se conservaron.
+
+[Pruebas del almacén](evidencia-1-6/almacen.txt) · [Prueba local de migración 0002](evidencia-1-8/prueba-0002.txt).
+
+**Límites y vuelta atrás.** La aplicación real de 0002 continúa reservada a Simón. Las pantallas y recorridos autenticados necesitan 1.5. El trabajo de código se puede revertir mediante su commit. Tras aplicar 0002, conservar los datos y volver al código anterior, como detalla el SQL.
+
+**Lista de control**
+1. Sí, agrupación autorizada dentro de fase 1.
+2. Sí, 33 pruebas.
+3. Sí.
+4. Sí en el almacén y pruebas locales. Integración con sesión pendiente.
+5. No aplica, sin pantallas nuevas.
+6. No aplica, sin captura nueva.
+7. No aplica.
+8. No aplica.
+9. No aplica.
+10. No aplica.
+11. Sí.
+12. Sí.
+13. No aplica.
+14. No aplica.
+15. No aplica.
+16. Sí, nombre norka.
+17. No aplica.
+18. No aplica, sin textos de interfaz.
+19. No aplica.
+20. Sí, sin textos de juicio ni cambios de trato.

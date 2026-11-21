@@ -2,7 +2,7 @@
 
 **Actualizado:** 21 de noviembre de 2026.
 
-**Estado:** Fase 0 aprobada por Simón el 20 de noviembre de 2026. Fase 1 en curso, rama `fase-1`. Tarea 1.4 completada. Simón aplicó la migración 0001 y confirmó el resultado. Verificación remota en norka aprobada para las seis tablas. Proyecto `yplhlooidqzqhrjbwrdp`, Neuralia, São Paulo. Última migración aplicada: 0001.
+**Estado:** Fase 0 aprobada. Fase 1 en curso, rama `fase-1`. 1.4 completada, última migración aplicada 0001. Núcleo de almacén de 1.6 implementado y probado. Migración 0002 de 1.8 preparada y probada localmente. 1.5 necesita configurar Google, que está desactivado en Supabase. Referencia del proyecto `yplhlooidqzqhrjbwrdp`.
 
 **Hecho**
 - Prompt maestro v7 en `docs/PROMPT-MAESTRO.md`.
@@ -17,8 +17,10 @@
 - Estructura de 9.1, glosario con 37 términos y base Next.js comprobada con HTTP 200. Evidencia y vuelta atrás en [Fase 1](fases/FASE-1.md).
 
 **Sigue**
-1. Tarea 1.5, entrada con proveedores configurados y sesión propia. Simón autorizó continuar el trabajo siguiendo el prompt maestro. La siguiente fase sigue requiriendo su aprobación escrita.
-2. Mantener una tarea por respuesta y registrar evidencia según la sección 14.
+1. Simón aplica [0002](../supabase/verificaciones/0002_INSTRUCCIONES.md) y se verifica en Supabase.
+2. Habilitar Google y configurar las variables privadas del servidor para completar 1.5. No hay proyecto norka o parentis en Vercel dentro de la conexión consultada.
+3. Conectar el almacén a la sesión verificada, completar creación/invitación de 1.7, pantallas de personas de 1.8 y navegación de 1.9.
+4. Simón autorizó por escrito agrupar tareas de la fase 1 que no necesiten su intervención. La fase 2 requiere aprobación escrita de la fase 1.
 
 **Pendiente fuera del código**
 - Verificar el registro de marca en INAPI y el título exacto en las consolas de tiendas. La Fase 0 documenta los dominios y coincidencias encontrados.
