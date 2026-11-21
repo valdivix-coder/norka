@@ -2,7 +2,7 @@
 
 **Actualizado:** 20 de noviembre de 2026.
 
-**Estado:** Fase 0 aprobada por Simón el 20 de noviembre de 2026. Fase 1 en curso, rama `fase-1`. Tarea 1.1 entregada con arranque local y compilación comprobados.
+**Estado:** Fase 0 aprobada por Simón el 20 de noviembre de 2026. Fase 1 en curso, rama `fase-1`. Tarea 1.2 con arnés mínimo aprobado en local y fallo deliberado comprobado. Integración continua por verificar después de subir el cambio.
 
 **Hecho**
 - Prompt maestro v7 en `docs/PROMPT-MAESTRO.md`.
@@ -17,8 +17,9 @@
 - Estructura de 9.1, glosario con 37 términos y base Next.js comprobada con HTTP 200. Evidencia y vuelta atrás en [Fase 1](fases/FASE-1.md).
 
 **Sigue**
-1. Tarea 1.2, arnés mínimo con tipos, linter, fronteras de capas e integración continua.
-2. Mantener una tarea por respuesta y registrar evidencia según la sección 14.
+1. Comprobar la ejecución del arnés en GitHub Actions.
+2. Tarea 1.3, tokens, mensajes, marca y componentes. Antes de implementar valores contradictorios de la guía, resolver los señalados en la Fase 0.
+3. Mantener una tarea por respuesta y registrar evidencia según la sección 14.
 
 **Pendiente fuera del código**
 - Verificar el registro de marca en INAPI y el título exacto en las consolas de tiendas. La Fase 0 documenta los dominios y coincidencias encontrados.

@@ -136,3 +136,114 @@ La revisión de los archivos TSX confirmó componentes de servidor, importación
 ### Vuelta atrás y siguiente tarea
 
 Revertir el cambio de la tarea 1.1 en la rama `fase-1` devuelve la estructura al estado anterior. Los documentos de la Fase 0 están en su rama aprobada. La siguiente tarea es 1.2, arnés mínimo.
+
+
+## Tarea 1.2 — Arnés mínimo
+
+### Alcance y autorización
+
+Simón aprobó la opción A para agregar ESLint 10.15.0 y eslint-config-next 16.4.6. Vitest 5.1.1 forma parte del stack definido en el prompt maestro y quedó incluido en la consulta. Se registran las versiones exactas en package.json y package-lock.json.
+
+El comando único es `npm run arnes`, usado también por `.github/workflows/arnes.yml` en cada push y pull request. Incluye generación de tipos de rutas con Next.js, TypeScript, linter sin advertencias permitidas y Vitest. El arnés detiene la ejecución con código distinto de cero al fallar un paso.
+
+La regla de fronteras revisa el árbol de sintaxis del código. Permite rutas internas del núcleo y Zod en contratos, según 9.1. Detecta importaciones y reexportaciones, importaciones de tipos, llamadas dinámicas y require. Resuelve rutas relativas y el alias `@/` para detectar accesos desde el núcleo a otras capas. Las rutas dinámicas no verificables generan error. La prueba sobre los archivos reales no permite desactivar las reglas con comentarios de ESLint.
+
+Hay 20 pruebas, que incluyen dependencias prohibidas, rutas internas permitidas y la excepción de contratos. Las pruebas que contienen importaciones prohibidas las presentan como texto a ESLint. El arnés no carga React en el núcleo para ejecutar esas pruebas.
+
+### Compatibilidad y decisiones de implementación
+
+Se detectó que typescript-eslint todavía rechaza TypeScript 7. La versión de TypeScript se ajustó a 6.0.3, compatible con el linter instalado, y se verificaron tipos y compilación. La instalación limpia con `npm ci` terminó con código 0. npm muestra advertencias de compatibilidad declarada entre ESLint 10 y algunos plugins incluidos por Next.js. La documentación instalada de Next.js indica soporte para ESLint 10 y advierte de estas declaraciones de plugins. Las comprobaciones ejecutadas pasaron.
+
+El entorno de integración usa Node.js 24 y el proyecto declara Node.js 24 o superior para las herramientas instaladas. La configuración de integración solo tiene permiso de lectura del contenido del repositorio.
+
+Se leyó la documentación incluida en los paquetes instalados, la configuración distribuida de eslint-config-next y las guías de Next.js para ESLint y `next typegen`. El linter recomendó nombrar el objeto exportado de la regla. Se corrigió ese archivo. También se reemplazó la propiedad obsoleta `argument` por `source` al revisar tipos de importación. Las pruebas conservaron sus expectativas.
+
+### Evidencia local
+
+Última ejecución del arnés después de retirar el archivo temporal, salida real abreviada.
+
+```text
+> norka@0.1.0 arnes
+> node tests/arnes/ejecutar.mjs
+
+
+Tipos de rutas
+Generating route types...
+✓ Types generated successfully
+
+TypeScript
+
+Linter
+
+Pruebas
+
+ RUN  v5.1.1 /workspace/work/norka
+
+
+ Test Files  1 passed (1)
+      Tests  20 passed (20)
+   Start at  23:52:51
+   Duration  1.80s (tests 94%, import 6%)
+
+
+Arnés mínimo aprobado.
+```
+
+Fallo deliberado exigido por 1.2. Se creó temporalmente `src/core/domain/comprobacion-temporal.ts` con `import "react";` y se ejecutó el mismo arnés. El archivo se retiró en un bloque de limpieza garantizada y quedó fuera del cambio enviado.
+
+```text
+> norka@0.1.0 arnes
+> node tests/arnes/ejecutar.mjs
+
+
+Tipos de rutas
+Generating route types...
+✓ Types generated successfully
+
+TypeScript
+
+Linter
+
+/workspace/work/norka/src/core/domain/comprobacion-temporal.ts
+  1:8  error  El núcleo no puede importar react. Usa un puerto de src/core/ports  norka/fronteras
+
+✖ 1 problem (1 error, 0 warnings)
+Código de salida del fallo deliberado: 1
+```
+
+`npm run build` terminó con código 0 después del arnés. `git diff --check` terminó con código 0. Se comprobó que el archivo temporal ya no existe.
+
+### Evidencia de integración continua
+
+La ejecución de GitHub Actions se comprobará después de subir el cambio y se registrará aquí con su enlace y resultado real.
+
+### Límites y vuelta atrás
+
+Esta es la base mínima pedida por 1.2. Las pruebas de aislamiento se incorporan en 1.6 y las comprobaciones de interfaz y recorridos se amplían al construir las pantallas. Las reglas recomendadas de Next.js incorporan comprobaciones estáticas de accesibilidad. Los recorridos con navegador y el modo `--completo` todavía no están implementados. El comando rechaza opciones adicionales con código distinto de cero para evitar presentar una ejecución incompleta como aprobada.
+
+Nada visible en esta tarea. La guía gráfica conserva su contenido y no se incorporaron pantallas ni valores visuales. No hay comprobación de teléfono aplicable a este cambio.
+
+Para volver atrás, revertir los commits de 1.2 en la rama `fase-1` y reinstalar con `npm ci`. La siguiente tarea es 1.3. Las contradicciones visuales identificadas en el apartado 9 de Fase 0 necesitan resolverse antes de implementar sus valores.
+
+### Lista de control de 14.2 para 1.2
+
+1. Sí, solo 1.2.
+2. Sí, arnés aprobado después de retirar el archivo temporal que provocó el fallo esperado. Las expectativas de las pruebas se conservaron.
+3. Sí, vocabulario de producto conservado.
+4. No aplica, sin datos de familias.
+5. No aplica, sin funciones para integrantes.
+6. No aplica, sin captura ni acciones de producto.
+7. No aplica, sin pantallas nuevas.
+8. No aplica, sin cambios visuales.
+9. No aplica, sin textos de interfaz nuevos.
+10. No aplica, sin valores visuales nuevos.
+11. Sí, sin datos personales ni secretos.
+12. Sí, documentos actualizados.
+13. No aplica, sin acciones frecuentes.
+14. No aplica, sin anticipación.
+15. No aplica, sin tratamientos.
+16. Sí para el nombre del producto. Sin cambios a la marca.
+17. No aplica, sin reconocimiento.
+18. No aplica, sin mensajes de interfaz.
+19. No aplica, sin movimiento, cabecera ni sonidos.
+20. No aplica, sin funciones ni textos de interfaz nuevos.
