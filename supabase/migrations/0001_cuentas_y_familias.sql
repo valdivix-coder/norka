@@ -1,7 +1,8 @@
+-- ESTADO: Aplicada a mano el 21 de noviembre de 2026 y registrada después en el historial (20261121030000).
+-- Sin begin/commit: el aplicador de Supabase ya es transaccional. El SQL coincide con el guardado en el historial.
 -- Fase 1, tarea 1.4. Ejecutar como propietario desde el editor SQL de Supabase.
 -- Ejecutar primero supabase/verificaciones/0001_antes.sql.
 -- La transacción completa se revierte si falla cualquier instrucción.
-begin;
 
 create table public.cuentas (
   id uuid primary key default gen_random_uuid(),
@@ -143,7 +144,6 @@ grant select, insert, update, delete on table
   public.cuentas, public.identidades, public.familias,
   public.integrantes, public.invitaciones, public.preferencias to service_role;
 
-commit;
 
 -- VUELTA ATRÁS
 -- Si ocurre un error antes del COMMIT, ejecutar ROLLBACK en la misma sesión.

@@ -1,5 +1,6 @@
+-- ESTADO: Aplicada con apply_migration el 21 de noviembre de 2026 (20261121131915).
+-- Sin begin/commit: el aplicador de Supabase ya es transaccional. El SQL coincide con el guardado en el historial.
 -- Tarea 1.8. Aplicar por Simón después de 0002_antes.sql.
-begin;
 
 create table public.personas_a_cargo (
   id uuid primary key default gen_random_uuid(),
@@ -108,7 +109,6 @@ insert into public.ambitos(familia_id,nombre,color,icono,orden,exige_plazo)
     ('Compras','ambito-compras','bolsa',8,false)
   ) as a(nombre,color,icono,orden,exige_plazo);
 
-commit;
 
 -- VUELTA ATRÁS
 -- Antes de COMMIT: ROLLBACK en la misma sesión.

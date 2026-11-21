@@ -20,3 +20,8 @@ hogares=1 ambitos=8 borrar=HOGAR_NO_BORRABLE archivar=HOGAR_NO_ARCHIVABLE
 
 AVISOS DE SEGURIDAD (get_advisors security)
 Solo INFO rls_enabled_no_policy en las 8 tablas. Es lo esperado: RLS sin políticas, acceso solo por servidor.
+
+REGISTRO DE 0001 EN EL HISTORIAL (mismo día, con autorización de Simón)
+Se insertó en supabase_migrations.schema_migrations la fila 0001_cuentas_y_familias (versión 20261121030000) con su SQL, sin ejecutarlo de nuevo.
+Resultado: 20261121030000 0001_cuentas_y_familias · 20261121131915 0002_personas_y_ambitos.
+Vuelta atrás: delete from supabase_migrations.schema_migrations where version='20261121030000'; (no toca tablas ni datos).

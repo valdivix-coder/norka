@@ -16,6 +16,8 @@
 
 - Estructura de 9.1, glosario con 37 términos y base Next.js comprobada con HTTP 200. Evidencia y vuelta atrás en [Fase 1](fases/FASE-1.md).
 
+**Pausa de uso (21 de noviembre):** se detiene el avance por límite de uso de la semana. Último punto cerrado: migraciones 0001 y 0002 aplicadas y registradas en Supabase. Queda en curso 1.6 (falta integrarla con la sesión, que depende de 1.5) y 1.8 (faltan las pantallas).
+
 **Sigue**
 1. Hecho: 0002 aplicada y verificada. Evidencia en `docs/fases/evidencia-1-8/`.
 2. Habilitar Google y configurar las variables privadas del servidor para completar 1.5. No hay proyecto norka o parentis en Vercel dentro de la conexión consultada.

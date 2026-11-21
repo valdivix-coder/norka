@@ -415,6 +415,8 @@ La primera ejecución de las pruebas nuevas encontró que Vitest no resolvía el
 
 **Aplicación de 0002.** Aplicada y verificada en Supabase el 21 de noviembre de 2026 con autorización escrita de Simón. Resultado OK en ambas tablas, y prueba funcional revertida: una familia nueva recibe 1 hogar y 8 ámbitos, y el hogar no se puede borrar ni archivar. [Evidencia](evidencia-1-8/aplicacion-0002-supabase.txt).
 
+**Historial.** Se registró 0001 en el historial de Supabase sin repetir su SQL, y los archivos del repositorio quedaron sin begin/commit para coincidir con lo guardado. Mapa en [HISTORIAL.md](../../supabase/migrations/HISTORIAL.md).
+
 **Límites y vuelta atrás.** 0002 ya está aplicada. Las pantallas y recorridos autenticados necesitan 1.5. El trabajo de código se puede revertir mediante su commit. Tras aplicar 0002, conservar los datos y volver al código anterior, como detalla el SQL.
 
 **Lista de control**
