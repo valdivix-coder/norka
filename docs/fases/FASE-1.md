@@ -301,3 +301,34 @@ OK: seis tablas protegidas, valores iniciales, lectura de servidor, 11 rechazos 
 NO VERIFICADO: aplicación en Supabase. La tarea permanece pendiente hasta identificar el proyecto y recibir la confirmación de Simón, según el criterio de 1.4. La consulta después comprueba RLS, ausencia de políticas y permisos efectivos de los tres roles. El repositorio incluye todos los archivos para realizar ese paso.
 
 La vuelta atrás conserva datos y protecciones. Antes del COMMIT se usa ROLLBACK. Después del COMMIT se vuelve al código anterior y se conserva el esquema aditivo. Las correcciones posteriores llevan una nueva migración.
+
+Arnés local de la entrega, sin cambios en las pruebas existentes:
+
+```text
+Test Files  2 passed (2)
+     Tests  25 passed (25)
+Arnés mínimo aprobado.
+```
+
+Lista de control de 14.2 para esta tarea
+
+1. Sí, solo 1.4.
+2. Sí, arnés aprobado.
+3. Sí, vocabulario del modelo de datos.
+4. Parcial: relaciones familiares verificadas en la base temporal. El cerrojo del servidor corresponde a 1.6.
+5. No aplica a esta entrega de esquema.
+6. No aplica.
+7. No aplica.
+8. No aplica.
+9. No aplica, sin textos de interfaz.
+10. No aplica.
+11. Sí, sin datos personales reales ni secretos.
+12. Sí, documentos de estado y fase actualizados.
+13. No aplica.
+14. No aplica.
+15. No aplica.
+16. Sí, nombre norka en minúsculas. Sin uso nuevo de la marca.
+17. No aplica.
+18. No aplica.
+19. No aplica.
+20. Sí, las relaciones permiten distintos adultos y formas de familia.
