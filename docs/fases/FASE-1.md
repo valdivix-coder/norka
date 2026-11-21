@@ -413,7 +413,9 @@ La primera ejecución de las pruebas nuevas encontró que Vitest no resolvía el
 
 [Pruebas del almacén](evidencia-1-6/almacen.txt) · [Prueba local de migración 0002](evidencia-1-8/prueba-0002.txt).
 
-**Límites y vuelta atrás.** La aplicación real de 0002 continúa reservada a Simón. Las pantallas y recorridos autenticados necesitan 1.5. El trabajo de código se puede revertir mediante su commit. Tras aplicar 0002, conservar los datos y volver al código anterior, como detalla el SQL.
+**Aplicación de 0002.** Aplicada y verificada en Supabase el 21 de noviembre de 2026 con autorización escrita de Simón. Resultado OK en ambas tablas, y prueba funcional revertida: una familia nueva recibe 1 hogar y 8 ámbitos, y el hogar no se puede borrar ni archivar. [Evidencia](evidencia-1-8/aplicacion-0002-supabase.txt).
+
+**Límites y vuelta atrás.** 0002 ya está aplicada. Las pantallas y recorridos autenticados necesitan 1.5. El trabajo de código se puede revertir mediante su commit. Tras aplicar 0002, conservar los datos y volver al código anterior, como detalla el SQL.
 
 **Lista de control**
 1. Sí, agrupación autorizada dentro de fase 1.
