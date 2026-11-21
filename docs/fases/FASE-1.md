@@ -358,3 +358,33 @@ Consulta de precios solicitada por Simón, 21 de noviembre de 2026. El plan paga
 Fuentes oficiales [precios](https://supabase.com/pricing) y [facturación](https://supabase.com/docs/guides/platform/billing-faq).
 
 La documentación permite mantener una organización gratuita y otra pagada. Para tres proyectos pequeños, dos gratuitos en la primera y uno Micro en una organización Pro dan un total base de USD 25 mensuales. Los planes se aplican por organización. Esta alternativa requiere distribuir los proyectos entre ambas organizaciones y no se ha ejecutado.
+
+#### Cierre de 1.4 · Migración aplicada y verificada
+
+El 21 de noviembre de 2026 Simón confirmó la ejecución y entregó una captura con «Success. No rows returned». Se verificó directamente el proyecto norka. Las seis tablas devolvieron OK en la comprobación de RLS, ausencia de políticas, bloqueo de permisos a anon/authenticated y acceso del servidor. También se revisaron las restricciones y los índices, incluidos los de identidad única y familia de la invitación. [Evidencia remota](evidencia-1-4/verificacion-supabase.txt).
+
+El asesor de seguridad devuelve seis avisos informativos rls_enabled_no_policy. Corresponden a la configuración requerida por la sección 9.2.2. [Descripción oficial](https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy).
+
+El arnés local pasó con 25 pruebas. La tarea 1.4 cumple su criterio de entrega. La vuelta atrás documentada conserva el esquema y los datos. Sigue 1.5, entrada y sesión propia, dentro de la autorización de continuidad de Simón. El aislamiento desde el servidor se comprobará en 1.6.
+
+Lista de control del cierre
+1. Sí, cierre de 1.4.
+2. Sí, 25 pruebas aprobadas.
+3. Sí.
+4. No aplica al cierre documental. Las relaciones de familia están verificadas y el cerrojo del servidor corresponde a 1.6.
+5. No aplica.
+6. No aplica.
+7. No aplica.
+8. No aplica.
+9. No aplica.
+10. No aplica.
+11. Sí.
+12. Sí.
+13. No aplica.
+14. No aplica.
+15. No aplica.
+16. Sí, nombre norka. Sin cambios de marca.
+17. No aplica.
+18. No aplica.
+19. No aplica.
+20. Sí, sin cambios a reglas ni textos de coordinación.

@@ -2,7 +2,7 @@
 
 **Actualizado:** 21 de noviembre de 2026.
 
-**Estado:** Fase 0 aprobada por Simón el 20 de noviembre de 2026. Fase 1 en curso, rama `fase-1`. Tarea 1.4 preparada y probada en una base temporal. Proyecto norka creado en Neuralia, región São Paulo, referencia `yplhlooidqzqhrjbwrdp`, activo y saludable. Comprobación previa remota aprobada. Pendiente que Simón aplique la migración 0001. Última migración aplicada en Supabase: ninguna confirmada.
+**Estado:** Fase 0 aprobada por Simón el 20 de noviembre de 2026. Fase 1 en curso, rama `fase-1`. Tarea 1.4 completada. Simón aplicó la migración 0001 y confirmó el resultado. Verificación remota en norka aprobada para las seis tablas. Proyecto `yplhlooidqzqhrjbwrdp`, Neuralia, São Paulo. Última migración aplicada: 0001.
 
 **Hecho**
 - Prompt maestro v7 en `docs/PROMPT-MAESTRO.md`.
@@ -11,13 +11,13 @@
 - Repositorio renombrado a «norka» (20 de noviembre de 2026).
 - Archivos SVG exactos de la marca en `docs/marca/svg/`.
 - Instrucciones para agentes (`AGENTS.md`) y guía de arranque (`docs/ARRANQUE.md`).
-- Documento de [Fase 0](fases/FASE-0.md), con fuentes, mapa de pantallas y preguntas. Última migración: ninguna.
+- Documento de [Fase 0](fases/FASE-0.md), con fuentes, mapa de pantallas y preguntas. Última migración: 0001.
 - Siete decisiones de Simón registradas en el apartado 2 de la Fase 0. El prompt maestro se acepta como base general.
 
 - Estructura de 9.1, glosario con 37 términos y base Next.js comprobada con HTTP 200. Evidencia y vuelta atrás en [Fase 1](fases/FASE-1.md).
 
 **Sigue**
-1. Completar 1.4 con [las instrucciones de aplicación](../supabase/verificaciones/0001_INSTRUCCIONES.md). Después sigue 1.5, entrada y sesión.
+1. Tarea 1.5, entrada con proveedores configurados y sesión propia. Simón autorizó continuar el trabajo siguiendo el prompt maestro. La siguiente fase sigue requiriendo su aprobación escrita.
 2. Mantener una tarea por respuesta y registrar evidencia según la sección 14.
 
 **Pendiente fuera del código**

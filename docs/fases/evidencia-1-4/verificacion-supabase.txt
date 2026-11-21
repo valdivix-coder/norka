@@ -1,0 +1,27 @@
+Proyecto norka · yplhlooidqzqhrjbwrdp
+Aplicación confirmada por Simón el 21 de noviembre de 2026.
+Consulta 0001_despues.sql ejecutada en Supabase con acceso de solo lectura.
+
+nombre        rls    politicas resultado
+cuentas       true   0         OK
+familias      true   0         OK
+identidades   true   0         OK
+integrantes   true   0         OK
+invitaciones  true   0         OK
+preferencias  true   0         OK
+
+La consulta comprueba que anon y authenticated carecen de permisos de tabla
+y que service_role tiene SELECT, INSERT, UPDATE y DELETE.
+Restricciones e índices revisados en pg_constraint y pg_indexes.
+La clave foránea de invitaciones incluye familia_id y creada_por.
+El índice cuentas_correo_unico usa lower(btrim(correo)).
+
+Asesor de seguridad de Supabase:
+rls_enabled_no_policy · INFO · 6 hallazgos.
+Corresponde al acceso exclusivo por servidor de 9.2.2 del prompt maestro.
+https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy
+
+Arnés local:
+Test Files  2 passed (2)
+     Tests  25 passed (25)
+Arnés mínimo aprobado.

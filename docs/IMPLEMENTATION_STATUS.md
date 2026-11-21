@@ -5,7 +5,7 @@ Se actualiza al cerrar cada tarea, con evidencia. Estados: pendiente · en curso
 | Fase | Contenido | Estado | Evidencia | Documento |
 | --- | --- | --- | --- | --- |
 | 0 | Descubrimiento y diseño (sin código) | aprobada | Aprobación escrita de Simón el 20 de noviembre de 2026. Guía de 45 páginas, fuentes fechadas, siete respuestas de Simón en el apartado 2 y verificación documental en el apartado 9 | [FASE-0.md](fases/FASE-0.md) |
-| 1 | Base | en curso | Tarea 1.4 preparada. Seis tablas y verificaciones probadas en una base temporal. Proyecto norka creado y comprobado. Pendiente aplicación por Simón | [FASE-1.md](fases/FASE-1.md) |
+| 1 | Base | en curso | Tarea 1.4 completada. Migración 0001 aplicada por Simón, seis tablas con verificación remota OK. Sigue 1.5 | [FASE-1.md](fases/FASE-1.md) |
 | 2 | Captura | pendiente | — | `docs/fases/FASE-2.md` |
 | 3 | Centro de control | pendiente | — | `docs/fases/FASE-3.md` |
 | 4 | Reparto | pendiente | — | `docs/fases/FASE-4.md` |

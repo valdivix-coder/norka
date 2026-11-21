@@ -1,6 +1,6 @@
 # Preparar las cuentas y familias de norka
 
-La tarea 1.4 está preparada para que Simón aplique el cambio. La sección 9.2.10 del prompt maestro reserva ese paso para la propietaria.
+La tarea 1.4 fue aplicada por Simón y verificada en el proyecto norka el 21 de noviembre de 2026. Los pasos siguientes quedan como registro de la aplicación. La sección 9.2.10 del prompt maestro reserva ese paso para la propietaria.
 
 ## Antes de aplicar
 
@@ -40,7 +40,7 @@ Antes de confirmar la transacción, `ROLLBACK;` revierte los cambios de esa sesi
 
 La migración y ambas consultas se ejecutaron en una base temporal PGlite 0.5.17, motor PostgreSQL 18.7. Esta herramienta se usó fuera del repositorio y no se agregó como dependencia de la aplicación. Se verificaron valores iniciales, unicidad, fechas, teléfonos, permisos, separación de familias en invitaciones y repetición accidental. [Salida real](../../docs/fases/evidencia-1-4/prueba-sql.txt)
 
-NO VERIFICADO: ejecución en el proyecto real de Supabase. Se comprueba siguiendo los pasos anteriores. La prueba temporal valida SQL y restricciones, y la aplicación real permite confirmar además los roles y configuración del proyecto elegido.
+VERIFICADO en el proyecto real de Supabase el 21 de noviembre de 2026. Las seis tablas devolvieron OK, con RLS activado y cero políticas. La prueba temporal valida SQL y restricciones, y la aplicación real permite confirmar además los roles y configuración del proyecto elegido.
 
 Se consultaron la documentación de RLS y el registro de cambios de Supabase. El cambio de exposición automática de tablas se cubre mediante concesiones explícitas de permisos a `service_role`.
 
