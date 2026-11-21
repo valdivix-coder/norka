@@ -260,3 +260,28 @@ Para volver atrás, revertir los commits de 1.2 en la rama `fase-1` y reinstalar
 Se revisó la versión `5d07b4c` de la rama `fase-1`. La fase 0 tiene sus nueve apartados y la aprobación registrada. La tarea 1.1 conserva sus documentos y la evidencia de arranque (HTTP 200). Se volvió a ejecutar el arnés mínimo: `Tests  20 passed (20)`. La compilación terminó correctamente y generó las tres páginas estáticas. La [ejecución de GitHub para esa versión](https://github.com/valdivix-coder/norka/actions/runs/44858464814) también terminó correctamente. El fallo deliberado está documentado arriba. Estos resultados respaldan los criterios de 1.1 y 1.2.
 
 La guía fija una escala tipográfica cerrada en la sección 5 y medidas distintas en 7.4 (anillos), 7.16 (contador) y 7.26 (iniciales de los días). Queda pendiente la elección de Simón antes de aplicar esas medidas. Esta revisión solo actualiza documentación. Para deshacerla, revertir el cambio documental.
+
+### Tarea 1.3 · Muestra de componentes
+
+La ruta `/muestra` incluye un índice, las 28 fichas numeradas 7.1 a 7.28, un cambio de tema y la matriz de 4 piezas × 4 fondos. Las fuentes están alojadas en el proyecto. Los ejemplos usan datos ficticios en memoria. Los SVG se copian desde los archivos originales. La prueba de igualdad de contenido cubre los tres. El componente elige la variante reducida según el ancho disponible. Las elecciones tipográficas, el margen a 360 px y la tira de estadía quedaron documentados en [Notas de marca](../marca/NOTAS-DE-MARCA.md).
+
+**Cómo probar.** Abrir `/muestra` con la aplicación en ejecución. En la ficha 7.11, abrir una hoja, elegir un plazo y cerrarla. En 7.26, recorrer los días de lado y tocar uno para cambiar la casa del ejemplo. En 7.28, enviar el texto de muestra, elegir «Revisar» o «Enviar igual». Los cambios de muestra se pierden al recargar.
+
+**Evidencia a 360 px.** [Catálogo oscuro](evidencia-1-3/catalogo-oscuro.png) · [Catálogo claro](evidencia-1-3/catalogo-claro.png) · [Marca en oscuro](evidencia-1-3/marca-oscuro.png) · [Marca en claro](evidencia-1-3/marca-claro.png).
+
+```text
+Test Files  2 passed (2)
+     Tests  25 passed (25)
+Arnés mínimo aprobado.
+
+✓ Generating static pages using 2 workers (5/5)
+└ ○ /muestra
+```
+
+Chromium, ventana de 360 × 800 px: la página mide 360 px de ancho en ambos modos, tiene 18 px de margen a cada lado y carga sin errores de JavaScript. La prueba tocó una opción en una hoja inferior, escribió ocho dígitos, cambió una estadía y comprobó que la pausa conserva el comentario al revisar y al enviar igual. Axe-core 4.10.3, etiquetas WCAG 2 A/AA y 2.1 A/AA, devolvió cero infracciones en la vista inicial de cada tema.
+
+**Íconos.** `npm run iconos` usa Inkscape instalado en el equipo de generación para convertir el SVG de tienda a PNG de 1024 × 1024. El favicon SVG y el PNG generados están incluidos en la rama. Ejecutar la aplicación y compilarla utiliza los archivos incluidos.
+
+**Alcance.** La muestra permite probar presentación e interacciones locales. Los proveedores de entrada, la grabación de audio, los envíos reales, la persistencia y las vistas familiares completas corresponden a sus tareas posteriores. El botón de Google se presenta deshabilitado como ejemplo. NO VERIFICADO: funcionamiento con VoiceOver y TalkBack en teléfonos físicos. Comprobar en iOS y Android recorriendo los controles, abriendo las hojas y cambiando el día con lector de pantalla.
+
+**Vuelta atrás.** Revertir el cambio de la tarea 1.3 en la rama de trabajo. La tarea no incluye migraciones ni cambios en servicios externos.

@@ -1,0 +1,110 @@
+:root {
+  /* ---- color · modo oscuro (principal) ---- */
+  --fondo: #0B0A1A;
+  --superficie: #16142C;
+  --superficie-alta: #211E40;
+  --borde: #2F2B57;
+  --tinta: #F4F2FF;
+  --tinta-suave: #A7A3C2;
+  --marca: #6A4BFF;
+  --marca-clara: #A594FF;
+  --acento: #C8F135;
+  --proximas: #FFB020;
+  --vencidas: #8E8AA8;
+  --error: #FF8A80;
+  --sobre-marca: #FFFFFF;
+  --sobre-acento: #0B0A1A;
+
+  /* ---- ámbitos ---- */
+  --ambito-salud: #2EE6A6;
+  --ambito-colegio: #5AA9FF;
+  --ambito-pagos: #22D3C5;
+  --ambito-crianza: #FF7A6B;
+  --ambito-hogar: #FFA94D;
+  --ambito-mascotas: #E879F9;
+  --ambito-tramites: #94A3B8;
+  --ambito-compras: #FFD43B;
+
+  /* ---- personas (en orden de asignación) ---- */
+  --persona-1: #FF6FA0;
+  --persona-2: #4CC9F0;
+  --persona-3: #7BD88F;
+  --persona-4: #FF9F5A;
+  --persona-5: #C4A7FF;
+  --persona-6: #FFE066;
+  --persona-7: #2DD4BF;
+  --persona-8: #FF8A80;
+
+  /* ---- casas (solo con 2 o más casas) ---- */
+  --casa-1: #A594FF;
+  --casa-2: #2DD4BF;
+  --casa-3: #FFE066;
+  --casa-4: #FF9F5A;
+
+  /* ---- tipografía ---- */
+  --fuente-titulos: 'Bricolage Grotesque', ui-rounded, system-ui, sans-serif;
+  --fuente-texto: 'Figtree', system-ui, -apple-system, sans-serif;
+  --t-12: 12px; --t-13: 13px; --t-14: 14px; --t-16: 16px;
+  --t-20: 20px; --t-24: 24px; --t-32: 32px; --t-44: 44px;
+
+  /* ---- espacio y forma ---- */
+  --e-1: 4px; --e-2: 8px; --e-3: 12px; --e-4: 16px;
+  --e-5: 20px; --e-6: 24px; --e-8: 32px; --e-12: 48px;
+  --radio-control: 12px; --radio-tarjeta: 20px;
+  --radio-hoja: 28px; --radio-completo: 999px;
+  --toque-minimo: 44px;
+    /* ---- movimiento ---- */
+    --mov-micro: 120ms; --mov-estandar: 220ms; --mov-pantalla: 320ms;
+    --curva-salida: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --curva-entrada: cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* ---- modo claro (secundario) ---- */
+:root[data-tema="claro"] {
+  --fondo: #F6F4FB;
+  --superficie: #FFFFFF;
+  --superficie-alta: #FFFFFF;
+  --borde: #E3DFF0;
+  --tinta: #0B0A1A;
+  --tinta-suave: #5F5B78;
+  --marca: #5B3DF5;
+  --marca-clara: #5B3DF5;
+  --acento: #C8F135;
+  --proximas: #B86E00;
+  --vencidas: #5F5B78;
+  --ambito-salud: #10855C;
+  --ambito-colegio: #0072EE;
+  --ambito-pagos: #15847B;
+  --ambito-crianza: #B4432D;
+  --ambito-hogar: #B35D00;
+  --ambito-mascotas: #C60AE3;
+  --ambito-tramites: #627793;
+  --ambito-compras: #927200;
+}
+
+/* Medidas específicas de 7.4, 7.16 y 7.26 aprobadas por Simón. */
+:root {
+  --cifra-anillo-grande: 30px;
+  --cifra-anillo-mediano: 22px;
+  --contador-e-inicial-dia: 10px;
+  --anillo-grande: 124px;
+  --anillo-mediano: 84px;
+  --anillo-pequeno: 40px;
+}
+
+/* Medidas de las fichas 3.5, 3.6, 6.1 y 7.2–7.26. */
+:root {
+  --margen-360: 18px;
+  --alto-fila: 56px;
+  --alto-campo: 52px;
+  --ancho-dia: 18px;
+  --asa-hoja: 36px;
+  --alto-nav: 80px;
+  --capturar: 64px;
+  --logo-minimo: 96px;
+  --isotipo-cabecera: 26px;
+  --vista-cabecera: 124px;
+  --marca-fondo-noche: #0B0A1A;
+  --marca-fondo-claro: #F6F4FB;
+  --marca-una-tinta: #F4F2FF;
+}

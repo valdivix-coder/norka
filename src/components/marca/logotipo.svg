@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="1 7 308 90" role="img" aria-label="norka">
+  <path d="M10 94V34M10 64a24 24 0 0 1 48 0V94" stroke="LETRAS" stroke-width="13" stroke-linecap="butt" stroke-linejoin="round" fill="none"/>
+  <circle cx="105" cy="64" r="24" stroke="TRAZO" stroke-width="13" stroke-linecap="butt" stroke-linejoin="round" fill="none"/>
+  <circle cx="105" cy="64" r="8.500" fill="PUNTO"/>
+  <path d="M152 94V34M152 64a24 24 0 0 1 24-24" stroke="LETRAS" stroke-width="13" stroke-linecap="butt" stroke-linejoin="round" fill="none"/>
+  <path d="M192 94V10" stroke="LETRAS" stroke-width="13" stroke-linecap="butt" stroke-linejoin="round" fill="none"/>
+  <clipPath id="norka-k">
+  <rect x="192" y="34" width="60" height="60"/>
+  </clipPath>
+  <g clip-path="url(#norka-k)">
+  <path d="M192 70L225 28M203 56L229 100" stroke="LETRAS" stroke-width="13" stroke-linecap="butt" stroke-linejoin="round" fill="none"/>
+  </g>
+  <path d="M250 94V64a24 24 0 0 1 48 0V94" stroke="TRAZO" stroke-width="13" stroke-linecap="butt" stroke-linejoin="round" fill="none"/>
+  <circle cx="274" cy="64" r="8.500" fill="PUNTO"/>
+</svg>

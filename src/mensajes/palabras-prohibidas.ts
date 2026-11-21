@@ -1,0 +1,22 @@
+// Sección 6.19. Solo se usa para revisar textos de la aplicación.
+export const palabrasProhibidas = [
+  "ex",
+  "pareja",
+  "esposa",
+  "esposo",
+  "marido",
+  "señora",
+  "custodia",
+  "visitas",
+  "régimen",
+  "tuición",
+  "pensión",
+  "incumplió",
+  "falló",
+  "olvidó",
+  "otra vez",
+  "por fin",
+  "como siempre",
+  "te toca a ti",
+  "culpa",
+] as const;

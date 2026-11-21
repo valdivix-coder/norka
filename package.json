@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "arnes": "node tests/arnes/ejecutar.mjs"
+    "arnes": "node tests/arnes/ejecutar.mjs",
+    "iconos": "node scripts/iconos.mjs"
   },
   "engines": {
     "node": ">=24.0.0"
