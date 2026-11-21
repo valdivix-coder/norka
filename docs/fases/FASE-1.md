@@ -285,3 +285,19 @@ Chromium, ventana de 360 × 800 px: la página mide 360 px de ancho en ambos mod
 **Alcance.** La muestra permite probar presentación e interacciones locales. Los proveedores de entrada, la grabación de audio, los envíos reales, la persistencia y las vistas familiares completas corresponden a sus tareas posteriores. El botón de Google se presenta deshabilitado como ejemplo. NO VERIFICADO: funcionamiento con VoiceOver y TalkBack en teléfonos físicos. Comprobar en iOS y Android recorriendo los controles, abriendo las hojas y cambiando el día con lector de pantalla.
 
 **Vuelta atrás.** Revertir el cambio de la tarea 1.3 en la rama de trabajo. La tarea no incluye migraciones ni cambios en servicios externos.
+
+### Tarea 1.4 · Migración preparada, aplicación pendiente
+
+Se entregan [0001_cuentas_y_familias.sql](../../supabase/migrations/0001_cuentas_y_familias.sql), la consulta [antes](../../supabase/verificaciones/0001_antes.sql), la consulta [después](../../supabase/verificaciones/0001_despues.sql) y [las instrucciones con vuelta atrás](../../supabase/verificaciones/0001_INSTRUCCIONES.md).
+
+Las seis tablas usan RLS, cero políticas y acceso de lectura y escritura únicamente para el servidor. Las invitaciones tienen una relación compuesta que exige la misma familia que su creador. Se incluyen las once categorías de avisos, sus valores iniciales, revisiones para futuros controles de concurrencia y restricciones de unicidad y fechas. Las decisiones de representación están explicadas en las instrucciones.
+
+Prueba aislada en PGlite 0.5.17 / PostgreSQL 18.7, fuera de Supabase y del proyecto de la aplicación. [Salida real](evidencia-1-4/prueba-sql.txt).
+
+```text
+OK: seis tablas protegidas, valores iniciales, lectura de servidor, 11 rechazos esperados y segunda ejecución sin pérdida de datos.
+```
+
+NO VERIFICADO: aplicación en Supabase. La tarea permanece pendiente hasta identificar el proyecto y recibir la confirmación de Simón, según el criterio de 1.4. La consulta después comprueba RLS, ausencia de políticas y permisos efectivos de los tres roles. El repositorio incluye todos los archivos para realizar ese paso.
+
+La vuelta atrás conserva datos y protecciones. Antes del COMMIT se usa ROLLBACK. Después del COMMIT se vuelve al código anterior y se conserva el esquema aditivo. Las correcciones posteriores llevan una nueva migración.

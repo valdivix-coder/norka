@@ -1,8 +1,8 @@
 # Ahora
 
-**Actualizado:** 20 de noviembre de 2026.
+**Actualizado:** 21 de noviembre de 2026.
 
-**Estado:** Fase 0 aprobada por Simón el 20 de noviembre de 2026. Fase 1 en curso, rama `fase-1`. Tarea 1.3 con catálogo en `/muestra`, 28 fichas, marca en 16 combinaciones y capturas a 360 px en claro y oscuro.
+**Estado:** Fase 0 aprobada por Simón el 20 de noviembre de 2026. Fase 1 en curso, rama `fase-1`. Tarea 1.4 preparada y probada en una base temporal. Pendiente identificar el proyecto de Supabase y que Simón aplique la migración 0001. Última migración aplicada en Supabase: ninguna confirmada.
 
 **Hecho**
 - Prompt maestro v7 en `docs/PROMPT-MAESTRO.md`.
@@ -17,7 +17,7 @@
 - Estructura de 9.1, glosario con 37 términos y base Next.js comprobada con HTTP 200. Evidencia y vuelta atrás en [Fase 1](fases/FASE-1.md).
 
 **Sigue**
-1. Tarea 1.4: preparar la migración 0001 con verificaciones y vuelta atrás. Última migración aplicada: ninguna.
+1. Completar 1.4 con [las instrucciones de aplicación](../supabase/verificaciones/0001_INSTRUCCIONES.md). Después sigue 1.5, entrada y sesión.
 2. Mantener una tarea por respuesta y registrar evidencia según la sección 14.
 
 **Pendiente fuera del código**

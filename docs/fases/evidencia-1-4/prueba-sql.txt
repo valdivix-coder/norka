@@ -1,0 +1,14 @@
+Motor [
+  {
+    version: 'PostgreSQL 18.7 (PGlite 0.5.17) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 6.0.13 (e13ee988ce3d87a738dd8f3661d02223308c412a), 32-bit'
+  }
+]
+Protecciones [
+  { nombre: 'cuentas', rls: true, politicas: 0, resultado: 'OK' },
+  { nombre: 'familias', rls: true, politicas: 0, resultado: 'OK' },
+  { nombre: 'identidades', rls: true, politicas: 0, resultado: 'OK' },
+  { nombre: 'integrantes', rls: true, politicas: 0, resultado: 'OK' },
+  { nombre: 'invitaciones', rls: true, politicas: 0, resultado: 'OK' },
+  { nombre: 'preferencias', rls: true, politicas: 0, resultado: 'OK' }
+]
+OK: seis tablas protegidas, valores iniciales, lectura de servidor, 11 rechazos esperados y segunda ejecución sin pérdida de datos.
