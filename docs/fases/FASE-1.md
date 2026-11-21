@@ -356,3 +356,5 @@ La aplicación de 0001 continúa pendiente de Simón según 9.2.10. Se actualiz�
 Consulta de precios solicitada por Simón, 21 de noviembre de 2026. El plan pagado de entrada es Pro, USD 25 mensuales por organización, con USD 10 de crédito de cómputo. Un proyecto Micro consume aproximadamente USD 10 al mes. Tres proyectos Micro en la misma organización Pro cuestan aproximadamente USD 45 al mes antes de impuestos y consumos adicionales. Los precios de cómputo se calculan por hora. La organización conserva el plan gratuito.
 
 Fuentes oficiales [precios](https://supabase.com/pricing) y [facturación](https://supabase.com/docs/guides/platform/billing-faq).
+
+La documentación permite mantener una organización gratuita y otra pagada. Para tres proyectos pequeños, dos gratuitos en la primera y uno Micro en una organización Pro dan un total base de USD 25 mensuales. Los planes se aplican por organización. Esta alternativa requiere distribuir los proyectos entre ambas organizaciones y no se ha ejecutado.
