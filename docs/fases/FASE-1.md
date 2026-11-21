@@ -215,7 +215,14 @@ Código de salida del fallo deliberado: 1
 
 ### Evidencia de integración continua
 
-La ejecución de GitHub Actions se comprobará después de subir el cambio y se registrará aquí con su enlace y resultado real.
+GitHub Actions terminó con resultado `success` en el commit `5d725d2`. Los pasos `npm ci` y `npm run arnes` terminaron correctamente en Ubuntu con Node.js 24. [Ver ejecución 44858323396](https://github.com/valdivix-coder/norka/actions/runs/44858323396).
+
+```text
+status: completed
+conclusion: success
+Run npm ci: success
+Run npm run arnes: success
+```
 
 ### Límites y vuelta atrás
 
