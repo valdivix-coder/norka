@@ -254,3 +254,9 @@ Para volver atrás, revertir los commits de 1.2 en la rama `fase-1` y reinstalar
 18. No aplica, sin mensajes de interfaz.
 19. No aplica, sin movimiento, cabecera ni sonidos.
 20. No aplica, sin funciones ni textos de interfaz nuevos.
+
+### Revisión antes de la tarea 1.3
+
+Se revisó la versión `5d07b4c` de la rama `fase-1`. La fase 0 tiene sus nueve apartados y la aprobación registrada. La tarea 1.1 conserva sus documentos y la evidencia de arranque (HTTP 200). Se volvió a ejecutar el arnés mínimo: `Tests  20 passed (20)`. La compilación terminó correctamente y generó las tres páginas estáticas. La [ejecución de GitHub para esa versión](https://github.com/valdivix-coder/norka/actions/runs/44858464814) también terminó correctamente. El fallo deliberado está documentado arriba. Estos resultados respaldan los criterios de 1.1 y 1.2.
+
+La guía fija una escala tipográfica cerrada en la sección 5 y medidas distintas en 7.4 (anillos), 7.16 (contador) y 7.26 (iniciales de los días). Queda pendiente la elección de Simón antes de aplicar esas medidas. Esta revisión solo actualiza documentación. Para deshacerla, revertir el cambio documental.

@@ -17,7 +17,7 @@
 - Estructura de 9.1, glosario con 37 términos y base Next.js comprobada con HTTP 200. Evidencia y vuelta atrás en [Fase 1](fases/FASE-1.md).
 
 **Sigue**
-1. Tarea 1.3, tokens, mensajes, marca y componentes. Antes de implementar valores contradictorios de la guía, resolver los señalados en la Fase 0.
+1. Tarea 1.3, tokens, mensajes, marca y componentes. Primera decisión pendiente: escala general de la sección 5 o tamaños específicos de 7.4, 7.16 y 7.26. El arnés y la compilación volvieron a pasar antes de esta tarea.
 2. Mantener una tarea por respuesta y registrar evidencia según la sección 14.
 
 **Pendiente fuera del código**
