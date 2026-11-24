@@ -49,7 +49,6 @@ export function crearAlmacenSupabase({
       redirect: "error",
       headers: {
         apikey: claveServicio,
-        Authorization: "Bearer " + claveServicio,
         "Content-Type": "application/json",
         Prefer: "return=representation",
       },

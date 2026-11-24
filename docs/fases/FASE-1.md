@@ -470,3 +470,7 @@ La auditoría actualiza documentación y estado. Para revertirla, revertir su co
 #### Google habilitado · 24 de noviembre de 2026
 
 Simón confirmó guardar la configuración de Google. Se consultó el endpoint público de ajustes de Supabase y devolvió google=true, apple=false, facebook=false. No se guardaron credenciales en el repositorio. Esta comprobación confirma la habilitación del proveedor. NO VERIFICADO: validez del secreto, acceso de una cuenta de prueba y regreso a la aplicación. Se comprueba con el recorrido real cuando esté implementado.
+
+#### Actualización de claves de servidor
+
+Se consultó la [guía oficial de migración de claves](https://supabase.com/docs/guides/getting-started/migrating-to-new-api-keys). Para el servidor se usará una clave Secret (sb_secret_) mediante SUPABASE_SECRET_KEY. El adaptador REST envía la clave únicamente en apikey, compatible con la clave nueva y con el mecanismo anterior de API key. Se agregó una comprobación de encabezados para evitar enviar una clave opaca como JWT. La instrucción anterior de usar una clave Legacy queda reemplazada. Pendiente ingresar la clave privada en Vercel y verificar la conexión real. No se cambia el esquema de datos.

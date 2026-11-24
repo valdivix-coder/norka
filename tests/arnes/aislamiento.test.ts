@@ -91,7 +91,7 @@ describe("Adaptador REST de Supabase", () => {
   function crear(solicitar: typeof fetch) {
     return crearAlmacenSupabase({
       url: "https://proyecto.supabase.co",
-      claveServicio: "clave-de-prueba",
+      claveServicio: "sb_secret_prueba",
       familiaId: "a",
       solicitar,
     });
@@ -139,6 +139,8 @@ describe("Adaptador REST de Supabase", () => {
     const [url, opciones] = solicitar.mock.calls[0];
     expect(new URL(String(url)).searchParams.get("revision")).toBe("eq.0");
     expect(JSON.parse(String(opciones?.body)).revision).toBe(1);
+    expect(opciones?.headers).toMatchObject({ apikey: "sb_secret_prueba" });
+    expect(opciones?.headers).not.toHaveProperty("Authorization");
     expect(opciones?.redirect).toBe("error");
     expect(opciones?.cache).toBe("no-store");
   });

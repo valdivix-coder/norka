@@ -16,7 +16,7 @@
 
 - Estructura de 9.1, glosario con 37 términos y base Next.js comprobada con HTTP 200. Evidencia y vuelta atrás en [Fase 1](fases/FASE-1.md).
 
-**Auditoría actual:** repositorio sincronizado con `33b2977`. Supabase activo, 0002 verificada con dos resultados OK. Vercel tiene proyecto norka y despliegue READY desde fase-1 en `norka-kappa.vercel.app`. Solo figura SUPABASE_URL entre sus variables. Google figura habilitado en la comprobación del 24 de noviembre. Apple y Facebook siguen desactivados. Arnés local: 33 pruebas aprobadas. Compilación aprobada.
+**Auditoría actual:** repositorio sincronizado con `33b2977`. Supabase activo, 0002 verificada con dos resultados OK. Vercel tiene proyecto norka y despliegue READY desde fase-1 en `norka-kappa.vercel.app`. Solo figura SUPABASE_URL entre sus variables. Configurar SUPABASE_SECRET_KEY con una clave nueva sb_secret_. Google figura habilitado en la comprobación del 24 de noviembre. Apple y Facebook siguen desactivados. Arnés local: 33 pruebas aprobadas. Compilación aprobada.
 
 **Sigue, en orden**
 1. 1.5: implementar reglas de identidad, sesión y pruebas con Google ya habilitado en Supabase. Usar configuración privada del servidor. Entrada real en teléfono pendiente.
