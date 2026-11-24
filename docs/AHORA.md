@@ -2,7 +2,7 @@
 
 **Actualizado:** 24 de noviembre de 2026.
 
-**Estado:** Fase 0 aprobada. Fase 1 en curso, rama `fase-1`. 1.4 completada, última migración aplicada 0002 (21 de noviembre). Núcleo de almacén de 1.6 implementado y probado. Migración 0002 de 1.8 aplicada y verificada en Supabase; faltan las pantallas de personas. 1.5 necesita configurar Google, que está desactivado en Supabase. Referencia del proyecto `yplhlooidqzqhrjbwrdp`.
+**Estado:** Fase 0 aprobada. Fase 1 en curso, rama `fase-1`. 1.4 completada, última migración aplicada 0002 (21 de noviembre). Núcleo de almacén de 1.6 implementado y probado. Migración 0002 de 1.8 aplicada y verificada en Supabase; faltan las pantallas de personas. 1.5: Google habilitado y comprobado en Supabase. Faltan el código de entrada/sesión y su prueba real. Referencia del proyecto `yplhlooidqzqhrjbwrdp`.
 
 **Hecho**
 - Prompt maestro v7 en `docs/PROMPT-MAESTRO.md`.
@@ -16,10 +16,10 @@
 
 - Estructura de 9.1, glosario con 37 términos y base Next.js comprobada con HTTP 200. Evidencia y vuelta atrás en [Fase 1](fases/FASE-1.md).
 
-**Auditoría actual:** repositorio sincronizado con `33b2977`. Supabase activo, 0002 verificada con dos resultados OK. Vercel tiene proyecto norka y despliegue READY desde fase-1 en `norka-kappa.vercel.app`. Solo figura SUPABASE_URL entre sus variables. Google, Apple y Facebook siguen desactivados. Arnés local: 33 pruebas aprobadas. Compilación aprobada.
+**Auditoría actual:** repositorio sincronizado con `33b2977`. Supabase activo, 0002 verificada con dos resultados OK. Vercel tiene proyecto norka y despliegue READY desde fase-1 en `norka-kappa.vercel.app`. Solo figura SUPABASE_URL entre sus variables. Google figura habilitado en la comprobación del 24 de noviembre. Apple y Facebook siguen desactivados. Arnés local: 33 pruebas aprobadas. Compilación aprobada.
 
 **Sigue, en orden**
-1. 1.5: implementar reglas de identidad, sesión y pruebas mientras Simón configura Google en Supabase. Usar configuración privada del servidor. Entrada real en teléfono pendiente.
+1. 1.5: implementar reglas de identidad, sesión y pruebas con Google ya habilitado en Supabase. Usar configuración privada del servidor. Entrada real en teléfono pendiente.
 2. 1.6: integrar almacén con la familia de sesión y probarlo contra Supabase.
 3. 1.7: crear familia e invitación de un uso con caducidad, y probar con dos cuentas.
 4. 1.8: completar pantallas de agregar, editar y archivar personas a cargo.

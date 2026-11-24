@@ -466,3 +466,7 @@ Orden de trabajo: reglas y pruebas de identidad/sesión (1.5), integración de a
 Acción de Simón: configurar Google mediante su cuenta en Google Cloud y Supabase, ingresando credenciales en los paneles protegidos. URL de retorno del proveedor: https://yplhlooidqzqhrjbwrdp.supabase.co/auth/v1/callback. Las variables privadas del servidor también deben configurarse en Vercel. El asistente prepara el código y verifica el resultado. Las decisiones de producto ya resueltas se conservan.
 
 La auditoría actualiza documentación y estado. Para revertirla, revertir su commit documental.
+
+#### Google habilitado · 24 de noviembre de 2026
+
+Simón confirmó guardar la configuración de Google. Se consultó el endpoint público de ajustes de Supabase y devolvió google=true, apple=false, facebook=false. No se guardaron credenciales en el repositorio. Esta comprobación confirma la habilitación del proveedor. NO VERIFICADO: validez del secreto, acceso de una cuenta de prueba y regreso a la aplicación. Se comprueba con el recorrido real cuando esté implementado.
