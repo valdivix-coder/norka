@@ -25,7 +25,9 @@ export default function Entrada() {
         <Link className={`${s.boton} ${s.texto}`} href="/muestra">
           {m.verComponentes}
         </Link>
-        <p className={s.suave}>{m.entradaEnPreparacion}</p>
+        <Link className={`${s.boton} ${s.texto}`} href="/entrar">
+          {m.entrarConCuenta}
+        </Link>
       </div>
     </main>
   );

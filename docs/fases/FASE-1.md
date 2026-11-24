@@ -551,3 +551,32 @@ Texto al 200 %: 7 pantallas, ancho 360 px, sin desbordamiento horizontal
 **Siguiente trabajo autorizado:** 1.5 (entrada/sesión), después conexión real de 1.7 y 1.8. No hace falta que Simón repita la configuración ya realizada; la prueba en teléfono se solicita cuando exista el recorrido real.
 
 **Publicación comprobada:** [vista previa del commit 66620bf](https://norka-7ezygypbv-neuralia1.vercel.app/) en estado READY. Entrada y Familia devolvieron HTTP 200 mediante el conector autenticado. [Evidencia del despliegue](evidencia-1-9/despliegue.txt). Vercel puede pedir acceso: la protección original se mantiene. No se promovió a producción ni se fusionó `main`.
+
+
+## Tarea 1.5 · Entrada con Google y sesión propia
+
+Entregada el 24 de noviembre de 2026 en la rama `fase-1`. **No está cerrada:** el criterio «se puede entrar y salir en el teléfono con Google» solo lo puede comprobar Simón. Hasta entonces la tarea queda en estado *entregada, espera prueba real*.
+
+### Qué se hizo
+- **Núcleo** (`src/core/`): dominio de cuentas e identidades, puertos de cuentas, sesiones y reloj, y los casos de uso `resolverEntrada` («una persona, una cuenta», 6.16), `unirIdentidad` (Perfil › Formas de entrar) y `abrirSesion`/`validarSesion`/`cerrarSesion`.
+- **Flujo**: Supabase Auth hace de intermediario con Google (PKCE). norka lee quién es la persona y **descarta los tokens**; abre una sesión propia en cookie `httpOnly` (`norka_sesion`). Protocolo comprobado en el código fuente oficial de `@supabase/auth-js` 2.119.2: `GET /auth/v1/authorize` con `code_challenge` (s256) y `POST /auth/v1/token?grant_type=pkce`. No se agregó ninguna dependencia.
+- **Rutas**: `/api/entrar/[proveedor]` (inicio), `/api/entrar/retorno` (vuelta), `/api/salir` (POST, solo desde este sitio). **Pantallas**: `/entrar` (botón solo si el proveedor está configurado) y `/cuenta` (quién eres, formas de entrar, «Salir»).
+- **Migración 0003** `sesiones`: solo se guarda el hash SHA-256 del token; RLS sin políticas; permisos solo para el servidor. Aplicada y verificada: [evidencia](evidencia-1-5/aplicacion-0003-supabase.txt).
+- **Variables**: `ENTRADA_GOOGLE=activa` cargada en Vercel (producción, vista previa y desarrollo). `.env.example` documenta `SUPABASE_PUBLISHABLE_KEY` y los tres interruptores, sin valores.
+
+### Evidencia
+- Arnés: tipos, linter, 61 pruebas (28 nuevas) y compilación aprobados: [salida](evidencia-1-5/arnes.txt).
+- Pruebas del núcleo pedidas por 1.5: correo que ya existe con otro proveedor (se suma la identidad, una sola cuenta), correo distinto (cuenta nueva) y unir dos formas de entrar desde Perfil. Además: correo no confirmado (se rechaza), entradas simultáneas, normalización del correo, caducidad y cierre de sesión, vector de prueba RFC 7636, y que ni los registros ni los errores contienen tokens.
+
+### Límites y NO VERIFICADO
+- **NO VERIFICADO:** entrada real con Google de punta a punta. Este entorno no alcanza a Supabase ni a Google. Se comprueba al entrar desde el teléfono y revisando los registros de autenticación.
+- **NO VERIFICADO:** que la URL del sitio y las URL de redirección estén guardadas en Supabase (`https://norka-kappa.vercel.app/**`). Sin ellas, Supabase no devuelve a la persona al sitio.
+- La entrada solo funciona desde un dominio incluido en esa lista (no en cualquier URL de vista previa).
+- Mientras «Vercel Authentication» siga activa, quien no sea del equipo de Vercel no podrá abrir el sitio.
+- Apple y Facebook: el núcleo y las rutas los admiten tras su variable, pero **no hay botón** hasta contar con su recurso oficial (6.16 prohíbe dibujarlos).
+- Unir dos cuentas con datos propias no está construido: si esa identidad ya pertenece a otra cuenta, se rechaza con un mensaje.
+- Crear la cuenta y su identidad son dos pasos; si el segundo falla, el siguiente intento lo repara (se reconoce el correo confirmado).
+- **Decisión pendiente de Simón:** duración de la sesión, hoy 30 días (`DURACION_SESION_MS`). Las sesiones caducadas se limpiarán con el proceso diario de la Fase 3.
+
+### Vuelta atrás
+Revertir el commit de 1.5 devuelve el código. La tabla `sesiones` puede quedar (no estorba); sin datos reales se elimina con `drop table public.sesiones;`. Quitar `ENTRADA_GOOGLE` en Vercel oculta el botón de inmediato.

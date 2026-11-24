@@ -1,0 +1,14 @@
+Aplicación real de 0003 en Supabase, proyecto norka (yplhlooidqzqhrjbwrdp). 24 de noviembre de 2026.
+Autorización escrita de Simón para aplicar migraciones de la fase 1. Método: apply_migration.
+
+ANTES (0003_antes.sql)
+cuentas_existe=true sesiones_por_crear=true
+
+APLICACIÓN
+{"success":true}
+list_migrations -> 20261121030000 0001 · 20261121131915 0002 · 20261124212830 0003_sesiones
+
+DESPUÉS (0003_despues.sql)
+sesiones rls=true politicas=0 resultado=OK
+
+Vuelta atrás: si no hay datos reales, drop table public.sesiones; (ver pie del SQL).

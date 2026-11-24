@@ -2,7 +2,7 @@
 
 **Actualizado:** 24 de noviembre de 2026.
 
-**Estado:** Fase 0 aprobada. Fase 1 en curso, rama `fase-1`. Última migración aplicada: **0002**, el 21 de noviembre. No hay aprobación de la fase 1 ni fusión en `main`.
+**Estado:** Fase 0 aprobada. Fase 1 en curso, rama `fase-1`. Última migración aplicada: **0003**, el 24 de noviembre. No hay aprobación de la fase 1 ni fusión en `main`.
 
 **Vista previa comprobada:** https://norka-7ezygypbv-neuralia1.vercel.app/ (READY, código `66620bf`, sin promoción a producción).
 
@@ -18,8 +18,10 @@
 - Google habilitado; Apple y Facebook desactivados. El código de entrada y sesión propia de 1.5 sigue pendiente.
 - Variables Vercel verificadas el 24 de noviembre, sin leer ni imprimir valores: `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY` y `SUPABASE_SECRET_KEY`, para producción, vista previa y desarrollo. **No volver a pedirle a Simón que las ingrese.** Falta probar su uso desde una sesión real.
 
+**Tarea 1.5 entregada (24 de noviembre), espera tu prueba real.** Entrada con Google, sesión propia y migración 0003 aplicada. Falta que pruebes entrar y salir desde el teléfono. Detalle y límites en [Fase 1](fases/FASE-1.md).
+
 **Sigue, en orden**
-1. Completar 1.5: identidad, Google, cookie propia httpOnly y pruebas de entrada/salida. La muestra visual no sustituye este paso.
+1. Probar 1.5 en el teléfono (Simón) y, con eso, cerrarla.
 2. Integrar 1.6 con la familia de sesión; completar 1.7 (crear familia e invitaciones reales).
 3. Conectar las pantallas de 1.8 al servidor; completar 1.9 con el recorrido autenticado, gestos y prueba en teléfono.
 4. Completar revisión de 1.3 y arnés de accesibilidad/navegador en integración continua. `npm run arnes -- --completo` todavía no está implementado.

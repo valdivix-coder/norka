@@ -170,7 +170,7 @@ export const interfaz = {
     "Puedes recorrer las pantallas y probar con nombres de ejemplo. Los cambios se borran al recargar.",
   entrarMuestra: "Recorrer la muestra",
   verComponentes: "Ver componentes",
-  entradaEnPreparacion: "Estamos preparando la entrada a tu familia.",
+  entrarConCuenta: "Entrar con mi cuenta",
   cerrar: "Cerrar",
   volver: "Volver",
   irInicio: "Ir al inicio",
@@ -360,4 +360,27 @@ export const interfaz = {
     "Trámites",
     "Compras",
   ],
+} as const;
+
+// Entrada y cuenta (tarea 1.5).
+export const entrada = {
+  titulo: "Entrar a norka",
+  bajada: "Usa tu cuenta de siempre. No guardamos tu contraseña.",
+  continuarCon: (proveedor: string) => `Continuar con ${proveedor}`,
+  ningunProveedor: "La entrada todavía no está disponible.",
+  errores: {
+    cancelado: "No pudimos completar la entrada. Puedes intentarlo de nuevo.",
+    incompleto: "La entrada se interrumpió. Empieza de nuevo desde aquí.",
+    sin_correo_verificado:
+      "Esta cuenta no tiene un correo confirmado, así que no pudimos entrar con ella.",
+    otra_cuenta:
+      "Esa forma de entrar ya pertenece a otra cuenta de norka.",
+    fallo: "Algo salió mal de nuestro lado. Intenta de nuevo en un momento.",
+  },
+  cuenta: {
+    titulo: "Tu cuenta",
+    entrasCon: "Entras con",
+    unida: "Listo, agregamos esa forma de entrar.",
+    salir: "Salir",
+  },
 } as const;
