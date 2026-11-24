@@ -549,3 +549,5 @@ Texto al 200 %: 7 pantallas, ancho 360 px, sin desbordamiento horizontal
 **Vuelta atrás.** Revertir el commit de esta entrega en `fase-1` y volver al despliegue anterior si se publicó la vista previa. No hay migraciones ni datos reales que revertir; el contenido de la muestra desaparece al recargar. `main` se conserva intacta.
 
 **Siguiente trabajo autorizado:** 1.5 (entrada/sesión), después conexión real de 1.7 y 1.8. No hace falta que Simón repita la configuración ya realizada; la prueba en teléfono se solicita cuando exista el recorrido real.
+
+**Publicación comprobada:** [vista previa del commit 66620bf](https://norka-7ezygypbv-neuralia1.vercel.app/) en estado READY. Entrada y Familia devolvieron HTTP 200 mediante el conector autenticado. [Evidencia del despliegue](evidencia-1-9/despliegue.txt). Vercel puede pedir acceso: la protección original se mantiene. No se promovió a producción ni se fusionó `main`.

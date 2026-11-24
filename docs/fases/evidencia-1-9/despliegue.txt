@@ -1,0 +1,18 @@
+Verificado: 24 de noviembre de 2026.
+Proyecto Vercel: norka (prj_6AYMvUUJEasIpgrTvGxHcF1SoGGg).
+Equipo: neuralia1.
+Entorno: vista previa (target=null).
+Rama: fase-1.
+Commit de implementación: 66620bf84015b0a6445b5015665453cbe983159e.
+Despliegue: dpl_HBxzixYhkczoos3dUZuEQPm7XcGc.
+Estado: READY.
+URL inmutable: https://norka-7ezygypbv-neuralia1.vercel.app/
+Alias de rama: https://norka-git-fase-1-neuralia1.vercel.app/
+Comprobación mediante el conector autenticado de Vercel:
+  GET / -> 200; contiene «Recorrer la muestra».
+  GET /muestra/pantallas/familia -> 200; contiene «Personas a cargo» y «Familia de ejemplo».
+  No aparecen claves privadas de Supabase ni del proveedor en los documentos recibidos.
+No se cambió la protección del despliegue. El enlace puede pedir acceso a Vercel.
+No se promovió a producción ni se cambió la configuración de GitHub.
+main remoto conserva 4f01b11b62c4567ed093801f78c9b8b1ae8b4f8a.
+Los recorridos interactivos se comprobaron sobre la compilación local; en el despliegue se verificó la entrega HTML autenticada.

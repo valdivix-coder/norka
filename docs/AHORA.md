@@ -4,6 +4,8 @@
 
 **Estado:** Fase 0 aprobada. Fase 1 en curso, rama `fase-1`. Última migración aplicada: **0002**, el 21 de noviembre. No hay aprobación de la fase 1 ni fusión en `main`.
 
+**Vista previa comprobada:** https://norka-7ezygypbv-neuralia1.vercel.app/ (READY, código `66620bf`, sin promoción a producción).
+
 **Avance visual de esta entrega**
 - La raíz ya presenta la entrada de la **muestra de diseño**. `/muestra/pantallas/hoy` permite recorrer Hoy, Familia, Equilibrio, Actividad, Buscar y Perfil; Capturar abre su hoja. Avisos se abre desde la cabecera.
 - Cabecera ligada al desplazamiento de 0 a 48 px; navegación de cinco destinos, transiciones, modos oscuro/claro, hojas inferiores con cierre y restauración del foco.
