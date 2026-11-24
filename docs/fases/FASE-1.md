@@ -440,3 +440,29 @@ La primera ejecución de las pruebas nuevas encontró que Vitest no resolvía el
 18. No aplica, sin textos de interfaz.
 19. No aplica.
 20. Sí, sin textos de juicio ni cambios de trato.
+
+### Auditoría de avance · 24 de noviembre de 2026
+
+Se sincronizó el checkout con los commits remotos posteriores `848a066` y `33b2977`. Se verificó el proyecto Supabase activo y las tablas ambitos y personas_a_cargo con RLS, cero políticas y permisos esperados, ambas con resultado OK. Por tanto, la aplicación de 0002 está resuelta.
+
+Vercel tiene proyecto norka, dominio verificado norka-kappa.vercel.app y despliegue READY de la rama fase-1, commit 33b2977. Se consultaron solo metadatos de variables: figura SUPABASE_URL. Google, Apple y Facebook aparecen false en los ajustes públicos de Supabase. NO VERIFICADO: acceso real, sesión y creación de familia. Se comprueba con el recorrido de teléfono una vez implementado y configurado.
+
+Arnés local, ejecutado durante la auditoría:
+
+```text
+Test Files  3 passed (3)
+     Tests  33 passed (33)
+Arnés mínimo aprobado.
+✓ Compiled successfully in 846ms
+✓ Generating static pages using 2 workers (5/5)
+```
+
+Estado por tarea: 1.1 y 1.2 con comprobaciones técnicas aprobadas. 1.3 tiene catálogo y evidencia previa, pero requiere completar la revisión de valores sueltos en CSS y tamaños del conjunto de marca antes del cierre visual. 1.4 completada. 1.5 carece todavía de código de entrada/sesión. 1.6 tiene puerto y dos adaptadores con pruebas locales, falta integración real. 1.7 pendiente. 1.8 tiene migración y validación, faltan pantallas. 1.9 pendiente. La raíz devuelve null y la única pantalla construida es el catálogo /muestra.
+
+La documentación anterior era demasiado amplia al presentar la base visual como cerrada. La evidencia demuestra un catálogo construido, y la revisión final de fidelidad sigue pendiente. El arnés actual tampoco ejecuta accesibilidad automática ni admite --completo. Las 33 pruebas no acreditan un recorrido autenticado completo.
+
+Orden de trabajo: reglas y pruebas de identidad/sesión (1.5), integración de almacén (1.6), creación e invitación (1.7), personas (1.8), navegación y estados (1.9), revisión visual y recorridos de fase. Las credenciales externas bloquean la prueba real, pero permiten avanzar con reglas y pruebas independientes.
+
+Acción de Simón: configurar Google mediante su cuenta en Google Cloud y Supabase, ingresando credenciales en los paneles protegidos. URL de retorno del proveedor: https://yplhlooidqzqhrjbwrdp.supabase.co/auth/v1/callback. Las variables privadas del servidor también deben configurarse en Vercel. El asistente prepara el código y verifica el resultado. Las decisiones de producto ya resueltas se conservan.
+
+La auditoría actualiza documentación y estado. Para revertirla, revertir su commit documental.
