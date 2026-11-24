@@ -15,7 +15,7 @@
 
 **Base real ya comprobada**
 - Supabase norka: `yplhlooidqzqhrjbwrdp`. Migraciones 0001 y 0002 aplicadas, con RLS y aislamiento del almacén probado.
-- Google habilitado; Apple y Facebook desactivados. El código de entrada y sesión propia de 1.5 sigue pendiente.
+- Google habilitado; Apple y Facebook desactivados. El código de entrada y sesión propia de 1.5 está entregado y espera la prueba real en teléfono.
 - Variables Vercel verificadas el 24 de noviembre, sin leer ni imprimir valores: `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY` y `SUPABASE_SECRET_KEY`, para producción, vista previa y desarrollo. **No volver a pedirle a Simón que las ingrese.** Falta probar su uso desde una sesión real.
 
 **Tarea 1.5 entregada (24 de noviembre), espera tu prueba real.** Entrada con Google, sesión propia y migración 0003 aplicada. Falta que pruebes entrar y salir desde el teléfono. Detalle y límites en [Fase 1](fases/FASE-1.md).
