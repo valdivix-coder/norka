@@ -2,31 +2,27 @@
 
 **Actualizado:** 24 de noviembre de 2026.
 
-**Estado:** Fase 0 aprobada. Fase 1 en curso, rama `fase-1`. 1.4 completada, última migración aplicada 0002 (21 de noviembre). Núcleo de almacén de 1.6 implementado y probado. Migración 0002 de 1.8 aplicada y verificada en Supabase; faltan las pantallas de personas. 1.5: Google habilitado y comprobado en Supabase. Faltan el código de entrada/sesión y su prueba real. Referencia del proyecto `yplhlooidqzqhrjbwrdp`.
+**Estado:** Fase 0 aprobada. Fase 1 en curso, rama `fase-1`. Última migración aplicada: **0002**, el 21 de noviembre. No hay aprobación de la fase 1 ni fusión en `main`.
 
-**Hecho**
-- Prompt maestro v7 en `docs/PROMPT-MAESTRO.md`.
-- Guía gráfica v2.0 en `docs/marca/GUIA-GRAFICA.pdf`.
-- Marca decidida: logotipo «norka» e isotipo «Órbita».
-- Repositorio renombrado a «norka» (20 de noviembre de 2026).
-- Archivos SVG exactos de la marca en `docs/marca/svg/`.
-- Instrucciones para agentes (`AGENTS.md`) y guía de arranque (`docs/ARRANQUE.md`).
-- Documento de [Fase 0](fases/FASE-0.md), con fuentes, mapa de pantallas y preguntas. Última migración: 0002.
-- Siete decisiones de Simón registradas en el apartado 2 de la Fase 0. El prompt maestro se acepta como base general.
+**Avance visual de esta entrega**
+- La raíz ya presenta la entrada de la **muestra de diseño**. `/muestra/pantallas/hoy` permite recorrer Hoy, Familia, Equilibrio, Actividad, Buscar y Perfil; Capturar abre su hoja. Avisos se abre desde la cabecera.
+- Cabecera ligada al desplazamiento de 0 a 48 px; navegación de cinco destinos, transiciones, modos oscuro/claro, hojas inferiores con cierre y restauración del foco.
+- En la muestra se puede agregar, editar, archivar y deshacer personas a cargo, con cumpleaños y colores; «El hogar» no se archiva. Perfil permite probar rol, participación y teléfono. Se usa el almacén en memoria acotado a una familia de ejemplo. **No guarda en Supabase; se reinicia al recargar.**
+- 33 pruebas del arnés aprobadas y compilación aprobada. 9 recorridos de navegador aprobados; 24 revisiones axe sin infracciones; siete pantallas sin desbordamiento horizontal a 360 px y texto al 200 %. Capturas, grabación y resultados en [Fase 1](fases/FASE-1.md).
+- Se corrigió la proporción del conjunto vertical de la marca según guía 3.4. SVG originales intactos. La revisión general del catálogo 1.3 continúa pendiente.
 
-- Estructura de 9.1, glosario con 37 términos y base Next.js comprobada con HTTP 200. Evidencia y vuelta atrás en [Fase 1](fases/FASE-1.md).
-
-**Auditoría actual:** repositorio sincronizado con `33b2977`. Supabase activo, 0002 verificada con dos resultados OK. Vercel tiene proyecto norka y despliegue READY desde fase-1 en `norka-kappa.vercel.app`. Solo figura SUPABASE_URL entre sus variables. Configurar SUPABASE_SECRET_KEY con una clave nueva sb_secret_. Google figura habilitado en la comprobación del 24 de noviembre. Apple y Facebook siguen desactivados. Arnés local: 33 pruebas aprobadas. Compilación aprobada.
+**Base real ya comprobada**
+- Supabase norka: `yplhlooidqzqhrjbwrdp`. Migraciones 0001 y 0002 aplicadas, con RLS y aislamiento del almacén probado.
+- Google habilitado; Apple y Facebook desactivados. El código de entrada y sesión propia de 1.5 sigue pendiente.
+- Variables Vercel verificadas el 24 de noviembre, sin leer ni imprimir valores: `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY` y `SUPABASE_SECRET_KEY`, para producción, vista previa y desarrollo. **No volver a pedirle a Simón que las ingrese.** Falta probar su uso desde una sesión real.
 
 **Sigue, en orden**
-1. 1.5: implementar reglas de identidad, sesión y pruebas con Google ya habilitado en Supabase. Usar configuración privada del servidor. Entrada real en teléfono pendiente.
-2. 1.6: integrar almacén con la familia de sesión y probarlo contra Supabase.
-3. 1.7: crear familia e invitación de un uso con caducidad, y probar con dos cuentas.
-4. 1.8: completar pantallas de agregar, editar y archivar personas a cargo.
-5. 1.9: navegación, cabecera, estados vacíos y recorridos de teléfono.
-6. Antes de cerrar: completar revisión de 1.3 (valores visuales fuera de tokens) y arnés de navegador/accesibilidad. Simón recorre el producto y aprueba la fase 1.
-7. La aplicación de 0002 y su historial ya están resueltos. La fase 2 requiere aprobación escrita de la fase 1.
+1. Completar 1.5: identidad, Google, cookie propia httpOnly y pruebas de entrada/salida. La muestra visual no sustituye este paso.
+2. Integrar 1.6 con la familia de sesión; completar 1.7 (crear familia e invitaciones reales).
+3. Conectar las pantallas de 1.8 al servidor; completar 1.9 con el recorrido autenticado, gestos y prueba en teléfono.
+4. Completar revisión de 1.3 y arnés de accesibilidad/navegador en integración continua. `npm run arnes -- --completo` todavía no está implementado.
+5. Simón prueba la entrada desde su teléfono y aprueba la fase 1 antes de pasar a fase 2.
 
-**Pendiente fuera del código**
-- Verificar el registro de marca en INAPI y el título exacto en las consolas de tiendas. La Fase 0 documenta los dominios y coincidencias encontrados.
-- Confirmar con una persona hablante de mapuzungun el significado del nombre antes de publicarlo.
+**De Simón ahora:** no se requiere una nueva decisión ni repetir la configuración técnica para avanzar en código. Más adelante: prueba real con las dos cuentas y un teléfono. Antes de datos reales, reemplazar las credenciales privadas que se compartieron en la conversación mediante los paneles protegidos.
+
+**Fuera de esta entrega:** marca en INAPI y consolas de tiendas; significado del nombre sin confirmar (no publicarlo). No se modificó el prompt maestro, el PDF, las migraciones ni la configuración de GitHub.

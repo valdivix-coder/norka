@@ -1,6 +1,6 @@
 // Guía 8.1. Lienzo común y trazos que heredan el color del control.
 const trazos = {
-  hoy: "M3 11 12 3l9 8 M5 10v11h14V10",
+  hoy: "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18 M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6",
   familia:
     "M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6 M2 20v-2a6 6 0 0 1 12 0v2 M16 5a3 3 0 0 1 0 6 M17 14q5 0 5 6",
   capturar: "M12 4v16 M4 12h16",
@@ -16,6 +16,20 @@ const trazos = {
   logro: "M12 3l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z",
   llamar: "M4 3h4l2 5-2 2q2 4 6 6l2-2 5 2v4q-2 4-10-2T3 5z",
   comentar: "M3 4h18v13H9l-6 4z",
+  volver: "M15 5l-7 7 7 7 M8 12h13",
+  cerrar: "M6 6l12 12 M18 6 6 18",
+  siguiente: "M9 5l7 7-7 7",
+  persona: "M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8 M4 21v-2a8 8 0 0 1 16 0v2",
+  editar: "M4 16 16 4l4 4L8 20H4z M13 7l4 4",
+  reloj: "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18 M12 7v5l3 2",
+  mascota:
+    "M7 14q5-5 10 0l2 4q0 4-7 1-7 3-7-1z M4 9a1 2 0 1 0 2 0 1 2 0 1 0-2 0 M9 5a1 2 0 1 0 2 0 1 2 0 1 0-2 0 M14 5a1 2 0 1 0 2 0 1 2 0 1 0-2 0 M19 9a1 2 0 1 0 2 0 1 2 0 1 0-2 0",
+  crianza: "M12 21 3 12C-3 4 7-1 12 6c5-7 15-2 9 6z",
+  tramites: "M5 3h10l4 4v14H5z M15 3v5h4 M8 12h8 M8 16h6",
+  compras: "M4 7h16l1 14H3z M8 7V5a4 4 0 0 1 8 0v2",
+  conexion: "M2 7q10-8 20 0 M5 11q7-6 14 0 M9 15q3-2 6 0 M12 19h.01 M3 3l18 18",
+  aviso: "M12 3 2 21h20z M12 9v5 M12 17h.01",
+  sol: "M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8 M12 2v2 M12 20v2 M2 12h2 M20 12h2 M5 5l1 1 M18 18l1 1 M19 5l-1 1 M6 18l-1 1",
 } as const;
 export function Icono({ tipo }: { tipo: keyof typeof trazos }) {
   return (

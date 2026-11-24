@@ -1,0 +1,37 @@
+[
+  {
+    "pantalla": "hoy",
+    "ancho200": 360,
+    "controlesPequenos": []
+  },
+  {
+    "pantalla": "familia",
+    "ancho200": 360,
+    "controlesPequenos": []
+  },
+  {
+    "pantalla": "equilibrio",
+    "ancho200": 360,
+    "controlesPequenos": []
+  },
+  {
+    "pantalla": "actividad",
+    "ancho200": 360,
+    "controlesPequenos": []
+  },
+  {
+    "pantalla": "avisos",
+    "ancho200": 360,
+    "controlesPequenos": []
+  },
+  {
+    "pantalla": "buscar",
+    "ancho200": 360,
+    "controlesPequenos": []
+  },
+  {
+    "pantalla": "perfil",
+    "ancho200": 360,
+    "controlesPequenos": []
+  }
+]

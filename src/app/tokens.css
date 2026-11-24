@@ -34,6 +34,7 @@
   --persona-6: #FFE066;
   --persona-7: #2DD4BF;
   --persona-8: #FF8A80;
+  --persona-hogar: #A7A3C2;
 
   /* ---- casas (solo con 2 o más casas) ---- */
   --casa-1: #A594FF;
@@ -107,4 +108,66 @@
   --marca-fondo-noche: #0B0A1A;
   --marca-fondo-claro: #F6F4FB;
   --marca-una-tinta: #F4F2FF;
+}
+
+/* Composición de pantallas: medidas exactas de guía 3.4, 4.6, 5–9, 10.8. */
+:root {
+  --borde-fino: 1px;
+  --borde-control: 1.5px;
+  --borde-foco: 2px;
+  --separacion-foco: 2px;
+  --peso-texto: 500;
+  --peso-secundario: 400;
+  --peso-boton: 600;
+  --peso-titulo: 800;
+  --peso-seccion: 700;
+  --interlinea-texto: 1.5;
+  --interlinea-boton: calc(20 / 14);
+  --interlinea-hoja: calc(28 / 24);
+  --espaciado-titulo: -1px;
+  --espaciado-etiqueta: 0.6px;
+  --icono-nav: 22px;
+  --icono-interior: 18px;
+  --cabecera-alta: 56px;
+  --cabecera-baja: 44px;
+  --cabecera-recorrido: 48px;
+  --logo-alto: 28px;
+  --logo-ancho: calc(28px * 308 / 90);
+  --marca-entrada-ancho: calc(48px * 308 / 90);
+  --resplandor-lado: 440px;
+  --resplandor-izquierda: -110px;
+  --resplandor-arriba: -170px;
+  --resplandor-fin: 68%;
+  --luz-hoy: 42%;
+  --luz-familia: 30%;
+  --luz-persona: 36%;
+  --luz-equilibrio: 20%;
+  --cabecera-opacidad: 85%;
+  --desenfoque: 16px;
+  --ilustracion-vacia: 120px;
+  --capturar-elevacion: -30px;
+  --capturar-anillo: 6px;
+  --capturar-sombra: 0 10px 28px;
+  --capturar-luz: 35%;
+  --boton-horizontal: 18px;
+  --presionado-escala: 0.97;
+  --presionado-brillo: 0.92;
+  --deshabilitado: 0.4;
+  --traslado-pestana: 8px;
+  --traslado-detalle: 24px;
+  --mov-silueta: 1200ms;
+  --resorte-rigidez: 380;
+  --resorte-amortiguacion: 32;
+  --resorte-masa: 1;
+  --interruptor-ancho: 44px;
+  --interruptor-alto: 26px;
+  --interruptor-punto: 20px;
+  --separacion-rejilla: 10px;
+  --capa-contenido: 1;
+  --capa-cabecera: 10;
+  --capa-barra: 20;
+  --capa-aviso: 30;
+  --velo: rgb(0 0 0 / 0.5);
+  /* Límite de lectura de una columna, ya usado en el catálogo de 1.3. */
+  --ancho-columna: 42rem;
 }

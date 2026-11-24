@@ -30,7 +30,9 @@
 }
 
 .marca[data-pieza="conjunto-vertical"] [data-dibujo="isotipo"] {
-  width: 50%;
+  /* Guía 3.4: lado 2h y separación 0,5h; h = ancho × 90/308. */
+  width: calc(100% * 180 / 308);
+  margin-bottom: calc(100% * 45 / 308);
 }
 
 @container (width < 96px) {

@@ -1,0 +1,30 @@
+
+> norka@0.1.0 arnes
+> node tests/arnes/ejecutar.mjs
+
+
+Tipos de rutas
+Generating route types...
+✓ Types generated successfully
+
+TypeScript
+
+Linter
+
+Pruebas
+
+ RUN  v5.1.1 /workspace/work/norka
+
+
+ Test Files  3 passed (3)
+      Tests  33 passed (33)
+   Start at  17:26:44
+   Duration  1.73s (tests 91%, import 7%, transform 1%, worker 1%)
+
+
+Arnés mínimo aprobado.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.3
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.3
+npm notice To update run: npm install -g npm@12.2.3
+npm notice

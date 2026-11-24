@@ -474,3 +474,78 @@ Simón confirmó guardar la configuración de Google. Se consultó el endpoint p
 #### Actualización de claves de servidor
 
 Se consultó la [guía oficial de migración de claves](https://supabase.com/docs/guides/getting-started/migrating-to-new-api-keys). Para el servidor se usará una clave Secret (sb_secret_) mediante SUPABASE_SECRET_KEY. El adaptador REST envía la clave únicamente en apikey, compatible con la clave nueva y con el mecanismo anterior de API key. Se agregó una comprobación de encabezados para evitar enviar una clave opaca como JWT. La instrucción anterior de usar una clave Legacy queda reemplazada. Pendiente ingresar la clave privada en Vercel y verificar la conexión real. No se cambia el esquema de datos.
+
+### Implementación gráfica y recorrido de muestra · 24 de noviembre de 2026
+
+**Alcance autorizado.** Simón pidió avanzar con todas las tareas gráficas posibles dentro de fase 1 y retomar desde el punto de interrupción. Esta entrega desarrolla la presentación de 1.8 y 1.9 y corrige la composición de marca de 1.3. No declara completas 1.5, 1.7, 1.8 ni 1.9; falta el recorrido autenticado. No adelanta funcionalidades de fases posteriores.
+
+**Qué se construyó**
+
+- Entrada en `/` con el conjunto vertical oficial, frase de guía 10.8 y acceso al recorrido de diseño. Identificación explícita de muestra: no simula Google ni guardado en la familia real.
+- `/muestra/pantallas/hoy`, `familia`, `equilibrio`, `actividad`, `buscar`, `avisos`, `perfil`, `persona`. Cinco destinos en la barra; Capturar abre hoja inferior.
+- Cabecera fija, cambio continuo logotipo/isotipo entre 0 y 48 px, áreas seguras, tres acciones, flecha de regreso y navegación que conserva la familia de muestra.
+- Transiciones nativas cuando el navegador las admite, coordinadas con la llegada de la página; alternativa de fundido/desplazamiento. Movimiento reducido respetado. Hojas con física 380/32/1, botón Cerrar, Escape y foco restaurado.
+- Personas a cargo: nombre, tipo, cumpleaños, año opcional, colegio, color; agregar, editar, archivar y deshacer. Se reutilizan `guardarPersona`, `validarPersona` y el adaptador en memoria con cerrojo de familia. El hogar no se archiva. Se pueden cargar ejemplos explícitos.
+- Perfil de ejemplo: nombre, rol y etiqueta propia, participación, teléfono con +56 9 o formato internacional, cambio de tema. Los cambios se conservan durante el recorrido, no al recargar.
+- Buscar encuentra las personas del ejemplo sin distinguir mayúsculas o tildes. No se presenta como la búsqueda completa de fase 3.
+- Controles de revisión para vacío, datos, cargando, error y sin conexión; límites indicados en los estados. En Hoy/Equilibrio/Actividad/Avisos no se inventan tareas, proporciones ni actividad real: siguen vacíos en fase 1.
+
+**Guía aplicada:** 3.4–3.8, 4.1/4.4/4.6, 5, 6, 7.1/7.4/7.9–7.14/7.16/7.23, 8, 9.1/9.3, 10.6/10.8, 11, 12 y 13. Los archivos SVG se conservan idénticos a `docs/marca/svg/`. No se editó el PDF.
+
+**Comprobación real**
+
+```text
+Test Files  3 passed (3)
+     Tests  33 passed (33)
+Arnés mínimo aprobado.
+✓ Compiled successfully
+✓ Generating static pages using 2 workers (5/5)
+Recorridos de navegador: 9 aprobados
+Revisiones axe-core 4.10.3: 24; infracciones: 0
+Errores de ejecución en el navegador: 0
+Texto al 200 %: 7 pantallas, ancho 360 px, sin desbordamiento horizontal
+```
+
+- [Arnés completo de esta ejecución](evidencia-1-9/arnes.txt) y [compilación](evidencia-1-9/compilacion.txt).
+- [Resultados de navegador](evidencia-1-9/resultados.json), [medición de texto al 200 %](evidencia-1-9/texto-200.json) y [grabación del recorrido](evidencia-1-9/recorrido-360.webm).
+- [Entrada](evidencia-1-9/entrada-oscuro-360.png), [Hoy](evidencia-1-9/hoy-oscuro-360.png), [Familia en claro](evidencia-1-9/familia-claro-360.png), [cabecera recogida](evidencia-1-9/cabecera-recogida-360.png), [hoja para agregar persona](evidencia-1-9/agregar-persona-360.png). El directorio incluye capturas oscuras/claras de las ocho vistas.
+- Prueba reproducible: `NORKA_URL=http://localhost:3192 NORKA_AXE=/tmp/norka-axe.js PLAYWRIGHT_BROWSERS_PATH=/workspace/.cache/norka-playwright python tests/navegador/recorrido-fase-1.py`, con el servidor compilado, Playwright Python, Chromium y axe-core ya disponibles en este entorno. No se agregaron dependencias al proyecto. Para video se reutilizó `/usr/bin/ffmpeg` mediante un enlace en la caché del espacio de trabajo.
+- La ejecución valida cumpleaños, crear/editar/archivar/deshacer, hogar protegido, búsqueda, teléfono, tema, Escape/foco y cabecera. Durante la preparación del guion se corrigieron un selector ambiguo que incluía el anunciador interno de rutas de Next y una espera de navegación antes de medir el desplazamiento. Se conservaron todas las expectativas. El linter detectó uso de una referencia durante render y un enlace interno sin Link; se corrigió el código, sin relajar comprobaciones.
+
+**Infraestructura comprobada.** Los metadatos de Vercel confirman `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY` y `SUPABASE_SECRET_KEY` en los tres entornos. La clave secreta figura como sensible en producción y vista previa. No se leyeron ni imprimieron valores. La instrucción anterior de pedir estas variables queda resuelta. No se modificaron credenciales ni tablas en esta entrega.
+
+**Límites**
+
+- Es una muestra navegable, no una sesión real. Entrada, vinculación de identidades, creación/invitación de familia y persistencia en Supabase siguen pendientes. No introducir datos reales en el recorrido de ejemplo.
+- No se guardan capturas ni se envían invitaciones. Las funciones de captura, actividad, equilibrio, avisos, logros y tratamientos se completan en sus fases.
+- NO VERIFICADO: iPhone/Android reales, lector de pantalla real, 60 fps o metas de rendimiento. Se comprueba con los recorridos en dispositivos físicos al cerrar la fase.
+- NO COMPLETADO: gesto de volver desde el borde, transición compartida tarjeta/detalle, revisión completa del catálogo antiguo y arnés de navegador/accesibilidad integrado en `npm run arnes -- --completo`. El guion Python es una comprobación adicional, no reemplaza ese requisito.
+- El estado «con datos» solo muestra lo implementado en fase 1; no acredita cinco estados del producto completo. La vista de entrada corresponde a la muestra, no sustituye los botones oficiales de acceso de 1.5.
+- No se ha medido con 1, 2, 3 y 6 integrantes reales. No se declara alcanzado un estándar de premios ni cerrada la fase 1.
+
+**Lista de control 14.2**
+
+1. **Sí:** tareas gráficas de fase 1 agrupadas por autorización de Simón.
+2. **Sí:** 33 pruebas; sin cambios a las pruebas existentes para hacerlas pasar.
+3. **Sí:** vocabulario de la interfaz centralizado.
+4. **Sí en la muestra:** personas con familia_id y almacén acotado. **No** en sesión real, aún no implementada.
+5. **No:** falta recorrido autenticado con diferentes cantidades de integrantes.
+6. **No aplica** al guardado sin conexión de captura, que pertenece a fase 2. La muestra funciona sin IA.
+7. **No:** estados visuales de revisión disponibles, pero faltan estados con datos reales de la aplicación.
+8. **Sí en Chromium:** oscuro/claro, 360 px, axe y texto ampliado; teléfonos físicos no verificados.
+9. **Sí:** textos sin juicio, presión ni estructura familiar supuesta.
+10. **No para el conjunto del proyecto:** nuevos componentes usan tokens; catálogo antiguo pendiente de revisión completa.
+11. **Sí:** sin datos prohibidos ni secretos en archivos o navegador.
+12. **Sí:** AHORA, IMPLEMENTATION_STATUS y FASE-1 actualizados.
+13. **No:** botones y deshacer local comprobados; faltan gestos completos del producto.
+14. **No aplica:** no se agregó anticipación.
+15. **Sí:** no se agregaron consejos ni campos de salud.
+16. **Sí:** componente Marca, tres archivos SVG originales sin cambios de geometría, nombre en minúsculas.
+17. **Sí:** no hay comparación, vigilancia ni contadores por integrante.
+18. **Sí:** textos de interfaz en es-CL.ts; nombres de ejemplo identificados como datos de prueba.
+19. **No como cierre de toda la tarea:** cabecera y transiciones construidas con tokens; quedan la transición compartida y el gesto de regreso. No se agregan sonidos.
+20. **Sí:** textos compatibles con adultos separados, sin tomar partido ni exponer a nadie.
+
+**Vuelta atrás.** Revertir el commit de esta entrega en `fase-1` y volver al despliegue anterior si se publicó la vista previa. No hay migraciones ni datos reales que revertir; el contenido de la muestra desaparece al recargar. `main` se conserva intacta.
+
+**Siguiente trabajo autorizado:** 1.5 (entrada/sesión), después conexión real de 1.7 y 1.8. No hace falta que Simón repita la configuración ya realizada; la prueba en teléfono se solicita cuando exista el recorrido real.
