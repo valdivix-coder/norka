@@ -4,8 +4,10 @@ import { esProveedor, proveedoresConfigurados } from "@/lib/entrada/proveedores"
 import { urlDeAutorizacion } from "@/lib/entrada/supabase-auth";
 import {
   COOKIE_ENTRADA,
+  COOKIE_SIGUIENTE,
   MAX_ENTRADA_SEGUNDOS,
   opcionesCookie,
+  rutaSiguiente,
 } from "@/lib/entrada/cookies";
 
 // Inicia la entrada: guarda el verificador PKCE en una cookie httpOnly de corta vida
@@ -35,5 +37,12 @@ export async function GET(
     `${proveedor}.${modo}.${verificador}`,
     opcionesCookie(request.nextUrl.protocol === "https:", "/api/entrar", MAX_ENTRADA_SEGUNDOS),
   );
+  const siguiente = rutaSiguiente(request.nextUrl.searchParams.get("siguiente"));
+  if (siguiente)
+    respuesta.cookies.set(
+      COOKIE_SIGUIENTE,
+      siguiente,
+      opcionesCookie(request.nextUrl.protocol === "https:", "/api/entrar", MAX_ENTRADA_SEGUNDOS),
+    );
   return respuesta;
 }

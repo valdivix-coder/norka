@@ -3,13 +3,15 @@ import { entrada as m } from "@/mensajes/es-CL";
 import { MarcaDelTema } from "@/components/interfaz/MarcaDelTema";
 import s from "@/components/interfaz/interfaz.module.css";
 import { proveedoresConfigurados } from "@/lib/entrada/proveedores";
+import { rutaSiguiente } from "@/lib/entrada/cookies";
 
 export const metadata = { title: m.titulo };
 
-type Props = { searchParams: Promise<{ error?: string }> };
+type Props = { searchParams: Promise<{ error?: string; siguiente?: string }> };
 
 export default async function Entrar({ searchParams }: Props) {
-  const { error } = await searchParams;
+  const { error, siguiente } = await searchParams;
+  const destino = rutaSiguiente(siguiente);
   const mensajeError =
     error && error in m.errores
       ? m.errores[error as keyof typeof m.errores]
@@ -29,6 +31,7 @@ export default async function Entrar({ searchParams }: Props) {
         {mensajeError && <p role="alert">{mensajeError}</p>}
         {google ? (
           <form action="/api/entrar/google" method="get">
+            {destino && <input type="hidden" name="siguiente" value={destino} />}
             <button className={`${s.boton} ${s.principal} ${s.ancho}`} type="submit">
               <Image src="/proveedores/google.svg" width={24} height={24} alt="" />
               {m.continuarCon("Google")}

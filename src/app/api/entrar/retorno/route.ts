@@ -5,7 +5,9 @@ import { dependencias } from "@/lib/entrada/servidor";
 import {
   COOKIE_ENTRADA,
   COOKIE_SESION,
+  COOKIE_SIGUIENTE,
   opcionesCookie,
+  rutaSiguiente,
 } from "@/lib/entrada/cookies";
 
 // Vuelta desde Supabase Auth. Abre la sesión propia y descarta todo lo del proveedor.
@@ -16,6 +18,7 @@ export async function GET(request: NextRequest) {
   const ir = (ruta: string) => {
     const r = NextResponse.redirect(new URL(ruta, request.nextUrl.origin));
     r.cookies.set(COOKIE_ENTRADA, "", opcionesCookie(seguro, "/api/entrar", 0));
+    r.cookies.set(COOKIE_SIGUIENTE, "", opcionesCookie(seguro, "/api/entrar", 0));
     return r;
   };
   if (!proveedor || !esProveedor(proveedor) || !verificador)
@@ -34,7 +37,9 @@ export async function GET(request: NextRequest) {
 
   if (resultado.tipo === "error") return ir(`/entrar?error=${resultado.codigo}`);
   if (resultado.tipo === "unida") return ir("/cuenta?unida=1");
-  const respuesta = ir("/cuenta");
+  const respuesta = ir(
+    rutaSiguiente(request.cookies.get(COOKIE_SIGUIENTE)?.value) ?? "/cuenta",
+  );
   respuesta.cookies.set(
     COOKIE_SESION,
     resultado.tokenSesion,

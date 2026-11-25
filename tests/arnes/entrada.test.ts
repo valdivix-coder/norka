@@ -392,3 +392,23 @@ describe("Adaptador de cuentas y sesiones en Supabase", () => {
     expect(r?.caduca_en_ms).toBe(Date.parse("2026-12-24T00:00:00.000Z"));
   });
 });
+
+import { rutaSiguiente } from "../../src/lib/entrada/cookies";
+describe("Volver a la invitación después de entrar", () => {
+  const codigo = "A".repeat(43);
+  it("solo acepta la página de una invitación", () => {
+    expect(rutaSiguiente(`/invitacion/${codigo}`)).toBe(`/invitacion/${codigo}`);
+    for (const malo of [
+      "https://sitio-malo.example",
+      "//sitio-malo.example",
+      "/cuenta",
+      `/invitacion/${codigo}/../../x`,
+      `/invitacion/${codigo}?a=b`,
+      "/invitacion/corto",
+      "",
+      null,
+      undefined,
+    ])
+      expect(rutaSiguiente(malo)).toBeNull();
+  });
+});
