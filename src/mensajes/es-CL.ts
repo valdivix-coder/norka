@@ -88,6 +88,11 @@ export const muestra = {
   plazos: ["6 meses", "1 mes", "1 año", "Elegir fecha", "No hace falta"],
   recordatorio:
     "Es solo un recordatorio. Sigue la indicación de tu profesional.",
+  guardadaReal: "Los cambios quedaron guardados",
+  agregadaReal: "La persona se agregó a la familia",
+  cambioDeshecho: "Cambio deshecho",
+  actualizarPersonas: "Actualizar",
+  conflictoPersona: "Los datos cambiaron en otro lugar. Actualiza y vuelve a intentarlo.",
   deshacer: "Deshacer",
   hecha: "Mochilas quedó hecha",
   pospuesta: "Mochilas quedó pospuesta",

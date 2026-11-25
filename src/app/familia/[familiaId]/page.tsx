@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { PersonasReales } from "@/components/familia/PersonasReales";
+import { almacenFamiliaActual } from "@/lib/familia/servidor";
 import { notFound, redirect } from "next/navigation";
 import { FormularioInvitacion } from "@/components/familia/FormularioInvitacion";
 import s from "@/components/interfaz/interfaz.module.css";
@@ -28,13 +30,17 @@ export default async function Familia({
     throw error;
   }
   const { familia, yo, integrantes } = datos;
+  const almacen = await almacenFamiliaActual(familiaId);
+  const [personas, ambitos] = await Promise.all([almacen.listar("personas_a_cargo"), almacen.listar("ambitos")]);
   const rol = (r: string) => mi.roles[roles.indexOf(r as (typeof roles)[number])] ?? r;
   return (
     <main className={estilos.pagina}>
       <header>
         <h1>{familia.nombre}</h1>
-        <p className={s.suave}>{m.ver.integrantes}</p>
+        <p className={s.suave}>{mi.contextoFamilia}</p>
       </header>
+      <PersonasReales key={familiaId} familiaId={familiaId} iniciales={personas} ambitosIniciales={ambitos} />
+      <h2>{m.ver.integrantes}</h2>
       <ul className={estilos.lista}>
         {integrantes.map((i) => (
           <li key={i.id} className={estilos.fila}>

@@ -9,8 +9,10 @@ import { HojaInferior } from "@/components/interfaz/HojaInferior";
 import { useRecorrido } from "./ContextoRecorrido";
 import s from "@/components/interfaz/interfaz.module.css";
 
-function FormularioPersona({ persona }: { persona?: PersonaACargo }) {
-  const { guardar, personas } = useRecorrido();
+export function FormularioPersona({ persona, guardar, personas, familiaId = familiaMuestraId }: {
+  persona?: PersonaACargo; guardar: (persona: PersonaACargo, nueva: boolean) => Promise<void>;
+  personas: PersonaACargo[]; familiaId?: string;
+}) {
   const [tipo, elegirTipo] = useState<PersonaACargo["tipo"]>(
     persona?.tipo ?? "hija_hijo",
   );
@@ -44,7 +46,7 @@ function FormularioPersona({ persona }: { persona?: PersonaACargo }) {
       await guardar(
         {
           id: persona?.id ?? crypto.randomUUID(),
-          familia_id: familiaMuestraId,
+          familia_id: familiaId,
           tipo,
           nombre,
           cumple_dia: numero("dia"),
@@ -67,7 +69,9 @@ function FormularioPersona({ persona }: { persona?: PersonaACargo }) {
       avisar(
         causa instanceof Error && causa.message.startsWith("CUMPLEANOS")
           ? m.cumpleInvalido
-          : m.errorGuardar,
+          : causa instanceof Error && causa.message === "CONFLICTO_REVISION"
+            ? m.conflictoPersona
+            : m.errorGuardar,
       );
     } finally {
       ocupar(false);
@@ -198,8 +202,9 @@ function FormularioPersona({ persona }: { persona?: PersonaACargo }) {
     </form>
   );
 }
-function Archivo({ persona }: { persona: PersonaACargo }) {
-  const { archivar, abrir } = useRecorrido();
+export function Archivo({ persona, archivar, cancelar }: {
+  persona: PersonaACargo; archivar: (persona: PersonaACargo) => Promise<void>; cancelar: () => void;
+}) {
   const [error, avisar] = useState("");
   const [ocupado, ocupar] = useState(false);
   return (
@@ -222,14 +227,14 @@ function Archivo({ persona }: { persona: PersonaACargo }) {
       >
         {m.archivar}
       </Boton>
-      <Boton texto onClick={() => abrir(null)}>
+      <Boton texto onClick={cancelar}>
         {m.ahoraNo}
       </Boton>
     </div>
   );
 }
 export function HojasRecorrido() {
-  const { hoja, abrir, familia, nombrar } = useRecorrido();
+  const { hoja, abrir, familia, nombrar, guardar, personas, archivar } = useRecorrido();
   if (!hoja) return null;
   const titulo =
     hoja.tipo === "persona"
@@ -245,8 +250,8 @@ export function HojasRecorrido() {
             : m.invitar;
   return (
     <HojaInferior titulo={titulo} cerrar={() => abrir(null)}>
-      {hoja.tipo === "persona" && <FormularioPersona persona={hoja.persona} />}
-      {hoja.tipo === "archivar" && <Archivo persona={hoja.persona} />}
+      {hoja.tipo === "persona" && <FormularioPersona persona={hoja.persona} guardar={guardar} personas={personas} />}
+      {hoja.tipo === "archivar" && <Archivo persona={hoja.persona} archivar={archivar} cancelar={() => abrir(null)} />}
       {hoja.tipo === "capturar" && (
         <div className={s.pila}>
           <label className={s.campo}>
