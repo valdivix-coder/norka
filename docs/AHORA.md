@@ -1,10 +1,10 @@
 # Ahora
 
-**Actualizado:** 24 de noviembre de 2026.
+**Actualizado:** 25 de noviembre de 2026.
 
-**Estado:** Fase 0 aprobada. Fase 1 en curso, rama `fase-1`. Última migración aplicada: **0003**, el 24 de noviembre. No hay aprobación de la fase 1 ni fusión en `main`.
+**Estado:** Fase 0 aprobada. Fase 1 en curso, rama `fase-1`. Última migración aplicada: **0004**, el 25 de noviembre (verificada directamente). No hay aprobación de la fase 1 ni fusión en `main`.
 
-**Vista previa comprobada:** https://norka-7ezygypbv-neuralia1.vercel.app/ (READY, código `66620bf`, sin promoción a producción).
+**Vista previa comprobada:** https://norka-qeypbp2lr-neuralia1.vercel.app/ (READY, código `4bd3783`, sin promoción a producción).
 
 **Avance visual de esta entrega**
 - La raíz ya presenta la entrada de la **muestra de diseño**. `/muestra/pantallas/hoy` permite recorrer Hoy, Familia, Equilibrio, Actividad, Buscar y Perfil; Capturar abre su hoja. Avisos se abre desde la cabecera.
@@ -24,8 +24,8 @@
 
 **Sigue, en orden**
 1. Probar 1.5 en el teléfono (Simón) y, con eso, cerrarla.
-2. Continuar con 1.7 (crear familia e invitaciones reales), usando el acceso seguro de 1.6.
-3. Conectar las pantallas de 1.8 al servidor; completar 1.9 con el recorrido autenticado, gestos y prueba en teléfono.
+2. Probar 1.7 con dos cuentas reales; código entregado.
+3. Continuar 1.8: conectar las pantallas de personas a cargo y ámbitos al servidor. 0002 ya está aplicada y sus disparadores y permisos comprobados. Después, completar 1.9 con recorrido autenticado, gestos y prueba en teléfono.
 4. Completar revisión de 1.3 y arnés de accesibilidad/navegador en integración continua. `npm run arnes -- --completo` todavía no está implementado.
 5. Simón prueba la entrada desde su teléfono y aprueba la fase 1 antes de pasar a fase 2.
 
@@ -36,3 +36,5 @@
 **Tarea 1.6 entregada:** almacén autorizado desde cookie de sesión; comprueba sesión vigente y pertenencia activa antes de cada operación. Pruebas de aislamiento, revocación, caducidad y concurrencia. Punto de entrada `almacenFamiliaActual(familiaId)` preparado para las acciones de 1.7/1.8; las pantallas de muestra todavía usan memoria. No se necesitó migración.
 
 **Autorización vigente de Simón:** puede aplicar el asistente las migraciones en Supabase de norka, comprobando antes/después y guardando la evidencia e historial correspondientes. Esta autorización expresa sustituye la restricción anterior de aplicación manual; no autoriza fusionar `main` ni avanzar a fase 2.
+
+**Revisión 25 de noviembre:** CI success y Vercel READY para `4bd3783`. 1.8 en curso: migración y núcleo existentes, conexión real de pantalla pendiente. El PDF oficial existe pero el conector no permite leerlo; se requiere acceso al PDF antes de modificar pantallas (regla 0.11). Ver [Fase 1](fases/FASE-1.md). No se modificaron datos ni código.

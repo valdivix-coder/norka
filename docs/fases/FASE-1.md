@@ -659,3 +659,15 @@ Entregada el 25 de noviembre de 2026 en `fase-1`. **No está cerrada:** el crite
 
 ### Vuelta atrás
 Revertir el commit devuelve el código. Las funciones de 0004 solo se agregan: no estorban y se retiran con los `drop function` del pie de su SQL si no hay familias reales.
+
+## Tarea 1.8 · Revisión de continuidad (25 de noviembre de 2026)
+
+**En curso; no entregada.** Revisión independiente del commit `4bd3783` de `fase-1`.
+
+- Supabase: historial real confirma 0002 (`20261121131915`) y 0004 (`20261125113029`). No volver a aplicarlas. Ambas tablas de 1.8 tienen RLS activa y SELECT denegado a anon/authenticated, permitido al servidor. Los disparadores `familias_inicializar` y `personas_proteger_hogar` están activos. Las cuatro funciones de 0004 y las dos funciones paralelas `norka_*` tienen EXECUTE restringido al servidor; no se retiraron funciones ni se alteraron datos.
+- La evidencia previa de 0002 acredita un hogar automático, ocho ámbitos y rechazo del archivo del hogar. Las pruebas anteriores de 1.7 acreditan invitaciones y teléfonos con datos sintéticos; todavía falta el recorrido real de dos cuentas.
+- GitHub Actions: [ejecución 45610637314](https://github.com/valdivix-coder/norka/actions/runs/45610637314), success para `4bd3783`. Vercel: [vista previa de 1.7](https://norka-qeypbp2lr-neuralia1.vercel.app/), READY para el mismo commit; no promovida a producción.
+- La muestra usa `crearAlmacenMuestra` en `ContextoRecorrido.tsx`; sus cambios no persisten. Existe `almacenFamiliaActual(familiaId)` y `guardarPersona`. Siguiente implementación: conectar lectura de personas y ámbitos, creación, edición, archivo y deshacer a acciones de servidor autorizadas, mantener la revisión de concurrencia y el hogar protegido; comprobar persistencia al recargar, aislamiento entre familias y ausencia de datos de ejemplo en el recorrido real. Reutilizar los componentes y valores de marca existentes, sin cambiar la muestra de diseño ni adelantar la fase 2.
+- **Bloqueo:** el PDF oficial `docs/marca/GUIA-GRAFICA.pdf` existe (blob `af1133fb4184e7a000d7d5f1a7db16b15a3aa111`), pero el conector devuelve contenido vacío en base64 y la descarga directa no está disponible. No se pudo abrir ni leer el PDF; el entorno local tampoco resuelve github.com para clonar e instalar. Según regla 0.11 no se modifican pantallas sin la guía. Se requiere el PDF adjunto o un entorno de ejecución con acceso al archivo y a las dependencias. No se realizó ningún cambio de código, de datos ni de configuración de despliegue; no se fusiona main.
+
+Vuelta atrás: esta revisión solo modifica documentación.
