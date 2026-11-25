@@ -22,7 +22,7 @@
 
 **Sigue, en orden**
 1. Probar 1.5 en el teléfono (Simón) y, con eso, cerrarla.
-2. Integrar 1.6 con la familia de sesión; completar 1.7 (crear familia e invitaciones reales).
+2. Continuar con 1.7 (crear familia e invitaciones reales), usando el acceso seguro de 1.6.
 3. Conectar las pantallas de 1.8 al servidor; completar 1.9 con el recorrido autenticado, gestos y prueba en teléfono.
 4. Completar revisión de 1.3 y arnés de accesibilidad/navegador en integración continua. `npm run arnes -- --completo` todavía no está implementado.
 5. Simón prueba la entrada desde su teléfono y aprueba la fase 1 antes de pasar a fase 2.
@@ -30,3 +30,7 @@
 **De Simón ahora:** no se requiere una nueva decisión ni repetir la configuración técnica para avanzar en código. Más adelante: prueba real con las dos cuentas y un teléfono. Antes de datos reales, reemplazar las credenciales privadas que se compartieron en la conversación mediante los paneles protegidos.
 
 **Fuera de esta entrega:** marca en INAPI y consolas de tiendas; significado del nombre sin confirmar (no publicarlo). No se modificó el prompt maestro, el PDF, las migraciones ni la configuración de GitHub.
+
+**Tarea 1.6 entregada:** almacén autorizado desde cookie de sesión; comprueba sesión vigente y pertenencia activa antes de cada operación. Pruebas de aislamiento, revocación, caducidad y concurrencia. Punto de entrada `almacenFamiliaActual(familiaId)` preparado para las acciones de 1.7/1.8; las pantallas de muestra todavía usan memoria. No se necesitó migración.
+
+**Autorización vigente de Simón:** puede aplicar el asistente las migraciones en Supabase de norka, comprobando antes/después y guardando la evidencia e historial correspondientes. Esta autorización expresa sustituye la restricción anterior de aplicación manual; no autoriza fusionar `main` ni avanzar a fase 2.

@@ -29,7 +29,14 @@ export async function validarSesion(
   reloj: Reloj,
 ): Promise<{ cuenta_id: string }> {
   const registro = await almacen.buscarPorHash(hashToken);
-  if (!registro || registro.revocada || registro.caduca_en_ms <= reloj.ahoraMs())
+  if (
+    !registro ||
+    registro.hash_token !== hashToken ||
+    !registro.cuenta_id ||
+    registro.revocada ||
+    !Number.isFinite(registro.caduca_en_ms) ||
+    registro.caduca_en_ms <= reloj.ahoraMs()
+  )
     throw new SesionInvalida();
   return { cuenta_id: registro.cuenta_id };
 }

@@ -580,3 +580,59 @@ Entregada el 24 de noviembre de 2026 en la rama `fase-1`. **No está cerrada:** 
 
 ### Vuelta atrás
 Revertir el commit de 1.5 devuelve el código. La tabla `sesiones` puede quedar (no estorba); sin datos reales se elimina con `drop table public.sesiones;`. Quitar `ENTRADA_GOOGLE` en Vercel oculta el botón de inmediato.
+
+## Tarea 1.6 · Almacén de familia autorizado por sesión
+
+Entrega del 24 de noviembre de 2026 (Chile). Se conservan el puerto de almacén,
+los adaptadores Supabase/memoria y el control de revisión existentes. Se añade
+el enlace de autorización: cookie httpOnly → hash → sesión vigente → cuenta →
+pertenencia activa a la familia → almacén acotado. No se recibe cuenta_id desde
+el navegador. Una familia seleccionada no constituye autorización.
+
+`src/lib/familia/servidor.ts` ofrece `almacenFamiliaActual(familiaId)` a las futuras
+acciones de 1.7/1.8. La capa de núcleo valida sesión y pertenencia al abrirlo y
+antes de cada lectura, creación o edición. Rechaza sesiones cerradas/caducadas,
+integrantes retirados y accesos a otra familia. Una respuesta de red fallida
+impide continuar. Se corrige también el rechazo de fechas de sesión no finitas
+y respuestas cuyo hash no coincide. Las entradas de escritura se copian antes
+de esperar, evitando mutaciones del objeto durante la autorización.
+
+El adaptador de pertenencias consulta únicamente cuenta_id, familia_id y estado,
+con filtros exactos y sin caché. No obtiene teléfonos ni perfiles. Solo el
+servidor utiliza la clave secreta. No hay dependencia nueva ni cambio visual.
+
+### Evidencia y alcance
+
+- [Arnés](evidencia-1-6/arnes.txt): tipos, linter y 86 pruebas (25 nuevas).
+- [Compilación](evidencia-1-6/compilacion.txt).
+- [Supabase real](evidencia-1-6/supabase.txt): cuatro tablas con RLS, cero políticas,
+  sin SELECT para anon/authenticated y SELECT para service_role.
+- Pruebas nuevas: dos familias; IDs ajenos y manipulados; cuenta con varias
+  pertenencias; retirada, cierre y caducidad después de abrir el almacén;
+  fallo de red; respuestas inesperadas; ediciones concurrentes; cookie ausente;
+  recorrido integrado cookie → hash → REST de sesión/pertenencia → datos acotados.
+- Las pruebas existentes no se modificaron para hacerlas pasar.
+
+**Límites:** no hay prueba con Google y dos cuentas reales todavía. Las pruebas
+REST usan respuestas controladas. El acceso seguro está preparado para las
+acciones de servidor; conectar la muestra con datos reales corresponde a 1.7/1.8.
+La autorización y la operación REST son solicitudes sucesivas, no una única
+transacción: una retirada simultánea entre ambas puede dejar terminar una
+operación ya autorizada. Se vuelve a comprobar en la siguiente operación.
+No se declara cerrada la fase 1 ni implementado el arnés `--completo`.
+
+**Migraciones:** ninguna necesaria. Simón autorizó expresamente que el asistente
+aplique las futuras migraciones de norka con consultas antes/después y evidencia;
+se registra en AHORA. No se cambió el prompt maestro ni GitHub.
+
+**Control 14.2:** 1 Sí, solo 1.6; 2 Sí, pruebas aprobadas; 3 Sí; 4 Sí, pertenencia y
+almacén acotado; 5 Sí en pruebas de pertenencia, NO VERIFICADO recorrido con varias
+cuentas reales; 6 No aplica, sin captura ni IA; 7 No aplica, sin pantalla nueva;
+8 No aplica; 9 Sí; 10 No aplica, sin cambios visuales; 11 Sí; 12 Sí;
+13 No aplica; 14 No aplica; 15 Sí; 16 No aplica, marca intacta;
+17 Sí; 18 No aplica, sin textos nuevos de interfaz; 19 No aplica; 20 Sí.
+
+**Vuelta atrás:** revertir el commit de 1.6. No hay datos ni migración que revertir.
+**Siguiente tarea:** 1.7, crear familia y aceptar invitaciones con dos cuentas,
+utilizando este punto de acceso. La prueba real de entrada/salida sigue pendiente
+para cerrar 1.5 y, posteriormente, la fase 1.

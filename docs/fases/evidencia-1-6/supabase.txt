@@ -1,0 +1,12 @@
+Verificación de solo lectura, 24 de noviembre de 2026 (Chile).
+Proyecto: yplhlooidqzqhrjbwrdp (norka).
+Consulta: pg_class + pg_namespace + pg_policies + has_table_privilege.
+Tabla             RLS    Políticas  anon SELECT  authenticated SELECT  service_role SELECT
+ambitos           true   0          false        false                 true
+integrantes       true   0          false        false                 true
+personas_a_cargo  true   0          false        false                 true
+sesiones          true   0          false        false                 true
+No se modificaron tablas, permisos ni datos. No se necesitó migración.
+Esta verificación comprueba la configuración real. Las pruebas automáticas de
+sesión y REST usan respuestas controladas; no acreditan entrada real con Google.
+Fuente documental consultada: https://supabase.com/docs/guides/api/securing-your-api
