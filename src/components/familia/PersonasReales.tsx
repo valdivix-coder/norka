@@ -82,8 +82,8 @@ export function PersonasReales({ familiaId, iniciales, ambitosIniciales }: {
               <AvatarPersona nombre={p.nombre} tipo={p.tipo} color={colorPersona(p.color,p.tipo)} />
               <strong>{p.nombre}</strong>
             </Link>
-            <span className={s.suave}>{m.tipos[p.tipo]}</span>
             {p.tipo === "hogar" ? <span className={s.suave}>{m.hogarAyuda}</span> : <>
+              <span className={s.suave}>{m.tipos[p.tipo]}</span>
               <Boton disabled={ocupado} onClick={() => abrir({tipo:"editar",persona:visual(p)})}>{m.editarPersona}</Boton>
               <Boton texto disabled={ocupado} onClick={() => abrir({tipo:"archivar",persona:p})}>{m.archivar}</Boton>
             </>}

@@ -1,11 +1,11 @@
-| 1 | Base | en curso | Nueve tareas implementadas; 0001–0004 verificadas. 1.9: 118 pruebas aprobadas, Vercel READY `f4a4f05`, 9 vistas móviles emuladas sin desbordamiento, 6 controles, 9 revisiones axe sin infracciones y 0 errores JS. Prueba local aislada con REST sintético, no OAuth real. Pendiente: catálogo 1.3, arnés completo, aceptación 1.5/1.7/1.8/1.9 en teléfono y aprobación de fase | [FASE-1.md](fases/FASE-1.md) |ntación
+# Estado de la implementación
 
 Se actualiza al cerrar cada tarea, con evidencia. Estados: pendiente · en curso · entregada (espera aprobación) · aprobada.
 
 | Fase | Contenido | Estado | Evidencia | Documento |
 | --- | --- | --- | --- | --- |
 | 0 | Descubrimiento y diseño (sin código) | aprobada | Aprobación escrita de Simón el 20 de noviembre de 2026. Guía de 45 páginas, fuentes fechadas, siete respuestas de Simón en el apartado 2 y verificación documental en el apartado 9 | [FASE-0.md](fases/FASE-0.md) |
-| 1 | Base | en curso | 0001 y 0002 verificadas. 86 pruebas del arnés tras 1.6. Almacén autorizado desde sesión y pertenencia activa. Muestra navegable de fase 1: 9 recorridos y 24 revisiones de accesibilidad aprobados. 1.5 entregada, espera prueba real en teléfono (0003 aplicada, 61 pruebas). 1.7 entregada (0004 aplicada, 107 pruebas), espera prueba real con dos cuentas. 1.8 en curso: 0002 y disparadores/permisos verificados directamente el 25 de noviembre; código de conexión real enviado, Vercel READY ee2a7c4; 113 pruebas aprobadas en el núcleo; aceptación autenticada pendiente. 1.9 pendiente de recorrido autenticado | [FASE-1.md](fases/FASE-1.md) |
+| 1 | Base | en curso | 9 tareas implementadas; 118 pruebas aprobadas, Vercel READY f4a4f05, 9 vistas móviles emuladas y 9 auditorías axe sin infracciones. Pendiente aceptación en teléfono, revisión final y arnés completo. | [FASE-1.md](fases/FASE-1.md) |
 | 2 | Captura | pendiente | — | `docs/fases/FASE-2.md` |
 | 3 | Centro de control | pendiente | — | `docs/fases/FASE-3.md` |
 | 4 | Reparto | pendiente | — | `docs/fases/FASE-4.md` |

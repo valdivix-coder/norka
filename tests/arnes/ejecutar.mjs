@@ -9,8 +9,10 @@ const pasos = [
   ["Pruebas", "node_modules/vitest/vitest.mjs", "run"],
 ];
 
-if (process.argv.length > 2) {
-  console.error("El arnés mínimo todavía no incorpora recorridos con navegador ni opciones adicionales.");
+const argumentos = process.argv.slice(2);
+const completo = argumentos.length === 1 && argumentos[0] === "--completo";
+if (argumentos.length && !completo) {
+  console.error("Uso: npm run arnes [-- --completo]");
   process.exit(1);
 }
 
@@ -30,3 +32,13 @@ for (const [nombre, ...argumentos] of pasos) {
 }
 
 console.log("\nArnés mínimo aprobado.");
+
+if (completo) {
+  console.log("\nNavegador, catálogo y accesibilidad");
+  const resultado = spawnSync("bash", ["tests/navegador/ejecutar.sh"], {
+    cwd: raiz, stdio: "inherit", env: { ...process.env, NEXT_TELEMETRY_DISABLED: "1" },
+  });
+  if (resultado.error) console.error(resultado.error.message);
+  if (resultado.status !== 0) process.exit(resultado.status ?? 1);
+  console.log("\nArnés completo aprobado.");
+}

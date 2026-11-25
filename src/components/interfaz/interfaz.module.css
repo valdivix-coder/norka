@@ -884,7 +884,7 @@
 
 .fichaEnlace {
   display: grid;
-  gap: var(--e-3);
+  gap: var(--e-2);
   min-height: var(--toque-minimo);
   color: var(--tinta);
   text-decoration: none;

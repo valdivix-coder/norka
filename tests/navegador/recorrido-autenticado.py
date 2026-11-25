@@ -85,6 +85,16 @@ async def main():
         await page.emulate_media(reduced_motion="reduce")
         await nav.get_by_role("link",name="Equilibrio",exact=True).click()
         await pantalla("Equilibrio","equilibrio-claro-reducido")
+        # Comprobación de ampliación textual, sin cambiar el ancho del dispositivo.
+        await page.evaluate("""() => {
+          const nodos=[...document.querySelectorAll('h1,h2,p,label,button,a,span,dt,dd,input,select,legend')];
+          const tamanos=nodos.map(n=>parseFloat(getComputedStyle(n).fontSize));
+          nodos.forEach((n,i)=>n.style.fontSize=tamanos[i]*2+'px');
+        }""")
+        await pantalla("Equilibrio","equilibrio-texto-200")
+        resultados["controles"].append("Equilibrio con texto al 200 %")
+        await page.reload()
+        await expect(page.get_by_role("heading",name="Equilibrio",exact=True)).to_be_visible()
         await context.set_offline(True)
         await expect(page.get_by_text("Sin conexión.",exact=True)).to_be_visible()
         await context.set_offline(False)
