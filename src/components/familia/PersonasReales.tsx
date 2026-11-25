@@ -7,6 +7,7 @@ import { AvatarPersona, Boton } from "@/components/interfaz/Elementos";
 import { HojaInferior } from "@/components/interfaz/HojaInferior";
 import { Archivo, FormularioPersona } from "@/components/recorrido/HojasRecorrido";
 import { Icono } from "@/components/Icono";
+import Link from "@/components/interfaz/Enlace";
 import { interfaz as m } from "@/mensajes/es-CL";
 import s from "@/components/interfaz/interfaz.module.css";
 
@@ -77,8 +78,10 @@ export function PersonasReales({ familiaId, iniciales, ambitosIniciales }: {
       <div className={s.rejilla}>
         {activas.map(p => (
           <div id={"persona-"+p.id} key={p.id} className={`${s.tarjeta} ${s.personaTarjeta}`}>
-            <AvatarPersona nombre={p.nombre} tipo={p.tipo} color={colorPersona(p.color,p.tipo)} />
-            <strong>{p.nombre}</strong>
+            <Link href={"/familia/"+familiaId+"/persona?id="+p.id} className={s.fichaEnlace}>
+              <AvatarPersona nombre={p.nombre} tipo={p.tipo} color={colorPersona(p.color,p.tipo)} />
+              <strong>{p.nombre}</strong>
+            </Link>
             <span className={s.suave}>{m.tipos[p.tipo]}</span>
             {p.tipo === "hogar" ? <span className={s.suave}>{m.hogarAyuda}</span> : <>
               <Boton disabled={ocupado} onClick={() => abrir({tipo:"editar",persona:visual(p)})}>{m.editarPersona}</Boton>

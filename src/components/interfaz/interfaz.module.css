@@ -881,3 +881,19 @@
     calc(var(--interruptor-ancho) - var(--interruptor-alto))
   );
 }
+
+.fichaEnlace {
+  display: grid;
+  gap: var(--e-3);
+  min-height: var(--toque-minimo);
+  color: var(--tinta);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+:global(::view-transition-group(norka-persona)) {
+  animation-duration: var(--mov-pantalla);
+  animation-timing-function: var(--curva-salida);
+}
+@media (prefers-reduced-motion: reduce) {
+  :global(::view-transition-group(norka-persona)) { animation-duration: var(--mov-micro); }
+}

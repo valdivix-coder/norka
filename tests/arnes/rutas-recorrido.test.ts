@@ -1,7 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { destinoRecorrido, movimientoEntre, rutaRecorrido, gestoVolver } from "../../src/lib/rutas-recorrido";
+import { destinoRecorrido, movimientoEntre, rutaRecorrido, gestoVolver, personaDeRuta } from "../../src/lib/rutas-recorrido";
 const base = "/familia/00000000-0000-4000-8000-000000000001";
 describe("Navegación 1.9",()=>{
+  it("solo usa IDs válidos de fichas reales para la transición compartida",()=>{
+    const id="00000000-0000-4000-8000-000000000002";
+    expect(personaDeRuta(base+"/persona?id="+id)).toBe(id);
+    expect(personaDeRuta(base+"/persona?id=inválido")).toBeNull();
+    expect(personaDeRuta("/muestra/pantallas/persona?id="+id)).toBeNull();
+  });
   it("solo confirma un gesto horizontal al superar la mitad del ancho",()=>{
     expect(gestoVolver(181,10,360)).toBe(true);
     expect(gestoVolver(180,10,360)).toBe(false);

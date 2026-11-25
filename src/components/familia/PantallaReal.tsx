@@ -13,9 +13,9 @@ import s from "@/components/interfaz/interfaz.module.css";
 export type PantallaReal = "hoy" | "equilibrio" | "actividad" | "avisos" | "buscar";
 type PersonaBusca = Pick<PersonaACargo,"id"|"nombre"|"tipo"|"color">;
 const contextos = { hoy:m.contextoHoy, familia:m.contextoFamilia, equilibrio:m.contextoEquilibrio,
-  actividad:m.contextoActividad, avisos:m.contextoAvisos, buscar:m.contextoBuscar, perfil:m.contextoPerfil };
-export function EncabezadoReal({ pantalla, titulo, contexto }: {
-  pantalla: keyof typeof contextos; titulo?: string; contexto?: string;
+  actividad:m.contextoActividad, avisos:m.contextoAvisos, buscar:m.contextoBuscar, perfil:m.contextoPerfil, persona:m.personas };
+export function EncabezadoReal({ pantalla, titulo, contexto, persona }: {
+  pantalla: keyof typeof contextos; titulo?: string; contexto?: string; persona?: PersonaBusca;
 }) {
   const ruta = usePathname();
   useLayoutEffect(() => {
@@ -24,13 +24,13 @@ export function EncabezadoReal({ pantalla, titulo, contexto }: {
       document.querySelector<HTMLElement>("main h1")?.focus({preventScroll:true});
     }
     pantallaLista();
-  },[ruta]);
+  },[ruta,persona?.id]);
   return <>
     <div className={s.resplandor} aria-hidden="true" style={{
-      "--luz-color":pantalla==="equilibrio" ? "var(--acento)" : "var(--marca)",
-      "--luz-opacidad":pantalla==="hoy" ? "var(--luz-hoy)" : pantalla==="equilibrio" ? "var(--luz-equilibrio)" : "var(--luz-familia)",
+      "--luz-color":persona ? colorPersona(persona.color,persona.tipo) : pantalla==="equilibrio" ? "var(--acento)" : "var(--marca)",
+      "--luz-opacidad":persona ? "var(--luz-persona)" : pantalla==="hoy" ? "var(--luz-hoy)" : pantalla==="equilibrio" ? "var(--luz-equilibrio)" : "var(--luz-familia)",
     } as CSSProperties}/>
-    <div className={s.encabezado}>
+    <div className={s.encabezado} id={persona ? "persona-"+persona.id : undefined}>
       <p className={s.contexto}>{contexto ?? contextos[pantalla]}</p>
       <h1 tabIndex={-1} className={s.titulo}>{titulo ?? m[pantalla]}</h1>
     </div>
@@ -49,7 +49,7 @@ function BuscarReal({base, personas}: {base:string;personas:PersonaBusca[]}) {
     <div aria-live="polite">
       {q.length<2 ? <Vacio tipo="buscar" titulo={m.sinBusqueda} ayuda={m.busquedaReal}/>
       : resultados.length ? <div className={s.lista}>{resultados.map(p=>
-        <Link key={p.id} href={base+"#persona-"+p.id} className={`${s.filaLista} ${s.enlaceFila}`}>
+        <Link key={p.id} href={base+"/persona?id="+p.id} className={`${s.filaLista} ${s.enlaceFila}`}>
           <AvatarPersona nombre={p.nombre} tipo={p.tipo} color={colorPersona(p.color,p.tipo)}/>
           <span>{p.nombre}</span>
         </Link>)}</div>
@@ -104,4 +104,22 @@ export function AjustesRecorrido() {
     <Link className={s.boton} href="/cuenta">{entrada.cuenta.titulo}</Link>
     <form action="/api/salir" method="post"><Boton type="submit" className={s.ancho}>{entrada.cuenta.salir}</Boton></form>
   </section>;
+}
+
+export function FichaReal({familiaId,persona}: {
+  familiaId:string;persona:PersonaBusca & Pick<PersonaACargo,"cumple_dia"|"cumple_mes">;
+}) {
+  const cumple=persona.cumple_dia && persona.cumple_mes
+    ? m.fechaCumple(persona.cumple_dia,m.meses[persona.cumple_mes-1].toLocaleLowerCase("es-CL")) : m.tipos[persona.tipo];
+  return <div className={s.pila}>
+    <EncabezadoReal pantalla="persona" titulo={persona.nombre} contexto={cumple} persona={persona}/>
+    <div className={s.fila}>
+      <AvatarPersona nombre={persona.nombre} tipo={persona.tipo} color={colorPersona(persona.color,persona.tipo)}/>
+      <span>{m.tipos[persona.tipo]}</span>
+    </div>
+    <Vacio titulo={m.sinResponsabilidades} ayuda={m.noResponsabilidad}>
+      <Link className={`${s.boton} ${s.principal}`} href={"/familia/"+familiaId}>{m.verFamilia}</Link>
+    </Vacio>
+    {persona.tipo==="hogar" && <p className={s.suave}>{m.hogarAyuda}</p>}
+  </div>;
 }

@@ -23,3 +23,10 @@ export function movimientoEntre(actual: string, destino: string) {
 export function gestoVolver(dx: number, dy: number, ancho: number) {
   return dx > 0 && dx > Math.abs(dy) && dx > ancho / 2;
 }
+
+export function personaDeRuta(ruta:string) {
+  const info=rutaRecorrido(ruta);
+  if(!info?.real || info.pantalla!=="persona") return null;
+  const id=new URLSearchParams(ruta.split("?")[1] ?? "").get("id");
+  return id && uuid.test(id) ? id : null;
+}
