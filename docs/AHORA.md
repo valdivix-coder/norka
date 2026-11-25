@@ -4,7 +4,7 @@
 
 **Estado:** Fase 0 aprobada; fase 1 con sus nueve tareas implementadas, pendiente de aceptación y revisión final. Rama `fase-1`. No hay autorización de fusionar main ni iniciar fase 2. Última migración aplicada: 0004.
 
-**Vista previa de código comprobada:** https://norka-anjeoshv4-neuralia1.vercel.app/ (READY, `f4a4f05`). Enlace estable de la rama: https://norka-git-fase-1-neuralia1.vercel.app/ . Vercel Authentication sigue activa; no se cambió la protección.
+**Vista previa de código comprobada:** https://norka-3wkufoea9-neuralia1.vercel.app/ (READY, `1b29b00`). Enlace estable: https://norka-git-fase-1-neuralia1.vercel.app/. Vercel Authentication activa.
 
 **Tarea 1.9 — entrega técnica**
 - Recorrido autenticado: Hoy, Familia, Capturar (hoja informativa, sin guardar hasta fase 2), Equilibrio, Actividad, Buscar personas, Avisos, Perfil real y ficha de persona a cargo. Marco y marca compartidos con la muestra; ninguna ruta autenticada usa datos de ejemplo.
@@ -21,8 +21,10 @@
 - La guía gráfica original se abrió y verificó (45 páginas; blob `af1133fb4184e7a000d7d5f1a7db16b15a3aa111`); SVG originales intactos.
 
 **Sigue, en orden**
-1. Completar revisión del catálogo 1.3; verificar recorrido autenticado con texto al 200 %, gesto físico, transición compartida y fluidez de 60 fps en teléfono. Compactar la sección de personas a cargo (duplicación de etiqueta de hogar y tarjetas altas) sin alterar la guía. El arnés de navegador está en CI independiente, pero `npm run arnes -- --completo` aún no está implementado.
+1. Arnés completo y catálogo estructural aprobados; se quitó la duplicación de hogar y se ajustó espaciado de ficha. Pendiente revisión visual exhaustiva de valores, texto ampliado en todas las pantallas, gesto físico, transición compartida y 60 fps en teléfono.
 2. Simón prueba 1.5, 1.7, 1.8 y 1.9 en teléfono con cuentas reales. Antes de datos reales, reemplazar credenciales privadas compartidas mediante paneles protegidos; verificar que el dominio de vista previa esté permitido en la redirección de Google/Supabase.
 3. Solo tras validar y recibir «apruebo la fase 1», considerar fusión en main y fase 2.
 
-**Autorización vigente:** el asistente puede aplicar migraciones de norka con verificaciones antes/después e historial. No autoriza fusionar main ni pasar a fase 2. No se modificaron migraciones, datos, variables, configuración del proyecto, marca ni prompt maestro en 1.9. Se agregó un flujo CI de navegador aislado, sin credenciales, en el repositorio. Ver [Fase 1](fases/FASE-1.md).
+**Autorización vigente:** el asistente puede aplicar migraciones de norka con verificaciones antes/después e historial. No autoriza fusionar main ni pasar a fase 2. No se modificaron migraciones, datos, variables, configuración del proyecto, marca ni prompt maestro. Se agregó un flujo CI de navegador aislado, sin credenciales, en el repositorio. Ver [Fase 1](fases/FASE-1.md).
+
+**Revisión de cierre 25 de noviembre:** [arnés completo](https://github.com/valdivix-coder/norka/actions/runs/45680886725) success para `1b29b00`: 118 pruebas, 10 vistas, 7 controles, 12 auditorías axe sin infracciones (10 vistas y 2 catálogos), 0 errores JS, Equilibrio al 200 %, 28 componentes y 16 combinaciones por tema a 360 px. [Evidencia](https://github.com/valdivix-coder/norka/actions/runs/45680886725/artifacts/15054821112). Infraestructura revalidada: cuatro migraciones numeradas y una paralela histórica; nueve tablas con RLS y lectura solo de servidor. [Informe global por las 83 tareas](INFORME-IMPLEMENTACION.md). Falta aprobación y prueba física. No fusionar.

@@ -700,3 +700,22 @@ Vuelta atrás: esta revisión solo modifica documentación.
 
 ### Límites, control y vuelta atrás
 NO VERIFICADO: 60 fps, gesto físico y transición compartida en teléfono real, lector de pantalla físico, texto al 200 % en el recorrido real (sí existe evidencia anterior de muestra), prueba de Google real y persistencia de acciones 1.8 con dos cuentas. El vídeo de CI es de navegador móvil emulado, no sustituye la grabación del teléfono. No se declara 1.9 cerrada según su criterio ni se declara aprobada la fase 1. La revisión completa del catálogo 1.3 y el comando arnés completo quedan pendientes. No se modificaron Supabase, variables, secretos, permisos, producción, main, guía ni prompt maestro. Vuelta atrás: revertir commits de 1.9 en fase-1, preservar 1.7/1.8 y migraciones; el workflow de prueba se puede revertir por separado. Siguiente: validaciones y aprobación de fase 1.
+
+## Revisión de cierre de fase 1 — 25 de noviembre de 2026
+
+Commit `1b29b00`: se implementa `npm run arnes -- --completo` con ejecución mínima, build y dos recorridos de navegador, siempre REST TLS local y credenciales ficticias; CI usa Ubuntu 24.04. No se modifican las pruebas anteriores para conseguir aprobación; se añaden comprobaciones. Catálogo 28 fichas con sección 7 y 16 combinaciones de marca en cada tema. Equilibrio texto 200 %. Se compacta la separación de ficha y elimina tipo duplicado de hogar con tokens de guía 6.1, 7.9, 12; marca intacta. Se corrige duplicación en el documento de estado.
+
+Evidencia: [arnés mínimo](https://github.com/valdivix-coder/norka/actions/runs/45680886800), [arnés completo](https://github.com/valdivix-coder/norka/actions/runs/45680886725), success para `1b29b00`.
+
+```
+Tests 118 passed (118)
+10 vistas: ancho 360 px
+7 controles funcionales
+0 errores JS
+10 auditorías de vistas: infracciones []
+Catálogo oscuro: 28 componentes, 16 marca, ancho 360, infracciones []
+Catálogo claro: 28 componentes, 16 marca, ancho 360, infracciones []
+Arnés completo aprobado.
+```
+
+[Artefacto](https://github.com/valdivix-coder/norka/actions/runs/45680886725/artifacts/15054821112); [Vercel READY](https://norka-3wkufoea9-neuralia1.vercel.app/). No equivale a auditoría exhaustiva de valores visuales, lector físico, rendimiento 60 fps ni autenticación real. Se revalidó la infraestructura sin modificarla. El código de fase 1 está entregado; no se cumple la puerta formal de 13.1. Vuelta atrás: revertir `1b29b00` conservando las migraciones y los datos. No se fusiona ni inicia la fase 2. [Informe global](../INFORME-IMPLEMENTACION.md).
