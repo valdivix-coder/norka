@@ -1,4 +1,4 @@
-# Estado de la implementación
+| 1 | Base | en curso | Nueve tareas implementadas; 0001–0004 verificadas. 1.9: 118 pruebas aprobadas, Vercel READY `f4a4f05`, 9 vistas móviles emuladas sin desbordamiento, 6 controles, 9 revisiones axe sin infracciones y 0 errores JS. Prueba local aislada con REST sintético, no OAuth real. Pendiente: catálogo 1.3, arnés completo, aceptación 1.5/1.7/1.8/1.9 en teléfono y aprobación de fase | [FASE-1.md](fases/FASE-1.md) |ntación
 
 Se actualiza al cerrar cada tarea, con evidencia. Estados: pendiente · en curso · entregada (espera aprobación) · aprobada.
 
