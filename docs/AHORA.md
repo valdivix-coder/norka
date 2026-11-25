@@ -4,7 +4,7 @@
 
 **Estado:** Fase 0 aprobada. Fase 1 en curso, rama `fase-1`. Última migración aplicada: **0004**, el 25 de noviembre (verificada directamente). No hay aprobación de la fase 1 ni fusión en `main`.
 
-**Vista previa comprobada:** https://norka-qeypbp2lr-neuralia1.vercel.app/ (READY, código `4bd3783`, sin promoción a producción).
+**Vista previa comprobada:** https://norka-li3yb5yf4-neuralia1.vercel.app/ (READY, código `ee2a7c4`, sin promoción a producción).
 
 **Avance visual de esta entrega**
 - La raíz ya presenta la entrada de la **muestra de diseño**. `/muestra/pantallas/hoy` permite recorrer Hoy, Familia, Equilibrio, Actividad, Buscar y Perfil; Capturar abre su hoja. Avisos se abre desde la cabecera.
@@ -25,7 +25,7 @@
 **Sigue, en orden**
 1. Probar 1.5 en el teléfono (Simón) y, con eso, cerrarla.
 2. Probar 1.7 con dos cuentas reales; código entregado.
-3. Continuar 1.8: conectar las pantallas de personas a cargo y ámbitos al servidor. 0002 ya está aplicada y sus disparadores y permisos comprobados. Después, completar 1.9 con recorrido autenticado, gestos y prueba en teléfono.
+3. 1.8: código conectado a Supabase. Comprobar el arnés de la última revisión y el recorrido real de crear, editar, archivar, deshacer y recargar. Después, completar 1.9 con recorrido autenticado, gestos y prueba en teléfono.
 4. Completar revisión de 1.3 y arnés de accesibilidad/navegador en integración continua. `npm run arnes -- --completo` todavía no está implementado.
 5. Simón prueba la entrada desde su teléfono y aprueba la fase 1 antes de pasar a fase 2.
 
@@ -38,3 +38,5 @@
 **Autorización vigente de Simón:** puede aplicar el asistente las migraciones en Supabase de norka, comprobando antes/después y guardando la evidencia e historial correspondientes. Esta autorización expresa sustituye la restricción anterior de aplicación manual; no autoriza fusionar `main` ni avanzar a fase 2.
 
 **Revisión 25 de noviembre:** CI success y Vercel READY para `4bd3783`. 1.8 en curso: migración y núcleo existentes, conexión real de pantalla pendiente. El PDF oficial existe pero el conector no permite leerlo; se requiere acceso al PDF antes de modificar pantallas (regla 0.11). Ver [Fase 1](fases/FASE-1.md). No se modificaron datos ni código.
+
+**Entrega de código 1.8:** guía PDF original recibida y verificada. Núcleo aprobado (113 pruebas); interfaz real conectada, Vercel READY para `ee2a7c4`. CI final: success para el commit corregido ee2a7c4. Falta comprobación real autenticada en teléfono. No se hicieron migraciones ni se modificó main. Ver [Fase 1](fases/FASE-1.md).
