@@ -5,7 +5,7 @@ Se actualiza al cerrar cada tarea, con evidencia. Estados: pendiente · en curso
 | Fase | Contenido | Estado | Evidencia | Documento |
 | --- | --- | --- | --- | --- |
 | 0 | Descubrimiento y diseño (sin código) | aprobada | Aprobación escrita de Simón el 20 de noviembre de 2026. Guía de 45 páginas, fuentes fechadas, siete respuestas de Simón en el apartado 2 y verificación documental en el apartado 9 | [FASE-0.md](fases/FASE-0.md) |
-| 1 | Base | en curso | 9/9 tareas con código. 118 pruebas, arnés completo aprobado, 10 vistas a 360 px, 7 controles, 12 auditorías axe sin infracciones y 0 errores JS. Catálogo 28 componentes/16 combinaciones por tema; Equilibrio 200 %. Vercel READY 1b29b00. Pendiente prueba física y aprobación. | [FASE-1.md](fases/FASE-1.md) |
+| 1 | Base | en curso | 9/9 tareas con código. 118 pruebas, arnés completo aprobado, 10 vistas a 360 px, 7 controles, 12 auditorías axe sin infracciones y 0 errores JS. Catálogo 28 componentes/16 combinaciones por tema; Equilibrio 200 %. Vercel READY 1b29b00. Incidencia OAuth: origen estable corregido en b1b8b1d, falta autorizar callback en Supabase y prueba física; no fusionar. | [FASE-1.md](fases/FASE-1.md) |
 | 2 | Captura | pendiente | — | `docs/fases/FASE-2.md` |
 | 3 | Centro de control | pendiente | — | `docs/fases/FASE-3.md` |
 | 4 | Reparto | pendiente | — | `docs/fases/FASE-4.md` |

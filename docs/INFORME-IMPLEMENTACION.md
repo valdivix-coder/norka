@@ -155,3 +155,7 @@ Fuente: sección 13 del prompt maestro, evidencia de Fase 1, GitHub Actions, Ver
 5. Grabar pantalla sin datos identificables y comunicar problemas. Confirmar solo si todo funciona y escribir «apruebo la fase 1».
 
 La fase 2 comienza con la migración de responsabilidades, tareas, capturas y trabajos IA (2.1), luego captura manual, cola offline, contrato de interpretación, evaluaciones, Gemini, resultado editable, voz y mediciones. No se implementa aún.
+
+## Incidencia de entrada reportada tras la revisión
+
+Pantalla blanca después de Google: alias de producción antiguo retorna null. Corrección de origen estable desplegada en preview `b1b8b1d`. Pendiente comprobar/agregar callback exacto en Supabase y repetir Google real; 1.5 no aceptada. Véase [documento de fase](fases/FASE-1.md). Las cifras globales anteriores son estimaciones, no aprobación formal.

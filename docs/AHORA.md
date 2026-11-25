@@ -4,7 +4,7 @@
 
 **Estado:** Fase 0 aprobada; fase 1 con sus nueve tareas implementadas, pendiente de aceptación y revisión final. Rama `fase-1`. No hay autorización de fusionar main ni iniciar fase 2. Última migración aplicada: 0004.
 
-**Vista previa de código comprobada:** https://norka-3wkufoea9-neuralia1.vercel.app/ (READY, `1b29b00`). Enlace estable: https://norka-git-fase-1-neuralia1.vercel.app/. Vercel Authentication activa.
+**Vista previa de código comprobada:** https://norka-cdoo8zfoo-neuralia1.vercel.app/ (READY, `b1b8b1d`). Enlace estable: https://norka-git-fase-1-neuralia1.vercel.app/. Vercel Authentication activa.
 
 **Tarea 1.9 — entrega técnica**
 - Recorrido autenticado: Hoy, Familia, Capturar (hoja informativa, sin guardar hasta fase 2), Equilibrio, Actividad, Buscar personas, Avisos, Perfil real y ficha de persona a cargo. Marco y marca compartidos con la muestra; ninguna ruta autenticada usa datos de ejemplo.
@@ -28,3 +28,5 @@
 **Autorización vigente:** el asistente puede aplicar migraciones de norka con verificaciones antes/después e historial. No autoriza fusionar main ni pasar a fase 2. No se modificaron migraciones, datos, variables, configuración del proyecto, marca ni prompt maestro. Se agregó un flujo CI de navegador aislado, sin credenciales, en el repositorio. Ver [Fase 1](fases/FASE-1.md).
 
 **Revisión de cierre 25 de noviembre:** [arnés completo](https://github.com/valdivix-coder/norka/actions/runs/45680886725) success para `1b29b00`: 118 pruebas, 10 vistas, 7 controles, 12 auditorías axe sin infracciones (10 vistas y 2 catálogos), 0 errores JS, Equilibrio al 200 %, 28 componentes y 16 combinaciones por tema a 360 px. [Evidencia](https://github.com/valdivix-coder/norka/actions/runs/45680886725/artifacts/15054821112). Infraestructura revalidada: cuatro migraciones numeradas y una paralela histórica; nueve tablas con RLS y lectura solo de servidor. [Informe global por las 83 tareas](INFORME-IMPLEMENTACION.md). Falta aprobación y prueba física. No fusionar.
+
+**Incidencia OAuth (25 de noviembre, 17:50 Chile):** destino antiguo de producción retorna página vacía. Se estabilizó el origen de preview en código y Vercel. **Bloqueo:** verificar/agregar en Supabase Redirect URLs `https://norka-git-fase-1-neuralia1.vercel.app/api/entrar/retorno`. No disponible desde el conector; no fusionar ni iniciar fase 2. Ver [Fase 1](fases/FASE-1.md).
