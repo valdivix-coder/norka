@@ -636,3 +636,26 @@ cuentas reales; 6 No aplica, sin captura ni IA; 7 No aplica, sin pantalla nueva;
 **Siguiente tarea:** 1.7, crear familia y aceptar invitaciones con dos cuentas,
 utilizando este punto de acceso. La prueba real de entrada/salida sigue pendiente
 para cerrar 1.5 y, posteriormente, la fase 1.
+
+
+## Tarea 1.7 · Familia, invitaciones y perfil
+
+Entregada el 25 de noviembre de 2026 en `fase-1`. **No está cerrada:** el criterio «dos cuentas distintas quedan en la misma familia y cada una ve el teléfono de la otra» está probado en el núcleo y en la base, pero falta la prueba real con dos cuentas de Google.
+
+### Qué se hizo
+- **Núcleo**: crear familia (quien la crea es administrador), generar invitación (solo administrador; código en claro una sola vez, en la base solo su hash; caduca a los 7 días), aceptar invitación de un solo uso, ver familia (solo integrantes; así se ven los teléfonos) y editar el propio perfil con control de revisión. Reparto inicial de cuotas en partes iguales (suma 100).
+- **Teléfono**: prefijo «+56 9» fijo con 8 dígitos exactos u «Otro país» con número internacional; se guarda como «+569XXXXXXXX». Cumpleaños: día y mes juntos, 29 de febrero válido.
+- **Migración 0004**: cuatro funciones atómicas (crear familia con su administrador y aceptar invitación bloqueando la fila). Aplicada y verificada: [evidencia](evidencia-1-7/aplicacion-0004-supabase.txt).
+- **Pantallas**: `/familia/nueva`, `/familia/[id]` (integrantes con teléfono, invitar), `/familia/[id]/perfil`, `/invitacion/[codigo]`; `/cuenta` enlaza a la familia. Tras entrar con Google se vuelve a la invitación (solo rutas de invitación; sin redirecciones abiertas).
+- **Evidencia**: arnés con 107 pruebas, tipos, linter y compilación aprobados ([salida](evidencia-1-7/arnes.txt)).
+
+### Límites y NO VERIFICADO
+- **NO VERIFICADO:** flujo real con dos cuentas de Google en el teléfono.
+- No incluye retirar integrantes, cambiar el nombre de la familia ni cambiar la participación desde el perfil (esto último toca las cuotas: tarea 4.5).
+- Una cuenta con familia no puede crear otra desde la pantalla.
+- Los enlaces de WhatsApp y llamada son de la tarea 3.10; aquí solo se muestra el número.
+- Pasos 4 a 7 de la creación de familia (6.1) pertenecen a tareas posteriores.
+- Existe una migración paralela `norka_*` (ver evidencia); su retiro está pendiente de confirmar.
+
+### Vuelta atrás
+Revertir el commit devuelve el código. Las funciones de 0004 solo se agregan: no estorban y se retiran con los `drop function` del pie de su SQL si no hay familias reales.

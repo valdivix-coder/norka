@@ -20,6 +20,8 @@
 
 **Tarea 1.5 entregada (24 de noviembre), espera tu prueba real.** Entrada con Google, sesión propia y migración 0003 aplicada. Falta que pruebes entrar y salir desde el teléfono. Detalle y límites en [Fase 1](fases/FASE-1.md).
 
+**Tarea 1.7 entregada (25 de noviembre), espera prueba real con dos cuentas.** Familia, invitaciones, teléfono y perfil. Detalle en [Fase 1](fases/FASE-1.md). Pendiente de confirmar: retirar las funciones `norka_*` de otra migración paralela.
+
 **Sigue, en orden**
 1. Probar 1.5 en el teléfono (Simón) y, con eso, cerrarla.
 2. Continuar con 1.7 (crear familia e invitaciones reales), usando el acceso seguro de 1.6.
