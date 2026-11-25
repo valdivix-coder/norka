@@ -4,6 +4,12 @@ import { FueraDeFamilia, RegistroAusente, type PersonaACargo } from "@/core/doma
 import { SesionInvalida } from "@/core/domain/cuenta";
 import { esUuid } from "@/core/usecases/personas-reales";
 import { almacenFamiliaActual } from "@/lib/familia/servidor";
+import { interfaz as m } from "@/mensajes/es-CL";
+const titulos = { hoy:m.hoy, equilibrio:m.equilibrio, actividad:m.actividad, avisos:m.avisos, buscar:m.buscar, persona:m.persona } as const;
+export async function generateMetadata({params}: {params:Promise<{pantalla:string}>}) {
+  const {pantalla}=await params;
+  return {title:Object.hasOwn(titulos,pantalla)?titulos[pantalla as keyof typeof titulos]:m.familia};
+}
 const permitidas = ["hoy","equilibrio","actividad","avisos","buscar","persona"];
 export default async function Page({params,searchParams}: {
   params:Promise<{familiaId:string;pantalla:string}>;searchParams:Promise<{id?:string}>

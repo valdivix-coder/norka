@@ -10,6 +10,7 @@ import { familia as m, interfaz as mi } from "@/mensajes/es-CL";
 import { guardarPerfilAccion, type ClaveError } from "../../acciones";
 import estilos from "../../familia.module.css";
 
+export const metadata = { title: m.perfil.titulo };
 const roles = ["madre", "padre", "cuidador", "abuelo", "tio", "otro"] as const;
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
