@@ -1,0 +1,52 @@
+name: Navegador fase 1
+on:
+  push:
+    branches: [fase-1]
+    paths:
+      - 'src/**'
+      - 'tests/navegador/**'
+      - '.github/workflows/navegador-fase-1.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  recorrido:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SUPABASE_URL: https://127.0.0.1:3193
+      SUPABASE_PUBLISHABLE_KEY: qa-local
+      SUPABASE_SECRET_KEY: qa-local
+      NORKA_URL: http://127.0.0.1:3191
+      NORKA_QA_OUT: /tmp/norka-evidencia
+      NORKA_AXE: /tmp/norka-qa/node_modules/axe-core/axe.min.js
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Herramientas de navegador aisladas
+        run: |
+          python -m venv /tmp/norka-venv
+          /tmp/norka-venv/bin/pip install playwright==1.51.0
+          /tmp/norka-venv/bin/python -m playwright install --with-deps chromium
+          npm install --prefix /tmp/norka-qa --no-save --package-lock=false axe-core@4.10.3
+      - name: Compilar
+        run: npm run build
+      - name: Recorrido autenticado con datos sintéticos
+        run: |
+          openssl req -x509 -newkey rsa:2048 -nodes -keyout /tmp/norka-key.pem -out /tmp/norka-cert.pem -subj /CN=localhost -addext 'subjectAltName=DNS:localhost,IP:127.0.0.1' -days 1 >/dev/null 2>&1
+          /tmp/norka-venv/bin/python tests/navegador/servidor_qa.py /tmp/norka-cert.pem /tmp/norka-key.pem > /tmp/norka-rest.log 2>&1 &
+          export NODE_EXTRA_CA_CERTS=/tmp/norka-cert.pem
+          npm run start -- --hostname 127.0.0.1 --port 3191 > /tmp/norka-next.log 2>&1 &
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:3191/ >/dev/null && break; sleep 1; done
+          /tmp/norka-venv/bin/python tests/navegador/recorrido-autenticado.py
+      - name: Evidencia sintética
+        if: always()
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: recorrido-norka-1-9
+          path: /tmp/norka-evidencia
+          if-no-files-found: warn
