@@ -46,6 +46,7 @@ export function crearAlmacenCuentasSupabase({
       method: metodo,
       cache: "no-store",
       redirect: "error",
+      signal: AbortSignal.timeout(10000),
       headers: {
         apikey: claveServicio,
         "Content-Type": "application/json",

@@ -1,13 +1,13 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { aleatorioUrl } from "@/lib/entrada/pkce";
 import { esProveedor, proveedoresConfigurados } from "@/lib/entrada/proveedores";
+import { prepararInicio } from "@/lib/entrada/origen";
 import { urlDeAutorizacion } from "@/lib/entrada/supabase-auth";
 import {
   COOKIE_ENTRADA,
   COOKIE_SIGUIENTE,
   MAX_ENTRADA_SEGUNDOS,
   opcionesCookie,
-  rutaSiguiente,
 } from "@/lib/entrada/cookies";
 
 // Inicia la entrada: guarda el verificador PKCE en una cookie httpOnly de corta vida
@@ -22,27 +22,35 @@ export async function GET(
   if (!esProveedor(proveedor) || !proveedoresConfigurados().includes(proveedor))
     return destinoError("fallo");
 
-  const modo = request.nextUrl.searchParams.get("modo") === "unir" ? "unir" : "entrar";
-  const verificador = aleatorioUrl(48);
-  const retorno = new URL("/api/entrar/retorno", request.nextUrl.origin).toString();
-  const url = await urlDeAutorizacion(
-    { url: process.env.SUPABASE_URL as string },
-    proveedor,
-    retorno,
-    verificador,
-  );
-  const respuesta = NextResponse.redirect(url);
+  try {
+    const { modo, retorno, siguiente, redireccion } = prepararInicio(new URL(request.url), proveedor);
+    if (redireccion) {
+      const respuesta = NextResponse.redirect(redireccion);
+      respuesta.headers.set("Cache-Control", "no-store");
+      respuesta.headers.set("Referrer-Policy", "no-referrer");
+      return respuesta;
+    }
+    const verificador = aleatorioUrl(48);
+    const url = await urlDeAutorizacion(
+      { url: process.env.SUPABASE_URL as string }, proveedor, retorno, verificador,
+    );
+    const respuesta = NextResponse.redirect(url);
+    respuesta.headers.set("Cache-Control", "no-store");
+    respuesta.headers.set("Referrer-Policy", "no-referrer");
   respuesta.cookies.set(
     COOKIE_ENTRADA,
     `${proveedor}.${modo}.${verificador}`,
     opcionesCookie(request.nextUrl.protocol === "https:", "/api/entrar", MAX_ENTRADA_SEGUNDOS),
   );
-  const siguiente = rutaSiguiente(request.nextUrl.searchParams.get("siguiente"));
   if (siguiente)
     respuesta.cookies.set(
       COOKIE_SIGUIENTE,
       siguiente,
       opcionesCookie(request.nextUrl.protocol === "https:", "/api/entrar", MAX_ENTRADA_SEGUNDOS),
     );
-  return respuesta;
+    else respuesta.cookies.set(COOKIE_SIGUIENTE, "", opcionesCookie(request.nextUrl.protocol === "https:", "/api/entrar", 0));
+    return respuesta;
+  } catch {
+    return destinoError("fallo");
+  }
 }

@@ -412,3 +412,34 @@ describe("Volver a la invitación después de entrar", () => {
       expect(rutaSiguiente(malo)).toBeNull();
   });
 });
+
+import { origenEntrada, prepararInicio } from "../../src/lib/entrada/origen";
+describe("Origen estable de autenticación", () => {
+  const estable = "https://preview.example";
+  it("redirige desde otro despliegue antes de crear la cookie PKCE", () => {
+    const r = prepararInicio(new URL("https://otro.example/api/entrar/google"), "google", estable);
+    expect(r.redireccion?.href).toBe(estable+"/api/entrar/google");
+    expect(r.retorno).toBe(estable+"/api/entrar/retorno");
+  });
+  it("en el origen estable no redirige de nuevo", () => {
+    const r = prepararInicio(new URL(estable+"/api/entrar/google"), "google", estable);
+    expect(r.redireccion).toBeNull();
+    expect(r.retorno).toBe(estable+"/api/entrar/retorno");
+  });
+  it("conserva la invitación legítima sin copiar otros parámetros", () => {
+    const invitacion = "/invitacion/"+"A".repeat(43);
+    const r = prepararInicio(new URL("https://otro.example/api/entrar/google?siguiente="+invitacion+"&code=privado"),"google",estable);
+    expect(r.redireccion?.searchParams.get("siguiente")).toBe(invitacion);
+    expect(r.redireccion?.searchParams.has("code")).toBe(false);
+  });
+  it("no permite trasladar la vinculación de cuenta ni redirecciones externas", () => {
+    const r=prepararInicio(new URL("https://otro.example/api/entrar/google?modo=unir&siguiente=https://mal.example"),"google",estable);
+    expect(r.redireccion?.href).toBe(estable+"/entrar?error=incompleto");
+    expect(r.siguiente).toBeNull();
+  });
+  it("rechaza configuraciones inseguras y permite el origen local sin configuración", () => {
+    for(const valor of ["http://preview.example","https://usuario@preview.example","https://preview.example/ruta","https://preview.example/?q=x"])
+      expect(()=>origenEntrada(estable,valor)).toThrow("ORIGEN_ENTRADA_INVALIDO");
+    expect(origenEntrada("http://localhost:3000","")).toBe("http://localhost:3000");
+  });
+});

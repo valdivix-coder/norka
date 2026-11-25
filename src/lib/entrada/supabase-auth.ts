@@ -55,6 +55,7 @@ export async function canjearCodigo(
     method: "POST",
     cache: "no-store",
     redirect: "error",
+    signal: AbortSignal.timeout(10000),
     headers: { apikey: clavePublicable, "Content-Type": "application/json" },
     body: JSON.stringify({ auth_code: codigo, code_verifier: verificador }),
   });
