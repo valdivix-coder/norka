@@ -4,14 +4,14 @@ import Link from "@/components/interfaz/Enlace";
 import { usePathname, useRouter } from "next/navigation";
 import { Icono } from "@/components/Icono";
 import { interfaz as m } from "@/mensajes/es-CL";
-import { movimientoReducido, valorToken } from "@/lib/movimiento";
+import { movimientoReducido, valorToken, volverConResorte } from "@/lib/movimiento";
 import { Boton } from "@/components/interfaz/Elementos";
 import { ContextoRecorrido, useRecorrido } from "./ContextoRecorrido";
 import { HojasRecorrido } from "./HojasRecorrido";
 import s from "@/components/interfaz/interfaz.module.css";
 
 import { transicionActiva, cambiarPantalla } from "@/lib/transicion";
-import { destinoRecorrido, rutaRecorrido, movimientoEntre } from "@/lib/rutas-recorrido";
+import { destinoRecorrido, rutaRecorrido, movimientoEntre, gestoVolver } from "@/lib/rutas-recorrido";
 
 const destinos = [
   "hoy",
@@ -63,6 +63,9 @@ export function Marco({
   const raiz = useRef<HTMLDivElement>(null);
   const contenido = useRef<HTMLElement>(null);
   const anterior = useRef(pantalla);
+  const gesto = useRef<{x:number;y:number;activo:boolean} | null>(null);
+  const cancelarGesto = useRef<(() => void) | undefined>(undefined);
+  useEffect(() => () => cancelarGesto.current?.(), []);
   useEffect(() => {
     const elemento = raiz.current!;
     let cuadro = 0;
@@ -183,7 +186,39 @@ export function Marco({
           </nav>
         </div>
       </header>
-      <main className={s.principalContenido} id="contenido" ref={contenido}>
+      <main className={s.principalContenido} id="contenido" ref={contenido}
+        onTouchStart={e=>{
+          const t=e.touches[0];
+          if (!subpantalla || movimientoReducido() || e.touches.length!==1 ||
+              t.clientX>valorToken("--traslado-detalle") ||
+              (e.target instanceof Element && e.target.closest("input, textarea, select, button, a, [contenteditable]"))) return;
+          cancelarGesto.current?.();
+          gesto.current={x:t.clientX,y:t.clientY,activo:false};
+        }}
+        onTouchMove={e=>{
+          const g=gesto.current, nodo=contenido.current;
+          if (!g || !nodo || e.touches.length!==1) return;
+          const dx=e.touches[0].clientX-g.x, dy=e.touches[0].clientY-g.y;
+          if (!g.activo && Math.abs(dy)>valorToken("--traslado-pestana") && Math.abs(dy)>Math.abs(dx)) {
+            gesto.current=null;return;
+          }
+          if (dx>valorToken("--traslado-pestana") && dx>Math.abs(dy)) g.activo=true;
+          if (g.activo) nodo.style.transform=`translateX(${Math.max(0,dx)}px)`;
+        }}
+        onTouchEnd={e=>{
+          const g=gesto.current,nodo=contenido.current;
+          gesto.current=null;
+          if(!g?.activo || !nodo) return;
+          const t=e.changedTouches[0], dx=Math.max(0,t.clientX-g.x),dy=t.clientY-g.y;
+          if(gestoVolver(dx,dy,nodo.clientWidth)){
+            nodo.style.transform="";
+            volver();
+          }else cancelarGesto.current=volverConResorte(nodo,dx,undefined,"X");
+        }}
+        onTouchCancel={()=>{
+          gesto.current=null; cancelarGesto.current?.();
+          if(contenido.current) contenido.current.style.transform="";
+        }}>
         {children}
       </main>
       <nav className={s.nav} aria-label={m.navegacion}>

@@ -1,5 +1,5 @@
 "use client";
-import { useLayoutEffect, useState, type CSSProperties } from "react";
+import { useLayoutEffect, useState, useSyncExternalStore, type CSSProperties } from "react";
 import { usePathname } from "next/navigation";
 import Link from "@/components/interfaz/Enlace";
 import { AvatarPersona, Boton, Vacio } from "@/components/interfaz/Elementos";
@@ -19,8 +19,10 @@ export function EncabezadoReal({ pantalla, titulo, contexto }: {
 }) {
   const ruta = usePathname();
   useLayoutEffect(() => {
-    window.scrollTo({top:0,behavior:"instant"});
-    document.querySelector<HTMLElement>("main h1")?.focus({preventScroll:true});
+    if (!location.hash) {
+      window.scrollTo({top:0,behavior:"instant"});
+      document.querySelector<HTMLElement>("main h1")?.focus({preventScroll:true});
+    }
     pantallaLista();
   },[ruta]);
   return <>
@@ -87,12 +89,18 @@ export function PantallaRealVacia({ pantalla, familiaId, personas }: {
     </Vacio>}
   </>;
 }
+function escucharTema(cambio: () => void) {
+  window.addEventListener("norka-tema", cambio);
+  return () => window.removeEventListener("norka-tema", cambio);
+}
+const temaActual = () => document.documentElement.dataset.tema === "claro" ? "claro" : "oscuro";
+const temaServidor = () => "oscuro";
 export function AjustesRecorrido() {
-  const [tema, ponerTema]=useState<"oscuro"|"claro">("oscuro");
+  const tema=useSyncExternalStore(escucharTema,temaActual,temaServidor);
   return <section className={`${s.tarjeta} ${s.pila}`}>
     <h2 className={s.seccionTitulo}>{m.aspecto}</h2>
     <div className={s.opciones}>{(["oscuro","claro"] as const).map(valor=><Boton key={valor} className={s.opcion}
-      aria-pressed={tema===valor} onClick={()=>{document.documentElement.dataset.tema=valor;ponerTema(valor);}}>{m[valor]}</Boton>)}</div>
+      aria-pressed={tema===valor} onClick={()=>{document.documentElement.dataset.tema=valor;window.dispatchEvent(new Event("norka-tema"));}}>{m[valor]}</Boton>)}</div>
     <Link className={s.boton} href="/cuenta">{entrada.cuenta.titulo}</Link>
     <form action="/api/salir" method="post"><Boton type="submit" className={s.ancho}>{entrada.cuenta.salir}</Boton></form>
   </section>;

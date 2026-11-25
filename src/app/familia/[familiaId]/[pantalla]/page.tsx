@@ -8,14 +8,15 @@ const permitidas = ["hoy","equilibrio","actividad","avisos","buscar"];
 export default async function Page({params}: {params:Promise<{familiaId:string;pantalla:string}>}) {
   const {familiaId,pantalla}=await params;
   if(!esUuid(familiaId)||!permitidas.includes(pantalla)) notFound();
+  let personas: Parameters<typeof PantallaRealVacia>[0]["personas"];
   try {
     const almacen=await almacenFamiliaActual(familiaId);
-    const personas=pantalla==="buscar" ? (await almacen.listar("personas_a_cargo")).filter(p=>!p.archivada_en)
+    personas=pantalla==="buscar" ? (await almacen.listar("personas_a_cargo")).filter(p=>!p.archivada_en)
       .map(({id,nombre,tipo,color})=>({id,nombre,tipo,color})) : [];
-    return <PantallaRealVacia pantalla={pantalla as PantallaReal} familiaId={familiaId} personas={personas}/>;
   } catch(e) {
     if(e instanceof SesionInvalida) redirect("/entrar");
     if(e instanceof FueraDeFamilia) notFound();
     throw e;
   }
+  return <PantallaRealVacia pantalla={pantalla as PantallaReal} familiaId={familiaId} personas={personas}/>;
 }

@@ -834,7 +834,7 @@
 @keyframes detalleEntrada {
   from {
     opacity: 0;
-    transform: translateX(var(--traslado-detalle));
+    transform: translateX(calc(var(--sentido, 1) * var(--traslado-detalle)));
   }
 }
 @media (prefers-reduced-motion: reduce) {

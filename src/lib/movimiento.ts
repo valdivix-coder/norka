@@ -11,6 +11,7 @@ export function volverConResorte(
   elemento: HTMLElement,
   desplazamiento: number,
   fin?: () => void,
+  eje: "X" | "Y" = "Y",
 ) {
   if (movimientoReducido()) {
     elemento.style.transform = "";
@@ -30,7 +31,7 @@ export function volverConResorte(
     anterior = ahora;
     velocidad += ((-k * x - c * velocidad) / masa) * dt;
     x += velocidad * dt;
-    elemento.style.transform = `translateY(${x}px)`;
+    elemento.style.transform = `translate${eje}(${x}px)`;
     if (
       (Math.abs(x) < 0.5 && Math.abs(velocidad) < 0.5) ||
       ahora - inicio >= valorToken("--mov-pantalla")

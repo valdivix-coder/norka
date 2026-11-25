@@ -1,7 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { destinoRecorrido, movimientoEntre, rutaRecorrido } from "../../src/lib/rutas-recorrido";
+import { destinoRecorrido, movimientoEntre, rutaRecorrido, gestoVolver } from "../../src/lib/rutas-recorrido";
 const base = "/familia/00000000-0000-4000-8000-000000000001";
 describe("Navegación 1.9",()=>{
+  it("solo confirma un gesto horizontal al superar la mitad del ancho",()=>{
+    expect(gestoVolver(181,10,360)).toBe(true);
+    expect(gestoVolver(180,10,360)).toBe(false);
+    expect(gestoVolver(200,210,360)).toBe(false);
+    expect(gestoVolver(-200,0,360)).toBe(false);
+  });
   it("reconoce la familia autenticada y su raíz como pestaña Familia",()=>{
     expect(rutaRecorrido(base)).toEqual({base,pantalla:"familia",real:true});
     expect(destinoRecorrido(base,"familia")).toBe(base);

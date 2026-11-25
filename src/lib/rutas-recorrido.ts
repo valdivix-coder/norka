@@ -18,3 +18,8 @@ export function movimientoEntre(actual: string, destino: string) {
   const detalle = a === -1 || b === -1;
   return { detalle, sentido: a === -1 && b !== -1 || a !== -1 && b !== -1 && a > b ? -1 : 1 };
 }
+
+// El gesto solo empieza en el borde y se confirma al superar la mitad del ancho.
+export function gestoVolver(dx: number, dy: number, ancho: number) {
+  return dx > 0 && dx > Math.abs(dy) && dx > ancho / 2;
+}
