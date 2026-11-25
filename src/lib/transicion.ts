@@ -1,4 +1,5 @@
 // Coordinación de la transición nativa con la llegada real de la página de Next.
+import { movimientoEntre, rutaRecorrido } from "./rutas-recorrido";
 let llegada: (() => void) | undefined;
 let activa = false;
 export function transicionActiva() {
@@ -12,14 +13,12 @@ export function cambiarPantalla(navegar: () => void, destino: string) {
     navegar();
     return;
   }
-  const orden = ["hoy", "familia", "equilibrio", "actividad"];
-  const actual = location.pathname.split("/").at(-1) ?? "";
-  const siguiente = destino.split("?")[0].split("/").at(-1) ?? "";
-  const a = orden.indexOf(actual),
-    b = orden.indexOf(siguiente);
+  const actual = rutaRecorrido(location.pathname)?.pantalla ?? "";
+  const siguiente = rutaRecorrido(destino)?.pantalla ?? "";
+  const { detalle, sentido } = movimientoEntre(actual, siguiente);
   const raiz = document.documentElement;
-  raiz.dataset.transicion = b === -1 || a === -1 ? "detalle" : "pestana";
-  raiz.style.setProperty("--sentido", String(b !== -1 && a > b ? -1 : 1));
+  raiz.dataset.transicion = detalle ? "detalle" : "pestana";
+  raiz.style.setProperty("--sentido", String(sentido));
   activa = true;
   let tiempo: ReturnType<typeof setTimeout>;
   const transicion = document.startViewTransition(
@@ -34,7 +33,7 @@ export function cambiarPantalla(navegar: () => void, destino: string) {
         tiempo = setTimeout(() => {
           transicion.skipTransition();
           llegada?.();
-        }, 2000);
+        }, rutaRecorrido(destino)?.real ? 320 : 2000);
         navegar();
       }),
   );

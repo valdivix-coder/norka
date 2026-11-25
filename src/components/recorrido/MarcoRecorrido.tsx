@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode, type CSSProperties } from "react";
 import Link from "@/components/interfaz/Enlace";
 import { usePathname, useRouter } from "next/navigation";
 import { Icono } from "@/components/Icono";
@@ -11,6 +11,7 @@ import { HojasRecorrido } from "./HojasRecorrido";
 import s from "@/components/interfaz/interfaz.module.css";
 
 import { transicionActiva, cambiarPantalla } from "@/lib/transicion";
+import { destinoRecorrido, rutaRecorrido, movimientoEntre } from "@/lib/rutas-recorrido";
 
 const destinos = [
   "hoy",
@@ -29,14 +30,16 @@ const titulos: Record<string, string> = {
   perfil: m.perfil,
   persona: m.persona,
 };
-function Marco({
+export function Marco({
   children,
   logotipo,
   isotipo,
+  baseRuta, nombrePerfil, colorPerfil, abrirCaptura, extra,
 }: {
   children: ReactNode;
   logotipo: ReactNode;
   isotipo: ReactNode;
+  baseRuta: string; nombrePerfil: string; colorPerfil?: string; abrirCaptura: () => void; extra?: ReactNode;
 }) {
   const ruta = usePathname();
   const router = useRouter();
@@ -51,13 +54,12 @@ function Marco({
   function volver() {
     const previa = historial.current.at(-2);
     if (previa) cambiarPantalla(() => router.back(), previa);
-    else router.replace(pantalla === "persona" ? "/muestra/pantallas/familia" : "/muestra/pantallas/hoy");
+    else router.replace(destinoRecorrido(baseRuta, pantalla === "persona" || pantalla === "perfil" ? "familia" : "hoy"));
   }
-  const pantalla = ruta.split("/").at(-1) ?? "hoy";
+  const pantalla = rutaRecorrido(ruta)?.pantalla ?? "hoy";
   const subpantalla = !["hoy", "familia", "equilibrio", "actividad"].includes(
     pantalla,
   );
-  const { abrir, personas, perfil } = useRecorrido();
   const raiz = useRef<HTMLDivElement>(null);
   const contenido = useRef<HTMLElement>(null);
   const anterior = useRef(pantalla);
@@ -74,7 +76,7 @@ function Marco({
       );
       elemento.style.setProperty(
         "--paralaje",
-        `${Math.min(y, valorToken("--resplandor-lado")) * 0.3}px`,
+        `${movimientoReducido() ? 0 : Math.min(y, valorToken("--resplandor-lado")) * 0.3}px`,
       );
     };
     const scroll = () => {
@@ -93,12 +95,8 @@ function Marco({
     anterior.current = pantalla;
     if (fue === pantalla || transicionActiva()) return;
     const nodo = contenido.current!;
-    const distancia = valorToken(
-      subpantalla ? "--traslado-detalle" : "--traslado-pestana",
-    );
-    const indice = (p: string) =>
-      destinos.indexOf(p as (typeof destinos)[number]);
-    const direccion = subpantalla || indice(pantalla) > indice(fue) ? 1 : -1;
+    const { detalle, sentido: direccion } = movimientoEntre(fue, pantalla);
+    const distancia = valorToken(detalle ? "--traslado-detalle" : "--traslado-pestana");
     const animacion = nodo.animate(
       movimientoReducido()
         ? [{ opacity: 0 }, { opacity: 1 }]
@@ -110,7 +108,7 @@ function Marco({
         duration: valorToken(
           movimientoReducido()
             ? "--mov-micro"
-            : subpantalla
+            : detalle
               ? "--mov-pantalla"
               : "--mov-estandar",
         ),
@@ -123,10 +121,7 @@ function Marco({
     nodo.querySelector<HTMLElement>("h1")?.focus({ preventScroll: true });
     return () => animacion.cancel();
   }, [pantalla, subpantalla]);
-  const titulo =
-    pantalla === "persona" && personas.length
-      ? m.persona
-      : (titulos[pantalla] ?? m.hoy);
+  const titulo = titulos[pantalla] ?? m.hoy;
   return (
     <div className={s.app} ref={raiz}>
       <a className={`${s.boton} ${s.principal} ${s.saltar}`} href="#contenido">
@@ -165,25 +160,25 @@ function Marco({
           )}
           <nav className={s.accionesCabecera} aria-label={m.perfil}>
             <Link
-              href="/muestra/pantallas/buscar"
+              href={destinoRecorrido(baseRuta, "buscar")}
               className={`${s.boton} ${s.iconoBoton}`}
               aria-label={m.buscar}
             >
               <Icono tipo="buscar" />
             </Link>
             <Link
-              href="/muestra/pantallas/avisos"
+              href={destinoRecorrido(baseRuta, "avisos")}
               className={`${s.boton} ${s.iconoBoton}`}
               aria-label={m.avisos}
             >
               <Icono tipo="avisos" />
             </Link>
             <Link
-              href="/muestra/pantallas/perfil"
+              href={destinoRecorrido(baseRuta, "perfil")}
               className={`${s.boton} ${s.iconoBoton}`}
               aria-label={m.perfil}
             >
-              <span className={s.avatarMini}>{perfil.nombre.slice(0, 1)}</span>
+              <span className={s.avatarMini} style={{ "--color-avatar-cabecera": colorPerfil } as CSSProperties}>{nombrePerfil.slice(0, 1).toLocaleUpperCase("es-CL")}</span>
             </Link>
           </nav>
         </div>
@@ -198,7 +193,7 @@ function Marco({
               key={destino}
               className={s.capturar}
               aria-label={m.capturar}
-              onClick={() => abrir({ tipo: "capturar" })}
+              onClick={abrirCaptura}
             >
               <Icono tipo="capturar" />
             </button>
@@ -206,7 +201,7 @@ function Marco({
             <Link
               key={destino}
               className={s.destino}
-              href={`/muestra/pantallas/${destino}`}
+              href={destinoRecorrido(baseRuta, destino)}
               aria-current={pantalla === destino ? "page" : undefined}
             >
               <Icono tipo={destino} />
@@ -215,16 +210,18 @@ function Marco({
           ),
         )}
       </nav>
-      <HojasRecorrido />
+      {extra}
     </div>
   );
 }
-export function MarcoRecorrido(props: Parameters<typeof Marco>[0]) {
-  return (
-    <ContextoRecorrido>
-      <Marco {...props} />
-    </ContextoRecorrido>
-  );
+type MarcoMuestraProps = Pick<Parameters<typeof Marco>[0], "children" | "logotipo" | "isotipo">;
+function MarcoMuestra(props: MarcoMuestraProps) {
+  const { perfil, abrir } = useRecorrido();
+  return <Marco {...props} baseRuta="/muestra/pantallas" nombrePerfil={perfil.nombre}
+    abrirCaptura={() => abrir({tipo:"capturar"})} extra={<HojasRecorrido/>}/>;
+}
+export function MarcoRecorrido(props: MarcoMuestraProps) {
+  return <ContextoRecorrido><MarcoMuestra {...props}/></ContextoRecorrido>;
 }
 export function OpcionesMuestra() {
   const { estado, cambiarEstado, ejemplos, tema, cambiarTema } = useRecorrido();

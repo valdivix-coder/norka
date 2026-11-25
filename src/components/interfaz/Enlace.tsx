@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { ComponentProps } from "react";
 import { cambiarPantalla } from "@/lib/transicion";
+import { rutaRecorrido } from "@/lib/rutas-recorrido";
 export default function Enlace(props: ComponentProps<typeof Link>) {
   const router = useRouter();
   return (
@@ -11,7 +12,8 @@ export default function Enlace(props: ComponentProps<typeof Link>) {
       onNavigate={(evento) => {
         if (
           typeof props.href !== "string" ||
-          !props.href.startsWith("/muestra/pantallas/") ||
+          !rutaRecorrido(props.href) ||
+          rutaRecorrido(location.pathname)?.base !== rutaRecorrido(props.href)?.base ||
           location.pathname + location.search === props.href
         )
           return;

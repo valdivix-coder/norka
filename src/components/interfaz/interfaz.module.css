@@ -210,7 +210,7 @@
   place-items: center;
   width: var(--e-8);
   height: var(--e-8);
-  background: var(--persona-1);
+  background: var(--color-avatar-cabecera, var(--persona-1));
   border-radius: 50%;
   color: var(--sobre-acento);
   font-weight: var(--peso-boton);
