@@ -76,7 +76,7 @@ export function PersonasReales({ familiaId, iniciales, ambitosIniciales }: {
       </div>
       <div className={s.rejilla}>
         {activas.map(p => (
-          <div key={p.id} className={`${s.tarjeta} ${s.personaTarjeta}`}>
+          <div id={"persona-"+p.id} key={p.id} className={`${s.tarjeta} ${s.personaTarjeta}`}>
             <AvatarPersona nombre={p.nombre} tipo={p.tipo} color={colorPersona(p.color,p.tipo)} />
             <strong>{p.nombre}</strong>
             <span className={s.suave}>{m.tipos[p.tipo]}</span>

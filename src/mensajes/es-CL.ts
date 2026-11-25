@@ -164,6 +164,9 @@ export const ejemplos = {
 
 // Recorrido visual de la fase 1. Los ejemplos no son una familia real.
 export const interfaz = {
+  capturaRealLimite: "La captura todavía no está disponible. Podrás usarla en la siguiente fase.",
+  ayudaConexionReal: "Cuando vuelva la conexión, puedes volver a cargar la pantalla.",
+  busquedaReal: "Por ahora puedes buscar a las personas a cargo por su nombre.",
   descripcion: "Lo que la familia tiene que hacer, en un solo lugar.",
   muestra: "Muestra de diseño",
   limiteMuestra:

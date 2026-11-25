@@ -1,4 +1,5 @@
-import Link from "next/link";
+import Link from "@/components/interfaz/Enlace";
+import { AjustesRecorrido, EncabezadoReal } from "@/components/familia/PantallaReal";
 import { notFound, redirect } from "next/navigation";
 import { CampoTelefono } from "@/components/familia/CampoTelefono";
 import s from "@/components/interfaz/interfaz.module.css";
@@ -39,11 +40,8 @@ export default async function Perfil({
         : null;
   const chile = yo.telefono?.startsWith("+569") && yo.telefono.length === 12;
   return (
-    <main className={estilos.pagina}>
-      <header>
-        <h1>{m.perfil.titulo}</h1>
-        <p className={s.suave}>{yo.nombre}</p>
-      </header>
+    <section className={s.pila}>
+      <EncabezadoReal pantalla="perfil" titulo={m.perfil.titulo} contexto={yo.nombre}/>
       <form action={guardarPerfilAccion} className={s.formulario}>
         <input type="hidden" name="familiaId" value={familiaId} />
         <input type="hidden" name="revision" value={yo.revision} />
@@ -85,9 +83,10 @@ export default async function Perfil({
           {m.perfil.guardar}
         </button>
       </form>
+      <AjustesRecorrido/>
       <Link className={`${s.boton} ${s.texto}`} href={`/familia/${familiaId}`}>
         {m.perfil.volver}
       </Link>
-    </main>
+    </section>
   );
 }

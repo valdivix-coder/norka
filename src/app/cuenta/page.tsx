@@ -47,7 +47,7 @@ export default async function Cuenta({ searchParams }: Props) {
       <div className={s.entradaInferior}>
         <Link
           className={`${s.boton} ${s.principal} ${s.ancho}`}
-          href={primera ? `/familia/${primera.familia_id}` : "/familia/nueva"}
+          href={primera ? `/familia/${primera.familia_id}/hoy` : "/familia/nueva"}
         >
           {primera ? mf.cuenta.miFamilia : mf.cuenta.crearFamilia}
         </Link>

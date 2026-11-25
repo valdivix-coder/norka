@@ -1,4 +1,5 @@
-import Link from "next/link";
+import Link from "@/components/interfaz/Enlace";
+import { EncabezadoReal } from "@/components/familia/PantallaReal";
 import { PersonasReales } from "@/components/familia/PersonasReales";
 import { almacenFamiliaActual } from "@/lib/familia/servidor";
 import { notFound, redirect } from "next/navigation";
@@ -34,13 +35,10 @@ export default async function Familia({
   const [personas, ambitos] = await Promise.all([almacen.listar("personas_a_cargo"), almacen.listar("ambitos")]);
   const rol = (r: string) => mi.roles[roles.indexOf(r as (typeof roles)[number])] ?? r;
   return (
-    <main className={estilos.pagina}>
-      <header>
-        <h1>{familia.nombre}</h1>
-        <p className={s.suave}>{mi.contextoFamilia}</p>
-      </header>
+    <section className={s.pila}>
+      <EncabezadoReal pantalla="familia" contexto={familia.nombre}/>
       <PersonasReales key={familiaId} familiaId={familiaId} iniciales={personas} ambitosIniciales={ambitos} />
-      <h2>{m.ver.integrantes}</h2>
+      <h2 className={s.seccionTitulo}>{m.ver.integrantes}</h2>
       <ul className={estilos.lista}>
         {integrantes.map((i) => (
           <li key={i.id} className={estilos.fila}>
@@ -82,6 +80,6 @@ export default async function Familia({
       <Link className={`${s.boton} ${s.texto}`} href="/cuenta">
         {mi.volver}
       </Link>
-    </main>
+    </section>
   );
 }
