@@ -22,3 +22,7 @@ No acceder a capturas reales ni copiar secretos. Gemini gratuito solo sintético
 ## Recursos adicionales para v7
 
 Evalúa `src/core/usecases/calendario-captura.ts` (candidato aislado) y `evals/desarrollo-cl-v6.json` (50 casos adicionales, no ciegos). Puedes usar este corpus para desarrollo, no como examen independiente ni reemplazo del oficial. Revisa especialmente convención de día de semana, alcance y evidencia temporal, negación/autocorrección. No afirmar que el calendario está conectado.
+
+## Evidencia v6 definitiva para el encargo v7
+
+Lee el resultado medido al final de INFORME-EVALUACION-V6.md. V6 ya supera la meta de precisión agrupada: 48/50 en ambas métricas, pero dos errores impiden aprobación. No entrenes con los textos exactos de los casos 8 y 24: deriva reglas generales y contraejemplos nuevos. Prioriza alcance temporal, clasificación específica de compras para mascotas, compactación, evidencia textual y validación de monto. Preserva lo ya ganado. No declares cero invenciones ni cierres fase 2.
