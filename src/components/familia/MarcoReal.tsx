@@ -48,7 +48,7 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
   const [objetivo,ponerObjetivo]=useState<{tarea:TareaCapturada;descartar:boolean}|null>(null);
   const editando=objetivo!==null;
   const [borrador,ponerBorrador]=useState("");
-  const [errorEdicion,ponerErrorEdicion]=useState(false);
+  const [errorEdicion,ponerErrorEdicion]=useState("");
   const cambiando=useRef(false);
   const enLinea=useSyncExternalStore(escucharConexion,conectado,conectadoServidor);
   const router=useRouter();
@@ -118,17 +118,20 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
   function cancelarVoz(){sesionVoz.current?.cancelar();sesionVoz.current=null;ponerGrabando(false);ponerDictado("");}
   function abrirGestion(tarea:TareaCapturada,descartar=false){
     if(ocupada||!enLinea||abierta||grabando||cambiando.current)return;
-    ponerBorrador(tarea.titulo);ponerErrorEdicion(false);avisar("");ponerObjetivo({tarea,descartar});
+    ponerBorrador(tarea.titulo);ponerErrorEdicion("");avisar("");ponerObjetivo({tarea,descartar});
   }
   async function cambiar(descartar:boolean,tarea:TareaCapturada|null=objetivo?.tarea??resultado){
     if(!tarea||cambiando.current||(!descartar&&!borrador.trim()))return;
-    cambiando.current=true;ocupar(true);ponerErrorEdicion(false);
+    cambiando.current=true;ocupar(true);ponerErrorEdicion("");
     try{
       const r=await editarCapturaAccion(familiaId,cuentaId,{capturaId:tarea.captura_id,tareaId:tarea.id,revision:tarea.revision,titulo:descartar?null:borrador,descartar});
-      if(!r.ok)throw new Error("NO_EDITADA");
+      if(!r.ok){
+        const mensaje=r.motivo==="conflicto"?textos.errorConflicto:r.motivo==="no_editable"?textos.errorNoEditable:r.motivo==="sesion"?textos.errorSesion:textos.errorEdicion;
+        ponerErrorEdicion(mensaje);router.refresh();return;
+      }
       ponerResultado(actual=>actual?.id===tarea.id?(descartar?null:r.resultado):actual);
       ponerObjetivo(null);avisar(descartar?textos.deshecha:m.guardadaReal);router.refresh();
-    }catch{ponerErrorEdicion(true);}
+    }catch{ponerErrorEdicion(textos.errorEdicion);}
     finally{cambiando.current=false;ocupar(false);}
   }
   return <captura.Provider value={()=>abrir(true)}>
@@ -136,15 +139,15 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
     <Marco baseRuta={`/familia/${familiaId}`} nombrePerfil={nombre} colorPerfil={color}
       logotipo={logotipo} isotipo={isotipo} abrirCaptura={()=>abrir(true)}
       voz={{disponible:vozWeb.disponible,iniciar:iniciarVoz,terminar:terminarVoz,cancelar:cancelarVoz,grabando,texto:dictado}}
-      extra={objetivo?<HojaInferior titulo={objetivo.descartar?textos.eliminar:textos.editar} cerrar={()=>{if(!cambiando.current){ponerObjetivo(null);ponerErrorEdicion(false);}}}>
+      extra={objetivo?<HojaInferior titulo={objetivo.descartar?textos.eliminar:textos.editar} cerrar={()=>{if(!cambiando.current){ponerObjetivo(null);ponerErrorEdicion("");}}}>
         {objetivo.descartar?<div className={s.pila}>
           <p>{textos.confirmarEliminar}</p><p className={s.suave}>{objetivo.tarea.titulo}</p>
-          {errorEdicion&&<p role="alert">{textos.errorEdicion}</p>}
+          {errorEdicion&&<p role="alert">{errorEdicion}</p>}
           <Boton principal disabled={ocupada} onClick={()=>void cambiar(true)}>{textos.eliminar}</Boton>
           <Boton disabled={ocupada} onClick={()=>ponerObjetivo(null)}>{textos.cancelar}</Boton>
         </div>:<form className={s.pila} onSubmit={e=>{e.preventDefault();void cambiar(false);}}>
           <label className={s.campo}><span>{textos.titulo}</span><textarea data-enfoque-inicial="" className={s.entradaCampo} rows={3} value={borrador} onChange={e=>ponerBorrador(e.target.value)} disabled={ocupada}/></label>
-          {errorEdicion&&<p role="alert">{textos.errorEdicion}</p>}
+          {errorEdicion&&<p role="alert">{errorEdicion}</p>}
           <Boton principal type="submit" disabled={ocupada||!borrador.trim()}>{m.guardar}</Boton>
         </form>}
       </HojaInferior>:abierta&&<HojaInferior titulo={m.capturar} cerrar={()=>abrir(false)}>
@@ -165,8 +168,8 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
       {!abierta&&!editando&&aviso&&<p role="status" className={`${s.aviso} ${s.avisoCaptura}`}>{aviso}</p>}
       {resultado&&<ResultadoCaptura filas={[{id:resultado.id,titulo:resultado.titulo,tipo:"tarea",porRevisar:true}]}
         ocupada={ocupada||!enLinea} editar={id=>{if(id===resultado.id)abrirGestion(resultado);}}
-        deshacer={()=>void cambiar(true)} cerrar={()=>{ponerResultado(null);ponerErrorEdicion(false);}}
-        error={errorEdicion&&!editando&&<p role="alert">{textos.errorEdicion}</p>}/>}
+        deshacer={()=>void cambiar(true,resultado)} cerrar={()=>{ponerResultado(null);ponerErrorEdicion("");}}
+        error={errorEdicion&&!editando&&<p role="alert">{errorEdicion}</p>}/>}
       {children}
     </Marco>
     </gestionCaptura.Provider>

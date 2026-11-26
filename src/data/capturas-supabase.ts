@@ -19,6 +19,15 @@ export function crearAlmacenCaptura({url,claveServicio,familiaId,cuentaId,solici
   }};
 }
 
+export function revisionCaptura(valor:unknown):number {
+  const n=typeof valor==="string"&&/^\d+$/.test(valor)?Number(valor):valor;
+  if(typeof n!=="number"||!Number.isSafeInteger(n)||n<0)throw new Error("RESPUESTA_INVALIDA");
+  return n;
+}
+export class ErrorEdicionCaptura extends Error {
+  constructor(public readonly motivo:"conflicto"|"no_editable"|"conexion"|"respuesta"){super("EDICION_"+motivo);}
+}
+
 export async function listarCapturasPendientes({url,claveServicio,familiaId,integranteId,solicitar=fetch}:{
   url:string;claveServicio:string;familiaId:string;integranteId:string;solicitar?:typeof fetch;
 }):Promise<TareaCapturadaVisible[]>{
@@ -30,7 +39,7 @@ export async function listarCapturasPendientes({url,claveServicio,familiaId,inte
   if(!r.ok)throw new Error("CAPTURAS_NO_DISPONIBLES");
   const filas=await r.json() as (TareaCapturada & {capturas?:{autor_id:string;estado:string}|null})[];
   if(!Array.isArray(filas)||filas.some(f=>f.familia_id!==familiaId))throw new Error("RESPUESTA_INVALIDA");
-  return filas.map(({id,familia_id,titulo,revision,captura_id,capturas})=>({id,familia_id,titulo,revision,captura_id,editable:capturas?.autor_id===integranteId&&capturas?.estado==="pendiente"}));
+  return filas.map(({id,familia_id,titulo,revision,captura_id,capturas})=>({id,familia_id,titulo,revision:revisionCaptura(revision),captura_id,editable:capturas?.autor_id===integranteId&&capturas?.estado==="pendiente"}));
 }
 
 export async function editarResultadoCaptura({url,claveServicio,familiaId,cuentaId,solicitar=fetch}:{
@@ -40,8 +49,16 @@ export async function editarResultadoCaptura({url,claveServicio,familiaId,cuenta
   const r=await solicitar(new URL("/rest/v1/rpc/editar_resultado_captura",url),{method:"POST",cache:"no-store",redirect:"error",
     signal:AbortSignal.timeout(10000),headers:{apikey:claveServicio,"Content-Type":"application/json"},
     body:JSON.stringify({p_familia:familiaId,p_cuenta:cuentaId,p_captura:dato.capturaId,p_tarea:dato.tareaId,p_revision:dato.revision,p_titulo:dato.titulo,p_descartar:dato.descartar})});
-  if(!r.ok)throw new Error("CAPTURA_NO_EDITADA");
+  if(!r.ok){
+    let mensaje:unknown;
+    try{mensaje=(await r.json() as {message?:unknown}).message;}catch{/* no registrar contenido */}
+    if(mensaje==="CONFLICTO_REVISION")throw new ErrorEdicionCaptura("conflicto");
+    if(mensaje==="CAPTURA_NO_EDITABLE"||mensaje==="FUERA_DE_FAMILIA")throw new ErrorEdicionCaptura("no_editable");
+    throw new ErrorEdicionCaptura("conexion");
+  }
   const v=await r.json() as TareaCapturada & {estado:string};
-  if(v.familia_id!==familiaId||v.id!==dato.tareaId||v.captura_id!==dato.capturaId||v.revision!==dato.revision+1)throw new Error("RESPUESTA_INVALIDA");
-  return v;
+  const revision=revisionCaptura(v.revision);
+  if(v.familia_id!==familiaId||v.id!==dato.tareaId||v.captura_id!==dato.capturaId||revision!==dato.revision+1||
+     v.estado!==(dato.descartar?"descartada":"pendiente")||(!dato.descartar&&v.titulo!==dato.titulo))throw new ErrorEdicionCaptura("respuesta");
+  return {...v,revision};
 }

@@ -66,6 +66,7 @@ export function PantallaRealVacia({ pantalla, familiaId, personas, capturas=[] }
   const base="/familia/"+familiaId;
   const capturar=useCapturaReal();
   const gestion=useGestionCaptura();
+  const ultimaPropia=capturas.find(t=>t.editable)?.id;
   return <>
     <EncabezadoReal pantalla={pantalla}/>
     {pantalla==="buscar" ? <BuscarReal base={base} personas={personas}/>
@@ -85,6 +86,7 @@ export function PantallaRealVacia({ pantalla, familiaId, personas, capturas=[] }
           <p className={s.capturaTitulo}>{t.titulo}</p>
           {t.editable&&gestion&&<div className={s.opciones}>
             <Boton texto disabled={gestion.bloqueada} aria-label={textos.editarResultado(t.titulo)} onClick={()=>gestion.abrir(t,false)}>{textos.editar}</Boton>
+            {t.id===ultimaPropia&&<Boton disabled={gestion.bloqueada} aria-label={textos.deshacerResultado(t.titulo)} onClick={()=>gestion.abrir(t,true)}>{m.deshacer}</Boton>}
             <Boton texto disabled={gestion.bloqueada} aria-label={textos.eliminarResultado(t.titulo)} onClick={()=>gestion.abrir(t,true)}>{textos.eliminar}</Boton>
           </div>}
         </div>)}</div>

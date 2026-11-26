@@ -78,6 +78,13 @@ async def main():
         await page.reload()
         await expect(lista.get_by_text("QA Hoy corregida",exact=True)).to_have_count(0)
         await expect(lista.get_by_text("QA Familia",exact=True)).to_be_visible()
+        # Deshacer disponible incluso tras perder la tarjeta de resultado al recargar.
+        await captura("QA deshacer visible")
+        await expect(lista.get_by_text("QA deshacer visible",exact=True)).to_be_visible()
+        await page.reload()
+        await lista.get_by_role("button",name="Deshacer QA deshacer visible",exact=True).click()
+        await page.get_by_role("dialog").get_by_role("button",name="Eliminar",exact=True).click()
+        await expect(lista.get_by_text("QA deshacer visible",exact=True)).to_have_count(0)
         await page.screenshot(path=str(OUT/"capturas-fase-2.png"),full_page=True)
         assert not errores,errores
         await browser.close()

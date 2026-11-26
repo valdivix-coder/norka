@@ -15,6 +15,10 @@ export function ResultadoCaptura({filas,ocupada,editar,deshacer,cerrar,error}:{
   if(!filas.length)return null;
   return <section className={`${s.tarjeta} ${s.pila} ${s.resultadoCaptura}`} aria-label={textos.resultado}>
     {filas.length>1&&<h2 className={s.seccionTitulo}>{textos.resultados(filas.length)}</h2>}
+    <div className={s.repartida}>
+      <Boton disabled={ocupada} onClick={deshacer}>{m.deshacer}</Boton>
+      <Boton texto onClick={cerrar}>{m.cerrar}</Boton>
+    </div>
     <div className={s.resultadoFilas}>
       {filas.map(fila=><div className={s.resultadoFila} key={fila.id}>
         <div className={s.resultadoTexto}>
@@ -25,10 +29,6 @@ export function ResultadoCaptura({filas,ocupada,editar,deshacer,cerrar,error}:{
         </div>
         <Boton disabled={ocupada} onClick={()=>editar(fila.id)} aria-label={filas.length>1?textos.editarResultado(fila.titulo):textos.editar}>{textos.editar}</Boton>
       </div>)}
-    </div>
-    <div className={s.repartida}>
-      <Boton texto disabled={ocupada} onClick={deshacer}>{m.deshacer}</Boton>
-      <Boton texto onClick={cerrar}>{m.cerrar}</Boton>
     </div>
     {error}
   </section>;
