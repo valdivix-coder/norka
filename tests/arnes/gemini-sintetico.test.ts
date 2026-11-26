@@ -68,3 +68,8 @@ describe("Gemma 4 como último respaldo",()=>{
   }
  });
 });
+
+it("clasifica errores sin registrar cuerpos o credenciales",async()=>{
+ const intentos:unknown[]=[];const ia=crearGeminiSintetico({clave:"qa",modelo:"gemini-4-hydrogen",corpus,observar:i=>intentos.push(i),solicitar:vi.fn(async()=>Response.json({candidates:[{content:{parts:[{text:"{}"}]}}]}))});
+ await expect(ia.evaluar(1)).rejects.toThrow();expect(intentos).toEqual([expect.objectContaining({modelo:"gemini-4-hydrogen",resultado:"fallida",motivo:"contrato_zod"})]);
+});

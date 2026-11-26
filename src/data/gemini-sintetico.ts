@@ -1,4 +1,5 @@
 // Adaptador del servidor para el corpus sintético. No acepta contextos de Supabase.
+import { z } from "zod";
 import { contratoInterpretacion, type Interpretacion } from "../core/contracts/interpretacion";
 
 export type CasoSintetico={id:number;texto:string};
@@ -8,8 +9,9 @@ export const MODELOS_GEMINI = ["gemini-4-hydrogen","gemini-3.8-flash","gemini-3.
 export class ErrorGemini extends Error {
   constructor(public readonly estado:number){super("GEMINI_HTTP_"+estado);}
 }
-export function crearGeminiSintetico({clave,modelo,corpus,respaldos=[],solicitar=fetch}:{
-  clave:string;modelo:string;corpus:ContextoSintetico;respaldos?:readonly string[];solicitar?:typeof fetch;
+export type IntentoGemini={modelo:string;resultado:string;ms:number;motivo?:string};
+export function crearGeminiSintetico({clave,modelo,corpus,respaldos=[],solicitar=fetch,observar=()=>{}}:{
+  clave:string;modelo:string;corpus:ContextoSintetico;respaldos?:readonly string[];solicitar?:typeof fetch;observar?:(dato:IntentoGemini)=>void;
 }){
   if(typeof window!=="undefined")throw new Error("SOLO_SERVIDOR");
   if(!clave||![modelo,...respaldos].every(m=>MODELOS_GEMINI.some(permitido=>permitido===m)))throw new Error("CONFIGURACION_GEMINI_INVALIDA");
@@ -29,10 +31,12 @@ export function crearGeminiSintetico({clave,modelo,corpus,respaldos=[],solicitar
     let ultimo:unknown=new ErrorGemini(429);
     for(const elegido of orden){
       if(suspendidos.has(elegido))continue;
+      const inicio=Date.now();
+      let etapa="red";
       try{
     const esGemma=elegido==="gemma-4-26b-a4b-it";
     // Gemma recibe instrucciones de JSON como texto, no depende de responseMimeType.
-    const generationConfig=esGemma?{temperature:0,thinkingConfig:{thinkingLevel:"minimal"}}:{responseMimeType:"application/json",temperature:0};
+    const generationConfig=esGemma?{temperature:0,thinkingConfig:{thinkingLevel:"minimal"}}:{responseMimeType:"application/json",responseJsonSchema:z.toJSONSchema(contratoInterpretacion),temperature:0};
     const r=await solicitar("https://generativelanguage.googleapis.com/v1beta/models/"+encodeURIComponent(elegido)+":generateContent",{
       method:"POST",cache:"no-store",redirect:"error",
       headers:{"Content-Type":"application/json","x-goog-api-key":clave},
@@ -40,14 +44,22 @@ export function crearGeminiSintetico({clave,modelo,corpus,respaldos=[],solicitar
       signal:AbortSignal.timeout(20000),
     });
     if(!r.ok)throw new ErrorGemini(r.status);
-    const respuesta=await r.json() as {candidates?:{content?:{parts?:{text?:string;thought?:boolean}[]}}[]};
+    etapa="respuesta_http";
+    const respuesta=await r.json() as {candidates?:{finishReason?:string;content?:{parts?:{text?:string;thought?:boolean}[]}}[]};
     const textoRespuesta=(respuesta.candidates?.[0]?.content?.parts?.filter(p=>!p.thought).map(p=>p.text??"").join("")??"").trim();
     // Aceptar únicamente JSON completo, opcionalmente dentro de un único bloque Markdown.
     const bloque=esGemma?textoRespuesta.match(/^```(?:json)?\s*\n([\s\S]*?)\n?```$/i):null;
-    const salida=contratoInterpretacion.parse(JSON.parse(bloque?.[1]??textoRespuesta));
+    etapa=textoRespuesta?"json":"sin_texto";
+    if(!textoRespuesta)throw new Error("SIN_TEXTO");
+    const objeto=JSON.parse(bloque?.[1]??textoRespuesta);
+    etapa="contrato_zod";
+    const salida=contratoInterpretacion.parse(objeto);
+    observar({modelo:elegido,resultado:"valida",ms:Date.now()-inicio});
     ultimoModelo=elegido;return salida;
       }catch(error){
         ultimo=error;
+        const motivo=error instanceof ErrorGemini?"HTTP "+error.estado:error instanceof Error&&["TimeoutError","AbortError"].includes(error.name)?"timeout":etapa;
+        observar({modelo:elegido,resultado:"fallida",ms:Date.now()-inicio,motivo});
         // Autenticación y errores de solicitud no se arreglan cambiando modelo.
         if(error instanceof ErrorGemini&&![404,408,429,500,502,503,504].includes(error.estado))throw error;
         // No insistir contra una cuota agotada ni un modelo ausente durante esta corrida.
