@@ -21,3 +21,10 @@ Zod 4.6.7 ya estaba en el lock como dependencia indirecta de desarrollo; se decl
 ## 2.7 · Resultado manual, editar y deshacer
 
 Migración 0006 aplicada 20261126031155; función solo servicio, prueba transaccional de edición, revisión obsoleta, rechazo cuenta ajena, conservación original y descarte aprobada. Tarjeta del último envío confirmado, también tras reconectar; editar en hoja, deshacer descarta tarea sin borrar captura original. Solo autor activo y revisión vigente; no altera tareas interpretadas. Prueba de navegador pendiente. No se interpreta ni escribe propuestas mientras IA no habilitada.
+
+
+### Dictado y evaluación (avance)
+- 2.8: puerto de voz y vibración, Web Speech es-CL, pulsación 400 ms, deslizamiento horizontal >44 px cancela, soltar confirma y conserva texto si falla. Sin envío a Gemini ni audio al servidor de norka. El proveedor de reconocimiento del navegador puede procesar voz fuera del dispositivo; no asumir local. iPhone/Safari y tiempos reales pendientes.
+- 2.6: `npm run eval` solo usa las 50 frases sintéticas versionadas y exige activación, clave y modelo en entorno privado. No se ejecutó sin credenciales. No se conecta con datos reales. Términos Gemini gratuito prohíben enviar información personal/confidencial/sensible: https://ai.google.dev/gemini-api/terms . Se requiere una decisión de privacidad y presupuesto antes de activar IA familiar.
+- 2.4: interpretación pura no persistida; existe dependencia de tablas propuestas (4.1) y actividad. No se crean asignaciones ni propuestas simuladas.
+- 2.9: medir en teléfono 10 capturas manuales desde pulsación hasta confirmación persistente (meta <=5 s); 10 dictados de frase de 5 s desde pulsación hasta confirmación (meta <=8 s), registrar red, dispositivo, fallos y mediana/máximo; evaluación de 50 casos >=90%, revisión de títulos y datos inventados =0. Aún sin medición física.
