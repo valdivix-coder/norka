@@ -21,3 +21,25 @@ describe("Adaptador Gemini sintético",()=>{
   await expect(mal.evaluar(1)).rejects.toThrow();
  });
 });
+
+describe("Respaldo de modelos gratuitos",()=>{
+ it("Hydrogen saturado pasa a Flash y luego a Lite; no repite modelo agotado",async()=>{
+  const llamadas:string[]=[];
+  const solicitar=vi.fn(async(u:RequestInfo|URL)=>{
+   const url=String(u);llamadas.push(url);
+   if(url.includes("gemini-4-hydrogen"))return new Response("",{status:429});
+   if(url.includes("gemini-3.8-flash"))return new Response("",{status:503});
+   return Response.json({candidates:[{content:{parts:[{text:JSON.stringify(resultado)}]}}]});
+  });
+  const ia=crearGeminiSintetico({clave:"qa",modelo:"gemini-4-hydrogen",respaldos:["gemini-3.8-flash","gemini-3.5-flash-lite"],corpus,solicitar});
+  expect(await ia.evaluar(1)).toEqual(resultado);expect(ia.modeloUsado()).toBe("gemini-3.5-flash-lite");
+  expect(llamadas).toHaveLength(3);
+  await ia.evaluar(1);expect(llamadas.filter(x=>x.includes("gemini-4-hydrogen"))).toHaveLength(1);
+ });
+ it("no usa respaldos ante un error de credencial y bloquea modelos no permitidos",async()=>{
+  const solicitar=vi.fn(async()=>new Response("",{status:403}));
+  const ia=crearGeminiSintetico({clave:"qa",modelo:"gemini-4-hydrogen",respaldos:["gemini-3.8-flash"],corpus,solicitar});
+  await expect(ia.evaluar(1)).rejects.toBeInstanceOf(ErrorGemini);expect(solicitar).toHaveBeenCalledTimes(1);
+  expect(()=>crearGeminiSintetico({clave:"qa",modelo:"gemini-4-argon",corpus,solicitar})).toThrow();
+ });
+});
