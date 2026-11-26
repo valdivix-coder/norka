@@ -11,3 +11,6 @@ test-results/
 *.log
 
 *.tsbuildinfo
+
+# Resultados de evaluación sintética, conservar como artefactos CI.
+/evals/salida-eval.json

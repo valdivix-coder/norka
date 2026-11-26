@@ -2,10 +2,16 @@
 
 **Actualizado:** 26 de noviembre de 2026.
 
-Fase 1 aprobada y fusionada en main por PR #1, commit 75f8600; Vercel producción READY. Video físico revisado, 10/10 pruebas del propietario, arnés completo de c2e33b6 aprobado. No publicar la grabación privada. Callback de producción real aún no comprobado por propietario.
+Fase 1 aprobada y fusionada por PR #1, main 75f8600, producción READY. Fase 2 en rama independiente. No avanzar a implementación formal de fase 3 sin la aprobación y metas de fase 2.
 
-Rama fase-2: 2.1 migración 0005 aplicada en Supabase (20261126030716), prueba transaccional con rollback pasó; 2.2 y 2.3 código de captura texto y cola local en revisión. No se habilita Gemini aún. No pasar fase 3 sin aprobación.
+**Evidencia de referencia:** 141/141 pruebas, arnés completo aprobado en d1886f4 (45747776610). 0005 y 0006 aplicadas previamente, sin cambios en producción en esta intervención. Captura texto, cola offline, edición y deshacer manual validados en navegador.
 
-Próximo: comprobar arnés y recorrido 2.2/2.3; 2.4 contrato Zod, 2.5 evals y 2.6 consentimiento/cola Gemini. Zod requerido en 6.2 ya existía en lock y se declara en ejecución; 2.4 contrato y reglas en revisión. Ver docs/fases/FASE-2.md. El nuevo alias de preview fase-2 necesita callback autorizado en Supabase; no trasladar cookies entre dominios. Mantener protección de Vercel y datos de familia.
+**Trabajo nuevo:** migración 0007 preparada pero NO aplicada; incluye propuestas, actividad, consentimiento, reserva, aplicación atómica e idempotencia. Caso de uso de procesamiento sin IA real; evaluación de Gemini aislada con activación explícita futura. CI SQL/núcleo de revisión 3cd070d: consultar los enlaces en FASE-2.md; no dar por aprobado antes de revisar resultados. No se envían datos familiares.
 
-**Actualización:** fase 2: guardado texto, cola offline, edición/deshacer aprobados en arnés/navegador hasta 85c2930; 0005 y 0006 aplicadas y verificadas con rollback de pruebas. Contrato y corpus aprobados. Dictado incorporado pendiente CI y dispositivo real. Evaluación sintética preparada sin clave; IA real bloqueada por privacidad y dependencia de propuestas/actividad. No fusionar fase 2 hasta evaluación/consentimiento y aceptación física.
+**Pendientes en orden:**
+1. Confirmar pruebas 0007 y arnés; documentar evidencia. Aplicar 0007 solo por el procedimiento de producción autorizado conforme 9.2.10, después de revisar antes/después.
+2. Cuando el propietario tenga computador: revocar clave compartida y guardar otra exclusivamente como secreto GitHub Actions GEMINI_API_KEY. Confirmar proyecto sin facturación y cuota. Ejecutar evaluación sintética (50 casos), revisar títulos/montos y campos inventados. No activar proveedor para datos familiares.
+3. Completar adaptador acotado de cola, consentimiento visible, resultado múltiple/editar/deshacer, y definir modalidad compatible con privacidad. Probar voz en iPhone y cronometrar texto y voz según 12. Aprobar fase 2 solo con criterios cumplidos.
+4. Iniciar fase 3 siguiendo 13.3; mapa preparado en PREPARACION-FASE-3.md. No implementar todavía sus pantallas o migraciones.
+
+Enlace estable de pruebas: https://norka-git-fase-2-neuralia1.vercel.app/ . El callback de esta rama debe estar autorizado en Supabase. No quitar protección Vercel ni cambiar datos personales.
