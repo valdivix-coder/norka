@@ -9,3 +9,7 @@ Siguiente: 2.2. No declarar fase 2 aprobada sin cumplir 2.9 y las metas del prom
 ## 2.2–2.3 · Captura texto y cola local
 
 Guardado atómico de original y tarea sin clasificar; acción valida cookie y cuenta esperada y RPC comprueba pertenencia activa. La cola IndexedDB solo retiene capturas pendientes, separadas por cuenta/familia; reintento al volver conexión, al abrir y cada 30 s. No se elimina hasta confirmación. No es cifrado frente a acceso local al dispositivo. En caso de fallo de IndexedDB, se intenta el servidor sin borrar texto si falla. Capturar en el marco de todas las pantallas, foco de campo al abrir; no se pide otro dato. No se promete recarga offline/PWA todavía. Falta validar en navegador y teléfono. Vuelta atrás: revertir código y conservar capturas guardadas y cola.
+
+## 2.4 · Contrato y reglas puras
+
+Zod 4.6.7 ya estaba en el lock como dependencia indirecta de desarrollo; se declara explícitamente como dependencia de ejecución, exigida por 6.2. Contrato estricto, fechas válidas, nombres exactos y únicos, notas sin clasificar, baja confianza por revisar, propuestas sin asignación directa, dos intentos máximos. Las pruebas no llaman a IA. El plan resultante aún no se escribe en BD: la persistencia atómica de propuestas (tabla programada en 4.1) y actividad (5.2 exige registro desde fase 2) requiere resolver esa dependencia del plan. NO VERIFICADO: precisión o invención de datos del modelo; se medirá con evals y Gemini. No se envían datos personales.
