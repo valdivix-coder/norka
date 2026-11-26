@@ -77,15 +77,15 @@ export function PersonasReales({ familiaId, iniciales, ambitosIniciales }: {
       </div>
       <div className={s.rejilla}>
         {activas.map(p => (
-          <div id={"persona-"+p.id} key={p.id} className={`${s.tarjeta} ${s.personaTarjeta}`}>
+          <div id={"persona-"+p.id} key={p.id} className={`${s.tarjeta} ${s.personaTarjeta} ${s.personaRealCompacta}`}>
             <Link href={"/familia/"+familiaId+"/persona?id="+p.id} className={s.fichaEnlace}>
               <AvatarPersona nombre={p.nombre} tipo={p.tipo} color={colorPersona(p.color,p.tipo)} />
               <strong>{p.nombre}</strong>
             </Link>
             {p.tipo === "hogar" ? <span className={s.suave}>{m.hogarAyuda}</span> : <>
               <span className={s.suave}>{m.tipos[p.tipo]}</span>
-              <Boton disabled={ocupado} onClick={() => abrir({tipo:"editar",persona:visual(p)})}>{m.editarPersona}</Boton>
-              <Boton texto disabled={ocupado} onClick={() => abrir({tipo:"archivar",persona:p})}>{m.archivar}</Boton>
+              <div className={s.personaAcciones}><Boton disabled={ocupado} onClick={() => abrir({tipo:"editar",persona:visual(p)})}>{m.editarPersona}</Boton>
+              <Boton texto disabled={ocupado} onClick={() => abrir({tipo:"archivar",persona:p})}>{m.archivar}</Boton></div>
             </>}
           </div>
         ))}

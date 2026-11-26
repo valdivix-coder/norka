@@ -17,6 +17,8 @@ function limpiar() {
 }
 export function transicionActiva() { return activa; }
 export function pantallaLista() { marcar(); llegada?.(); }
+// Una silueta no es el destino final: evitar animar dos pantallas consecutivas.
+export function pantallaCargando() { transicionActual?.skipTransition(); llegada?.(); }
 export function cambiarPantalla(navegar: () => void, destino: string) {
   if (!document.startViewTransition) { navegar();return; }
   if (activa) {

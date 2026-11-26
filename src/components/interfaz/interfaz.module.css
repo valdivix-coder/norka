@@ -897,3 +897,11 @@
 @media (prefers-reduced-motion: reduce) {
   :global(::view-transition-group(norka-persona)) { animation-duration: var(--mov-micro); }
 }
+
+/* Ajustes del recorrido físico: conservar los tokens y áreas táctiles. */
+.personaRealCompacta { gap: var(--e-2); padding: var(--e-3); cursor: default; }
+.personaRealCompacta .fichaEnlace { width:100%; }
+.personaAcciones { display:grid; gap:0; width:100%; margin-top:auto; }
+.personaAcciones .boton { padding-inline:var(--e-2); min-height:var(--toque-minimo); }
+.hoyReal .vacio { padding-block:var(--e-3); gap:var(--e-3); }
+.hoyReal .vacio .ilustracion { width:var(--e-12); height:var(--e-12); }

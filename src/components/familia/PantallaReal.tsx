@@ -45,7 +45,6 @@ function BuscarReal({base, personas}: {base:string;personas:PersonaBusca[]}) {
     <label className={s.campo}><span className={s.soloLector}>{m.campoBuscar}</span>
       <input type="search" className={s.entradaCampo} placeholder={m.campoBuscar} value={consulta}
         autoComplete="off" onChange={e=>escribir(e.target.value)}/></label>
-    <p className={s.suave}>{m.busquedaReal}</p>
     <div aria-live="polite">
       {q.length<2 ? <Vacio tipo="buscar" titulo={m.sinBusqueda} ayuda={m.busquedaReal}/>
       : resultados.length ? <div className={s.lista}>{resultados.map(p=>
@@ -67,7 +66,7 @@ export function PantallaRealVacia({ pantalla, familiaId, personas }: {
   return <>
     <EncabezadoReal pantalla={pantalla}/>
     {pantalla==="buscar" ? <BuscarReal base={base} personas={personas}/>
-    : pantalla==="hoy" ? <div className={s.pila}>
+    : pantalla==="hoy" ? <div className={`${s.pila} ${s.hoyReal}`}>
       <section className={s.fila} aria-label={m.semana}>
         <div className={s.anilloVacio} role="img" aria-label={m.sinPlazos}>
           <svg viewBox="0 0 124 124" aria-hidden="true"><circle cx="62" cy="62" r="50" fill="none" stroke="var(--borde)" strokeWidth="12"/></svg>
@@ -112,10 +111,10 @@ export function FichaReal({familiaId,persona}: {
   const cumple=persona.cumple_dia && persona.cumple_mes
     ? m.fechaCumple(persona.cumple_dia,m.meses[persona.cumple_mes-1].toLocaleLowerCase("es-CL")) : m.tipos[persona.tipo];
   return <div className={s.pila}>
-    <EncabezadoReal pantalla="persona" titulo={persona.nombre} contexto={cumple} persona={persona}/>
+    <EncabezadoReal pantalla="persona" titulo={persona.nombre} contexto={persona.tipo==="hogar"?m.personas:cumple} persona={persona}/>
     <div className={s.fila}>
       <AvatarPersona nombre={persona.nombre} tipo={persona.tipo} color={colorPersona(persona.color,persona.tipo)}/>
-      <span>{m.tipos[persona.tipo]}</span>
+      {persona.tipo!=="hogar" && <span>{m.tipos[persona.tipo]}</span>}
     </div>
     <Vacio titulo={m.sinResponsabilidades} ayuda={m.noResponsabilidad}>
       <Link className={`${s.boton} ${s.principal}`} href={"/familia/"+familiaId}>{m.verFamilia}</Link>

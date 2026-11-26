@@ -171,6 +171,7 @@ export function Marco({
             </Link>
             <Link
               href={destinoRecorrido(baseRuta, "avisos")}
+              prefetch={baseRuta.startsWith("/familia/") ? true : undefined}
               className={`${s.boton} ${s.iconoBoton}`}
               aria-label={m.avisos}
             >
@@ -237,6 +238,7 @@ export function Marco({
               key={destino}
               className={s.destino}
               href={destinoRecorrido(baseRuta, destino)}
+              prefetch={baseRuta.startsWith("/familia/") && destino !== "familia" ? true : undefined}
               aria-current={pantalla === destino ? "page" : undefined}
             >
               <Icono tipo={destino} />
