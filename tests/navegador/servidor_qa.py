@@ -1,5 +1,7 @@
 """REST de prueba local. Datos sintéticos, solo GET, sin conexión a Supabase real."""
 import hashlib
+import uuid
+from threading import Lock
 import json
 import ssl
 import sys
@@ -15,7 +17,10 @@ TOKEN = "a" * 43
 ahora = datetime.now(timezone.utc)
 base = dict(familia_id=FAMILIA, cumple_dia=None, cumple_mes=None,
             anio_nacimiento=None, va_al_colegio=False, archivada_en=None, revision=0)
+capturas = {}
+lock = Lock()
 tablas = {
+    "tareas": [],
     "sesiones": [{"cuenta_id": CUENTA, "hash_token": hashlib.sha256(TOKEN.encode()).hexdigest(),
                   "creada_en": ahora.isoformat(), "caduca_en": (ahora+timedelta(days=1)).isoformat(),
                   "revocada_en": None}],
@@ -47,6 +52,27 @@ tablas = {
 }
 
 class REST(BaseHTTPRequestHandler):
+    def do_POST(self):
+        if self.path != "/rest/v1/rpc/guardar_captura":
+            self.send_error(404); return
+        d=json.loads(self.rfile.read(int(self.headers["Content-Length"])))
+        if d["p_familia"]!=FAMILIA or d["p_cuenta"]!=CUENTA:
+            self.send_error(403); return
+        with lock:
+            cap=d["p_captura"]
+            if cap not in capturas:
+                tarea=str(uuid.uuid4())
+                capturas[cap]=dict(d,tarea_id=tarea)
+                tablas["tareas"].append(dict(id=tarea,familia_id=FAMILIA,titulo=d["p_texto"],revision=0,captura_id=cap,estado="pendiente",por_revisar="true"))
+            elif capturas[cap]["p_texto"]!=d["p_texto"]:
+                self.send_error(409); return
+            cuerpo=json.dumps(dict(captura_id=cap,tarea_id=capturas[cap]["tarea_id"])).encode()
+        self.send_response(200)
+        self.send_header("Content-Type","application/json")
+        self.send_header("Content-Length",str(len(cuerpo)))
+        self.end_headers()
+        self.wfile.write(cuerpo)
+
     def do_GET(self):
         u = urlparse(self.path)
         tabla = u.path.removeprefix("/rest/v1/")

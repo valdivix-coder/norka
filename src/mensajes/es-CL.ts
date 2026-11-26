@@ -456,6 +456,7 @@ export const familia = {
 } as const;
 
 export const captura = {
+  porRevisar: "Por revisar",
   guardada: "Tu captura quedó guardada. Por revisar.",
   enCola: "Guardada en este teléfono. Se enviará cuando sea posible.",
   ayudaSinConexion: "Puedes capturar ahora. Se enviará cuando vuelva la conexión.",

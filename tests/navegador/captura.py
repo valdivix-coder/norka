@@ -1,0 +1,45 @@
+"""Recorrido adicional 2.2/2.3: guardado en todas las pestañas y recuperación offline."""
+import asyncio, json, os
+from pathlib import Path
+from playwright.async_api import async_playwright, expect
+from servidor_qa import FAMILIA,TOKEN
+URL=os.environ["NORKA_URL"]
+BASE=f"{URL}/familia/{FAMILIA}"
+OUT=Path(os.environ["NORKA_QA_OUT"])
+async def main():
+    OUT.mkdir(parents=True,exist_ok=True)
+    async with async_playwright() as p:
+        browser=await p.chromium.launch()
+        ctx=await browser.new_context(viewport={"width":360,"height":800},is_mobile=True,has_touch=True)
+        await ctx.add_cookies([{"name":"norka_sesion","value":TOKEN,"url":URL,"httpOnly":True}])
+        page=await ctx.new_page()
+        errores=[]
+        page.on("pageerror",lambda e:errores.append(str(e)))
+        await page.goto(BASE+"/hoy")
+        nav=page.get_by_role("navigation",name="Navegación principal")
+        async def captura(texto):
+            await nav.get_by_role("button",name="Capturar",exact=True).click()
+            campo=page.get_by_role("textbox",name="Escribe lo que quieres recordar.")
+            await expect(campo).to_be_visible()
+            await campo.fill(texto)
+            await page.get_by_role("button",name="Enviar",exact=True).click()
+            await expect(page.get_by_role("dialog")).to_have_count(0)
+        for nombre,ruta in [("Hoy","hoy"),("Familia",""),("Equilibrio","equilibrio"),("Actividad","actividad"),("Buscar","buscar")]:
+            await page.goto(BASE+("/"+ruta if ruta else ""))
+            await captura("QA "+nombre)
+            await expect(page.get_by_text("Tu captura quedó guardada. Por revisar.",exact=True)).to_be_visible(timeout=20000)
+        await page.goto(BASE+"/hoy")
+        await ctx.set_offline(True)
+        await captura("QA sin conexión")
+        await expect(page.get_by_text("1 captura por enviar",exact=True)).to_be_visible()
+        await ctx.set_offline(False)
+        await expect(page.get_by_text("QA sin conexión",exact=True)).to_be_visible(timeout=25000)
+        await page.reload()
+        for nombre in ["Hoy","Familia","Equilibrio","Actividad","Buscar","sin conexión"]:
+            await expect(page.get_by_text("QA "+nombre,exact=True)).to_have_count(1)
+        await page.screenshot(path=str(OUT/"capturas-fase-2.png"),full_page=True)
+        assert not errores,errores
+        await browser.close()
+    print("Captura: cinco destinos + desconexión + persistencia sin duplicados aprobadas")
+    (OUT/"capturas-fase-2.json").write_text(json.dumps({"destinos":5,"offline":True,"persistencia":True,"errores":errores}))
+asyncio.run(main())

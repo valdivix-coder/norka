@@ -79,7 +79,7 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
   return <captura.Provider value={()=>abrir(true)}>
     <Marco baseRuta={`/familia/${familiaId}`} nombrePerfil={nombre} colorPerfil={color}
       logotipo={logotipo} isotipo={isotipo} abrirCaptura={()=>abrir(true)}
-      extra={abierta&&<HojaInferior titulo={m.capturar} cerrar={()=>{if(!enviando.current)abrir(false);}}>
+      extra={abierta&&<HojaInferior titulo={m.capturar} cerrar={()=>abrir(false)}>
         <form className={s.pila} onSubmit={e=>{e.preventDefault();void enviar();}}>
           <label className={s.campo}><span>{m.capturaAyuda}</span>
             <textarea className={s.entradaCampo} data-enfoque-inicial="" rows={4} value={texto} disabled={ocupada}

@@ -10,3 +10,5 @@ export function validarCaptura(dato:unknown): EntradaCaptura {
      !d.texto.trim() || (d.origen!=="texto" && d.origen!=="voz")) throw new Error("CAPTURA_INVALIDA");
   return {id:d.id,texto:d.texto,origen:d.origen};
 }
+
+export type TareaCapturada={id:string;familia_id:string;titulo:string;revision:number;captura_id:string};

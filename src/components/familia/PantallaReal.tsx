@@ -6,7 +6,8 @@ import { AvatarPersona, Boton, Vacio } from "@/components/interfaz/Elementos";
 import { useCapturaReal } from "./MarcoReal";
 import type { PersonaACargo } from "@/core/domain/familia";
 import { colorPersona } from "@/core/usecases/personas-reales";
-import { interfaz as m, entrada } from "@/mensajes/es-CL";
+import type { TareaCapturada } from "@/core/domain/captura";
+import { interfaz as m, entrada, captura as textos } from "@/mensajes/es-CL";
 import { pantallaLista } from "@/lib/transicion";
 import s from "@/components/interfaz/interfaz.module.css";
 
@@ -58,8 +59,8 @@ function BuscarReal({base, personas}: {base:string;personas:PersonaBusca[]}) {
     </div>
   </div>;
 }
-export function PantallaRealVacia({ pantalla, familiaId, personas }: {
-  pantalla:PantallaReal; familiaId:string; personas:PersonaBusca[];
+export function PantallaRealVacia({ pantalla, familiaId, personas, capturas=[] }: {
+  pantalla:PantallaReal; familiaId:string; personas:PersonaBusca[]; capturas?:TareaCapturada[];
 }) {
   const base="/familia/"+familiaId;
   const capturar=useCapturaReal();
@@ -76,9 +77,12 @@ export function PantallaRealVacia({ pantalla, familiaId, personas }: {
           <div key={nombre}><dt><span aria-hidden="true" className={`${s.punto} ${i===1?s.puntoProximas:i===2?s.puntoVencidas:""}`}/>{nombre}</dt><dd>0</dd></div>)}</dl>
       </section>
       <h2 className={s.seccionTitulo}>{m.teToca}</h2>
-      <Vacio tipo="hoy" titulo={m.ayudaHoy}>
+      {capturas.length>0?<section className={s.pila} aria-label={textos.porRevisar}>
+        <h2 className={s.seccionTitulo}>{textos.porRevisar}</h2>
+        <div className={s.lista}>{capturas.map(t=><div key={t.id} className={s.filaLista}><span style={{overflowWrap:"anywhere",whiteSpace:"pre-wrap"}}>{t.titulo}</span></div>)}</div>
+      </section>:<Vacio tipo="hoy" titulo={m.ayudaHoy}>
         <Boton principal onClick={()=>capturar?.()}>{m.capturarAlgo}</Boton>
-      </Vacio>
+      </Vacio>}
     </div> : <Vacio tipo={pantalla}
       titulo={pantalla==="equilibrio"?m.sinEquilibrio:pantalla==="actividad"?m.sinActividad:m.sinAvisos}
       ayuda={pantalla==="equilibrio"?m.ayudaEquilibrio:pantalla==="actividad"?m.ayudaActividad:m.ayudaAvisos}>

@@ -4,6 +4,9 @@ import { FueraDeFamilia, RegistroAusente, type PersonaACargo } from "@/core/doma
 import { SesionInvalida } from "@/core/domain/cuenta";
 import { esUuid } from "@/core/usecases/personas-reales";
 import { almacenFamiliaActual } from "@/lib/familia/servidor";
+import { capturasDeFamilia } from "@/lib/familia/capturas";
+import { NoEsIntegrante } from "@/core/domain/integrante";
+import type { TareaCapturada } from "@/core/domain/captura";
 import { interfaz as m } from "@/mensajes/es-CL";
 const titulos = { hoy:m.hoy, equilibrio:m.equilibrio, actividad:m.actividad, avisos:m.avisos, buscar:m.buscar, persona:m.persona } as const;
 export async function generateMetadata({params}: {params:Promise<{pantalla:string}>}) {
@@ -20,14 +23,16 @@ export default async function Page({params,searchParams}: {
   if(pantalla==="persona"&&!esUuid(id)) notFound();
   let personas: Parameters<typeof PantallaRealVacia>[0]["personas"] = [];
   let ficha: PersonaACargo | null = null;
+  let capturas:TareaCapturada[]=[];
   try {
     const almacen=await almacenFamiliaActual(familiaId);
+    if(pantalla==="hoy") capturas=await capturasDeFamilia(familiaId);
     if(pantalla==="buscar") personas=(await almacen.listar("personas_a_cargo")).filter(p=>!p.archivada_en)
       .map(({id,nombre,tipo,color})=>({id,nombre,tipo,color}));
     if(pantalla==="persona" && esUuid(id)) ficha=await almacen.obtener("personas_a_cargo",id);
   } catch(e) {
     if(e instanceof SesionInvalida) redirect("/entrar");
-    if(e instanceof FueraDeFamilia || e instanceof RegistroAusente) notFound();
+    if(e instanceof FueraDeFamilia || e instanceof RegistroAusente || e instanceof NoEsIntegrante) notFound();
     throw e;
   }
   if(pantalla==="persona") {
@@ -35,5 +40,5 @@ export default async function Page({params,searchParams}: {
     const {id,nombre,tipo,color,cumple_dia,cumple_mes}=ficha;
     return <FichaReal familiaId={familiaId} persona={{id,nombre,tipo,color,cumple_dia,cumple_mes}}/>;
   }
-  return <PantallaRealVacia pantalla={pantalla as PantallaReal} familiaId={familiaId} personas={personas}/>;
+  return <PantallaRealVacia pantalla={pantalla as PantallaReal} familiaId={familiaId} personas={personas} capturas={capturas}/>;
 }

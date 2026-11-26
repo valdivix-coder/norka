@@ -28,3 +28,5 @@ for i in $(seq 1 30); do if curl -fsS "$NORKA_URL/" >/dev/null 2>&1; then break;
 curl -fsS "$NORKA_URL/" >/dev/null
 "$PYTHON" tests/navegador/recorrido-autenticado.py
 "$PYTHON" tests/navegador/catalogo.py
+
+"$PYTHON" tests/navegador/captura.py
