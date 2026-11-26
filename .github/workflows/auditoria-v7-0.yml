@@ -1,0 +1,65 @@
+name: Auditoría aislada V7.0
+on:
+  push:
+    branches: [fase-2]
+    paths: ['.github/workflows/auditoria-v7-0.yml']
+permissions:
+  contents: read
+jobs:
+  prototipo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Extraer anexos intactos en carpeta temporal
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/norka-v7"
+          export V7_TMP="$RUNNER_TEMP/norka-v7"
+          python - <<'PY'
+          import os, pathlib, re, shutil, hashlib
+          root=pathlib.Path.cwd()
+          out=pathlib.Path(os.environ["V7_TMP"])
+          doc=root/"docs/inteligencia/CAMBIOS-V7.md"
+          blocks=re.findall(r"```ts\n([\s\S]*?)\n```",doc.read_text())
+          names=["postproceso-v7.ts","contrato-interno-v7.ts","calendario.test.ts","validador.test.ts","regresion.test.ts","contrato.test.ts"]
+          assert len(blocks)==len(names)
+          for name,block in zip(names,blocks):
+              if name=="regresion.test.ts":
+                  block=block.replace("/home/claude/valdivix-coder/norka/evals/",str(root/"evals")+"/")
+              (out/name).write_text(block+"\n")
+          shutil.copyfile(root/"docs/inteligencia/EJEMPLOS-DESARROLLO-V7.json",out/"EJEMPLOS-DESARROLLO-V7.json")
+          (out/"node_modules").symlink_to(root/"node_modules",target_is_directory=True)
+          print("Extraídos seis bloques; único ajuste: ruta absoluta del corpus en regresion.test.ts")
+          p=(root/"docs/inteligencia/PROMPT-OPERATIVO-V7.md").read_text()
+          for i,b in enumerate(re.findall(r"```text\n([\s\S]*?)\n```",p)):
+              print("Bloque instrucción/sufijo",i,"caracteres",len(b),"bytes",len(b.encode()),"sha256",hashlib.sha256(b.encode()).hexdigest())
+          PY
+      - name: Ejecutar las cuatro pruebas originales sin proveedor
+        shell: bash
+        run: |
+          cd "$RUNNER_TEMP/norka-v7"
+          set +e
+          status=0
+          for test in calendario.test.ts validador.test.ts regresion.test.ts contrato.test.ts; do
+            echo "=== $test ==="
+            npx --yes tsx "$test" || status=1
+          done
+          exit "$status"
+      - name: Contraejemplo horario independiente
+        if: always()
+        shell: bash
+        run: |
+          cd "$RUNNER_TEMP/norka-v7"
+          cat > auditoria-hora.ts <<'TS'
+          import assert from "node:assert/strict";
+          import { resolverTiempo } from "./postproceso-v7.ts";
+          const r=resolverTiempo("2026-11-26",["mañana a las 09:30"],null);
+          console.log("Horario explícito: mañana a las 09:30",JSON.stringify(r));
+          assert.equal(r.hora,"09:30");
+          TS
+          npx --yes tsx auditoria-hora.ts
