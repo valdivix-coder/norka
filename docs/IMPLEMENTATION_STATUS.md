@@ -5,7 +5,7 @@ Se actualiza al cerrar cada tarea, con evidencia. Estados: pendiente · en curso
 | Fase | Contenido | Estado | Evidencia | Documento |
 | --- | --- | --- | --- | --- |
 | 0 | Descubrimiento y diseño (sin código) | aprobada | Aprobación escrita de Simón el 20 de noviembre de 2026. Guía de 45 páginas, fuentes fechadas, siete respuestas de Simón en el apartado 2 y verificación documental en el apartado 9 | [FASE-0.md](fases/FASE-0.md) |
-| 1 | Base | en curso | 9/9 tareas con código; 123 pruebas, arnés completo OAuth aprobado; propietario confirma Google con dos cuentas, familia, invitación, creación de personas y pestañas. Pendiente salida, teléfonos mutuos, edición/archivo, recorrido físico y aprobación. | [FASE-1.md](fases/FASE-1.md) |
+| 1 | Base | entregada (espera aprobación) | 9/9 tareas implementadas, 123/123 pruebas, arnés completo aprobado y 10/10 pruebas finales del propietario aprobadas. Falta grabación física 1.9 y aprobación formal. | [FASE-1.md](fases/FASE-1.md) |
 | 2 | Captura | pendiente | — | `docs/fases/FASE-2.md` |
 | 3 | Centro de control | pendiente | — | `docs/fases/FASE-3.md` |
 | 4 | Reparto | pendiente | — | `docs/fases/FASE-4.md` |
@@ -18,6 +18,6 @@ Se actualiza al cerrar cada tarea, con evidencia. Estados: pendiente · en curso
 
 El detalle y los criterios de «hecho cuando» de cada tarea están en la sección 13 de `docs/PROMPT-MAESTRO.md`. Si esta tabla y el prompt maestro difieren, manda el prompt maestro.
 
-Tarea 1.6: entregada técnicamente; integración de acciones de creación/invitación en 1.7 y de pantallas con datos reales en 1.8. La prueba real de Google de 1.5 sigue pendiente. Evidencia: `docs/fases/evidencia-1-6/`.
+Tarea 1.6: entregada técnicamente; integración de acciones de creación/invitación en 1.7 y de pantallas con datos reales en 1.8. La prueba real de Google de 1.5 fue aprobada por el propietario. Evidencia: `docs/fases/evidencia-1-6/`.
 
 [Informe global por fases y tareas](INFORME-IMPLEMENTACION.md).
