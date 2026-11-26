@@ -11,4 +11,6 @@
 
 | 0006_editar_captura.sql | 20261126031155 | 26-nov-2026 | apply_migration; prueba de revisión, autor y original con rollback |
 
+| 0007_interpretacion.sql | 20261126145358 | 26-nov-2026 | apply_migration con autorización expresa; pruebas aisladas y en transacción con rollback; RLS y funciones verificadas |
+
 La versión 20261121030000 de 0001 es una hora asignada al registrar (queda antes de 0002). Las migraciones nuevas se aplican con apply_migration y se guardan aquí con su versión.
