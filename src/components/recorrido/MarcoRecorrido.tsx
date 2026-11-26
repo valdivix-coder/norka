@@ -2,6 +2,7 @@
 import { useEffect, useRef, type ReactNode, type CSSProperties } from "react";
 import Link from "@/components/interfaz/Enlace";
 import { usePathname, useRouter } from "next/navigation";
+import { BotonCaptura, type ControlesVoz } from "./BotonCaptura";
 import { Icono } from "@/components/Icono";
 import { interfaz as m } from "@/mensajes/es-CL";
 import { movimientoReducido, valorToken, volverConResorte } from "@/lib/movimiento";
@@ -34,12 +35,12 @@ export function Marco({
   children,
   logotipo,
   isotipo,
-  baseRuta, nombrePerfil, colorPerfil, abrirCaptura, extra,
+  baseRuta, nombrePerfil, colorPerfil, abrirCaptura, extra, voz,
 }: {
   children: ReactNode;
   logotipo: ReactNode;
   isotipo: ReactNode;
-  baseRuta: string; nombrePerfil: string; colorPerfil?: string; abrirCaptura: () => void; extra?: ReactNode;
+  baseRuta: string; nombrePerfil: string; colorPerfil?: string; abrirCaptura: () => void; extra?: ReactNode; voz?:ControlesVoz;
 }) {
   const ruta = usePathname();
   const router = useRouter();
@@ -130,7 +131,7 @@ export function Marco({
       <a className={`${s.boton} ${s.principal} ${s.saltar}`} href="#contenido">
         {m.saltar}
       </a>
-      <header className={s.cabecera}>
+      <header className={s.cabecera} hidden={voz?.grabando}>
         <div className={s.fondoCabecera} />
         <div className={s.filaCabecera}>
           {subpantalla ? (
@@ -225,14 +226,7 @@ export function Marco({
       <nav className={s.nav} aria-label={m.navegacion}>
         {destinos.map((destino) =>
           destino === "capturar" ? (
-            <button
-              key={destino}
-              className={s.capturar}
-              aria-label={m.capturar}
-              onClick={abrirCaptura}
-            >
-              <Icono tipo="capturar" />
-            </button>
+            <BotonCaptura key={destino} abrir={abrirCaptura} voz={voz}/>
           ) : (
             <Link
               key={destino}

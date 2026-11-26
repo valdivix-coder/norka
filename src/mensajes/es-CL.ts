@@ -456,6 +456,7 @@ export const familia = {
 } as const;
 
 export const captura = {
+  vozEscuchando:"Escuchando…", vozCancelar:"Desliza hacia un lado para cancelar.", vozError:"Revisa el texto y guárdalo. El reconocimiento depende de tu navegador.",
   resultado: "Resultado de captura",
   editar: "Editar",
   titulo: "Título de la tarea",

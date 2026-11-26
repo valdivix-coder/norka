@@ -1,6 +1,8 @@
 "use client";
 import { createContext,useContext,useState,useSyncExternalStore,useEffect,useRef,useCallback,type ReactNode } from "react";
 import { useRouter } from "next/navigation";
+import { vozWeb,vibracionWeb } from "@/data/voz-web";
+import type { SesionVoz } from "@/core/ports/voz";
 import { Marco } from "@/components/recorrido/MarcoRecorrido";
 import { Boton } from "@/components/interfaz/Elementos";
 import { HojaInferior } from "@/components/interfaz/HojaInferior";
@@ -24,6 +26,12 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
   children:ReactNode;familiaId:string;cuentaId:string;nombre:string;color:string;logotipo:ReactNode;isotipo:ReactNode;
 }) {
   const [abierta,abrir]=useState(false);
+  const [grabando,ponerGrabando]=useState(false);
+  const [dictado,ponerDictado]=useState("");
+  const sesionVoz=useRef<SesionVoz|null>(null);
+  const soltarVoz=useRef(false);
+  const origen=useRef<"texto"|"voz">("texto");
+  useEffect(()=>()=>sesionVoz.current?.cancelar(),[]);
   const [texto,escribir]=useState("");
   const [ocupada,ocupar]=useState(false);
   const [aviso,avisar]=useState("");
@@ -67,10 +75,10 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
     queueMicrotask(iniciar);
     return()=>{clearInterval(reloj);window.removeEventListener("online",iniciar);document.removeEventListener("visibilitychange",visible);};
   },[sincronizar]);
-  async function enviar(){
-    if(enviando.current||!texto.trim()) return;
+  async function enviar(valor=texto,fuente=origen.current){
+    if(enviando.current||!valor.trim()) return;
     enviando.current=true;ocupar(true);avisar("");
-    const entrada:CapturaPendiente={id:id.current??crypto.randomUUID(),texto,origen:"texto",familiaId,cuentaId};
+    const entrada:CapturaPendiente={id:id.current??crypto.randomUUID(),texto:valor,origen:fuente,familiaId,cuentaId};
     id.current=entrada.id;
     try{
       // Guardar en el teléfono antes de la red. Si no hay almacenamiento, solo
@@ -79,11 +87,26 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
       try{await colaCapturasWeb.guardar(entrada);local=true;}catch{/* alternativa en línea */}
       if(!local){const r=await guardar(entrada);ponerResultado({id:r.tarea_id,captura_id:r.captura_id,familia_id:familiaId,titulo:entrada.texto,revision:0});avisar(textos.guardada);router.refresh();}
       else {ponerPendientes((await colaCapturasWeb.listar(cuentaId,familiaId)).length);avisar(textos.enCola);}
-      escribir("");id.current=null;abrir(false);
+      escribir("");id.current=null;origen.current="texto";abrir(false);
+      if(fuente==="voz")vibracionWeb.corta();
       if(local) void sincronizar();
-    }catch{avisar(m.errorGuardar);}
+    }catch{escribir(valor);origen.current=fuente;abrir(true);avisar(m.errorGuardar);}
     finally{enviando.current=false;ocupar(false);}
   }
+  function iniciarVoz(){
+    if(abierta||editando||ocupada||texto.trim()||sesionVoz.current)return false;
+    soltarVoz.current=false;ponerDictado("");avisar("");
+    const conservar=(t:string)=>{sesionVoz.current=null;ponerGrabando(false);escribir(t);origen.current=t?"voz":"texto";abrir(true);avisar(textos.vozError);};
+    try{
+      sesionVoz.current=vozWeb.iniciar({texto:ponerDictado,fin:t=>{
+        sesionVoz.current=null;ponerGrabando(false);
+        if(soltarVoz.current&&t.trim())void enviar(t,"voz");else conservar(t);
+      },error:conservar});
+      ponerGrabando(true);vibracionWeb.corta();return true;
+    }catch{conservar("");return true;}
+  }
+  function terminarVoz(){soltarVoz.current=true;sesionVoz.current?.terminar();}
+  function cancelarVoz(){sesionVoz.current?.cancelar();sesionVoz.current=null;ponerGrabando(false);ponerDictado("");}
   async function cambiar(descartar:boolean){
     if(!resultado||cambiando.current||(!descartar&&!borrador.trim()))return;
     cambiando.current=true;ocupar(true);ponerErrorEdicion(false);
@@ -97,6 +120,7 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
   return <captura.Provider value={()=>abrir(true)}>
     <Marco baseRuta={`/familia/${familiaId}`} nombrePerfil={nombre} colorPerfil={color}
       logotipo={logotipo} isotipo={isotipo} abrirCaptura={()=>abrir(true)}
+      voz={{disponible:vozWeb.disponible,iniciar:iniciarVoz,terminar:terminarVoz,cancelar:cancelarVoz,grabando,texto:dictado}}
       extra={editando&&resultado?<HojaInferior titulo={textos.editar} cerrar={()=>editar(false)}>
         <form className={s.pila} onSubmit={e=>{e.preventDefault();void cambiar(false);}}>
           <label className={s.campo}><span>{textos.titulo}</span><textarea data-enfoque-inicial="" className={s.entradaCampo} rows={3} value={borrador} onChange={e=>ponerBorrador(e.target.value)} disabled={ocupada}/></label>
@@ -113,6 +137,7 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
           <Boton principal type="submit" disabled={ocupada||!texto.trim()}>{ocupada?m.guardando:m.enviara}</Boton>
         </form>
       </HojaInferior>}>
+      {grabando&&<section className={s.tarjetaVoz} role="status"><strong>{textos.vozEscuchando}</strong><p>{dictado||textos.vozCancelar}</p></section>}
       {!enLinea&&<section className={s.tarjeta} role="status"><p>{m.sinConexion}</p><p className={s.suave}>{textos.ayudaSinConexion}</p></section>}
       {pendientes>0&&<section className={s.tarjeta} role="status"><p>{textos.pendientes(pendientes)}</p>
         <Boton texto disabled={!enLinea} onClick={()=>void sincronizar()}>{m.reintentar}</Boton>
