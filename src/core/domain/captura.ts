@@ -12,3 +12,5 @@ export function validarCaptura(dato:unknown): EntradaCaptura {
 }
 
 export type TareaCapturada={id:string;familia_id:string;titulo:string;revision:number;captura_id:string};
+
+export type TareaCapturadaVisible=TareaCapturada & {editable:boolean};

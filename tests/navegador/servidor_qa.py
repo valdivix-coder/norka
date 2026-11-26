@@ -57,7 +57,7 @@ class REST(BaseHTTPRequestHandler):
             d=json.loads(self.rfile.read(int(self.headers["Content-Length"])))
             with lock:
                 t=next((x for x in tablas["tareas"] if x["id"]==d["p_tarea"] and x["captura_id"]==d["p_captura"] and x["revision"]==d["p_revision"] and x["estado"]=="pendiente"),None)
-                if d["p_familia"]!=FAMILIA or d["p_cuenta"]!=CUENTA or t is None:
+                if d["p_familia"]!=FAMILIA or d["p_cuenta"]!=CUENTA or t is None or t.get("capturas",{}).get("autor_id")!=tablas["integrantes"][0]["id"]:
                     self.send_error(409); return
                 t["revision"]+=1
                 if d["p_descartar"]:t["estado"]="descartada"
@@ -79,7 +79,7 @@ class REST(BaseHTTPRequestHandler):
             if cap not in capturas:
                 tarea=str(uuid.uuid4())
                 capturas[cap]=dict(d,tarea_id=tarea)
-                tablas["tareas"].append(dict(id=tarea,familia_id=FAMILIA,titulo=d["p_texto"],revision=0,captura_id=cap,estado="pendiente",por_revisar="true"))
+                tablas["tareas"].append(dict(id=tarea,familia_id=FAMILIA,titulo=d["p_texto"],revision=0,captura_id=cap,estado="pendiente",por_revisar="true",capturas={"autor_id":tablas["integrantes"][0]["id"],"estado":"pendiente"}))
             elif capturas[cap]["p_texto"]!=d["p_texto"]:
                 self.send_error(409); return
             cuerpo=json.dumps(dict(captura_id=cap,tarea_id=capturas[cap]["tarea_id"])).encode()

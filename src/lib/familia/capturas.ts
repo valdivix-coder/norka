@@ -6,6 +6,6 @@ import { SesionInvalida } from "@/core/domain/cuenta";
 export async function capturasDeFamilia(familiaId:string){
   const cuenta=await cuentaActual();
   if(!cuenta) throw new SesionInvalida();
-  await verFamilia(cuenta,familiaId,almacenFamilias());
-  return listarCapturasPendientes({...configuracion(),familiaId});
+  const {yo}=await verFamilia(cuenta,familiaId,almacenFamilias());
+  return listarCapturasPendientes({...configuracion(),familiaId,integranteId:yo.id});
 }

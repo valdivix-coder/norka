@@ -15,6 +15,8 @@ import type { CapturaPendiente, TareaCapturada } from "@/core/domain/captura";
 import s from "@/components/interfaz/interfaz.module.css";
 
 const captura = createContext<(() => void) | null>(null);
+const gestionCaptura=createContext<{abrir:(t:TareaCapturada,descartar:boolean)=>void;bloqueada:boolean}|null>(null);
+export function useGestionCaptura(){return useContext(gestionCaptura);}
 export function useCapturaReal() { return useContext(captura); }
 function escucharConexion(cambio: () => void) {
   window.addEventListener("online", cambio);
@@ -36,9 +38,15 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
   const [texto,escribir]=useState("");
   const [ocupada,ocupar]=useState(false);
   const [aviso,avisar]=useState("");
+  useEffect(()=>{
+    if(!aviso||aviso===m.errorGuardar||aviso===textos.vozError)return;
+    const reloj=setTimeout(()=>avisar(""),5000);
+    return()=>clearTimeout(reloj);
+  },[aviso]);
   const [pendientes,ponerPendientes]=useState(0);
   const [resultado,ponerResultado]=useState<TareaCapturada|null>(null);
-  const [editando,editar]=useState(false);
+  const [objetivo,ponerObjetivo]=useState<{tarea:TareaCapturada;descartar:boolean}|null>(null);
+  const editando=objetivo!==null;
   const [borrador,ponerBorrador]=useState("");
   const [errorEdicion,ponerErrorEdicion]=useState(false);
   const cambiando=useRef(false);
@@ -108,26 +116,37 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
   }
   function terminarVoz(){soltarVoz.current=true;sesionVoz.current?.terminar();}
   function cancelarVoz(){sesionVoz.current?.cancelar();sesionVoz.current=null;ponerGrabando(false);ponerDictado("");}
-  async function cambiar(descartar:boolean){
-    if(!resultado||cambiando.current||(!descartar&&!borrador.trim()))return;
+  function abrirGestion(tarea:TareaCapturada,descartar=false){
+    if(ocupada||!enLinea||abierta||grabando||cambiando.current)return;
+    ponerBorrador(tarea.titulo);ponerErrorEdicion(false);avisar("");ponerObjetivo({tarea,descartar});
+  }
+  async function cambiar(descartar:boolean,tarea:TareaCapturada|null=objetivo?.tarea??resultado){
+    if(!tarea||cambiando.current||(!descartar&&!borrador.trim()))return;
     cambiando.current=true;ocupar(true);ponerErrorEdicion(false);
     try{
-      const r=await editarCapturaAccion(familiaId,cuentaId,{capturaId:resultado.captura_id,tareaId:resultado.id,revision:resultado.revision,titulo:descartar?null:borrador,descartar});
+      const r=await editarCapturaAccion(familiaId,cuentaId,{capturaId:tarea.captura_id,tareaId:tarea.id,revision:tarea.revision,titulo:descartar?null:borrador,descartar});
       if(!r.ok)throw new Error("NO_EDITADA");
-      ponerResultado(descartar?null:r.resultado);editar(false);avisar(descartar?textos.deshecha:m.guardadaReal);router.refresh();
+      ponerResultado(actual=>actual?.id===tarea.id?(descartar?null:r.resultado):actual);
+      ponerObjetivo(null);avisar(descartar?textos.deshecha:m.guardadaReal);router.refresh();
     }catch{ponerErrorEdicion(true);}
     finally{cambiando.current=false;ocupar(false);}
   }
   return <captura.Provider value={()=>abrir(true)}>
+    <gestionCaptura.Provider value={{abrir:abrirGestion,bloqueada:ocupada||!enLinea||editando||abierta||grabando}}>
     <Marco baseRuta={`/familia/${familiaId}`} nombrePerfil={nombre} colorPerfil={color}
       logotipo={logotipo} isotipo={isotipo} abrirCaptura={()=>abrir(true)}
       voz={{disponible:vozWeb.disponible,iniciar:iniciarVoz,terminar:terminarVoz,cancelar:cancelarVoz,grabando,texto:dictado}}
-      extra={editando&&resultado?<HojaInferior titulo={textos.editar} cerrar={()=>editar(false)}>
-        <form className={s.pila} onSubmit={e=>{e.preventDefault();void cambiar(false);}}>
+      extra={objetivo?<HojaInferior titulo={objetivo.descartar?textos.eliminar:textos.editar} cerrar={()=>{if(!cambiando.current){ponerObjetivo(null);ponerErrorEdicion(false);}}}>
+        {objetivo.descartar?<div className={s.pila}>
+          <p>{textos.confirmarEliminar}</p><p className={s.suave}>{objetivo.tarea.titulo}</p>
+          {errorEdicion&&<p role="alert">{textos.errorEdicion}</p>}
+          <Boton principal disabled={ocupada} onClick={()=>void cambiar(true)}>{textos.eliminar}</Boton>
+          <Boton disabled={ocupada} onClick={()=>ponerObjetivo(null)}>{m.cancelar}</Boton>
+        </div>:<form className={s.pila} onSubmit={e=>{e.preventDefault();void cambiar(false);}}>
           <label className={s.campo}><span>{textos.titulo}</span><textarea data-enfoque-inicial="" className={s.entradaCampo} rows={3} value={borrador} onChange={e=>ponerBorrador(e.target.value)} disabled={ocupada}/></label>
           {errorEdicion&&<p role="alert">{textos.errorEdicion}</p>}
           <Boton principal type="submit" disabled={ocupada||!borrador.trim()}>{m.guardar}</Boton>
-        </form>
+        </form>}
       </HojaInferior>:abierta&&<HojaInferior titulo={m.capturar} cerrar={()=>abrir(false)}>
         <form className={s.pila} onSubmit={e=>{e.preventDefault();void enviar();}}>
           <label className={s.campo}><span>{m.capturaAyuda}</span>
@@ -143,12 +162,13 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
       {pendientes>0&&<section className={s.tarjeta} role="status"><p>{textos.pendientes(pendientes)}</p>
         <Boton texto disabled={!enLinea} onClick={()=>void sincronizar()}>{m.reintentar}</Boton>
       </section>}
-      {!abierta&&aviso&&<p role="status" className={s.aviso}>{aviso}</p>}
+      {!abierta&&!editando&&aviso&&<p role="status" className={`${s.aviso} ${s.avisoCaptura}`}>{aviso}</p>}
       {resultado&&<ResultadoCaptura filas={[{id:resultado.id,titulo:resultado.titulo,tipo:"tarea",porRevisar:true}]}
-        ocupada={ocupada||!enLinea} editar={id=>{if(id!==resultado.id)return;ponerBorrador(resultado.titulo);ponerErrorEdicion(false);editar(true);}}
+        ocupada={ocupada||!enLinea} editar={id=>{if(id===resultado.id)abrirGestion(resultado);}}
         deshacer={()=>void cambiar(true)} cerrar={()=>{ponerResultado(null);ponerErrorEdicion(false);}}
         error={errorEdicion&&!editando&&<p role="alert">{textos.errorEdicion}</p>}/>}
       {children}
     </Marco>
+    </gestionCaptura.Provider>
   </captura.Provider>;
 }

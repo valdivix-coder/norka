@@ -921,3 +921,8 @@
 .resultadoFila + .resultadoFila { border-top:var(--borde-fino) solid var(--borde); padding-top:var(--e-3); }
 .resultadoTexto { display:grid; gap:var(--e-1); min-width:0; overflow-wrap:anywhere; }
 @media(max-width:360px){.resultadoFila{grid-template-columns:minmax(0,1fr)}.resultadoFila .boton{justify-self:start}}
+
+/* Confirmación transitoria: no tapa ni intercepta controles. */
+.avisoCaptura { pointer-events:none; }
+.capturaGuardada { display:grid; gap:var(--e-2); padding-block:var(--e-3); }
+.capturaTitulo { margin:0; overflow-wrap:anywhere; white-space:pre-wrap; }

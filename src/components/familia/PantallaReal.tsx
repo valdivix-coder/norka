@@ -4,10 +4,10 @@ import { usePathname } from "next/navigation";
 import Link from "@/components/interfaz/Enlace";
 import { AvatarPersona, Boton, Vacio } from "@/components/interfaz/Elementos";
 import { ConsentimientoCaptura } from "./ConsentimientoCaptura";
-import { useCapturaReal } from "./MarcoReal";
+import { useCapturaReal, useGestionCaptura } from "./MarcoReal";
 import type { PersonaACargo } from "@/core/domain/familia";
 import { colorPersona } from "@/core/usecases/personas-reales";
-import type { TareaCapturada } from "@/core/domain/captura";
+import type { TareaCapturadaVisible } from "@/core/domain/captura";
 import { interfaz as m, entrada, captura as textos } from "@/mensajes/es-CL";
 import { pantallaLista } from "@/lib/transicion";
 import s from "@/components/interfaz/interfaz.module.css";
@@ -61,10 +61,11 @@ function BuscarReal({base, personas}: {base:string;personas:PersonaBusca[]}) {
   </div>;
 }
 export function PantallaRealVacia({ pantalla, familiaId, personas, capturas=[] }: {
-  pantalla:PantallaReal; familiaId:string; personas:PersonaBusca[]; capturas?:TareaCapturada[];
+  pantalla:PantallaReal; familiaId:string; personas:PersonaBusca[]; capturas?:TareaCapturadaVisible[];
 }) {
   const base="/familia/"+familiaId;
   const capturar=useCapturaReal();
+  const gestion=useGestionCaptura();
   return <>
     <EncabezadoReal pantalla={pantalla}/>
     {pantalla==="buscar" ? <BuscarReal base={base} personas={personas}/>
@@ -80,7 +81,13 @@ export function PantallaRealVacia({ pantalla, familiaId, personas, capturas=[] }
       <h2 className={s.seccionTitulo}>{m.teToca}</h2>
       {capturas.length>0?<section className={s.pila} aria-label={textos.porRevisar}>
         <h2 className={s.seccionTitulo}>{textos.porRevisar}</h2>
-        <div className={s.lista}>{capturas.map(t=><div key={t.id} className={s.filaLista}><span style={{overflowWrap:"anywhere",whiteSpace:"pre-wrap"}}>{t.titulo}</span></div>)}</div>
+        <div className={s.lista}>{capturas.map(t=><div key={t.id} className={s.capturaGuardada}>
+          <p className={s.capturaTitulo}>{t.titulo}</p>
+          {t.editable&&gestion&&<div className={s.opciones}>
+            <Boton texto disabled={gestion.bloqueada} aria-label={textos.editarResultado(t.titulo)} onClick={()=>gestion.abrir(t,false)}>{textos.editar}</Boton>
+            <Boton texto disabled={gestion.bloqueada} aria-label={textos.eliminarResultado(t.titulo)} onClick={()=>gestion.abrir(t,true)}>{textos.eliminar}</Boton>
+          </div>}
+        </div>)}</div>
       </section>:<Vacio tipo="hoy" titulo={m.ayudaHoy}>
         <Boton principal onClick={()=>capturar?.()}>{m.capturarAlgo}</Boton>
       </Vacio>}

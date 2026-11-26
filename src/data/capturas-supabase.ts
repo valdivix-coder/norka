@@ -1,5 +1,5 @@
 import type { AlmacenCaptura } from "../core/ports/captura";
-import type { CapturaGuardada, TareaCapturada } from "../core/domain/captura";
+import type { CapturaGuardada, TareaCapturada, TareaCapturadaVisible } from "../core/domain/captura";
 // Adaptador exclusivamente de servidor. El RPC revalida pertenencia y autor en la transacción.
 export function crearAlmacenCaptura({url,claveServicio,familiaId,cuentaId,solicitar=fetch}:{
   url:string;claveServicio:string;familiaId:string;cuentaId:string;solicitar?:typeof fetch;
@@ -19,18 +19,18 @@ export function crearAlmacenCaptura({url,claveServicio,familiaId,cuentaId,solici
   }};
 }
 
-export async function listarCapturasPendientes({url,claveServicio,familiaId,solicitar=fetch}:{
-  url:string;claveServicio:string;familiaId:string;solicitar?:typeof fetch;
-}):Promise<TareaCapturada[]>{
+export async function listarCapturasPendientes({url,claveServicio,familiaId,integranteId,solicitar=fetch}:{
+  url:string;claveServicio:string;familiaId:string;integranteId:string;solicitar?:typeof fetch;
+}):Promise<TareaCapturadaVisible[]>{
   if(typeof window!=="undefined"||new URL(url).protocol!=="https:"||!claveServicio) throw new Error("CONFIGURACION_INVALIDA");
   const destino=new URL("/rest/v1/tareas",url);
   destino.search=new URLSearchParams({familia_id:"eq."+familiaId,estado:"eq.pendiente",por_revisar:"eq.true",
-    captura_id:"not.is.null",select:"id,familia_id,titulo,revision,captura_id",order:"creado_en.desc,id.desc",limit:"100"}).toString();
+    captura_id:"not.is.null",select:"id,familia_id,titulo,revision,captura_id,capturas(autor_id,estado)",order:"creado_en.desc,id.desc",limit:"100"}).toString();
   const r=await solicitar(destino,{cache:"no-store",redirect:"error",signal:AbortSignal.timeout(10000),headers:{apikey:claveServicio}});
   if(!r.ok)throw new Error("CAPTURAS_NO_DISPONIBLES");
-  const filas=await r.json() as TareaCapturada[];
+  const filas=await r.json() as (TareaCapturada & {capturas?:{autor_id:string;estado:string}|null})[];
   if(!Array.isArray(filas)||filas.some(f=>f.familia_id!==familiaId))throw new Error("RESPUESTA_INVALIDA");
-  return filas;
+  return filas.map(({id,familia_id,titulo,revision,captura_id,capturas})=>({id,familia_id,titulo,revision,captura_id,editable:capturas?.autor_id===integranteId&&capturas?.estado==="pendiente"}));
 }
 
 export async function editarResultadoCaptura({url,claveServicio,familiaId,cuentaId,solicitar=fetch}:{

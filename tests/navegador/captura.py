@@ -61,6 +61,23 @@ async def main():
         await page.reload()
         for nombre in ["Hoy","Familia","Equilibrio","Actividad","Buscar","sin conexión"]:
             await expect(page.get_by_text("QA "+nombre,exact=True)).to_have_count(1)
+        # Edición de una captura anterior tras recargar (no depende de tarjeta transitoria).
+        lista=page.get_by_role("region",name="Por revisar")
+        await lista.get_by_role("button",name="Editar QA Hoy",exact=True).click()
+        await page.get_by_role("textbox",name="Título de la tarea").fill("QA Hoy corregida")
+        await page.get_by_role("button",name="Guardar",exact=True).click()
+        await expect(lista.get_by_text("QA Hoy corregida",exact=True)).to_be_visible()
+        await page.reload()
+        await expect(lista.get_by_text("QA Hoy corregida",exact=True)).to_be_visible()
+        await lista.get_by_role("button",name="Eliminar QA Hoy corregida",exact=True).click()
+        await expect(page.get_by_role("dialog")).to_be_visible()
+        await page.get_by_role("dialog").get_by_role("button",name="Eliminar",exact=True).click()
+        await expect(lista.get_by_text("QA Hoy corregida",exact=True)).to_have_count(0)
+        await expect(page.get_by_text("Captura deshecha",exact=True)).to_be_visible()
+        await expect(page.get_by_text("Captura deshecha",exact=True)).to_have_count(0,timeout=8000)
+        await page.reload()
+        await expect(lista.get_by_text("QA Hoy corregida",exact=True)).to_have_count(0)
+        await expect(lista.get_by_text("QA Familia",exact=True)).to_be_visible()
         await page.screenshot(path=str(OUT/"capturas-fase-2.png"),full_page=True)
         assert not errores,errores
         await browser.close()
