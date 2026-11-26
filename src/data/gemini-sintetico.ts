@@ -1,5 +1,6 @@
 // Adaptador del servidor para el corpus sintético. No acepta contextos de Supabase.
 import { z } from "zod";
+import {revisarInterpretacion,type AjusteInterpretacion} from "../core/usecases/revisar-interpretacion";
 import {instruccionesCaptura} from "./prompt-captura";
 import { contratoInterpretacion, type Interpretacion } from "../core/contracts/interpretacion";
 
@@ -28,8 +29,9 @@ export function crearGeminiSintetico({clave,modelo,corpus,respaldos=[],solicitar
   const fallosTransitorios=new Map<string,number>();
   let ultimoModelo:string|null=null;
   let brutas=new Map<number,Interpretacion>();
+  let ajustes=new Map<number,AjusteInterpretacion[]>();
   async function evaluarGrupo(ids:readonly number[]):Promise<Map<number,Interpretacion>>{
-    ultimoModelo=null;brutas=new Map();
+    ultimoModelo=null;brutas=new Map();ajustes=new Map();
     if(ids.length<1||ids.length>5||new Set(ids).size!==ids.length)throw new Error("LOTE_INVALIDO");
     const entradas=ids.map(id=>{const texto=casos.get(id);if(!texto)throw new Error("CASO_FUERA_DEL_CORPUS");return {id,texto};});
     const lote=ids.length>1;
@@ -68,13 +70,8 @@ export function crearGeminiSintetico({clave,modelo,corpus,respaldos=[],solicitar
     for(const f of filas){
       const salida={elementos:f.elementos};
       originales.set(f.id,structuredClone(salida));
-      // Registrar la respuesta bruta sintética antes de normalizar catálogos.
-      for(const e of salida.elementos){
-        if(e.persona_a_cargo!==null&&!contexto.personas_a_cargo.includes(e.persona_a_cargo)){e.persona_a_cargo=null;e.confianza="baja";}
-        if(e.ambito!==null&&!contexto.ambitos.includes(e.ambito)){e.ambito=null;e.confianza="baja";}
-        if(e.dirigida_a!==null&&(!contexto.integrantes.includes(e.dirigida_a)||e.dirigida_a===contexto.autor)){e.dirigida_a=null;e.confianza="baja";if(e.tipo==="propuesta")e.tipo="nota";}
-      }
-      salidas.set(f.id,salida);
+      const revisada=revisarInterpretacion(salida,{texto:casos.get(f.id)!,personas:contexto.personas_a_cargo,integrantes:contexto.integrantes,ambitos:contexto.ambitos,autor:contexto.autor});
+      salidas.set(f.id,revisada.salida);ajustes.set(f.id,revisada.ajustes);
     }
     brutas=originales;
     const u=respuesta.usageMetadata;
@@ -98,5 +95,5 @@ export function crearGeminiSintetico({clave,modelo,corpus,respaldos=[],solicitar
     }
     throw ultimo;
   }
-  return {modeloUsado:()=>ultimoModelo,bruta:(id:number)=>brutas.get(id),evaluarLote:evaluarGrupo,async evaluar(id:number):Promise<Interpretacion>{return (await evaluarGrupo([id])).get(id)!;}};
+  return {modeloUsado:()=>ultimoModelo,bruta:(id:number)=>brutas.get(id),ajustes:(id:number)=>ajustes.get(id)??[],evaluarLote:evaluarGrupo,async evaluar(id:number):Promise<Interpretacion>{return (await evaluarGrupo([id])).get(id)!;}};
 }

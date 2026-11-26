@@ -1,5 +1,7 @@
 import {readFileSync,writeFileSync} from "node:fs";
 import {test,expect} from "vitest";
+import {auditarAcciones} from "./auditar-acciones";
+import {VERSION_PROMPT_CAPTURA} from "../src/data/prompt-captura";
 import {type Interpretacion} from "../src/core/contracts/interpretacion";
 import {crearGeminiSintetico,ErrorGemini,SinModelosDisponibles,MODELOS_GEMINI,type IntentoGemini} from "../src/data/gemini-sintetico";
 type Caso={id:number;texto:string;esperado:Interpretacion};
@@ -18,9 +20,9 @@ test("Gemini: exclusivamente corpus sintético versionado",async()=>{
   let solicitudes=0;
   const tamano=Number(process.env.GEMINI_EVAL_TAMANO??"1");
   if(!Number.isInteger(tamano)||tamano<1||tamano>5)throw new Error("TAMANO_INVALIDO");
-  let aciertos=0,aciertosMeta=0,fallos=0,discordancias=0,camposInventados=0,camposBrutosDiscrepantes=0;
+  let porAccion=0,porAccionBruta=0,aciertosBrutos=0,metaBruta=0,aciertos=0,aciertosMeta=0,fallos=0,discordancias=0,camposInventados=0,camposBrutosDiscrepantes=0;
   const firmaMeta=(e:Interpretacion["elementos"][number])=>JSON.stringify([e.persona_a_cargo,e.ambito,e.plazo_fecha,e.plazo_hora]);
-  const detalle:{id:number;resultado?:Interpretacion;bruta?:Interpretacion;estado:string;modelo?:string;camposInventados?:number;intentos?:IntentoGemini[]}[]=[];
+  const detalle:{id:number;resultado?:Interpretacion;bruta?:Interpretacion;estado:string;modelo?:string;camposInventados?:number;intentos?:IntentoGemini[];auditoria?:unknown;ajustes?:unknown}[]=[];
   for(let i=0;i<corpus.casos.length;i+=tamano){
     const grupo=corpus.casos.slice(i,i+tamano);
     intentos=[];
@@ -39,7 +41,11 @@ test("Gemini: exclusivamente corpus sintético versionado",async()=>{
       }
       camposInventados+=inventados;
       for(const el of bruta.elementos)for(const k of ["persona_a_cargo","ambito","dirigida_a","plazo_fecha","plazo_hora"] as const){if(el[k]!==null&&!caso.esperado.elementos.some(e=>e[k]===el[k]))camposBrutosDiscrepantes++;}
-      detalle.push({id:caso.id,resultado:salida,bruta,estado:"valida",modelo:usado,camposInventados:inventados,intentos});
+      const audit=auditarAcciones(salida,caso.esperado),auditBruta=auditarAcciones(bruta,caso.esperado);
+      porAccion+=audit.discrepancias;porAccionBruta+=auditBruta.discrepancias;
+      if(JSON.stringify(bruta.elementos.map(firma).sort())===JSON.stringify(caso.esperado.elementos.map(firma).sort()))aciertosBrutos++;
+      if(JSON.stringify(bruta.elementos.map(firmaMeta).sort())===JSON.stringify(caso.esperado.elementos.map(firmaMeta).sort()))metaBruta++;
+      detalle.push({id:caso.id,resultado:salida,bruta,estado:"valida",modelo:usado,camposInventados:inventados,intentos,auditoria:{normalizada:audit,bruta:auditBruta},ajustes:gemini.ajustes(caso.id)});
       const a=salida.elementos.map(firma).sort(),e=caso.esperado.elementos.map(firma).sort();
       const metaA=salida.elementos.map(firmaMeta).sort(),metaE=caso.esperado.elementos.map(firmaMeta).sort();
       if(JSON.stringify(metaA)===JSON.stringify(metaE))aciertosMeta++;
@@ -53,12 +59,14 @@ test("Gemini: exclusivamente corpus sintético versionado",async()=>{
       if(error instanceof ErrorGemini&&[401,403].includes(error.estado))break;
     }finally{solicitudes+=intentos.length;}
   }
-  const resumen={solicitudes,consumo,validas:detalle.filter(d=>d.estado==="valida").length,sinEjecutar:corpus.casos.length-detalle.length,modo:tamano===1?"individual":"diagnostico_agrupado",tamano,modelo,respaldos,modelosUsados,total:corpus.casos.length,procesados:detalle.length,aciertos,porcentaje:100*aciertos/corpus.casos.length,aciertosMeta,porcentajeMeta:100*aciertosMeta/corpus.casos.length,discordancias,fallos,camposInventados,camposBrutosDiscrepantes,revisionManual:"Revisar títulos, montos e invenciones; sin revisión humana no certificar cero invenciones."};
+  const resumen={version:VERSION_PROMPT_CAPTURA,porAccion,porAccionBruta,aciertosBrutos,metaBruta,solicitudes,consumo,validas:detalle.filter(d=>d.estado==="valida").length,sinEjecutar:corpus.casos.length-detalle.length,modo:tamano===1?"individual":"diagnostico_agrupado",tamano,modelo,respaldos,modelosUsados,total:corpus.casos.length,procesados:detalle.length,aciertos,porcentaje:100*aciertos/corpus.casos.length,aciertosMeta,porcentajeMeta:100*aciertosMeta/corpus.casos.length,discordancias,fallos,camposInventados,camposBrutosDiscrepantes,revisionManual:"Revisar títulos, montos e invenciones; sin revisión humana no certificar cero invenciones."};
   writeFileSync("evals/salida-eval.json",JSON.stringify({resumen,detalle},null,2));
   console.log(JSON.stringify(resumen));
   expect(detalle).toHaveLength(corpus.casos.length);
   expect(camposInventados).toBe(0);
   expect(camposBrutosDiscrepantes).toBe(0);
+  expect(porAccion).toBe(0);
+  expect(porAccionBruta).toBe(0);
   expect(aciertosMeta/corpus.casos.length).toBeGreaterThanOrEqual(.9);
   // Mantener también el criterio estricto previo: no ocultar fallos de tipo, propuesta o recurrencia.
   expect(aciertos/corpus.casos.length).toBeGreaterThanOrEqual(.9);
