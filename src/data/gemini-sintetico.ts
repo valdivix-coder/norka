@@ -22,12 +22,13 @@ export function crearGeminiSintetico({clave,modelo,corpus,respaldos=[],solicitar
   const casos=new Map(corpus.casos.map(c=>[c.id,c.texto]));
   const orden=[...new Set([modelo,...respaldos])];
   const suspendidos=new Set<string>();
+  const fallosTransitorios=new Map<string,number>();
   let ultimoModelo:string|null=null;
   return {modeloUsado:()=>ultimoModelo,async evaluar(id:number):Promise<Interpretacion>{
     ultimoModelo=null;
     const texto=casos.get(id);
     if(!texto)throw new Error("CASO_FUERA_DEL_CORPUS");
-    const input="Interpreta la frase familiar chilena. No inventes personas, plazos, horas ni montos. Una solicitud a otro integrante es propuesta, nunca asignación. Usa null cuando falte información. Devuelve solo JSON con elementos: tipo (tarea, responsabilidad, propuesta, nota), titulo, persona_a_cargo, ambito, plazo_fecha ISO, plazo_hora HH:MM, recurrencia (null o {tipo: diaria,semanal,mensual,anual,cada_n; cada: entero positivo; dias: nombres de días}), dirigida_a, confianza (alta,baja). Contexto: "+JSON.stringify(contexto)+"\nFrase: "+texto;
+    const input="Interpreta la frase familiar chilena. Distingue acciones independientes: una entrada por acción. Si se repite de manera explícita, es responsabilidad con recurrencia; si se pide a otra persona identificada, es propuesta y no asignación. Si no hay acción clara, nota. Respeta el calendario de America/Santiago y la fecha del contexto; hoy y mañana son relativos a esa fecha, próximo día de semana o día del mes es la siguiente ocurrencia. Una hora sin día no autoriza inventar fecha. Si el texto no dice cuándo, ambos campos de plazo son null. No conviertas recurrencias en plazos. Usa exactamente los nombres de las listas, sin apodos; si no existe o es ambiguo, null y confianza baja. El hogar solo cuando la frase se refiere inequívocamente a la casa o a algo compartido. No supongas montos, nombres ni horas. No inventes personas, plazos, horas ni montos. Una solicitud a otro integrante es propuesta, nunca asignación. Usa null cuando falte información. Devuelve solo JSON con elementos: tipo (tarea, responsabilidad, propuesta, nota), titulo, persona_a_cargo, ambito, plazo_fecha ISO, plazo_hora HH:MM, recurrencia (null o {tipo: diaria,semanal,mensual,anual,cada_n; cada: entero positivo; dias: nombres de días}), dirigida_a, confianza (alta,baja). Contexto: "+JSON.stringify(contexto)+"\nFrase: "+texto;
     let ultimo:unknown=new ErrorGemini(429);
     for(const elegido of orden){
       if(suspendidos.has(elegido))continue;
@@ -55,7 +56,7 @@ export function crearGeminiSintetico({clave,modelo,corpus,respaldos=[],solicitar
     etapa="contrato_zod";
     const salida=contratoInterpretacion.parse(objeto);
     observar({modelo:elegido,resultado:"valida",ms:Date.now()-inicio});
-    ultimoModelo=elegido;return salida;
+    fallosTransitorios.delete(elegido);ultimoModelo=elegido;return salida;
       }catch(error){
         ultimo=error;
         const motivo=error instanceof ErrorGemini?"HTTP "+error.estado:error instanceof Error&&["TimeoutError","AbortError"].includes(error.name)?"timeout":etapa;
@@ -64,6 +65,11 @@ export function crearGeminiSintetico({clave,modelo,corpus,respaldos=[],solicitar
         if(error instanceof ErrorGemini&&![404,408,429,500,502,503,504].includes(error.estado))throw error;
         // No insistir contra una cuota agotada ni un modelo ausente durante esta corrida.
         if(error instanceof ErrorGemini&&[404,429].includes(error.estado))suspendidos.add(elegido);
+        else {
+          const n=(fallosTransitorios.get(elegido)??0)+1;fallosTransitorios.set(elegido,n);
+          // Dos fallos consecutivos de cualquier tipo transitorio: evitar repetir solicitudes improductivas en este lote.
+          if(n>=2)suspendidos.add(elegido);
+        }
       }
     }
     throw ultimo;

@@ -73,3 +73,10 @@ it("clasifica errores sin registrar cuerpos o credenciales",async()=>{
  const intentos:unknown[]=[];const ia=crearGeminiSintetico({clave:"qa",modelo:"gemini-4-hydrogen",corpus,observar:i=>intentos.push(i),solicitar:vi.fn(async()=>Response.json({candidates:[{content:{parts:[{text:"{}"}]}}]}))});
  await expect(ia.evaluar(1)).rejects.toThrow();expect(intentos).toEqual([expect.objectContaining({modelo:"gemini-4-hydrogen",resultado:"fallida",motivo:"contrato_zod"})]);
 });
+
+it("suspende un respaldo que falla dos veces consecutivas y conserva la prioridad de los demás",async()=>{
+ const llamadas:string[]=[];const solicitar=vi.fn(async(u:RequestInfo|URL)=>{const modelo=String(u).split("/").at(-1)?.split(":")[0]??"";llamadas.push(modelo);if(modelo==="gemini-4-hydrogen")return new Response("",{status:503});return Response.json({candidates:[{content:{parts:[{text:JSON.stringify(resultado)}]}}]});});
+ const ia=crearGeminiSintetico({clave:"qa",modelo:"gemini-4-hydrogen",respaldos:["gemini-3.8-flash"],corpus,solicitar});
+ for(let i=0;i<3;i++)await ia.evaluar(1);
+ expect(llamadas).toEqual(["gemini-4-hydrogen","gemini-3.8-flash","gemini-4-hydrogen","gemini-3.8-flash","gemini-3.8-flash"]);
+});
