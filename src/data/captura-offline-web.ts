@@ -10,3 +10,12 @@ export async function prepararCapturaSinConexion(cuentaId:string,familiaId:strin
 export function olvidarContextoCaptura():void{
  try{sessionStorage.removeItem(CLAVE);}catch{/* almacenamiento no disponible */}
 }
+
+export function escucharSalidaCaptura():()=>void{
+ const salir=(e:Event)=>{
+  const f=e.target;
+  if(f instanceof HTMLFormElement&&new URL(f.action,location.origin).origin===location.origin&&new URL(f.action,location.origin).pathname==="/api/salir")olvidarContextoCaptura();
+ };
+ document.addEventListener("submit",salir,true);
+ return ()=>document.removeEventListener("submit",salir,true);
+}

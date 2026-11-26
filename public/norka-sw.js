@@ -4,7 +4,13 @@ const RECURSOS=["/sin-conexion.html","/sin-conexion.css","/sin-conexion.js","/fu
 self.addEventListener("install",evento=>{
   evento.waitUntil((async()=>{
     const cache=await caches.open(CACHE);
-    await cache.addAll(RECURSOS.map(r=>new Request(r,{cache:"reload",credentials:"same-origin"})));
+    // No aceptar una redirección de autenticación como recurso offline.
+    const recursos=await Promise.all(RECURSOS.map(async ruta=>{
+      const respuesta=await fetch(new Request(ruta,{cache:"reload",credentials:"same-origin",redirect:"error"}));
+      if(!respuesta.ok||new URL(respuesta.url).pathname!==ruta)throw new Error("RECURSO_OFFLINE_INVALIDO");
+      return {ruta,respuesta};
+    }));
+    await Promise.all(recursos.map(({ruta,respuesta})=>cache.put(ruta,respuesta)));
     await self.skipWaiting();
   })());
 });
