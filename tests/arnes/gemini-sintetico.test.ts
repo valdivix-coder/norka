@@ -86,3 +86,25 @@ it("no permite nombres ajenos al catálogo de personas a cargo",async()=>{
  const ia=crearGeminiSintetico({clave:"qa",modelo:"gemini-3.8-flash",corpus,solicitar:vi.fn(async()=>Response.json({candidates:[{content:{parts:[{text:JSON.stringify(falso)}]}}]}))});
  const salida=await ia.evaluar(1);expect(salida.elementos[0]).toMatchObject({persona_a_cargo:null,ambito:null,confianza:"baja"});
 });
+
+describe("Evaluación agrupada: solo diagnóstico sintético",()=>{
+ const dos={...corpus,casos:[...corpus.casos,{id:2,texto:"Comprar arroz",esperado:"NO ENVIAR"}]};
+ it("separa instrucciones, entradas y respuestas; conserva salida bruta",async()=>{
+  const solicitar=vi.fn(async(_u:RequestInfo|URL,init?:RequestInit)=>{
+   const body=JSON.parse(String(init?.body));
+   expect(body.systemInstruction.parts[0].text).toContain("beneficiario");
+   expect(body.systemInstruction.parts[0].text).not.toContain("NO ENVIAR");
+   expect(JSON.parse(body.contents[0].parts[0].text).entradas).toEqual([{id:1,texto:"Comprar pan"},{id:2,texto:"Comprar arroz"}]);
+   return Response.json({candidates:[{content:{parts:[{text:JSON.stringify({resultados:[{id:2,...resultado},{id:1,...resultado}]})}]}}]});
+  });
+  const ia=crearGeminiSintetico({clave:"qa",modelo:"gemini-3.5-flash-lite",corpus:dos,solicitar});
+  expect((await ia.evaluarLote([1,2])).get(1)).toEqual(resultado);
+  expect(ia.bruta(2)).toEqual(resultado);expect(solicitar).toHaveBeenCalledTimes(1);
+ });
+ it("rechaza un grupo con casos faltantes, duplicados o ajenos",async()=>{
+  for(const ids of [[1],[1,1],[1,3]]){
+   const ia=crearGeminiSintetico({clave:"qa",modelo:"gemini-3.5-flash-lite",corpus:dos,solicitar:vi.fn(async()=>Response.json({candidates:[{content:{parts:[{text:JSON.stringify({resultados:ids.map(id=>({id,...resultado}))})}]}}]}))});
+   await expect(ia.evaluarLote([1,2])).rejects.toThrow();expect(ia.modeloUsado()).toBeNull();
+  }
+ });
+});

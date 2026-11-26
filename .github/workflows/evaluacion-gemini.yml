@@ -4,6 +4,12 @@ on:
     branches: [fase-2]
     paths: ['evals/solicitud.json']
   workflow_dispatch:
+    inputs:
+      tamano:
+        description: '1 = evaluación individual; 5 = diagnóstico agrupado'
+        default: '1'
+        type: choice
+        options: ['1','5']
 permissions:
   contents: read
 concurrency:
@@ -26,6 +32,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_EVAL_ACTIVA: '1'
           GEMINI_MODELO: gemini-4-hydrogen
+          GEMINI_EVAL_TAMANO: ${{ github.event_name == 'push' && '5' || inputs.tamano || '1' }}
         run: npm run eval
       - name: Guardar resultados sintéticos para revisión
         if: always()
