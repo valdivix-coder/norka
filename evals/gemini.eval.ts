@@ -14,7 +14,8 @@ test("Gemini: exclusivamente corpus sintético versionado",async()=>{
   let intentos:IntentoGemini[]=[];
   const gemini=crearGeminiSintetico({clave:key,modelo,respaldos,corpus,observar:i=>intentos.push(i)});
   const modelosUsados:Record<string,number>={};
-  let aciertos=0,fallos=0,discordancias=0,camposInventados=0;
+  let aciertos=0,aciertosMeta=0,fallos=0,discordancias=0,camposInventados=0;
+  const firmaMeta=(e:Interpretacion["elementos"][number])=>JSON.stringify([e.persona_a_cargo,e.ambito,e.plazo_fecha,e.plazo_hora]);
   const detalle:{id:number;resultado?:Interpretacion;estado:string;modelo?:string;camposInventados?:number;intentos?:IntentoGemini[]}[]=[];
   for(const caso of corpus.casos){
     intentos=[];
@@ -29,15 +30,19 @@ test("Gemini: exclusivamente corpus sintético versionado",async()=>{
       camposInventados+=inventados;
       detalle.push({id:caso.id,resultado:salida,estado:"valida",modelo:usado,camposInventados:inventados,intentos});
       const a=salida.elementos.map(firma).sort(),e=caso.esperado.elementos.map(firma).sort();
+      const metaA=salida.elementos.map(firmaMeta).sort(),metaE=caso.esperado.elementos.map(firmaMeta).sort();
+      if(JSON.stringify(metaA)===JSON.stringify(metaE))aciertosMeta++;
       if(JSON.stringify(a)===JSON.stringify(e))aciertos++;
       else{discordancias++;console.log("Caso",caso.id,"requiere revisión de campos y título.");}
     }catch(error){fallos++;const estado=error instanceof ErrorGemini?"HTTP "+error.estado:"sin salida válida";detalle.push({id:caso.id,estado,intentos});console.log("Caso",caso.id,estado);if(error instanceof ErrorGemini&&[401,403,429].includes(error.estado))break;}
   }
-  const resumen={modelo,respaldos,modelosUsados,total:corpus.casos.length,procesados:detalle.length,aciertos,porcentaje:100*aciertos/corpus.casos.length,discordancias,fallos,camposInventados,revisionManual:"Revisar títulos, montos e invenciones; sin revisión humana no certificar cero invenciones."};
+  const resumen={modelo,respaldos,modelosUsados,total:corpus.casos.length,procesados:detalle.length,aciertos,porcentaje:100*aciertos/corpus.casos.length,aciertosMeta,porcentajeMeta:100*aciertosMeta/corpus.casos.length,discordancias,fallos,camposInventados,revisionManual:"Revisar títulos, montos e invenciones; sin revisión humana no certificar cero invenciones."};
   writeFileSync("evals/salida-eval.json",JSON.stringify({resumen,detalle},null,2));
   console.log(JSON.stringify(resumen));
   expect(detalle).toHaveLength(corpus.casos.length);
   expect(camposInventados).toBe(0);
+  expect(aciertosMeta/corpus.casos.length).toBeGreaterThanOrEqual(.9);
+  // Mantener también el criterio estricto previo: no ocultar fallos de tipo, propuesta o recurrencia.
   expect(aciertos/corpus.casos.length).toBeGreaterThanOrEqual(.9);
   expect(fallos).toBe(0);
 });

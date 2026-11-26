@@ -80,3 +80,9 @@ it("suspende un respaldo que falla dos veces consecutivas y conserva la priorida
  for(let i=0;i<3;i++)await ia.evaluar(1);
  expect(llamadas).toEqual(["gemini-4-hydrogen","gemini-3.8-flash","gemini-4-hydrogen","gemini-3.8-flash","gemini-3.8-flash"]);
 });
+
+it("no permite nombres ajenos al catálogo de personas a cargo",async()=>{
+ const falso={elementos:[{...resultado.elementos[0],persona_a_cargo:"QA",ambito:"Inventado"}]};
+ const ia=crearGeminiSintetico({clave:"qa",modelo:"gemini-3.8-flash",corpus,solicitar:vi.fn(async()=>Response.json({candidates:[{content:{parts:[{text:JSON.stringify(falso)}]}}]}))});
+ const salida=await ia.evaluar(1);expect(salida.elementos[0]).toMatchObject({persona_a_cargo:null,ambito:null,confianza:"baja"});
+});
