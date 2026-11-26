@@ -6,7 +6,7 @@ import { esUuid } from "@/core/usecases/personas-reales";
 import { almacenFamiliaActual } from "@/lib/familia/servidor";
 import { capturasDeFamilia } from "@/lib/familia/capturas";
 import { NoEsIntegrante } from "@/core/domain/integrante";
-import type { TareaCapturada } from "@/core/domain/captura";
+import type { TareaCapturadaVisible } from "@/core/domain/captura";
 import { interfaz as m } from "@/mensajes/es-CL";
 const titulos = { hoy:m.hoy, equilibrio:m.equilibrio, actividad:m.actividad, avisos:m.avisos, buscar:m.buscar, persona:m.persona } as const;
 export async function generateMetadata({params}: {params:Promise<{pantalla:string}>}) {
@@ -23,7 +23,7 @@ export default async function Page({params,searchParams}: {
   if(pantalla==="persona"&&!esUuid(id)) notFound();
   let personas: Parameters<typeof PantallaRealVacia>[0]["personas"] = [];
   let ficha: PersonaACargo | null = null;
-  let capturas:TareaCapturada[]=[];
+  let capturas:TareaCapturadaVisible[]=[];
   try {
     const almacen=await almacenFamiliaActual(familiaId);
     if(pantalla==="hoy") capturas=await capturasDeFamilia(familiaId);

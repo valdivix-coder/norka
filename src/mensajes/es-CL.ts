@@ -464,6 +464,7 @@ export const captura = {
   tipoResultado: {tarea:"Tarea",responsabilidad:"Responsabilidad",propuesta:"Propuesta"},
   editarResultado: (titulo:string) => "Editar "+titulo,
   eliminar: "Eliminar",
+  cancelar: "Cancelar",
   eliminarResultado: (titulo:string) => "Eliminar "+titulo,
   confirmarEliminar: "¿Eliminar esta tarea de Por revisar?",
   iaTitulo: "Interpretación automática",

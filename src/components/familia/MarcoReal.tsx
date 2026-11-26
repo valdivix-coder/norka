@@ -141,7 +141,7 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
           <p>{textos.confirmarEliminar}</p><p className={s.suave}>{objetivo.tarea.titulo}</p>
           {errorEdicion&&<p role="alert">{textos.errorEdicion}</p>}
           <Boton principal disabled={ocupada} onClick={()=>void cambiar(true)}>{textos.eliminar}</Boton>
-          <Boton disabled={ocupada} onClick={()=>ponerObjetivo(null)}>{m.cancelar}</Boton>
+          <Boton disabled={ocupada} onClick={()=>ponerObjetivo(null)}>{textos.cancelar}</Boton>
         </div>:<form className={s.pila} onSubmit={e=>{e.preventDefault();void cambiar(false);}}>
           <label className={s.campo}><span>{textos.titulo}</span><textarea data-enfoque-inicial="" className={s.entradaCampo} rows={3} value={borrador} onChange={e=>ponerBorrador(e.target.value)} disabled={ocupada}/></label>
           {errorEdicion&&<p role="alert">{textos.errorEdicion}</p>}
