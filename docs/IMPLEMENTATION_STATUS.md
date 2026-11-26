@@ -6,7 +6,7 @@ Se actualiza al cerrar cada tarea, con evidencia. Estados: pendiente · en curso
 | --- | --- | --- | --- | --- |
 | 0 | Descubrimiento y diseño (sin código) | aprobada | Aprobación escrita de Simón el 20 de noviembre de 2026. Guía de 45 páginas, fuentes fechadas, siete respuestas de Simón en el apartado 2 y verificación documental en el apartado 9 | [FASE-0.md](fases/FASE-0.md) |
 | 1 | Base | aprobada | PR #1 fusionado 75f8600, Vercel READY; 10/10 pruebas reales, vídeo revisado y arnés completo aprobado c2e33b6. | [FASE-1.md](fases/FASE-1.md) |
-| 2 | Captura | en curso | 0005/0006 verificadas; 0007 preparada sin aplicación, núcleo y evaluación sintética en CI; clave, privacidad, resultado múltiple y iPhone pendientes. | [FASE-2.md](fases/FASE-2.md) |
+| 2 | Captura | en curso | 0005/0006 verificadas; 0007 preparada sin aplicación, núcleo 145/145 y PostgreSQL aislado aprobados; evaluación sintética preparada, no ejecutada; clave, privacidad, resultado múltiple y iPhone pendientes. | [FASE-2.md](fases/FASE-2.md) |
 | 3 | Centro de control | pendiente | Preparación documental de 11 tareas; puerta fase 2 no cumplida. | [PREPARACION-FASE-3.md](fases/PREPARACION-FASE-3.md) |
 | 4 | Reparto | pendiente | — | `docs/fases/FASE-4.md` |
 | 5 | Anticipación | pendiente | — | `docs/fases/FASE-5.md` |
