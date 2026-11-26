@@ -9,7 +9,7 @@ import { Boton } from "@/components/interfaz/Elementos";
 import { HojaInferior } from "@/components/interfaz/HojaInferior";
 import { interfaz as m, captura as textos } from "@/mensajes/es-CL";
 import { guardarCapturaAccion, editarCapturaAccion } from "@/app/familia/captura-acciones";
-import { prepararCapturaSinConexion } from "@/data/captura-offline-web";
+import { prepararCapturaSinConexion, type EstadoCapturaOffline } from "@/data/captura-offline-web";
 import { colaCapturasWeb } from "@/data/cola-capturas-web";
 import { sincronizarCapturas } from "@/core/usecases/capturas";
 import type { CapturaPendiente, TareaCapturada } from "@/core/domain/captura";
@@ -51,7 +51,8 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
   const [borrador,ponerBorrador]=useState("");
   const [errorEdicion,ponerErrorEdicion]=useState("");
   const cambiando=useRef(false);
-  useEffect(()=>{void prepararCapturaSinConexion(cuentaId,familiaId);},[cuentaId,familiaId]);
+  const [estadoOffline,ponerEstadoOffline]=useState<EstadoCapturaOffline>("preparando");
+  useEffect(()=>{let activa=true;const preparar=()=>{void prepararCapturaSinConexion(cuentaId,familiaId).then(e=>{if(activa)ponerEstadoOffline(e);});};preparar();window.addEventListener("online",preparar);return()=>{activa=false;window.removeEventListener("online",preparar);};},[cuentaId,familiaId]);
   const enLinea=useSyncExternalStore(escucharConexion,conectado,conectadoServidor);
   const router=useRouter();
   const bloqueo=useRef(false);
@@ -163,6 +164,8 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
         </form>
       </HojaInferior>}>
       {grabando&&<section className={s.tarjetaVoz} role="status"><strong>{textos.vozEscuchando}</strong><p>{dictado||textos.vozCancelar}</p></section>}
+      {enLinea&&estadoOffline!=="lista"&&<p className={s.suave} role="status">{estadoOffline==="preparando"?textos.offlinePreparando:textos.offlineNoDisponible}</p>}
+      {enLinea&&estadoOffline==="lista"&&<p className={s.suave} role="status">{textos.offlineLista}</p>}
       {!enLinea&&<section className={s.tarjeta} role="status"><p>{m.sinConexion}</p><p className={s.suave}>{textos.ayudaSinConexion}</p></section>}
       {pendientes>0&&<section className={s.tarjeta} role="status"><p>{textos.pendientes(pendientes)}</p>
         <Boton texto disabled={!enLinea} onClick={()=>void sincronizar()}>{m.reintentar}</Boton>

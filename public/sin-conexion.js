@@ -10,7 +10,8 @@
   try{
     const c=JSON.parse(sessionStorage.getItem(clave)||"null");
     const familia=location.pathname.split("/")[2];
-    if(c&&uuid.test(c.cuentaId)&&uuid.test(c.familiaId)&&familia===c.familiaId&&Date.now()<c.hasta)contexto=c;
+    const entrada=["/","/cuenta","/cuenta/","/entrar","/entrar/"].includes(location.pathname);
+    if(c&&uuid.test(c.cuentaId)&&uuid.test(c.familiaId)&&(familia===c.familiaId||entrada)&&Date.now()<c.hasta)contexto=c;
   }catch{/* Sin contexto: no guardar para una cuenta desconocida. */}
   function abrir(){
     return new Promise((resolve,reject)=>{
@@ -37,7 +38,7 @@
       $("estado").textContent="Guarda el texto antes de volver.";return;
     }
     if(!navigator.onLine){$("estado").textContent="Todavía no hay conexión.";return;}
-    location.reload();
+    if(contexto&&location.pathname.split("/")[2]!==contexto.familiaId)location.replace("/familia/"+contexto.familiaId+"/hoy");else location.reload();
   }
   $("volver").addEventListener("click",volver);
   window.addEventListener("online",()=>{$("estado").textContent="Volvió la conexión. Vuelve a tu familia para enviar las capturas.";if(!ocupada&&!$("texto").value.trim())volver();});

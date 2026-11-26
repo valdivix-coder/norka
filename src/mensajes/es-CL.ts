@@ -485,6 +485,9 @@ export const captura = {
   porRevisar: "Por revisar",
   guardada: "Tu captura quedó guardada. Por revisar.",
   enCola: "Guardada en este teléfono. Se enviará cuando sea posible.",
+  offlinePreparando: "Preparando la captura sin conexión…",
+  offlineLista: "Captura sin conexión preparada.",
+  offlineNoDisponible: "No se pudo preparar la captura sin conexión. Abre norka directamente en Safari y vuelve a cargar.",
   ayudaSinConexion: "Puedes capturar ahora. Se enviará cuando vuelva la conexión.",
   pendientes: (n:number) => n === 1 ? "1 captura por enviar" : n+" capturas por enviar",
 } as const;

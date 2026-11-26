@@ -4,6 +4,7 @@ on:
     branches: [fase-1, fase-2]
     paths:
       - 'src/**'
+      - 'public/**'
       - 'tests/navegador/**'
       - 'tests/arnes/**'
       - '.github/workflows/navegador-fase-1.yml'
