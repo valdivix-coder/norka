@@ -1,0 +1,38 @@
+name: SQL de fase 2 (aislado)
+on:
+  push:
+    branches: [fase-2]
+    paths: ['supabase/**','.github/workflows/sql-fase-2.yml']
+permissions:
+  contents: read
+jobs:
+  sql:
+    runs-on: ubuntu-24.04
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: qa-local
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - name: Crear roles sintéticos y aplicar migraciones
+        env:
+          DB: ${{ job.services.postgres.id }}
+        run: |
+          set -euo pipefail
+          printf '%s\n' 'create role anon; create role authenticated; create role service_role bypassrls;' | docker exec -i "$DB" psql -U postgres -v ON_ERROR_STOP=1
+          for f in supabase/migrations/000*.sql; do
+            echo "Aplicar $f"
+            docker exec -i "$DB" psql -U postgres -v ON_ERROR_STOP=1 < "$f"
+          done
+      - name: Verificar y probar sin datos reales
+        env:
+          DB: ${{ job.services.postgres.id }}
+        run: |
+          set -euo pipefail
+          for f in supabase/verificaciones/0005_prueba.sql supabase/verificaciones/0006_prueba.sql supabase/verificaciones/0007_despues.sql supabase/verificaciones/0007_prueba.sql; do
+            echo "Comprobar $f"
+            docker exec -i "$DB" psql -U postgres -v ON_ERROR_STOP=1 < "$f"
+          done
