@@ -53,6 +53,22 @@ tablas = {
 
 class REST(BaseHTTPRequestHandler):
     def do_POST(self):
+        if self.path == "/rest/v1/rpc/editar_resultado_captura":
+            d=json.loads(self.rfile.read(int(self.headers["Content-Length"])))
+            with lock:
+                t=next((x for x in tablas["tareas"] if x["id"]==d["p_tarea"] and x["captura_id"]==d["p_captura"] and x["revision"]==d["p_revision"] and x["estado"]=="pendiente"),None)
+                if d["p_familia"]!=FAMILIA or d["p_cuenta"]!=CUENTA or t is None:
+                    self.send_error(409); return
+                t["revision"]+=1
+                if d["p_descartar"]:t["estado"]="descartada"
+                else:t["titulo"]=d["p_titulo"]
+                cuerpo=json.dumps(t).encode()
+            self.send_response(200)
+            self.send_header("Content-Type","application/json")
+            self.send_header("Content-Length",str(len(cuerpo)))
+            self.end_headers()
+            self.wfile.write(cuerpo)
+            return
         if self.path != "/rest/v1/rpc/guardar_captura":
             self.send_error(404); return
         d=json.loads(self.rfile.read(int(self.headers["Content-Length"])))

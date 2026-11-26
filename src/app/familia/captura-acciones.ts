@@ -3,7 +3,7 @@ import { guardarCaptura } from "@/core/usecases/capturas";
 import { esUuid } from "@/core/usecases/personas-reales";
 import { cuentaActual } from "@/lib/familia/cuenta";
 import { configuracion } from "@/lib/entrada/servidor";
-import { crearAlmacenCaptura } from "@/data/capturas-supabase";
+import { crearAlmacenCaptura, editarResultadoCaptura } from "@/data/capturas-supabase";
 export async function guardarCapturaAccion(familiaId:string,cuentaEsperada:string,entrada:unknown){
   try{
     if(!esUuid(familiaId)) throw new Error("DATOS_INVALIDOS");
@@ -12,5 +12,16 @@ export async function guardarCapturaAccion(familiaId:string,cuentaEsperada:strin
     const {url,claveServicio}=configuracion();
     const guardada=await guardarCaptura(entrada,crearAlmacenCaptura({url,claveServicio,familiaId,cuentaId}));
     return {ok:true as const,guardada};
+  }catch{return {ok:false as const};}
+}
+
+export async function editarCapturaAccion(familiaId:string,cuentaEsperada:string,dato:{capturaId:string;tareaId:string;revision:number;titulo:string|null;descartar:boolean}){
+  try{
+    if(!esUuid(familiaId)||!esUuid(dato.capturaId)||!esUuid(dato.tareaId)||!Number.isSafeInteger(dato.revision)||dato.revision<0||
+      typeof dato.descartar!=="boolean"||(!dato.descartar&&(typeof dato.titulo!=="string"||!dato.titulo.trim())))throw new Error("DATOS_INVALIDOS");
+    const cuentaId=await cuentaActual();
+    if(!cuentaId||cuentaId!==cuentaEsperada)throw new Error("SESION_INVALIDA");
+    const resultado=await editarResultadoCaptura({...configuracion(),familiaId,cuentaId},dato);
+    return {ok:true as const,resultado};
   }catch{return {ok:false as const};}
 }

@@ -17,3 +17,7 @@ Zod 4.6.7 ya estaba en el lock como dependencia indirecta de desarrollo; se decl
 ## 2.5 · Corpus sintético
 
 50 frases y resultados esperados en evals/captura-cl.json; fecha y familia sintéticas. Recuentos de categorías y validación Zod comprobables en CI. El primer caso obligatorio cuenta en múltiples y pagos; el segundo es control sin plazo, de modo que las 50 frases cumplen los recuentos. No se han medido aciertos de Gemini.
+
+## 2.7 · Resultado manual, editar y deshacer
+
+Migración 0006 aplicada 20261126031155; función solo servicio, prueba transaccional de edición, revisión obsoleta, rechazo cuenta ajena, conservación original y descarte aprobada. Tarjeta del último envío confirmado, también tras reconectar; editar en hoja, deshacer descarta tarea sin borrar captura original. Solo autor activo y revisión vigente; no altera tareas interpretadas. Prueba de navegador pendiente. No se interpreta ni escribe propuestas mientras IA no habilitada.

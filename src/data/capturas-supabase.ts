@@ -32,3 +32,16 @@ export async function listarCapturasPendientes({url,claveServicio,familiaId,soli
   if(!Array.isArray(filas)||filas.some(f=>f.familia_id!==familiaId))throw new Error("RESPUESTA_INVALIDA");
   return filas;
 }
+
+export async function editarResultadoCaptura({url,claveServicio,familiaId,cuentaId,solicitar=fetch}:{
+  url:string;claveServicio:string;familiaId:string;cuentaId:string;solicitar?:typeof fetch;
+},dato:{capturaId:string;tareaId:string;revision:number;titulo:string|null;descartar:boolean}):Promise<TareaCapturada & {estado:string}>{
+  if(typeof window!=="undefined"||new URL(url).protocol!=="https:"||!claveServicio)throw new Error("CONFIGURACION_INVALIDA");
+  const r=await solicitar(new URL("/rest/v1/rpc/editar_resultado_captura",url),{method:"POST",cache:"no-store",redirect:"error",
+    signal:AbortSignal.timeout(10000),headers:{apikey:claveServicio,"Content-Type":"application/json"},
+    body:JSON.stringify({p_familia:familiaId,p_cuenta:cuentaId,p_captura:dato.capturaId,p_tarea:dato.tareaId,p_revision:dato.revision,p_titulo:dato.titulo,p_descartar:dato.descartar})});
+  if(!r.ok)throw new Error("CAPTURA_NO_EDITADA");
+  const v=await r.json() as TareaCapturada & {estado:string};
+  if(v.familia_id!==familiaId||v.id!==dato.tareaId||v.captura_id!==dato.capturaId||v.revision!==dato.revision+1)throw new Error("RESPUESTA_INVALIDA");
+  return v;
+}

@@ -905,3 +905,6 @@
 .personaAcciones .boton { padding-inline:var(--e-2); min-height:var(--toque-minimo); }
 .hoyReal .vacio { padding-block:var(--e-3); gap:var(--e-3); }
 .hoyReal .vacio .ilustracion { width:var(--e-12); height:var(--e-12); }
+
+.resultadoCaptura { margin-bottom:var(--e-4); overflow-wrap:anywhere; }
+.resultadoCaptura p { white-space:pre-wrap; }

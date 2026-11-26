@@ -5,10 +5,10 @@ import { Marco } from "@/components/recorrido/MarcoRecorrido";
 import { Boton } from "@/components/interfaz/Elementos";
 import { HojaInferior } from "@/components/interfaz/HojaInferior";
 import { interfaz as m, captura as textos } from "@/mensajes/es-CL";
-import { guardarCapturaAccion } from "@/app/familia/captura-acciones";
+import { guardarCapturaAccion, editarCapturaAccion } from "@/app/familia/captura-acciones";
 import { colaCapturasWeb } from "@/data/cola-capturas-web";
 import { sincronizarCapturas } from "@/core/usecases/capturas";
-import type { CapturaPendiente } from "@/core/domain/captura";
+import type { CapturaPendiente, TareaCapturada } from "@/core/domain/captura";
 import s from "@/components/interfaz/interfaz.module.css";
 
 const captura = createContext<(() => void) | null>(null);
@@ -28,6 +28,11 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
   const [ocupada,ocupar]=useState(false);
   const [aviso,avisar]=useState("");
   const [pendientes,ponerPendientes]=useState(0);
+  const [resultado,ponerResultado]=useState<TareaCapturada|null>(null);
+  const [editando,editar]=useState(false);
+  const [borrador,ponerBorrador]=useState("");
+  const [errorEdicion,ponerErrorEdicion]=useState(false);
+  const cambiando=useRef(false);
   const enLinea=useSyncExternalStore(escucharConexion,conectado,conectadoServidor);
   const router=useRouter();
   const bloqueo=useRef(false);
@@ -45,7 +50,10 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
       if(navigator.onLine){
         const r=await sincronizarCapturas(colaCapturasWeb,cuentaId,familiaId,{guardar});
         ponerPendientes(r.pendientes);
-        if(r.enviadas){avisar(textos.guardada);router.refresh();}
+        if(r.enviadas){
+          if(r.ultima) ponerResultado({id:r.ultima.guardada.tarea_id,captura_id:r.ultima.guardada.captura_id,familia_id:familiaId,titulo:r.ultima.entrada.texto,revision:0});
+          avisar(textos.guardada);router.refresh();
+        }
       }else ponerPendientes((await colaCapturasWeb.listar(cuentaId,familiaId)).length);
     }catch{/* La cola persistente se conserva; no se confirma un envío fallido. */}
     finally{bloqueo.current=false;}
@@ -69,17 +77,33 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
       // confirmar tras respuesta del servidor; si falla, conservar el texto.
       let local=false;
       try{await colaCapturasWeb.guardar(entrada);local=true;}catch{/* alternativa en línea */}
-      if(!local){await guardar(entrada);avisar(textos.guardada);router.refresh();}
+      if(!local){const r=await guardar(entrada);ponerResultado({id:r.tarea_id,captura_id:r.captura_id,familia_id:familiaId,titulo:entrada.texto,revision:0});avisar(textos.guardada);router.refresh();}
       else {ponerPendientes((await colaCapturasWeb.listar(cuentaId,familiaId)).length);avisar(textos.enCola);}
       escribir("");id.current=null;abrir(false);
       if(local) void sincronizar();
     }catch{avisar(m.errorGuardar);}
     finally{enviando.current=false;ocupar(false);}
   }
+  async function cambiar(descartar:boolean){
+    if(!resultado||cambiando.current||(!descartar&&!borrador.trim()))return;
+    cambiando.current=true;ocupar(true);ponerErrorEdicion(false);
+    try{
+      const r=await editarCapturaAccion(familiaId,cuentaId,{capturaId:resultado.captura_id,tareaId:resultado.id,revision:resultado.revision,titulo:descartar?null:borrador,descartar});
+      if(!r.ok)throw new Error("NO_EDITADA");
+      ponerResultado(descartar?null:r.resultado);editar(false);avisar(descartar?textos.deshecha:m.guardadaReal);router.refresh();
+    }catch{ponerErrorEdicion(true);}
+    finally{cambiando.current=false;ocupar(false);}
+  }
   return <captura.Provider value={()=>abrir(true)}>
     <Marco baseRuta={`/familia/${familiaId}`} nombrePerfil={nombre} colorPerfil={color}
       logotipo={logotipo} isotipo={isotipo} abrirCaptura={()=>abrir(true)}
-      extra={abierta&&<HojaInferior titulo={m.capturar} cerrar={()=>abrir(false)}>
+      extra={editando&&resultado?<HojaInferior titulo={textos.editar} cerrar={()=>editar(false)}>
+        <form className={s.pila} onSubmit={e=>{e.preventDefault();void cambiar(false);}}>
+          <label className={s.campo}><span>{textos.titulo}</span><textarea data-enfoque-inicial="" className={s.entradaCampo} rows={3} value={borrador} onChange={e=>ponerBorrador(e.target.value)} disabled={ocupada}/></label>
+          {errorEdicion&&<p role="alert">{textos.errorEdicion}</p>}
+          <Boton principal type="submit" disabled={ocupada||!borrador.trim()}>{m.guardar}</Boton>
+        </form>
+      </HojaInferior>:abierta&&<HojaInferior titulo={m.capturar} cerrar={()=>abrir(false)}>
         <form className={s.pila} onSubmit={e=>{e.preventDefault();void enviar();}}>
           <label className={s.campo}><span>{m.capturaAyuda}</span>
             <textarea className={s.entradaCampo} data-enfoque-inicial="" rows={4} value={texto} disabled={ocupada}
@@ -94,6 +118,16 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
         <Boton texto disabled={!enLinea} onClick={()=>void sincronizar()}>{m.reintentar}</Boton>
       </section>}
       {!abierta&&aviso&&<p role="status" className={s.aviso}>{aviso}</p>}
+      {resultado&&<section className={`${s.tarjeta} ${s.pila} ${s.resultadoCaptura}`} aria-label={textos.resultado}>
+        <span className={s.suave}>{textos.porRevisar}</span>
+        <p>{resultado.titulo}</p>
+        <div className={s.repartida}>
+          <Boton disabled={ocupada||!enLinea} onClick={()=>{ponerBorrador(resultado.titulo);ponerErrorEdicion(false);editar(true);}}>{textos.editar}</Boton>
+          <Boton texto disabled={ocupada||!enLinea} onClick={()=>void cambiar(true)}>{m.deshacer}</Boton>
+          <Boton texto onClick={()=>{ponerResultado(null);ponerErrorEdicion(false);}}>{m.cerrar}</Boton>
+        </div>
+        {errorEdicion&&!editando&&<p role="alert">{textos.errorEdicion}</p>}
+      </section>}
       {children}
     </Marco>
   </captura.Provider>;

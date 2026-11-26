@@ -456,6 +456,11 @@ export const familia = {
 } as const;
 
 export const captura = {
+  resultado: "Resultado de captura",
+  editar: "Editar",
+  titulo: "Título de la tarea",
+  deshecha: "Captura deshecha",
+  errorEdicion: "No se pudo aplicar el cambio. Revisa la conexión o vuelve a cargar.",
   porRevisar: "Por revisar",
   guardada: "Tu captura quedó guardada. Por revisar.",
   enCola: "Guardada en este teléfono. Se enviará cuando sea posible.",
