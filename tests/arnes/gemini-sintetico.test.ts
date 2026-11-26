@@ -1,5 +1,5 @@
 import {describe,it,expect,vi} from "vitest";
-import {crearGeminiSintetico,ErrorGemini} from "../../src/data/gemini-sintetico";
+import {crearGeminiSintetico,ErrorGemini,SinModelosDisponibles} from "../../src/data/gemini-sintetico";
 const corpus={fecha:"2026-11-26T12:00:00-03:00",zona_horaria:"America/Santiago",personas_a_cargo:["El hogar"],integrantes:["QA"],autor:"QA",ambitos:["Compras"],casos:[{id:1,texto:"Comprar pan",esperado:"NO ENVIAR"}]};
 const resultado={elementos:[{tipo:"tarea",titulo:"Comprar pan",persona_a_cargo:"El hogar",ambito:"Compras",plazo_fecha:null,plazo_hora:null,recurrencia:null,dirigida_a:null,confianza:"alta"}]};
 describe("Adaptador Gemini sintético",()=>{
@@ -107,4 +107,19 @@ describe("Evaluación agrupada: solo diagnóstico sintético",()=>{
    await expect(ia.evaluarLote([1,2])).rejects.toThrow();expect(ia.modeloUsado()).toBeNull();
   }
  });
+});
+
+it("distingue agotamiento local de una respuesta HTTP y no simula solicitudes",async()=>{
+ const solicitar=vi.fn(async()=>new Response("",{status:429}));
+ const ia=crearGeminiSintetico({clave:"qa",modelo:"gemini-3.5-flash-lite",corpus,solicitar});
+ await expect(ia.evaluar(1)).rejects.toBeInstanceOf(ErrorGemini);
+ await expect(ia.evaluar(1)).rejects.toBeInstanceOf(SinModelosDisponibles);
+ expect(solicitar).toHaveBeenCalledTimes(1);
+});
+it("registra tokens declarados sin incluir texto o credenciales en la métrica",async()=>{
+ const intentos:unknown[]=[];
+ const ia=crearGeminiSintetico({clave:"qa",modelo:"gemini-3.5-flash-lite",corpus,observar:i=>intentos.push(i),solicitar:vi.fn(async()=>Response.json({usageMetadata:{promptTokenCount:700,candidatesTokenCount:200,thoughtsTokenCount:30},candidates:[{content:{parts:[{text:JSON.stringify(resultado)}]}}]}))});
+ await ia.evaluar(1);
+ expect(intentos).toEqual([expect.objectContaining({tokensEntrada:700,tokensSalida:200,tokensRazonamiento:30})]);
+ expect(JSON.stringify(intentos)).not.toContain("Comprar pan");
 });

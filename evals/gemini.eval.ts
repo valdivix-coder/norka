@@ -1,7 +1,7 @@
 import {readFileSync,writeFileSync} from "node:fs";
 import {test,expect} from "vitest";
 import {type Interpretacion} from "../src/core/contracts/interpretacion";
-import {crearGeminiSintetico,ErrorGemini,MODELOS_GEMINI,type IntentoGemini} from "../src/data/gemini-sintetico";
+import {crearGeminiSintetico,ErrorGemini,SinModelosDisponibles,MODELOS_GEMINI,type IntentoGemini} from "../src/data/gemini-sintetico";
 type Caso={id:number;texto:string;esperado:Interpretacion};
 const corpus=JSON.parse(readFileSync("evals/captura-cl.json","utf8")) as {fecha:string;zona_horaria:string;personas_a_cargo:string[];integrantes:string[];autor:string;ambitos:string[];casos:Caso[]};
 const campos=["tipo","persona_a_cargo","ambito","plazo_fecha","plazo_hora","recurrencia","dirigida_a"] as const;
@@ -14,6 +14,8 @@ test("Gemini: exclusivamente corpus sintético versionado",async()=>{
   let intentos:IntentoGemini[]=[];
   const gemini=crearGeminiSintetico({clave:key,modelo,respaldos,corpus,observar:i=>intentos.push(i)});
   const modelosUsados:Record<string,number>={};
+  const consumo:Record<string,{solicitudesValidas:number;entrada:number;salida:number;razonamiento:number;sinMedicion:number}>={};
+  let solicitudes=0;
   const tamano=Number(process.env.GEMINI_EVAL_TAMANO??"1");
   if(!Number.isInteger(tamano)||tamano<1||tamano>5)throw new Error("TAMANO_INVALIDO");
   let aciertos=0,aciertosMeta=0,fallos=0,discordancias=0,camposInventados=0,camposBrutosDiscrepantes=0;
@@ -25,6 +27,8 @@ test("Gemini: exclusivamente corpus sintético versionado",async()=>{
     if(i>0)await new Promise(r=>setTimeout(r,2500));
     try{
       const salidas=await gemini.evaluarLote(grupo.map(c=>c.id));
+      const intento=intentos.find(i=>i.resultado==="valida");
+      if(intento){const m=consumo[intento.modelo]??={solicitudesValidas:0,entrada:0,salida:0,razonamiento:0,sinMedicion:0};m.solicitudesValidas++;m.entrada+=intento.tokensEntrada??0;m.salida+=intento.tokensSalida??0;m.razonamiento+=intento.tokensRazonamiento??0;if(intento.tokensEntrada===undefined||intento.tokensSalida===undefined)m.sinMedicion++;}
       for(const caso of grupo){
       const salida=salidas.get(caso.id)!;
       const bruta=gemini.bruta(caso.id)!;
@@ -42,9 +46,14 @@ test("Gemini: exclusivamente corpus sintético versionado",async()=>{
       if(JSON.stringify(a)===JSON.stringify(e))aciertos++;
       else{discordancias++;console.log("Caso",caso.id,"requiere revisión de campos y título.");}
       }
-    }catch(error){fallos+=grupo.length;const estado=error instanceof ErrorGemini?"HTTP "+error.estado:"sin salida válida";for(const caso of grupo)detalle.push({id:caso.id,estado,intentos});console.log("Grupo",grupo.map(c=>c.id),estado);if(error instanceof ErrorGemini&&[401,403,429].includes(error.estado))break;}
+    }catch(error){
+      if(error instanceof SinModelosDisponibles){console.log("Sin modelos disponibles; resto sin ejecutar.");break;}
+      fallos+=grupo.length;const estado=error instanceof ErrorGemini?"HTTP "+error.estado:"sin salida válida";
+      for(const caso of grupo)detalle.push({id:caso.id,estado,intentos});console.log("Grupo",grupo.map(c=>c.id),estado);
+      if(error instanceof ErrorGemini&&[401,403].includes(error.estado))break;
+    }finally{solicitudes+=intentos.length;}
   }
-  const resumen={modo:tamano===1?"individual":"diagnostico_agrupado",tamano,modelo,respaldos,modelosUsados,total:corpus.casos.length,procesados:detalle.length,aciertos,porcentaje:100*aciertos/corpus.casos.length,aciertosMeta,porcentajeMeta:100*aciertosMeta/corpus.casos.length,discordancias,fallos,camposInventados,camposBrutosDiscrepantes,revisionManual:"Revisar títulos, montos e invenciones; sin revisión humana no certificar cero invenciones."};
+  const resumen={solicitudes,consumo,validas:detalle.filter(d=>d.estado==="valida").length,sinEjecutar:corpus.casos.length-detalle.length,modo:tamano===1?"individual":"diagnostico_agrupado",tamano,modelo,respaldos,modelosUsados,total:corpus.casos.length,procesados:detalle.length,aciertos,porcentaje:100*aciertos/corpus.casos.length,aciertosMeta,porcentajeMeta:100*aciertosMeta/corpus.casos.length,discordancias,fallos,camposInventados,camposBrutosDiscrepantes,revisionManual:"Revisar títulos, montos e invenciones; sin revisión humana no certificar cero invenciones."};
   writeFileSync("evals/salida-eval.json",JSON.stringify({resumen,detalle},null,2));
   console.log(JSON.stringify(resumen));
   expect(detalle).toHaveLength(corpus.casos.length);

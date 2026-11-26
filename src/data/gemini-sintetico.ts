@@ -10,8 +10,9 @@ export const MODELOS_GEMINI = ["gemini-4-hydrogen","gemini-3.8-flash","gemini-3.
 export class ErrorGemini extends Error {
   constructor(public readonly estado:number){super("GEMINI_HTTP_"+estado);}
 }
+export class SinModelosDisponibles extends Error { constructor(){super("SIN_MODELOS_DISPONIBLES");} }
 const contratoLote=z.strictObject({resultados:z.array(z.strictObject({id:z.number().int(),elementos:contratoInterpretacion.shape.elementos})).min(1).max(5)});
-export type IntentoGemini={modelo:string;resultado:string;ms:number;motivo?:string};
+export type IntentoGemini={modelo:string;resultado:string;ms:number;motivo?:string;tokensEntrada?:number;tokensSalida?:number;tokensRazonamiento?:number};
 export function crearGeminiSintetico({clave,modelo,corpus,respaldos=[],solicitar=fetch,observar=()=>{}}:{
   clave:string;modelo:string;corpus:ContextoSintetico;respaldos?:readonly string[];solicitar?:typeof fetch;observar?:(dato:IntentoGemini)=>void;
 }){
@@ -34,7 +35,8 @@ export function crearGeminiSintetico({clave,modelo,corpus,respaldos=[],solicitar
     const lote=ids.length>1;
     const instruccion=instruccionesCaptura+(lote?"\nCada entrada es completamente independiente. No compartas información entre entradas. Devuelve {resultados:[{id,elementos:[...]}]}, exactamente un resultado por id, sin omitir ni duplicar.":"\nDevuelve {elementos:[...]}.");
     const input=JSON.stringify({contexto,entradas:lote?entradas:entradas[0]});
-    let ultimo:unknown=new ErrorGemini(429);
+    if(orden.every(m=>suspendidos.has(m)))throw new SinModelosDisponibles();
+    let ultimo:unknown=new SinModelosDisponibles();
     for(const elegido of orden){
       if(suspendidos.has(elegido))continue;
       const inicio=Date.now();
@@ -51,7 +53,7 @@ export function crearGeminiSintetico({clave,modelo,corpus,respaldos=[],solicitar
     });
     if(!r.ok)throw new ErrorGemini(r.status);
     etapa="respuesta_http";
-    const respuesta=await r.json() as {candidates?:{finishReason?:string;content?:{parts?:{text?:string;thought?:boolean}[]}}[]};
+    const respuesta=await r.json() as {usageMetadata?:{promptTokenCount?:number;candidatesTokenCount?:number;thoughtsTokenCount?:number};candidates?:{finishReason?:string;content?:{parts?:{text?:string;thought?:boolean}[]}}[]};
     const textoRespuesta=(respuesta.candidates?.[0]?.content?.parts?.filter(p=>!p.thought).map(p=>p.text??"").join("")??"").trim();
     // Aceptar únicamente JSON completo, opcionalmente dentro de un único bloque Markdown.
     const bloque=esGemma?textoRespuesta.match(/^```(?:json)?\s*\n([\s\S]*?)\n?```$/i):null;
@@ -75,7 +77,9 @@ export function crearGeminiSintetico({clave,modelo,corpus,respaldos=[],solicitar
       salidas.set(f.id,salida);
     }
     brutas=originales;
-    observar({modelo:elegido,resultado:"valida",ms:Date.now()-inicio});
+    const u=respuesta.usageMetadata;
+    const tokens=(n:unknown)=>typeof n==="number"&&Number.isSafeInteger(n)&&n>=0?n:undefined;
+    observar({modelo:elegido,resultado:"valida",ms:Date.now()-inicio,tokensEntrada:tokens(u?.promptTokenCount),tokensSalida:tokens(u?.candidatesTokenCount),tokensRazonamiento:tokens(u?.thoughtsTokenCount)});
     fallosTransitorios.delete(elegido);ultimoModelo=elegido;return salidas;
       }catch(error){
         ultimo=error;
