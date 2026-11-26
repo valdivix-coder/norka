@@ -9,6 +9,7 @@ import { Boton } from "@/components/interfaz/Elementos";
 import { HojaInferior } from "@/components/interfaz/HojaInferior";
 import { interfaz as m, captura as textos } from "@/mensajes/es-CL";
 import { guardarCapturaAccion, editarCapturaAccion } from "@/app/familia/captura-acciones";
+import { prepararCapturaSinConexion } from "@/data/captura-offline-web";
 import { colaCapturasWeb } from "@/data/cola-capturas-web";
 import { sincronizarCapturas } from "@/core/usecases/capturas";
 import type { CapturaPendiente, TareaCapturada } from "@/core/domain/captura";
@@ -50,6 +51,7 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
   const [borrador,ponerBorrador]=useState("");
   const [errorEdicion,ponerErrorEdicion]=useState("");
   const cambiando=useRef(false);
+  useEffect(()=>{void prepararCapturaSinConexion(cuentaId,familiaId);},[cuentaId,familiaId]);
   const enLinea=useSyncExternalStore(escucharConexion,conectado,conectadoServidor);
   const router=useRouter();
   const bloqueo=useRef(false);
