@@ -1,0 +1,1 @@
+select p.proname,p.prosecdef,has_function_privilege('anon',p.oid,'EXECUTE') as anon_ejecuta,has_function_privilege('authenticated',p.oid,'EXECUTE') as auth_ejecuta,has_function_privilege('service_role',p.oid,'EXECUTE') as servicio_ejecuta from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' and p.proname='editar_resultado_captura';

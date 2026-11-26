@@ -1,0 +1,2 @@
+select to_regprocedure('public.editar_resultado_captura(uuid,uuid,uuid,uuid,bigint,text,boolean)') is null as funcion_nueva,
+to_regclass('public.capturas') is not null as capturas_existen,to_regclass('public.tareas') is not null as tareas_existen;
