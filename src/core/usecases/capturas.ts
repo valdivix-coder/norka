@@ -1,4 +1,4 @@
-import { validarCaptura, type CapturaPendiente, type CapturaGuardada } from "../domain/captura";
+import { validarCaptura, type CapturaGuardada } from "../domain/captura";
 import type { AlmacenCaptura, ColaCapturas } from "../ports/captura";
 export async function guardarCaptura(dato:unknown, almacen:AlmacenCaptura):Promise<CapturaGuardada> {
   return almacen.guardar(validarCaptura(dato));
