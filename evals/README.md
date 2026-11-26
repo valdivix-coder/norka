@@ -1,0 +1,5 @@
+# Evaluación 2.5
+
+50 frases sintéticas en español de Chile; fecha fija `2026-11-26T12:00:00-03:00`. No contiene datos reales. Los cinco primeros son los ejemplos obligatorios de 6.2. Para respetar los recuentos, la primera frase cuenta tanto en múltiples como en pagos; el segundo ejemplo es el control explícito sin plazo. El autor sintético es Camila, para que Ana/Pablo sean otros integrantes. El resultado esperado se expresa en el contrato 6.2; en el tercer ejemplo la persona no se presupone, por lo que pasa a revisión. Las categorías se verifican por etiqueta, no como partición exclusiva. No se ha ejecutado Gemini; estos son objetivos, no resultados medidos.
+
+Regla de evaluación: comparar elementos sin depender del orden; verificar tipo, persona, ámbito, fecha y hora, recurrencia y destinatario; cualquier entidad no incluida en listas o fecha no sustentada por el caso se registra como invención. La redacción del título se revisa por equivalencia y no por igualdad literal. No afirmar 90% ni cero invenciones hasta ejecución real y revisión de títulos.

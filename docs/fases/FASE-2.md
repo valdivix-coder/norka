@@ -13,3 +13,7 @@ Guardado atómico de original y tarea sin clasificar; acción valida cookie y cu
 ## 2.4 · Contrato y reglas puras
 
 Zod 4.6.7 ya estaba en el lock como dependencia indirecta de desarrollo; se declara explícitamente como dependencia de ejecución, exigida por 6.2. Contrato estricto, fechas válidas, nombres exactos y únicos, notas sin clasificar, baja confianza por revisar, propuestas sin asignación directa, dos intentos máximos. Las pruebas no llaman a IA. El plan resultante aún no se escribe en BD: la persistencia atómica de propuestas (tabla programada en 4.1) y actividad (5.2 exige registro desde fase 2) requiere resolver esa dependencia del plan. NO VERIFICADO: precisión o invención de datos del modelo; se medirá con evals y Gemini. No se envían datos personales.
+
+## 2.5 · Corpus sintético
+
+50 frases y resultados esperados en evals/captura-cl.json; fecha y familia sintéticas. Recuentos de categorías y validación Zod comprobables en CI. El primer caso obligatorio cuenta en múltiples y pagos; el segundo es control sin plazo, de modo que las 50 frases cumplen los recuentos. No se han medido aciertos de Gemini.
