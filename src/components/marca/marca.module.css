@@ -1,0 +1,54 @@
+.marca {
+  display: block;
+  container-type: inline-size;
+  width: 100%;
+}
+
+.piezas {
+  display: grid;
+  justify-items: center;
+}
+
+.piezas > span,
+.piezas svg {
+  display: block;
+  width: 100%;
+}
+
+.marca [data-dibujo="isotipo-reducido"],
+.marca[data-pieza="logotipo"] [data-dibujo="isotipo"] {
+  display: none;
+}
+
+.marca[data-pieza="isotipo-reducido"] {
+  max-width: var(--t-24);
+}
+
+.marca[data-pieza="isotipo-reducido"] [data-dibujo],
+.marca[data-pieza="conjunto-vertical"] [data-dibujo="isotipo"] {
+  display: block;
+}
+
+.marca[data-pieza="conjunto-vertical"] [data-dibujo="isotipo"] {
+  /* Guía 3.4: lado 2h y separación 0,5h; h = ancho × 90/308. */
+  width: calc(100% * 180 / 308);
+  margin-bottom: calc(100% * 45 / 308);
+}
+
+@container (width < 96px) {
+  .marca [data-dibujo="logotipo"] {
+    display: none;
+  }
+  .marca[data-pieza="logotipo"] [data-dibujo="isotipo"] {
+    display: block;
+  }
+}
+
+@container (width <= 24px) {
+  .marca[data-pieza] [data-dibujo="isotipo"] {
+    display: none;
+  }
+  .marca[data-pieza] [data-dibujo="isotipo-reducido"] {
+    display: block;
+  }
+}

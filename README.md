@@ -4,7 +4,7 @@ Aplicación para repartir y recordar las responsabilidades de una familia: quié
 
 > El repositorio se llamó «parentis» (nombre de trabajo anterior). El producto se llama **norka**, siempre en minúsculas.
 
-**Estado:** sin código todavía. Está preparado para empezar por la Fase 0 (descubrimiento y diseño). Mira [`docs/AHORA.md`](docs/AHORA.md).
+**Estado:** Fase 0 aprobada. Fase 1 en curso, con una muestra visual navegable en la rama `fase-1`. La muestra se abre desde `/`; usa datos de ejemplo en memoria y no guarda información en Supabase. La entrada real todavía está en construcción. Mira [`docs/AHORA.md`](docs/AHORA.md).
 
 ## Qué hay aquí
 

@@ -1,22 +1,37 @@
 # Ahora
 
-**Actualizado:** 20 de noviembre de 2026.
+**Actualizado:** 25 de noviembre de 2026.
 
-**Estado:** el repositorio está preparado y sin código. La Fase 0 (descubrimiento y diseño) no ha comenzado.
+**Estado:** fase 1 autorizada para fusionar; 10/10 pruebas del propietario aprobadas y grabación física recibida. Revisión de vídeo aplicada, pendiente CI de esta revisión. No se ha fusionado aún.
 
-**Hecho**
-- Prompt maestro v7 en `docs/PROMPT-MAESTRO.md`.
-- Guía gráfica v2.0 en `docs/marca/GUIA-GRAFICA.pdf`.
-- Marca decidida: logotipo «norka» e isotipo «Órbita».
-- Repositorio renombrado a «norka» (20 de noviembre de 2026).
-- Archivos SVG exactos de la marca en `docs/marca/svg/`.
-- Instrucciones para agentes (`AGENTS.md`) y guía de arranque (`docs/ARRANQUE.md`).
+**Vista previa comprobada:** https://norka-fetwujsz0-neuralia1.vercel.app/ (READY, `4ac2031`). Enlace estable: https://norka-git-fase-1-neuralia1.vercel.app/.
 
-**Sigue**
-1. La propietaria abre el agente de código en este repositorio y pega `docs/PROMPT-DE-ARRANQUE.md`.
-2. El ejecutor entrega la Fase 0 en `docs/fases/FASE-0.md` (rama `fase-0`), sin código.
-3. La propietaria responde las preguntas y escribe «apruebo la fase 0».
+**Tarea 1.9 — entrega técnica**
+- Recorrido autenticado: Hoy, Familia, Capturar (hoja informativa, sin guardar hasta fase 2), Equilibrio, Actividad, Buscar personas, Avisos, Perfil real y ficha de persona a cargo. Marco y marca compartidos con la muestra; ninguna ruta autenticada usa datos de ejemplo.
+- Cabecera ligada a 0–48 px, navegación con transiciones y cancelación de transición ante toques rápidos, regreso desde el borde y preferencia de movimiento reducido. Transición compartida de ficha en navegadores compatibles; fallback si la carga es lenta. Tema durante la navegación.
+- Cargando con silueta, error con reintento, sin conexión con aviso y salida. Cada ruta lee con sesión y pertenencia activa. No se agrega captura real, tareas ni sugerencias fuera de fase 1.
+- [Arnés 45655348451](https://github.com/valdivix-coder/norka/actions/runs/45655348451): **118/118 pruebas, tipos y linter aprobados**.
+- [Navegador 45655348697](https://github.com/valdivix-coder/norka/actions/runs/45655348697): **9 vistas a 360 px sin desbordamiento, 6 controles funcionales, 9 revisiones axe WCAG A/AA sin infracciones y 0 errores de JavaScript**. Se usó Chromium móvil emulado y REST TLS local con una familia ficticia, no Supabase real ni Google. [Capturas, resultados y grabación](https://github.com/valdivix-coder/norka/actions/runs/45655348697/artifacts/15042048974).
+- En la muestra se conservan los recorridos históricos (9 recorridos, 24 revisiones axe, 200 % comprobado en la entrega de muestra del 24 de noviembre). No se confunde esa evidencia con la entrega autenticada.
 
-**Pendiente fuera del código**
-- Verificar que «norka» esté libre como marca, dominio y nombre en las tiendas (lo investiga la Fase 0).
-- Confirmar con una persona hablante de mapuzungun el significado del nombre antes de publicarlo.
+**Base real**
+- Supabase norka: `yplhlooidqzqhrjbwrdp`. 0001, 0002, 0003 y 0004 aplicadas y verificadas; RLS y aislamiento comprobados. No reaplicar. Migración paralela con funciones `norka_*`: no retirada.
+- Variables Vercel verificadas el 24 de noviembre, sin leer ni imprimir valores: `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SECRET_KEY` en producción, vista previa y desarrollo. No pedir que se ingresen de nuevo.
+- Google habilitado; Apple y Facebook desactivados. 1.5, 1.7, 1.8 y 1.9 con pruebas funcionales del propietario aprobadas; falta grabación física de 1.9 y aprobación formal.
+- La guía gráfica original se abrió y verificó (45 páginas; blob `af1133fb4184e7a000d7d5f1a7db16b15a3aa111`); SVG originales intactos.
+
+**Sigue, en orden**
+1. Grabación física recibida y autorización escrita de fusión/continuación recibida; comprobar nueva revisión.
+3. Preparar fusión; verificar callback de producción en Supabase y despliegue Vercel. Luego iniciar 2.1 con numeración de migración libre.
+
+**Autorización vigente:** el asistente puede aplicar migraciones de norka con verificaciones antes/después e historial. Autoriza fusionar fase 1 al pasar sus pruebas y ejecutar fase 2. No se modificaron migraciones, datos, variables, configuración del proyecto, marca ni prompt maestro. Se agregó un flujo CI de navegador aislado, sin credenciales, en el repositorio. Ver [Fase 1](fases/FASE-1.md).
+
+**Revisión de cierre 25 de noviembre:** [arnés completo](https://github.com/valdivix-coder/norka/actions/runs/45680886725) success para `1b29b00`: 118 pruebas, 10 vistas, 7 controles, 12 auditorías axe sin infracciones (10 vistas y 2 catálogos), 0 errores JS, Equilibrio al 200 %, 28 componentes y 16 combinaciones por tema a 360 px. [Evidencia](https://github.com/valdivix-coder/norka/actions/runs/45680886725/artifacts/15054821112). Infraestructura revalidada: cuatro migraciones numeradas y una paralela histórica; nueve tablas con RLS y lectura solo de servidor. [Informe global por las 83 tareas](INFORME-IMPLEMENTACION.md). Falta aprobación y prueba física. No fusionar.
+
+**Incidencia OAuth:** corrección desplegada; entrada y salida con Google aprobadas por el propietario.
+
+**Validación del propietario:** 10/10 comprobaciones finales aprobadas. 123 pruebas automatizadas y arnés completo aprobados. Grabación y autorización recibidas. No se requiere migración adicional para fase 1.
+
+## Revisión del recorrido físico y autorización de cierre
+
+El propietario autorizó explícitamente fusionar la fase 1 y continuar con la fase 2, y adjuntó una grabación física de 66,1 segundos (512×1108, vídeo nominal 30 fps). Se inspeccionó el recorrido: Hoy, Familia, Equilibrio, Actividad, perfil, Avisos, Buscar, ficha de hogar, desplazamiento y cabecera. Se observan varias siluetas de carga al cambiar de pantalla, tarjetas altas, repetición de etiquetas y acción de Hoy muy baja. No se publica el video ni fotogramas por contener datos personales. No se mide 60 fps a partir de un video de 30 fps. Se compactan tarjetas y estado vacío de Hoy, se elimina texto repetido, se evita tratar la silueta como destino de transición y se habilita precarga de pestañas de lectura no mutables; Familia conserva su carga normal. Pendiente comprobar CI y preview de esta revisión antes de fusionar. No se alteran los SVG ni los datos. Vuelta atrás: revertir el commit de ajustes.

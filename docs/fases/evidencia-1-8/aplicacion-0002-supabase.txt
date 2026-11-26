@@ -1,0 +1,27 @@
+Aplicación real de 0002 en Supabase, proyecto norka (yplhlooidqzqhrjbwrdp, sa-east-1)
+Fecha: 21 de noviembre de 2026. Autorización escrita de Simón en la conversación.
+Método: apply_migration (conector de Supabase) con nombre 0002_personas_y_ambitos.
+Diferencia con el archivo: se omitieron "begin;" y "commit;" porque apply_migration ya ejecuta en una transacción. El resto del SQL es idéntico.
+
+ANTES (0002_antes.sql ampliada con conteo de familias)
+familias_existe=true personas_por_crear=true ambitos_por_crear=true familias=0
+
+APLICACIÓN
+{"success":true}
+list_migrations -> [{"version":"20261121131915","name":"0002_personas_y_ambitos"}]
+Nota: 0001 se aplicó a mano antes y no figura en ese historial.
+
+DESPUÉS (0002_despues.sql, primera consulta)
+ambitos            rls=true politicas=0 resultado=OK
+personas_a_cargo   rls=true politicas=0 resultado=OK
+
+PRUEBA FUNCIONAL REVERTIDA (bloque DO que termina en excepción, no deja datos)
+hogares=1 ambitos=8 borrar=HOGAR_NO_BORRABLE archivar=HOGAR_NO_ARCHIVABLE
+
+AVISOS DE SEGURIDAD (get_advisors security)
+Solo INFO rls_enabled_no_policy en las 8 tablas. Es lo esperado: RLS sin políticas, acceso solo por servidor.
+
+REGISTRO DE 0001 EN EL HISTORIAL (mismo día, con autorización de Simón)
+Se insertó en supabase_migrations.schema_migrations la fila 0001_cuentas_y_familias (versión 20261121030000) con su SQL, sin ejecutarlo de nuevo.
+Resultado: 20261121030000 0001_cuentas_y_familias · 20261121131915 0002_personas_y_ambitos.
+Vuelta atrás: delete from supabase_migrations.schema_migrations where version='20261121030000'; (no toca tablas ni datos).

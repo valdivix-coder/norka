@@ -1,0 +1,20 @@
+Comprobación local · 21 de noviembre de 2026
+
+Test Files  3 passed (3)
+     Tests  33 passed (33)
+Arnés mínimo aprobado.
+
+Ocho pruebas nuevas:
+- Lectura, creación, edición y listados aislados por familia.
+- Copias independientes y conflicto entre dos ediciones con la misma revisión.
+- Hogar protegido frente a archivo y cambio de tipo.
+- Cumpleaños válidos e inválidos.
+- Filtro REST de familia conservado con caracteres especiales en el identificador.
+- Respuesta de otra familia y creación cruzada rechazadas.
+- Revisión incluida en actualización REST y conflicto con versión actual.
+- Errores sin copiar contenido sensible de la respuesta.
+
+El adaptador Supabase se prueba con respuestas HTTP controladas.
+La conexión a tablas reales requiere que Simón aplique 0002 y configure la
+clave privada de servicio en el servidor. La familia deberá salir de la
+sesión verificada al conectar las pantallas.

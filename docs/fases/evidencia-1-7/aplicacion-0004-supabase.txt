@@ -1,0 +1,16 @@
+Aplicación real de 0004 en Supabase, proyecto norka (yplhlooidqzqhrjbwrdp). 25 de noviembre de 2026.
+Autorización escrita de Simón para migraciones de la fase 1. Método: apply_migration. Versión 20261125113029.
+
+ANTES: funciones_por_crear=true integrantes_existe=true invitaciones_existe=true familias=0
+DESPUÉS: las 4 funciones (repartir_cuotas, color_integrante, crear_familia, aceptar_invitacion)
+  usan permisos de quien llama, las ejecuta el servidor y no anon ni authenticated -> OK
+
+PRUEBA REAL REVERTIDA (bloque DO que termina en excepción; la base quedó con 0 filas)
+hogar=1 ambitos=8 integrantes=3 cuotas=[50,50,null] colores=[persona-1,persona-2,persona-3]
+telefonos=[+56912345678,+56987654321,-]
+reuso=INVITACION_USADA caducada=INVITACION_CADUCADA inexistente=INVITACION_NO_EXISTE
+
+Nota: existe además la migración 20261125030539 «familias_e_invitaciones» (funciones norka_*),
+aplicada antes por otro agente sin archivo en el repositorio. Simón decidió conservar esta implementación.
+Retirar las funciones norka_* queda pendiente de su confirmación.
+Vuelta atrás: ver pie de 0004_familias_e_invitaciones.sql.

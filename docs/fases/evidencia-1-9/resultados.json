@@ -1,0 +1,136 @@
+{
+  "rutas": [
+    {
+      "vista": "oscuro/",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "oscuro/muestra/pantallas/hoy",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "oscuro/muestra/pantallas/familia",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "oscuro/muestra/pantallas/equilibrio",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "oscuro/muestra/pantallas/actividad",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "oscuro/muestra/pantallas/avisos",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "oscuro/muestra/pantallas/buscar",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "oscuro/muestra/pantallas/perfil",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "claro/",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "claro/muestra/pantallas/hoy",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "claro/muestra/pantallas/familia",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "claro/muestra/pantallas/equilibrio",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "claro/muestra/pantallas/actividad",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "claro/muestra/pantallas/avisos",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "claro/muestra/pantallas/buscar",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "claro/muestra/pantallas/perfil",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "hoja-persona-error",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "captura-limite-explicito",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "estado-Cargando",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "estado-Error",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "estado-Sin conexión",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "estado-Vacío",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "estado-Con datos",
+      "violaciones": 0,
+      "ancho": 360
+    },
+    {
+      "vista": "texto-200-movimiento-reducido",
+      "violaciones": 0,
+      "ancho": 360
+    }
+  ],
+  "recorridos": [
+    "Crear, validar cumpleaños, editar, archivar y deshacer: aprobado",
+    "El hogar no ofrece archivar: aprobado",
+    "Búsqueda de muestra y estado sin resultados: aprobado",
+    "Cabecera ligada a desplazamiento 0–48 px y vuelta al inicio: aprobado",
+    "Escape cierra y devuelve foco: aprobado",
+    "Teléfono: valida 8 dígitos y conserva el borrador durante el recorrido: aprobado",
+    "Tema persistente durante la navegación: aprobado",
+    "Cinco controles de estado: aprobado; con datos conserva el alcance vacío de Hoy en fase 1",
+    "Texto al 200 % y movimiento reducido: aprobado"
+  ],
+  "errores": []
+}
