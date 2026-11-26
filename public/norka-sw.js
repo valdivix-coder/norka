@@ -1,5 +1,5 @@
 /* Solo recursos públicos de emergencia. Nunca cachear respuestas autenticadas. */
-const CACHE="norka-captura-offline-v2";
+const CACHE="norka-captura-offline-v3";
 const RECURSOS=["/sin-conexion.html","/sin-conexion.css","/sin-conexion.js"];
 const FUENTES=["/fuentes/figtree.ttf","/fuentes/bricolage.ttf"];
 const PUBLICOS=[...RECURSOS,...FUENTES];

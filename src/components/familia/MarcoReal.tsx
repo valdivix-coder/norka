@@ -10,7 +10,7 @@ import { HojaInferior } from "@/components/interfaz/HojaInferior";
 import { interfaz as m, captura as textos } from "@/mensajes/es-CL";
 import { guardarCapturaAccion, editarCapturaAccion } from "@/app/familia/captura-acciones";
 import { prepararCapturaSinConexion, type EstadoCapturaOffline } from "@/data/captura-offline-web";
-import { colaCapturasWeb } from "@/data/cola-capturas-web";
+import { colaCapturasWeb, listarBorradoresLocales, asignarBorradorLocal } from "@/data/cola-capturas-web";
 import { sincronizarCapturas } from "@/core/usecases/capturas";
 import type { CapturaPendiente, TareaCapturada } from "@/core/domain/captura";
 import s from "@/components/interfaz/interfaz.module.css";
@@ -45,6 +45,9 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
     return()=>clearTimeout(reloj);
   },[aviso]);
   const [pendientes,ponerPendientes]=useState(0);
+  const [borradores,ponerBorradores]=useState<CapturaPendiente[]>([]);
+  const [revisarBorradores,ponerRevisarBorradores]=useState(false);
+  const [moviendo,ponerMoviendo]=useState(false);
   const [resultado,ponerResultado]=useState<TareaCapturada|null>(null);
   const [objetivo,ponerObjetivo]=useState<{tarea:TareaCapturada;descartar:boolean}|null>(null);
   const editando=objetivo!==null;
@@ -68,6 +71,7 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
     bloqueo.current=true;
     try{
       if(navigator.onLine){
+        ponerBorradores(await listarBorradoresLocales().catch(()=>[]));
         const r=await sincronizarCapturas(colaCapturasWeb,cuentaId,familiaId,{guardar});
         ponerPendientes(r.pendientes);
         if(r.enviadas){
@@ -104,6 +108,15 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
       if(local) void sincronizar();
     }catch{escribir(valor);origen.current=fuente;abrir(true);avisar(m.errorGuardar);}
     finally{enviando.current=false;ocupar(false);}
+  }
+  async function adoptarBorrador(b:CapturaPendiente){
+    if(moviendo||!navigator.onLine)return;
+    ponerMoviendo(true);
+    try{
+      await asignarBorradorLocal(b.id,cuentaId,familiaId);
+      ponerBorradores(await listarBorradoresLocales());
+      await sincronizar();
+    }catch{avisar(m.errorGuardar);}finally{ponerMoviendo(false);}
   }
   function iniciarVoz(){
     if(abierta||editando||ocupada||texto.trim()||sesionVoz.current)return false;
@@ -167,6 +180,11 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
       {enLinea&&estadoOffline!=="lista"&&<p className={s.suave} role="status">{estadoOffline==="preparando"?textos.offlinePreparando:textos.offlineNoDisponible}</p>}
       {enLinea&&estadoOffline==="lista"&&<p className={s.suave} role="status">{textos.offlineLista}</p>}
       {!enLinea&&<section className={s.tarjeta} role="status"><p>{m.sinConexion}</p><p className={s.suave}>{textos.ayudaSinConexion}</p></section>}
+      {enLinea&&borradores.length>0&&<section className={s.tarjeta} aria-label={textos.borradoresTitulo}>
+        <p>{textos.borradoresAviso(borradores.length)}</p>
+        <Boton texto onClick={()=>ponerRevisarBorradores(v=>!v)}>{revisarBorradores?m.cerrar:textos.borradoresRevisar}</Boton>
+        {revisarBorradores&&borradores.map(b=><div key={b.id} className={s.capturaGuardada}><p className={s.capturaTitulo}>{b.texto}</p><Boton disabled={moviendo} onClick={()=>void adoptarBorrador(b)}>{textos.borradoresAsignar}</Boton></div>)}
+      </section>}
       {pendientes>0&&<section className={s.tarjeta} role="status"><p>{textos.pendientes(pendientes)}</p>
         <Boton texto disabled={!enLinea} onClick={()=>void sincronizar()}>{m.reintentar}</Boton>
       </section>}

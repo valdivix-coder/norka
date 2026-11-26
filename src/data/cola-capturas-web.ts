@@ -25,3 +25,26 @@ export const colaCapturasWeb:ColaCapturas={
   },
   async quitar(p){await operacion("readwrite",s=>s.delete(llave(p)));},
 };
+
+// Borradores sin destino: nunca se sincronizan automáticamente.
+// Solo una decisión explícita en una familia autenticada los mueve a su cola.
+export const destinoBorradorLocal="sin-contexto";
+export async function listarBorradoresLocales(){
+  return colaCapturasWeb.listar(destinoBorradorLocal,destinoBorradorLocal);
+}
+export async function asignarBorradorLocal(id:string,cuentaId:string,familiaId:string):Promise<boolean>{
+  const db=await abrir();
+  try{return await new Promise<boolean>((resolve,reject)=>{
+    const tx=db.transaction("pendientes","readwrite"),s=tx.objectStore("pendientes");
+    const original=llave({cuentaId:destinoBorradorLocal,familiaId:destinoBorradorLocal,id,texto:"",origen:"texto"});
+    let movido=false;
+    const r=s.get(original);
+    r.onsuccess=()=>{
+      const p=r.result as CapturaPendiente|undefined;
+      if(!p||p.id!==id||p.cuentaId!==destinoBorradorLocal||p.familiaId!==destinoBorradorLocal)return;
+      const nuevo={id:p.id,texto:p.texto,origen:p.origen,cuentaId,familiaId};
+      s.put({...nuevo,llave:llave(nuevo)});s.delete(original);movido=true;
+    };
+    tx.oncomplete=()=>resolve(movido);tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error);
+  });}finally{db.close();}
+}

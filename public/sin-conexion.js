@@ -1,5 +1,5 @@
 /* Pantalla pública, sin nombres, sesión ni datos del servidor en caché.
-   El contexto solo existe en la pestaña previamente autenticada.
+   El contexto identifica exclusivamente el destino de la cola, no autentica.
    La cola IndexedDB usa exactamente las mismas claves que la app. */
 (function(){
   "use strict";
@@ -8,7 +8,11 @@
   const $=id=>document.getElementById(id);
   let contexto=null,ocupada=false;
   try{
-    const c=JSON.parse(sessionStorage.getItem(clave)||"null");
+    let c=null;
+    // Si la pestaña se reconstruye, recuperar el destino persistente.
+    // Un destino explícito distinto no puede utilizar el de otra familia.
+    try{c=JSON.parse(localStorage.getItem(clave)||"null");}catch{/* usar alternativa */}
+    if(!c)try{c=JSON.parse(sessionStorage.getItem(clave)||"null");}catch{/* borrador sin destino */}
     const familia=location.pathname.split("/")[2];
     const entrada=["/","/cuenta","/cuenta/","/entrar","/entrar/"].includes(location.pathname);
     if(c&&uuid.test(c.cuentaId)&&uuid.test(c.familiaId)&&(familia===c.familiaId||entrada)&&Date.now()<c.hasta)contexto=c;
@@ -27,9 +31,10 @@
       tx.oncomplete=()=>resolve(r.result);tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error);
     });}finally{db.close();}
   }
+  const sinDestino={cuentaId:"sin-contexto",familiaId:"sin-contexto"};
   async function contar(){
-    if(!contexto)return;
-    const prefijo=contexto.cuentaId+":"+contexto.familiaId+":";
+    const destino=contexto??sinDestino;
+    const prefijo=destino.cuentaId+":"+destino.familiaId+":";
     const n=await operar("readonly",s=>s.count(IDBKeyRange.bound(prefijo,prefijo+"\uffff")));
     $("pendientes").textContent=n===1?"1 captura por enviar":n+" capturas por enviar";
   }
@@ -43,8 +48,7 @@
   $("volver").addEventListener("click",volver);
   window.addEventListener("online",()=>{$("estado").textContent="Volvió la conexión. Vuelve a tu familia para enviar las capturas.";if(!ocupada&&!$("texto").value.trim())volver();});
   if(!contexto){
-    $("ayuda").textContent="Conéctate a internet para entrar con tu cuenta. No se muestran datos familiares sin verificar la sesión.";
-    return;
+    $("ayuda").textContent="Puedes capturar ahora. Tus borradores quedan en este teléfono hasta que confirmes su destino al volver a entrar.";
   }
   $("captura").hidden=false;
   contar().catch(()=>{$("estado").textContent="No se pudo abrir el almacenamiento local.";});
@@ -52,12 +56,13 @@
     e.preventDefault();
     const texto=$("texto").value;
     if(ocupada||!texto.trim())return;
-    if(Date.now()>=contexto.hasta){$("estado").textContent="Vuelve a entrar con tu cuenta antes de guardar.";return;}
+    if(contexto&&Date.now()>=contexto.hasta)contexto=null;
+    const destino=contexto??sinDestino;
     ocupada=true;$("guardar").disabled=true;
     try{
-      const id=crypto.randomUUID(),p={id,texto,origen:"texto",cuentaId:contexto.cuentaId,familiaId:contexto.familiaId};
+      const id=crypto.randomUUID(),p={id,texto,origen:"texto",cuentaId:destino.cuentaId,familiaId:destino.familiaId};
       await operar("readwrite",s=>s.put({...p,llave:[p.cuentaId,p.familiaId,p.id].join(":")}));
-      $("texto").value="";$("estado").textContent="Guardada en este teléfono. Se enviará cuando sea posible.";
+      $("texto").value="";$("estado").textContent=contexto?"Guardada en este teléfono. Se enviará cuando sea posible.":"Borrador guardado en este teléfono. Confirma su destino al entrar.";
       await contar();
       if(navigator.onLine){ocupada=false;volver();}
     }catch{$("estado").textContent="No se pudo guardar. Conservamos el texto: vuelve a intentarlo.";}

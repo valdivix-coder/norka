@@ -10,6 +10,8 @@ export default function Enlace(props: ComponentProps<typeof Link>) {
     <Link
       {...props}
       onNavigate={(evento) => {
+        // Evitar que Next intente una navegación de servidor al perder red.
+        if(!navigator.onLine&&rutaRecorrido(location.pathname)?.real){evento.preventDefault();return;}
         if (
           typeof props.href !== "string" ||
           !rutaRecorrido(props.href) ||
