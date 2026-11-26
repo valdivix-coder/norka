@@ -4,7 +4,7 @@ import { contratoInterpretacion, type Interpretacion } from "../core/contracts/i
 export type CasoSintetico={id:number;texto:string};
 export type ContextoSintetico={fecha:string;zona_horaria:string;personas_a_cargo:string[];integrantes:string[];autor:string;ambitos:string[];casos:CasoSintetico[]};
 
-export const MODELOS_GEMINI = ["gemini-4-hydrogen","gemini-3.8-flash","gemini-3.5-flash-lite"] as const;
+export const MODELOS_GEMINI = ["gemini-4-hydrogen","gemini-3.8-flash","gemini-3.5-flash-lite","gemma-4-26b-a4b-it"] as const;
 export class ErrorGemini extends Error {
   constructor(public readonly estado:number){super("GEMINI_HTTP_"+estado);}
 }
@@ -30,15 +30,21 @@ export function crearGeminiSintetico({clave,modelo,corpus,respaldos=[],solicitar
     for(const elegido of orden){
       if(suspendidos.has(elegido))continue;
       try{
+    const esGemma=elegido==="gemma-4-26b-a4b-it";
+    // Gemma recibe instrucciones de JSON como texto, no depende de responseMimeType.
+    const generationConfig=esGemma?{temperature:0,thinkingConfig:{thinkingLevel:"minimal"}}:{responseMimeType:"application/json",temperature:0};
     const r=await solicitar("https://generativelanguage.googleapis.com/v1beta/models/"+encodeURIComponent(elegido)+":generateContent",{
       method:"POST",cache:"no-store",redirect:"error",
       headers:{"Content-Type":"application/json","x-goog-api-key":clave},
-      body:JSON.stringify({contents:[{parts:[{text:input}]}],generationConfig:{responseMimeType:"application/json",temperature:0}}),
+      body:JSON.stringify({contents:[{parts:[{text:input}]}],generationConfig}),
       signal:AbortSignal.timeout(20000),
     });
     if(!r.ok)throw new ErrorGemini(r.status);
-    const respuesta=await r.json() as {candidates?:{content?:{parts?:{text?:string}[]}}[]};
-    const salida=contratoInterpretacion.parse(JSON.parse(respuesta.candidates?.[0]?.content?.parts?.map(p=>p.text??"").join("")??""));
+    const respuesta=await r.json() as {candidates?:{content?:{parts?:{text?:string;thought?:boolean}[]}}[]};
+    const textoRespuesta=(respuesta.candidates?.[0]?.content?.parts?.filter(p=>!p.thought).map(p=>p.text??"").join("")??"").trim();
+    // Aceptar únicamente JSON completo, opcionalmente dentro de un único bloque Markdown.
+    const bloque=esGemma?textoRespuesta.match(/^```(?:json)?\s*\n([\s\S]*?)\n?```$/i):null;
+    const salida=contratoInterpretacion.parse(JSON.parse(bloque?.[1]??textoRespuesta));
     ultimoModelo=elegido;return salida;
       }catch(error){
         ultimo=error;

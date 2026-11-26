@@ -43,3 +43,28 @@ describe("Respaldo de modelos gratuitos",()=>{
   expect(()=>crearGeminiSintetico({clave:"qa",modelo:"gemini-4-argon",corpus,solicitar})).toThrow();
  });
 });
+
+describe("Gemma 4 como último respaldo",()=>{
+ it("rota en orden y adapta configuración y JSON de Gemma sin relajar Zod",async()=>{
+  const llamadas:string[]=[];
+  const solicitar=vi.fn(async(u:RequestInfo|URL,init?:RequestInit)=>{
+   const modelo=String(u).split("/").at(-1)?.split(":")[0]??"";
+   llamadas.push(modelo);
+   if(modelo!=="gemma-4-26b-a4b-it")return new Response("",{status:429});
+   const body=JSON.parse(String(init?.body));
+   expect(body.generationConfig.responseMimeType).toBeUndefined();
+   expect(body.generationConfig.thinkingConfig.thinkingLevel).toBe("minimal");
+   return Response.json({candidates:[{content:{parts:[{thought:true,text:"razonamiento"},{text:"```json\n"+JSON.stringify(resultado)+"\n```"}]}}]});
+  });
+  const ia=crearGeminiSintetico({clave:"qa",modelo:"gemini-4-hydrogen",respaldos:["gemini-3.8-flash","gemini-3.5-flash-lite","gemma-4-26b-a4b-it"],corpus,solicitar});
+  expect(await ia.evaluar(1)).toEqual(resultado);
+  expect(ia.modeloUsado()).toBe("gemma-4-26b-a4b-it");
+  expect(llamadas).toEqual(["gemini-4-hydrogen","gemini-3.8-flash","gemini-3.5-flash-lite","gemma-4-26b-a4b-it"]);
+ });
+ it("Gemma no admite texto arbitrario ni JSON fuera del contrato",async()=>{
+  for(const texto of ["explicación "+JSON.stringify(resultado),"```json\n{}\n```"]){
+   const ia=crearGeminiSintetico({clave:"qa",modelo:"gemma-4-26b-a4b-it",corpus,solicitar:vi.fn(async()=>Response.json({candidates:[{content:{parts:[{text:texto}]}}]}))});
+   await expect(ia.evaluar(1)).rejects.toThrow();expect(ia.modeloUsado()).toBeNull();
+  }
+ });
+});

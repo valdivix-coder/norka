@@ -8,7 +8,7 @@ const campos=["tipo","persona_a_cargo","ambito","plazo_fecha","plazo_hora","recu
 function firma(e:Interpretacion["elementos"][number]){return JSON.stringify(campos.map(k=>k==="recurrencia"&&e.recurrencia?{...e.recurrencia,dias:[...e.recurrencia.dias].sort()}:e[k]));}
 test("Gemini: exclusivamente corpus sintético versionado",async()=>{
   const key=process.env.GEMINI_API_KEY,modelo=process.env.GEMINI_MODELO;
-  if(process.env.GEMINI_EVAL_ACTIVA!=="1"||!key||!modelo||!/^gemini-[a-z0-9.-]+$/i.test(modelo))
+  if(process.env.GEMINI_EVAL_ACTIVA!=="1"||!key||!modelo||!MODELOS_GEMINI.some(m=>m===modelo))
     throw new Error("Evaluación no ejecutada: configurar GEMINI_EVAL_ACTIVA=1, GEMINI_API_KEY y GEMINI_MODELO en entorno seguro.");
   const respaldos=MODELOS_GEMINI.filter(m=>m!==modelo);
   const gemini=crearGeminiSintetico({clave:key,modelo,respaldos,corpus});
