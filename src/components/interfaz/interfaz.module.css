@@ -915,3 +915,9 @@
 .ondaVoz{display:flex;align-items:center;justify-content:center;gap:3px;height:24px}.ondaVoz i{width:3px;height:10px;background:currentColor;border-radius:3px}.ondaVoz i:nth-child(2),.ondaVoz i:nth-child(4){height:18px}.ondaVoz i:nth-child(3){height:24px}
 .tarjetaVoz{position:fixed;z-index:30;bottom:calc(100px + env(safe-area-inset-bottom));left:16px;right:16px;max-width:560px;margin:auto;background:var(--superficie);padding:16px;border:1px solid var(--borde);border-radius:16px;overflow-wrap:anywhere;}
 @media(prefers-reduced-motion:reduce){.capturar[data-grabando=true]{animation:none}}
+
+.resultadoFilas { display:grid; gap:var(--e-3); }
+.resultadoFila { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:var(--e-3); min-height:var(--alto-fila); }
+.resultadoFila + .resultadoFila { border-top:var(--borde-fino) solid var(--borde); padding-top:var(--e-3); }
+.resultadoTexto { display:grid; gap:var(--e-1); min-width:0; overflow-wrap:anywhere; }
+@media(max-width:360px){.resultadoFila{grid-template-columns:minmax(0,1fr)}.resultadoFila .boton{justify-self:start}}

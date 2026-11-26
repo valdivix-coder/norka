@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { vozWeb,vibracionWeb } from "@/data/voz-web";
 import type { SesionVoz } from "@/core/ports/voz";
 import { Marco } from "@/components/recorrido/MarcoRecorrido";
+import { ResultadoCaptura } from "./ResultadoCaptura";
 import { Boton } from "@/components/interfaz/Elementos";
 import { HojaInferior } from "@/components/interfaz/HojaInferior";
 import { interfaz as m, captura as textos } from "@/mensajes/es-CL";
@@ -143,16 +144,10 @@ export function MarcoReal({ children, familiaId, cuentaId, nombre, color, logoti
         <Boton texto disabled={!enLinea} onClick={()=>void sincronizar()}>{m.reintentar}</Boton>
       </section>}
       {!abierta&&aviso&&<p role="status" className={s.aviso}>{aviso}</p>}
-      {resultado&&<section className={`${s.tarjeta} ${s.pila} ${s.resultadoCaptura}`} aria-label={textos.resultado}>
-        <span className={s.suave}>{textos.porRevisar}</span>
-        <p>{resultado.titulo}</p>
-        <div className={s.repartida}>
-          <Boton disabled={ocupada||!enLinea} onClick={()=>{ponerBorrador(resultado.titulo);ponerErrorEdicion(false);editar(true);}}>{textos.editar}</Boton>
-          <Boton texto disabled={ocupada||!enLinea} onClick={()=>void cambiar(true)}>{m.deshacer}</Boton>
-          <Boton texto onClick={()=>{ponerResultado(null);ponerErrorEdicion(false);}}>{m.cerrar}</Boton>
-        </div>
-        {errorEdicion&&!editando&&<p role="alert">{textos.errorEdicion}</p>}
-      </section>}
+      {resultado&&<ResultadoCaptura filas={[{id:resultado.id,titulo:resultado.titulo,tipo:"tarea",porRevisar:true}]}
+        ocupada={ocupada||!enLinea} editar={id=>{if(id!==resultado.id)return;ponerBorrador(resultado.titulo);ponerErrorEdicion(false);editar(true);}}
+        deshacer={()=>void cambiar(true)} cerrar={()=>{ponerResultado(null);ponerErrorEdicion(false);}}
+        error={errorEdicion&&!editando&&<p role="alert">{textos.errorEdicion}</p>}/>}
       {children}
     </Marco>
   </captura.Provider>;

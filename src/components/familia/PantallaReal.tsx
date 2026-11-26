@@ -3,6 +3,7 @@ import { useLayoutEffect, useState, useSyncExternalStore, type CSSProperties } f
 import { usePathname } from "next/navigation";
 import Link from "@/components/interfaz/Enlace";
 import { AvatarPersona, Boton, Vacio } from "@/components/interfaz/Elementos";
+import { ConsentimientoCaptura } from "./ConsentimientoCaptura";
 import { useCapturaReal } from "./MarcoReal";
 import type { PersonaACargo } from "@/core/domain/familia";
 import { colorPersona } from "@/core/usecases/personas-reales";
@@ -100,10 +101,13 @@ const temaActual = () => document.documentElement.dataset.tema === "claro" ? "cl
 const temaServidor = () => "oscuro";
 export function AjustesRecorrido() {
   const tema=useSyncExternalStore(escucharTema,temaActual,temaServidor);
+  const [privacidad,abrirPrivacidad]=useState(false);
   return <section className={`${s.tarjeta} ${s.pila}`}>
     <h2 className={s.seccionTitulo}>{m.aspecto}</h2>
     <div className={s.opciones}>{(["oscuro","claro"] as const).map(valor=><Boton key={valor} className={s.opcion}
       aria-pressed={tema===valor} onClick={()=>{document.documentElement.dataset.tema=valor;window.dispatchEvent(new Event("norka-tema"));}}>{m[valor]}</Boton>)}</div>
+    <Boton onClick={()=>abrirPrivacidad(true)}>{textos.iaTitulo}</Boton>
+    {privacidad&&<ConsentimientoCaptura disponible={false} cerrar={()=>abrirPrivacidad(false)}/>}
     <Link className={s.boton} href="/cuenta">{entrada.cuenta.titulo}</Link>
     <form action="/api/salir" method="post"><Boton type="submit" className={s.ancho}>{entrada.cuenta.salir}</Boton></form>
   </section>;
