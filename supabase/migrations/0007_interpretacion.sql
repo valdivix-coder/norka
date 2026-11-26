@@ -128,8 +128,8 @@ begin
   if j.aplicado_en is not null then return jsonb_build_object('estado','ya_aplicada'); end if;
   if j.estado<>'reservado' or j.revision<>p_revision or j.reservado_hasta<=now()
     or c.estado<>'pendiente' then raise exception 'RESERVA_INVALIDA'; end if;
-  select * into original from public.tareas where familia_id=p_familia and captura_id=p_captura
-    and estado='pendiente' and revision=0 and titulo=c.texto_original for update;
+  select t0.* into original from public.tareas t0 where t0.familia_id=p_familia and t0.captura_id=p_captura
+    and t0.estado='pendiente' and t0.revision=0 and t0.titulo=c.texto_original for update;
   if not found then raise exception 'CAPTURA_MODIFICADA'; end if;
   if p_fallida is null then raise exception 'PLAN_INVALIDO'; end if;
   if p_fallida then
