@@ -159,3 +159,11 @@ La fase 2 comienza con la migración de responsabilidades, tareas, capturas y tr
 ## Incidencia de entrada reportada tras la revisión
 
 Pantalla blanca después de Google: alias de producción antiguo retorna null. Corrección de origen estable desplegada en preview `b1b8b1d`. Pendiente comprobar/agregar callback exacto en Supabase y repetir Google real; 1.5 no aceptada. Véase [documento de fase](fases/FASE-1.md). Las cifras globales anteriores son estimaciones, no aprobación formal.
+
+## Validación real comunicada por el propietario — 25 de noviembre, 23:45 Chile
+
+El propietario informa que ambas cuentas ingresaron con Google, crearon una familia, una invitó a la otra, la segunda aceptó y entró, crearon hijas como personas a cargo y recorrieron las pestañas. Evidencia: confirmación directa del propietario, no inspección de sus datos personales. La incidencia de pantalla blanca ya no impide el ingreso en los intentos reportados. No se infiere qué ajuste hizo en Supabase ni se presume que cerró sesión, comprobó teléfonos, editó/archivó o grabó la navegación.
+
+CI de la corrección OAuth `b1b8b1d`: [arnés mínimo](https://github.com/valdivix-coder/norka/actions/runs/45699265142) 123/123, [arnés completo](https://github.com/valdivix-coder/norka/actions/runs/45699264979) success. Vercel READY para `b23f69c`: https://norka-kywjg2hm7-neuralia1.vercel.app/ . main sigue en `4f01b11`.
+
+Pendiente de aceptación de fase 1: cerrar y volver a entrar con Google; comprobar roles/participación y visibilidad mutua de teléfonos de prueba; hogar automático y ocho ámbitos; editar, recargar y archivar una persona ficticia (probar Deshacer y archivo definitivo); buscar, avisos, perfil, capturar como hoja informativa, cabecera al deslizar y gesto de vuelta, temas claro/oscuro, legibilidad y grabación de recorrido físico. No usar datos de menores reales para probar archivo ni compartir teléfonos en capturas. No verificado: 60 fps físicos y auditoría visual exhaustiva (pulido de fase 9). Estimación actual: 875/900 puntos, 97,2% fase 1; 9/9 con código; 10,5% de 83 tareas numeradas por ponderación uniforme de porcentajes. No equivale a aprobación formal. Puerta pendiente: «apruebo la fase 1». Luego fusión y 2.1 (migración de captura con numeración libre). No se cambió código, permisos, datos, ni configuración en esta actualización documental.
