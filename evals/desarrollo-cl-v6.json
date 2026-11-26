@@ -1,0 +1,1103 @@
+{
+  "fecha": "2026-11-26T12:00:00-03:00",
+  "zona_horaria": "America/Santiago",
+  "personas_a_cargo": [
+    "Inés",
+    "Pipa",
+    "El hogar"
+  ],
+  "integrantes": [
+    "Rosa",
+    "Paula",
+    "Jaime"
+  ],
+  "autor": "Rosa",
+  "ambitos": [
+    "Salud",
+    "Colegio",
+    "Pagos y finanzas",
+    "Crianza diaria",
+    "Hogar",
+    "Mascotas",
+    "Trámites",
+    "Compras"
+  ],
+  "casos": [
+    {
+      "id": 1,
+      "texto": "Pasado mañana llevar a Inés a la fono",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Llevar a Inés a la fono",
+            "persona_a_cargo": "Inés",
+            "ambito": "Salud",
+            "plazo_fecha": "2026-11-28",
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "texto": "El martes retirar el pasaporte de Inés",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Retirar pasaporte de Inés",
+            "persona_a_cargo": "Inés",
+            "ambito": "Trámites",
+            "plazo_fecha": "2026-12-01",
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "texto": "Comprar temperas para Inés",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar témperas para Inés",
+            "persona_a_cargo": "Inés",
+            "ambito": "Colegio",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "texto": "Cambiar la ampolleta del pasillo de la casa",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Cambiar ampolleta",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Hogar",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "texto": "Comprar shampoo para Pipa",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar shampoo para Pipa",
+            "persona_a_cargo": "Pipa",
+            "ambito": "Mascotas",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "texto": "Comprar calcetines para Inés",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar calcetines para Inés",
+            "persona_a_cargo": "Inés",
+            "ambito": "Compras",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "texto": "Pagar 23000 pesos de la luz de la casa el 15 de diciembre",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Pagar 23000 pesos de luz",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Pagos y finanzas",
+            "plazo_fecha": "2026-12-15",
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "texto": "El lunes llevar a la perrita Rita a peluquería",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Llevar a Rita a peluquería",
+            "persona_a_cargo": null,
+            "ambito": "Mascotas",
+            "plazo_fecha": "2026-11-30",
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "baja"
+          }
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "texto": "Que Jaime cambie la ampolleta del patio de la casa",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "propuesta",
+            "titulo": "Cambiar ampolleta del patio",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Hogar",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": "Jaime",
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "texto": "Pedirle a Paula que busque a Inés en el colegio mañana",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "propuesta",
+            "titulo": "Buscar a Inés en el colegio",
+            "persona_a_cargo": "Inés",
+            "ambito": "Colegio",
+            "plazo_fecha": "2026-11-27",
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": "Paula",
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "texto": "Cada seis días limpiar el bebedero de Pipa",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "responsabilidad",
+            "titulo": "Limpiar bebedero de Pipa",
+            "persona_a_cargo": "Pipa",
+            "ambito": "Mascotas",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": {
+              "tipo": "diaria",
+              "cada": 6,
+              "dias": []
+            },
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "texto": "Todos los jueves separar ropa de deporte de Inés",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "responsabilidad",
+            "titulo": "Separar ropa de deporte de Inés",
+            "persona_a_cargo": "Inés",
+            "ambito": "Crianza diaria",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": {
+              "tipo": "semanal",
+              "cada": 1,
+              "dias": [
+                "jueves"
+              ]
+            },
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "texto": "Cada cuatro semanas el lunes limpiar el desagüe de la casa",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "responsabilidad",
+            "titulo": "Limpiar desagüe",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Hogar",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": {
+              "tipo": "semanal",
+              "cada": 4,
+              "dias": [
+                "lunes"
+              ]
+            },
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "texto": "Cada mes probar el detector de humo de la casa",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "responsabilidad",
+            "titulo": "Probar detector de humo",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Hogar",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": {
+              "tipo": "mensual",
+              "cada": 1,
+              "dias": []
+            },
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "texto": "Cada dos años renovar el pasaporte de Inés",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "responsabilidad",
+            "titulo": "Renovar pasaporte de Inés",
+            "persona_a_cargo": "Inés",
+            "ambito": "Trámites",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": {
+              "tipo": "anual",
+              "cada": 2,
+              "dias": []
+            },
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 16,
+      "texto": "Los lunes y miércoles preparar la colación de Inés",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "responsabilidad",
+            "titulo": "Preparar colación de Inés",
+            "persona_a_cargo": "Inés",
+            "ambito": "Crianza diaria",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": {
+              "tipo": "semanal",
+              "cada": 1,
+              "dias": [
+                "lunes",
+                "miércoles"
+              ]
+            },
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 17,
+      "texto": "Todos los días cambiar el agua de Pipa",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "responsabilidad",
+            "titulo": "Cambiar agua de Pipa",
+            "persona_a_cargo": "Pipa",
+            "ambito": "Mascotas",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": {
+              "tipo": "diaria",
+              "cada": 1,
+              "dias": []
+            },
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "texto": "Cada viernes preparar la mochila",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "responsabilidad",
+            "titulo": "Preparar mochila",
+            "persona_a_cargo": null,
+            "ambito": "Crianza diaria",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": {
+              "tipo": "semanal",
+              "cada": 1,
+              "dias": [
+                "viernes"
+              ]
+            },
+            "dirigida_a": null,
+            "confianza": "baja"
+          }
+        ]
+      }
+    },
+    {
+      "id": 19,
+      "texto": "Pagar 6800 pesos por los útiles de Inés",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Pagar 6800 pesos por útiles",
+            "persona_a_cargo": "Inés",
+            "ambito": "Pagos y finanzas",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 20,
+      "texto": "Comprar jabón para la casa",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar jabón",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Compras",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 21,
+      "texto": "Revisar las pilas del termómetro de la casa",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Revisar pilas del termómetro",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Hogar",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 22,
+      "texto": "Pedirle a Laura que retire el carnet de Inés",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "nota",
+            "titulo": "Pedirle a Laura que retire el carnet de Inés",
+            "persona_a_cargo": "Inés",
+            "ambito": "Trámites",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "baja"
+          }
+        ]
+      }
+    },
+    {
+      "id": 23,
+      "texto": "Chuta, no me acuerdo qué era lo del jardín",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "nota",
+            "titulo": "Chuta, no me acuerdo qué era lo del jardín",
+            "persona_a_cargo": null,
+            "ambito": null,
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "baja"
+          }
+        ]
+      }
+    },
+    {
+      "id": 24,
+      "texto": "Algo de la cuenta, pero no sé qué",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "nota",
+            "titulo": "Algo de la cuenta, pero no sé qué",
+            "persona_a_cargo": null,
+            "ambito": null,
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "baja"
+          }
+        ]
+      }
+    },
+    {
+      "id": 25,
+      "texto": "Lo que hablamos de la casa, no sé cuál era",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "nota",
+            "titulo": "Lo que hablamos de la casa, no sé cuál era",
+            "persona_a_cargo": null,
+            "ambito": null,
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "baja"
+          }
+        ]
+      }
+    },
+    {
+      "id": 26,
+      "texto": "No sé si tengo que llamar o comprar",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "nota",
+            "titulo": "No sé si tengo que llamar o comprar",
+            "persona_a_cargo": null,
+            "ambito": null,
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "baja"
+          }
+        ]
+      }
+    },
+    {
+      "id": 27,
+      "texto": "El 31 de diciembre pagar el seguro de la casa",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Pagar seguro de casa",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Pagos y finanzas",
+            "plazo_fecha": "2026-12-31",
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 28,
+      "texto": "El 2 de enero sacar el certificado de Inés",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Sacar certificado de Inés",
+            "persona_a_cargo": "Inés",
+            "ambito": "Trámites",
+            "plazo_fecha": "2027-01-02",
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 29,
+      "texto": "A las 14 mañana llevar a Inés al médico",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Llevar a Inés al médico",
+            "persona_a_cargo": "Inés",
+            "ambito": "Salud",
+            "plazo_fecha": "2026-11-27",
+            "plazo_hora": "14:00",
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 30,
+      "texto": "Mañana a las siete de la tarde bañar a Pipa",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Bañar a Pipa",
+            "persona_a_cargo": "Pipa",
+            "ambito": "Mascotas",
+            "plazo_fecha": "2026-11-27",
+            "plazo_hora": "19:00",
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 31,
+      "texto": "Comprar goma de borrar para Matías",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar goma de borrar para Matías",
+            "persona_a_cargo": null,
+            "ambito": "Colegio",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "baja"
+          }
+        ]
+      }
+    },
+    {
+      "id": 32,
+      "texto": "Llevar al gato Coco al veterinario",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Llevar a Coco al veterinario",
+            "persona_a_cargo": null,
+            "ambito": "Mascotas",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "baja"
+          }
+        ]
+      }
+    },
+    {
+      "id": 33,
+      "texto": "Comprar una carpeta escolar para Inés",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar carpeta escolar",
+            "persona_a_cargo": "Inés",
+            "ambito": "Colegio",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 34,
+      "texto": "Pagar la cuota del taller de Inés el 8 de diciembre",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Pagar cuota de taller",
+            "persona_a_cargo": "Inés",
+            "ambito": "Pagos y finanzas",
+            "plazo_fecha": "2026-12-08",
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 35,
+      "texto": "Revisar el cierre del uniforme de Inés",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Revisar cierre del uniforme",
+            "persona_a_cargo": "Inés",
+            "ambito": "Crianza diaria",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 36,
+      "texto": "Lavar las mantas del living de la casa",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Lavar mantas del living",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Hogar",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 37,
+      "texto": "Que Paula compre pañuelos para la casa",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "propuesta",
+            "titulo": "Comprar pañuelos",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Compras",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": "Paula",
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 38,
+      "texto": "Pedirle a Jaime que pague 12000 pesos del internet de casa",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "propuesta",
+            "titulo": "Pagar 12000 pesos de internet",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Pagos y finanzas",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": "Jaime",
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 39,
+      "texto": "Que Paula le dé comida a Pipa el domingo",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "propuesta",
+            "titulo": "Dar comida a Pipa",
+            "persona_a_cargo": "Pipa",
+            "ambito": "Mascotas",
+            "plazo_fecha": "2026-11-29",
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": "Paula",
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 40,
+      "texto": "Que Jaime lleve a Inés al dentista el lunes",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "propuesta",
+            "titulo": "Llevar a Inés al dentista",
+            "persona_a_cargo": "Inés",
+            "ambito": "Salud",
+            "plazo_fecha": "2026-11-30",
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": "Jaime",
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 41,
+      "texto": "El viernes llevar a Inés al colegio y limpiar el refrigerador de la casa",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Llevar a Inés al colegio",
+            "persona_a_cargo": "Inés",
+            "ambito": "Colegio",
+            "plazo_fecha": "2026-11-27",
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          },
+          {
+            "tipo": "tarea",
+            "titulo": "Limpiar refrigerador",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Hogar",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 42,
+      "texto": "Mañana a las 8 llevar a Pipa al veterinario y a las 17 comprar lápices para Inés",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Llevar a Pipa al veterinario",
+            "persona_a_cargo": "Pipa",
+            "ambito": "Mascotas",
+            "plazo_fecha": "2026-11-27",
+            "plazo_hora": "08:00",
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          },
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar lápices",
+            "persona_a_cargo": "Inés",
+            "ambito": "Colegio",
+            "plazo_fecha": "2026-11-27",
+            "plazo_hora": "17:00",
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 43,
+      "texto": "Hoy comprar té para la casa y el domingo sacar el carnet de Inés",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar té",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Compras",
+            "plazo_fecha": "2026-11-26",
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          },
+          {
+            "tipo": "tarea",
+            "titulo": "Sacar carnet de Inés",
+            "persona_a_cargo": "Inés",
+            "ambito": "Trámites",
+            "plazo_fecha": "2026-11-29",
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 44,
+      "texto": "Comprar comida para Pipa y pagar 9000 pesos del curso de Inés",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar comida para Pipa",
+            "persona_a_cargo": "Pipa",
+            "ambito": "Mascotas",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          },
+          {
+            "tipo": "tarea",
+            "titulo": "Pagar 9000 pesos del curso",
+            "persona_a_cargo": "Inés",
+            "ambito": "Pagos y finanzas",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 45,
+      "texto": "Ordenar el estuche de Inés y comprar harina para la casa",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Ordenar estuche de Inés",
+            "persona_a_cargo": "Inés",
+            "ambito": "Crianza diaria",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          },
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar harina",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Compras",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 46,
+      "texto": "El martes buscar a Inés en el colegio y el jueves pagar su matrícula",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Buscar a Inés en el colegio",
+            "persona_a_cargo": "Inés",
+            "ambito": "Colegio",
+            "plazo_fecha": "2026-12-01",
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          },
+          {
+            "tipo": "tarea",
+            "titulo": "Pagar su matrícula",
+            "persona_a_cargo": "Inés",
+            "ambito": "Pagos y finanzas",
+            "plazo_fecha": "2026-12-03",
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 47,
+      "texto": "Cada dos días cepillar a Pipa y cada mes limpiar las ventanas de la casa",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "responsabilidad",
+            "titulo": "Cepillar a Pipa",
+            "persona_a_cargo": "Pipa",
+            "ambito": "Mascotas",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": {
+              "tipo": "diaria",
+              "cada": 2,
+              "dias": []
+            },
+            "dirigida_a": null,
+            "confianza": "alta"
+          },
+          {
+            "tipo": "responsabilidad",
+            "titulo": "Limpiar ventanas",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Hogar",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": {
+              "tipo": "mensual",
+              "cada": 1,
+              "dias": []
+            },
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 48,
+      "texto": "Comprar pan para la casa mañana, perdón, el sábado",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar pan",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Compras",
+            "plazo_fecha": "2026-11-28",
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 49,
+      "texto": "No comprar cuadernos; comprar lápices para Inés",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar lápices",
+            "persona_a_cargo": "Inés",
+            "ambito": "Colegio",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 50,
+      "texto": "No hacer nada todavía, no sé qué hay que resolver",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "nota",
+            "titulo": "No hacer nada todavía, no sé qué hay que resolver",
+            "persona_a_cargo": null,
+            "ambito": null,
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "baja"
+          }
+        ]
+      }
+    }
+  ]
+}

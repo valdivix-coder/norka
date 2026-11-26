@@ -18,3 +18,7 @@ v5: diagnóstico de 50/50, 41/50 persona/ámbito/plazo, 39/50 estrictos, 8 campo
 
 ## Regla de privacidad
 No acceder a capturas reales ni copiar secretos. Gemini gratuito solo sintético. Evaluar cualquier modalidad pagada y restricciones de menores antes de uso real, no asumir que pagar resuelve privacidad. Mantener aplicación funcional sin IA. 
+
+## Recursos adicionales para v7
+
+Evalúa `src/core/usecases/calendario-captura.ts` (candidato aislado) y `evals/desarrollo-cl-v6.json` (50 casos adicionales, no ciegos). Puedes usar este corpus para desarrollo, no como examen independiente ni reemplazo del oficial. Revisa especialmente convención de día de semana, alcance y evidencia temporal, negación/autocorrección. No afirmar que el calendario está conectado.
