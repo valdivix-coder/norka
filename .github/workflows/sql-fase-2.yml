@@ -32,7 +32,7 @@ jobs:
           DB: ${{ job.services.postgres.id }}
         run: |
           set -euo pipefail
-          for f in supabase/verificaciones/0005_prueba.sql supabase/verificaciones/0006_prueba.sql supabase/verificaciones/0007_despues.sql supabase/verificaciones/0007_prueba.sql; do
+          for f in supabase/verificaciones/0005_prueba.sql supabase/verificaciones/0006_prueba.sql supabase/verificaciones/0007_despues.sql supabase/verificaciones/0007_prueba.sql supabase/verificaciones/0008_despues.sql supabase/verificaciones/0008_prueba.sql; do
             echo "Comprobar $f"
             docker exec -i "$DB" psql -U postgres -v ON_ERROR_STOP=1 < "$f"
           done

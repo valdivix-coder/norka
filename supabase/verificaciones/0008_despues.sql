@@ -1,0 +1,1 @@
+select proname,prosecdef,has_function_privilege('anon',oid,'EXECUTE') as anon,has_function_privilege('authenticated',oid,'EXECUTE') as autenticado,has_function_privilege('service_role',oid,'EXECUTE') as servidor from pg_proc where oid='public.gestionar_resultados_interpretados(uuid,uuid,uuid,jsonb,boolean)'::regprocedure;
