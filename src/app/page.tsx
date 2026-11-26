@@ -12,25 +12,22 @@ export default async function Entrada({searchParams}: {searchParams: Promise<{co
     <main className={s.entrada}>
       <div className={s.resplandor} aria-hidden="true" />
       <div className={s.entradaSuperior}>
-        <p className={s.contexto}>{m.muestraPie}</p>
+        <p className={s.contexto}>{m.entradaRealPie}</p>
         <div className={s.entradaMarca}>
           <MarcaDelTema pieza="conjunto-vertical" />
         </div>
         <h1 className={s.entradaFrase}>{m.descripcion}</h1>
       </div>
       <div className={s.entradaInferior}>
-        <p className={s.suave}>{m.limiteMuestra}</p>
-        <Link
-          className={`${s.boton} ${s.principal}`}
-          href="/muestra/pantallas/hoy"
-        >
+        <p className={s.suave}>{m.entradaRealAyuda}</p>
+        <Link className={`${s.boton} ${s.principal}`} href="/cuenta">
+          {m.entrarConCuenta}
+        </Link>
+        <Link className={`${s.boton} ${s.texto}`} href="/muestra/pantallas/hoy">
           {m.entrarMuestra}
         </Link>
         <Link className={`${s.boton} ${s.texto}`} href="/muestra">
           {m.verComponentes}
-        </Link>
-        <Link className={`${s.boton} ${s.texto}`} href="/entrar">
-          {m.entrarConCuenta}
         </Link>
       </div>
     </main>

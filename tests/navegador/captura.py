@@ -15,7 +15,20 @@ async def main():
         page=await ctx.new_page()
         errores=[]
         page.on("pageerror",lambda e:errores.append(str(e)))
-        await page.goto(BASE+"/hoy")
+        # La entrada principal debe llevar a la familia real, no a la muestra.
+        await page.goto(URL+"/")
+        await page.get_by_role("link",name="Entrar con mi cuenta",exact=True).click()
+        await expect(page).to_have_url(URL+"/cuenta")
+        await page.get_by_role("link",name="Mi familia",exact=True).click()
+        await expect(page).to_have_url(BASE+"/hoy")
+        # La muestra también ofrece acceso explícito a la cuenta real.
+        await page.goto(URL+"/muestra/pantallas/hoy")
+        await page.get_by_role("navigation",name="Navegación principal").get_by_role("button",name="Capturar",exact=True).click()
+        await expect(page.get_by_role("dialog").get_by_text("Estás en la muestra visual.",exact=False)).to_be_visible()
+        await page.get_by_role("dialog").get_by_role("link",name="Entrar con mi cuenta",exact=True).click()
+        await expect(page).to_have_url(URL+"/cuenta")
+        await page.get_by_role("link",name="Mi familia",exact=True).click()
+        await expect(page).to_have_url(BASE+"/hoy")
         nav=page.get_by_role("navigation",name="Navegación principal")
         async def captura(texto):
             await nav.get_by_role("button",name="Capturar",exact=True).click()

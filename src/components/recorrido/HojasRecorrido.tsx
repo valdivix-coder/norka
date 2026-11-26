@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState, type CSSProperties, type FormEvent } from "react";
 import type { PersonaACargo } from "@/core/domain/familia";
 import { familiaMuestraId } from "@/data/familia-muestra";
@@ -254,19 +255,10 @@ export function HojasRecorrido() {
       {hoja.tipo === "archivar" && <Archivo persona={hoja.persona} archivar={archivar} cancelar={() => abrir(null)} />}
       {hoja.tipo === "capturar" && (
         <div className={s.pila}>
-          <label className={s.campo}>
-            <span>{m.capturaAyuda}</span>
-            <textarea
-              autoFocus
-              className={`${s.entradaCampo} ${s.textarea}`}
-              placeholder={m.capturaCampo}
-              aria-describedby="limite-captura"
-            />
-          </label>
-          <p className={s.suave} id="limite-captura">
-            {m.capturaLimite}
-          </p>
-          <Boton disabled>{m.enviara}</Boton>
+          <p>{m.capturaLimite}</p>
+          <Link className={`${s.boton} ${s.principal}`} href="/cuenta">
+            {m.entrarConCuenta}
+          </Link>
         </div>
       )}
       {hoja.tipo === "invitar" && (

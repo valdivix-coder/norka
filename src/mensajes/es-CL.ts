@@ -164,7 +164,7 @@ export const ejemplos = {
 
 // Recorrido visual de la fase 1. Los ejemplos no son una familia real.
 export const interfaz = {
-  capturaRealLimite: "La captura todavía no está disponible. Podrás usarla en la siguiente fase.",
+  capturaRealLimite: "Abre tu familia con tu cuenta para usar la captura.",
   ayudaConexionReal: "Cuando vuelva la conexión, puedes volver a cargar la pantalla.",
   busquedaReal: "Por ahora puedes buscar a las personas a cargo por su nombre.",
   descripcion: "Lo que la familia tiene que hacer, en un solo lugar.",
@@ -235,7 +235,9 @@ export const interfaz = {
   limpiar: "Limpiar búsqueda",
   capturaAyuda: "Escribe lo que quieres recordar.",
   capturaLimite:
-    "La captura se conectará al guardado en la siguiente fase. En esta muestra no se envía ni se guarda el texto.",
+    "Estás en la muestra visual. Para guardar tareas y probar el dictado, entra con tu cuenta.",
+  entradaRealPie: "Tu espacio familiar",
+  entradaRealAyuda: "Entra con tu cuenta para capturar tareas en tu familia. La muestra visual usa datos de ejemplo.",
   capturaCampo: "Escribe una tarea",
   enviara: "Enviar",
   nombre: "Nombre o apodo",
