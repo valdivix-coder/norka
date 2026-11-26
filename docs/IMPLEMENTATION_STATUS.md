@@ -21,3 +21,8 @@ El detalle y los criterios de «hecho cuando» de cada tarea están en la secci�
 Tarea 1.6: entregada técnicamente; integración de acciones de creación/invitación en 1.7 y de pantallas con datos reales en 1.8. La prueba real de Google de 1.5 fue aprobada por el propietario. Evidencia: `docs/fases/evidencia-1-6/`.
 
 [Informe global por fases y tareas](INFORME-IMPLEMENTACION.md).
+
+
+## V7.0 · Auditoría independiente — punto de parada
+
+Paquete de cinco documentos recibido en 78a37c6, V6 y corpus oficial intactos. Pruebas reproducidas en CI aislado: https://github.com/valdivix-coder/norka/actions/runs/45913820767 (69/69, 72/72, 20/22 mutaciones detectadas, oficial/desarrollo 50/50, contrato 50/50). Contraejemplo adicional confirmado en rojo: «mañana a las 09:30» produce 09:00, clase inequívoca. PUNTO DE PARADA: no integrar ni llamar a Gemini. Ver docs/inteligencia/AUDITORIA-RECEPCION-V7.md para hallazgos, decisiones y reversión. Esperar respuesta del propietario para corregir prototipo sin editar originales. V6 sigue operativa, fase 2 abierta.
