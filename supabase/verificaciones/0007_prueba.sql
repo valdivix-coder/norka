@@ -39,7 +39,11 @@ begin
  if (select texto_original from public.capturas where id=cap)<>'QA original' then raise exception 'QA_ORIGINAL';end if;
  perform public.guardar_captura(a,ca,cap2,'QA sin clasificar','texto');
  j:=public.reservar_interpretacion(a,ca,cap2);
+ if (public.aplicar_interpretacion(a,ca,cap2,(j->>'revision')::bigint,null,true)->>'estado')<>'reintentar' then raise exception 'QA_REINTENTO';end if;
+ j:=public.reservar_interpretacion(a,ca,cap2);
+ if (j->>'intentos')::integer<>2 then raise exception 'QA_INTENTOS';end if;
  perform public.aplicar_interpretacion(a,ca,cap2,(j->>'revision')::bigint,null,true);
+ if (select estado from public.capturas where id=cap2)<>'fallida' then raise exception 'QA_FALLO_FINAL';end if;
  if not exists(select 1 from public.tareas where captura_id=cap2 and estado='pendiente' and por_revisar) then raise exception 'QA_FALLBACK';end if;
  r:=public.guardar_captura(a,ca,cap3,'QA edición','texto');
  j:=public.reservar_interpretacion(a,ca,cap3);

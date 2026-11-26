@@ -98,7 +98,14 @@ begin
     where familia_id=p_familia and captura_id=p_captura and aplicado_en is null
       and intentos<2 and (estado='pendiente' or (estado='reservado' and reservado_hasta<=now()))
     returning * into j;
-  if not found then return null; end if;
+  if not found then
+    -- Si el segundo intento quedó abandonado, conservar la tarea original y cerrar el trabajo.
+    update public.trabajos_ia set estado='fallido',reservado_hasta=null,revision=revision+1
+      where familia_id=p_familia and captura_id=p_captura and estado='reservado'
+        and intentos>=2 and reservado_hasta<=now();
+    if found then update public.capturas set estado='fallida',revision=revision+1 where id=p_captura; end if;
+    return null;
+  end if;
   return jsonb_build_object('id',j.id,'revision',j.revision,'intentos',j.intentos);
 end $$;
 
@@ -126,6 +133,10 @@ begin
   if not found then raise exception 'CAPTURA_MODIFICADA'; end if;
   if p_fallida is null then raise exception 'PLAN_INVALIDO'; end if;
   if p_fallida then
+    if j.intentos<2 then
+      update public.trabajos_ia set estado='pendiente',reservado_hasta=null,revision=revision+1 where id=j.id;
+      return jsonb_build_object('estado','reintentar');
+    end if;
     update public.capturas set estado='fallida',revision=revision+1 where id=c.id;
     update public.trabajos_ia set estado='fallido',reservado_hasta=null,revision=revision+1 where id=j.id;
     return jsonb_build_object('estado','sin_clasificar','tarea_id',original.id);

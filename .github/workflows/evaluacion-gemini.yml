@@ -1,0 +1,37 @@
+name: Gemini · evaluación sintética
+on:
+  push:
+    branches: [fase-2]
+    paths: ['evals/solicitud.json']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: norka-evaluacion-sintetica
+  cancel-in-progress: false
+jobs:
+  evaluar:
+    if: github.ref == 'refs/heads/fase-2'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Ejecutar exclusivamente el corpus sintético
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_EVAL_ACTIVA: '1'
+          GEMINI_MODELO: gemini-3.8-flash
+        run: npm run eval
+      - name: Guardar resultados sintéticos para revisión
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evaluacion-gemini-sintetica
+          path: evals/salida-eval.json
+          if-no-files-found: ignore
+          retention-days: 14
