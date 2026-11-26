@@ -79,7 +79,7 @@ class REST(BaseHTTPRequestHandler):
             if cap not in capturas:
                 tarea=str(uuid.uuid4())
                 capturas[cap]=dict(d,tarea_id=tarea)
-                tablas["tareas"].append(dict(id=tarea,familia_id=FAMILIA,titulo=d["p_texto"],revision=0,captura_id=cap,estado="pendiente",por_revisar="true",capturas={"autor_id":tablas["integrantes"][0]["id"],"estado":"pendiente"}))
+                tablas["tareas"].append(dict(id=tarea,familia_id=FAMILIA,titulo=d["p_texto"],revision=0,captura_id=cap,estado="pendiente",por_revisar="true",creado_en=datetime.now(timezone.utc).isoformat(),capturas={"autor_id":tablas["integrantes"][0]["id"],"estado":"pendiente"}))
             elif capturas[cap]["p_texto"]!=d["p_texto"]:
                 self.send_error(409); return
             cuerpo=json.dumps(dict(captura_id=cap,tarea_id=capturas[cap]["tarea_id"])).encode()
@@ -101,6 +101,8 @@ class REST(BaseHTTPRequestHandler):
                 filas = [f for f in filas if str(f.get(campo)) == valor[3:]]
             elif valor == "is.null":
                 filas = [f for f in filas if f.get(campo) is None]
+        if tabla=="tareas" and parse_qs(u.query).get("order")==["creado_en.desc,id.desc"]:
+            filas=sorted(filas,key=lambda f:(f["creado_en"],f["id"]),reverse=True)
         cuerpo = json.dumps(filas, ensure_ascii=False).encode()
         self.send_response(200)
         self.send_header("Content-Type", "application/json")
