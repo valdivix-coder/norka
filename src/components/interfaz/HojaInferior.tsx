@@ -29,6 +29,7 @@ export function HojaInferior({
     const overflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     hoja.showModal();
+    hoja.querySelector<HTMLElement>("[data-enfoque-inicial]")?.focus({preventScroll:true});
     if (!movimientoReducido())
       cancelarResorte.current = volverConResorte(hoja, hoja.clientHeight);
     return () => {

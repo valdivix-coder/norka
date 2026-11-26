@@ -1,7 +1,7 @@
 name: Navegador fase 1
 on:
   push:
-    branches: [fase-1]
+    branches: [fase-1, fase-2]
     paths:
       - 'src/**'
       - 'tests/navegador/**'

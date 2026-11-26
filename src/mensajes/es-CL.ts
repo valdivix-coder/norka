@@ -454,3 +454,10 @@ export const familia = {
   meses: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
   cuenta: { miFamilia: "Mi familia", crearFamilia: "Crear mi familia" },
 } as const;
+
+export const captura = {
+  guardada: "Tu captura quedó guardada. Por revisar.",
+  enCola: "Guardada en este teléfono. Se enviará cuando sea posible.",
+  ayudaSinConexion: "Puedes capturar ahora. Se enviará cuando vuelva la conexión.",
+  pendientes: (n:number) => n === 1 ? "1 captura por enviar" : n+" capturas por enviar",
+} as const;

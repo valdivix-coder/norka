@@ -16,7 +16,7 @@ export default async function Layout({ children, params }: {children: ReactNode;
   let yo;
   try { ({yo} = await verFamilia(cuenta, familiaId, almacenFamilias())); }
   catch (e) { if(e instanceof NoEsIntegrante) notFound(); throw e; }
-  return <MarcoReal familiaId={familiaId} nombre={yo.nombre}
+  return <MarcoReal familiaId={familiaId} cuentaId={cuenta} nombre={yo.nombre}
     color={/^persona-[1-8]$/.test(yo.color) ? `var(--${yo.color})` : "var(--persona-1)"}
     logotipo={<MarcaDelTema pieza="logotipo"/>} isotipo={<MarcaDelTema pieza="isotipo"/>}>
     {children}
