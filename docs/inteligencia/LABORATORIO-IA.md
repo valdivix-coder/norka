@@ -14,3 +14,5 @@ Se agrega el artefacto 15215444062 de desarrollo (run 46034647175) mediante NORK
 
 ## Cobertura de acciones · V7.5
 El laboratorio presenta la cantidad de acciones entregadas y esperadas, con aviso si faltan o sobran, y permite consultar la referencia sintética. No confunde igualdad de cantidades con equivalencia de significado. No añade acciones automáticamente ni altera las salidas originales. Se prueba sobre el caso histórico V7.4 que omitía el pago y V6 que duplicaba la matriculación. Es una mejora de la experiencia de revisión experimental, no un oráculo disponible para capturas reales.
+
+La revisión permite recuperar manualmente una acción de referencia ficticia mediante un selector. Se marca como añadida por el usuario, se puede deshacer y nunca modifica el resultado original ni sus métricas. El contador local excluye descartadas, y no certifica equivalencia semántica. No es una reparación automática ni una función habilitada para familias reales.

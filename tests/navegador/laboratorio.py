@@ -42,9 +42,19 @@ with sync_playwright() as p:
     page.locator("#b").select_option("6.0")
     assert page.get_by_text("Faltan 1 acciones según el conjunto sintético.",exact=True).count()==1
     assert page.get_by_text("Sobran 1 acciones según el conjunto sintético.",exact=True).count()==1
-    page.locator("summary").click()
+    page.get_by_text("Ver acciones esperadas de la prueba",exact=True).click()
     assert page.get_by_text("Referencia sintética: 2 acciones").is_visible()
     page.screenshot(path=str(out/"laboratorio-cobertura.png"),full_page=True)
+    page.locator("#recuperacion summary").click()
+    page.locator("#accion-referencia").select_option("1")
+    page.locator("#agregar-referencia").click()
+    assert page.get_by_text("Añadida manualmente · referencia sintética",exact=True).count()==1
+    assert page.get_by_text("2 acciones en revisión local",exact=False).count()==1
+    assert page.get_by_text("Faltan 1 acciones según el conjunto sintético.",exact=True).count()==1
+    page.screenshot(path=str(out/"laboratorio-recuperacion.png"),full_page=True)
+    page.locator("#deshacer").click()
+    assert page.get_by_text("Añadida manualmente · referencia sintética",exact=True).count()==0
+    assert page.get_by_text("1 acciones en revisión local",exact=False).count()==1
     page.locator("#corpus").select_option("45928250323")
     assert page.locator("#caso option").count()==12
     page.locator("#caso").select_option("6")
