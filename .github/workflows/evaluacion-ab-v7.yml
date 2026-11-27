@@ -1,0 +1,41 @@
+name: Gemini · comparación V6 V7 individual
+on:
+  push:
+    branches: [fase-2]
+    paths: ['evals/solicitud-ab-v7.json']
+permissions:
+  contents: read
+concurrency:
+  group: norka-evaluacion-sintetica
+  cancel-in-progress: false
+jobs:
+  evaluar:
+    if: github.ref == 'refs/heads/fase-2'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 80
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verificar huellas congeladas y arnés
+        run: npm run arnes
+      - name: A/B individual, detener ante regresión, 429 o cobertura incompleta
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_EVAL_ACTIVA: '1'
+          GEMINI_MODELO: gemini-3.5-flash-lite
+          GEMINI_PROMPT_VERSION: AB
+          GEMINI_EVAL_TAMANO: '1'
+          GEMINI_AB_SEMILLA: '20261126'
+        run: npm run eval
+      - name: Artefacto exclusivamente sintético
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: comparacion-individual-v6-v7
+          path: evals/salida-eval.json
+          if-no-files-found: ignore
+          retention-days: 14

@@ -1,6 +1,7 @@
 import {readFileSync,writeFileSync} from "node:fs";
 import {test,expect} from "vitest";
 import {auditarAcciones} from "./auditar-acciones";
+import {ejecutarComparacion,MODELO_AB,type Version} from "./comparacion-v7";
 import {VERSION_PROMPT_CAPTURA} from "../src/data/prompt-captura";
 import {type Interpretacion} from "../src/core/contracts/interpretacion";
 import {crearGeminiSintetico,ErrorGemini,SinModelosDisponibles,MODELOS_GEMINI,type IntentoGemini} from "../src/data/gemini-sintetico";
@@ -12,6 +13,28 @@ test("Gemini: exclusivamente corpus sintético versionado",async()=>{
   const key=process.env.GEMINI_API_KEY,modelo=process.env.GEMINI_MODELO;
   if(process.env.GEMINI_EVAL_ACTIVA!=="1"||!key||!modelo||!MODELOS_GEMINI.some(m=>m===modelo))
     throw new Error("Evaluación no ejecutada: configurar GEMINI_EVAL_ACTIVA=1, GEMINI_API_KEY y GEMINI_MODELO en entorno seguro.");
+  const version=process.env.GEMINI_PROMPT_VERSION;
+  if(version!==undefined){
+    if(!["6.0","7.0","AB"].includes(version)||modelo!==MODELO_AB)throw new Error("VERSION_O_MODELO_AB_INVALIDO");
+    const versiones:Version[]=version==="AB"?["6.0","7.0"]:[version as Version];
+    const salida=await ejecutarComparacion({clave:key,corpus,versiones,tamano:Number(process.env.GEMINI_EVAL_TAMANO??"1"),semilla:Number(process.env.GEMINI_AB_SEMILLA??"20261126")});
+    writeFileSync("evals/salida-eval.json",JSON.stringify(salida,null,2));
+    console.log(JSON.stringify(salida.resumen));
+    expect(salida.resumen.parada).toBeNull();
+    for(const v of versiones){const b=salida.resumen.brazos[v]!;
+      expect(b.validas).toBe(corpus.casos.length);
+      expect(b.camposInventados).toBe(0);
+      expect(b.camposBrutosDiscrepantes).toBe(0);
+      expect(b.porAccion).toBe(0);
+      expect(b.porAccionBruta).toBe(0);
+      expect(b.principalBruta/corpus.casos.length).toBeGreaterThanOrEqual(.9);
+      expect(b.estrictaBruta/corpus.casos.length).toBeGreaterThanOrEqual(.9);
+      expect(b.principalNormalizada/corpus.casos.length).toBeGreaterThanOrEqual(.9);
+      expect(b.estrictaNormalizada/corpus.casos.length).toBeGreaterThanOrEqual(.9);
+      expect(b.casosEmpeorados).toHaveLength(0);expect(b.fallidas).toBe(0);
+    }
+    return;
+  }
   const respaldos=MODELOS_GEMINI.filter(m=>m!==modelo);
   let intentos:IntentoGemini[]=[];
   const gemini=crearGeminiSintetico({clave:key,modelo,respaldos,corpus,observar:i=>intentos.push(i)});
