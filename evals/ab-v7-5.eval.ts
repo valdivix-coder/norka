@@ -5,7 +5,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { test, expect } from "vitest";
 import { ejecutarComparacionV75, type CorpusEvaluable, type VersionV75 } from "./comparacion-v7-5";
 
-const CORPUS_PERMITIDOS = { oficial: "evals/captura-cl.json", "desarrollo-v7-5": "evals/desarrollo-v7-5.json", "desarrollo-v7-2": "evals/desarrollo-v7-2.json", "desarrollo-v7-1": "evals/desarrollo-v7-1.json", "desarrollo-v7-1-catalogo": "evals/desarrollo-v7-1-catalogo.json" } as const;
+const CORPUS_PERMITIDOS = { oficial: "evals/captura-cl.json", "desarrollo-v7-5": "evals/desarrollo-v7-5.json", "desarrollo-v7-4": "evals/desarrollo-v7-4.json", "desarrollo-v7-1": "evals/desarrollo-v7-1.json", "desarrollo-v7-1-catalogo": "evals/desarrollo-v7-1-catalogo.json" } as const;
 
 test("Gemini 7.5: evaluación sintética", async () => {
   const clave = process.env.GEMINI_API_KEY;
