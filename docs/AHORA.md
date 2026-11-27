@@ -174,3 +174,8 @@ Run 45928250323 completó 12/12 pares: V6 8/12 bruta y normalizada; V7.2 9/12 br
 ## Traspaso V7.3 + laboratorio sintético
 
 El propietario solicita que un modelo avanzado optimice la siguiente candidata primero y construya después el laboratorio. Encargo detallado: docs/inteligencia/ENCARGO-V7.3-LABORATORIO.md; handoff actualizado. Base 594c98a. Primera entrega A–E y segunda L1–L5, ejecución 0/5 cada una. Sin código nuevo ni llamadas a Gemini en este traspaso. V7.2 desarrollo 12/12 pares, 83,3% vs 66,7% V6 normalizada; no aceptación por regresión de atribución hogar. Laboratorio solo replay sintético, aislado, sin BD ni proveedor, privado o local, deshabilitado por defecto. No utilizar para eludir puntos de parada ni habilitar IA familiar. Reversión: revertir commit documental. Retomar desde A con evidencia y gates originales.
+
+
+## Auditoría independiente V7.3
+
+Contraste de artefactos originales y reejecución sin proveedor en 4d7efe9, run 45998802842: 260/260 arnés, 2/2 controles independientes, 61 salidas replay reproducen 55/61 aciertos estrictos con V7.3; 8/8 anclas diagnósticas coinciden. Desarrollo 21/22 vs 13/22 V6 y 14/22 V7.2. Aceptación detenida 3/50 por alerta control, además error candidato de hogar en pago no doméstico. Se recomienda V7.4 dirigido antes de repetir, decisión D21 y autorización laboratorio de replay separado; no reanudar Gemini ni construir interfaz hasta respuesta. Informe docs/inteligencia/AUDITORIA-INDEPENDIENTE-V7.3.md. 212 archivos técnicos anteriores intactos; sin cambios de candidata, producción, datos, main o umbrales.

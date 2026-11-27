@@ -202,3 +202,8 @@ El propietario solicita que un modelo avanzado optimice la siguiente candidata p
 ## 27-nov-2026 · V7.3: punto de parada
 
 **27-nov-2026 · V7.3: PUNTO DE PARADA.** 7.3 congelada en `266549c`. Desarrollo real (22 frases nuevas): normalizada V6 13/22, 7.2 14/22, 7.3 21/22; hogar FP 7→0; entrada +6,0 %. Replay sin proveedor sobre 61 salidas reales: validador 7.3 55/61 frente a 53/61 de 7.2. A/B oficial (run 45995259777) detenido en el caso 3 por una alerta de invención del **control V6** (3/50 pares). Arnés 260/260. Esperar al propietario: D-21 (alerta del control), autorización del laboratorio independiente y decisión sobre 7.4. Traspaso: [TRASPASO-V7.3-LABORATORIO.md](../inteligencia/TRASPASO-V7.3-LABORATORIO.md). Sin datos reales, facturación, migraciones ni fusión.
+
+
+## Auditoría independiente V7.3
+
+Contraste de artefactos originales y reejecución sin proveedor en 4d7efe9, run 45998802842: 260/260 arnés, 2/2 controles independientes, 61 salidas replay reproducen 55/61 aciertos estrictos con V7.3; 8/8 anclas diagnósticas coinciden. Desarrollo 21/22 vs 13/22 V6 y 14/22 V7.2. Aceptación detenida 3/50 por alerta control, además error candidato de hogar en pago no doméstico. Se recomienda V7.4 dirigido antes de repetir, decisión D21 y autorización laboratorio de replay separado; no reanudar Gemini ni construir interfaz hasta respuesta. Informe docs/inteligencia/AUDITORIA-INDEPENDIENTE-V7.3.md. 212 archivos técnicos anteriores intactos; sin cambios de candidata, producción, datos, main o umbrales.

@@ -46,3 +46,8 @@ El propietario solicita que un modelo avanzado optimice la siguiente candidata p
 ## Candidato 7.3 (27-nov-2026)
 
 Congelada en `266549c`. M1 hogar por acción (regla y validador por cláusula, D-20), M2 calendario D-04 en la representación y compactación (instrucción −4,6 %). Desarrollo de tres brazos (run 45994191002): normalizada V6 13/22, 7.2 14/22, 7.3 21/22. Replay de validadores sobre 61 salidas reales: 50 → 55 estricta. Aceptación (run 45995259777): parada en el caso 3 por una alerta del control V6; 3/50 pares. No aprobada ni rechazada. Ver INFORME-EVALUACION-V7.3.md.
+
+
+## Auditoría independiente V7.3
+
+Contraste de artefactos originales y reejecución sin proveedor en 4d7efe9, run 45998802842: 260/260 arnés, 2/2 controles independientes, 61 salidas replay reproducen 55/61 aciertos estrictos con V7.3; 8/8 anclas diagnósticas coinciden. Desarrollo 21/22 vs 13/22 V6 y 14/22 V7.2. Aceptación detenida 3/50 por alerta control, además error candidato de hogar en pago no doméstico. Se recomienda V7.4 dirigido antes de repetir, decisión D21 y autorización laboratorio de replay separado; no reanudar Gemini ni construir interfaz hasta respuesta. Informe docs/inteligencia/AUDITORIA-INDEPENDIENTE-V7.3.md. 212 archivos técnicos anteriores intactos; sin cambios de candidata, producción, datos, main o umbrales.
