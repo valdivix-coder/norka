@@ -1,0 +1,10 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {auditarAplicabilidad} from './auditar-aplicabilidad.mjs';
+const base={tipo:'tarea',titulo:'Ejemplo ficticio',persona_a_cargo:null,ambito:null,plazo_fecha:null,plazo_hora:'09:30',recurrencia:null,dirigida_a:null};
+const fixture=(a,p)=>[{fuente:{run:'test',modo:'desarrollo',corpus:'desarrollo-prueba'},casos:[{id:1,brazos:{'7.5':{estado:'valida',resultado:{elementos:a},aplicable:{elementos:p}}}}]}];
+test('detecta hora reconocida perdida y marca revisión',()=>{const r=auditarAplicabilidad(fixture([base],[{...base,plazo_hora:null,confianza:'Por revisar'}]));assert.equal(r.resumen.cambiosPorCampo.plazo_hora,1);assert.equal(r.resumen.accionesConCambios,1);assert.equal(r.resumen.porRevisar,1);});
+test('cuenta cambio de tipo y recurrencia una sola vez por acción',()=>{const a={...base,tipo:'responsabilidad',recurrencia:{tipo:'semanal',cada:1,dias:['lunes']}};const r=auditarAplicabilidad(fixture([a],[{...a,tipo:'tarea',recurrencia:null}]));assert.equal(r.resumen.accionesConCambios,1);assert.equal(r.resumen.cambiosPorCampo.recurrencia,1);assert.equal(r.resumen.cambiosTipo['responsabilidad→tarea'],1);});
+test('detecta diferencia de cantidad y no inventa pares',()=>{const r=auditarAplicabilidad(fixture([base,base],[base]));assert.equal(r.resumen.capturasCambioCantidad,1);assert.equal(r.resumen.accionesPareadas,1);});
+test('no confunde orden de llaves con pérdida de información',()=>{const a={...base,recurrencia:{tipo:'semanal',cada:1,dias:['lunes']}};const b={...a,recurrencia:{dias:['lunes'],cada:1,tipo:'semanal'}};assert.equal(auditarAplicabilidad(fixture([a],[b])).resumen.accionesConCambios,0);});
+test('rechaza corpus oficial o capa ausente',()=>{const f=fixture([base],[base]);f[0].fuente.corpus='oficial';assert.throws(()=>auditarAplicabilidad(f),/SOLO_DESARROLLO/);const g=fixture([base],[base]);delete g[0].casos[0].brazos['7.5'].aplicable;assert.throws(()=>auditarAplicabilidad(g),/CAPA_AUSENTE/);});
