@@ -36,6 +36,15 @@ with sync_playwright() as p:
     assert page.get_by_text("Descartada (simulación)").count()==1
     page.locator("#reiniciar").click()
     assert page.get_by_role("heading",name="Prueba ficticia de edición").count()==0
+    page.locator("#corpus").select_option("46034647175")
+    page.locator("#caso").select_option("6")
+    page.locator("#a").select_option("7.4")
+    page.locator("#b").select_option("6.0")
+    assert page.get_by_text("Faltan 1 acciones según el conjunto sintético.",exact=True).count()==1
+    assert page.get_by_text("Sobran 1 acciones según el conjunto sintético.",exact=True).count()==1
+    page.locator("summary").click()
+    assert page.get_by_text("Referencia sintética: 2 acciones").is_visible()
+    page.screenshot(path=str(out/"laboratorio-cobertura.png"),full_page=True)
     page.locator("#corpus").select_option("45928250323")
     assert page.locator("#caso option").count()==12
     page.locator("#caso").select_option("6")

@@ -10,3 +10,7 @@ Pruebas de exportación, contratos y navegador; verificar run y artefacto antes 
 
 ## Actualización V7.4
 Se agrega el artefacto 15215444062 de desarrollo (run 46034647175) mediante NORKA_REPLAY_V74. El generador acepta únicamente la corrida y corpus de desarrollo conocidos; espera 12 pares completos, 36 respuestas. El workflow incluye ahora 95 capturas/224 respuestas, sujeto a la validación de la nueva exportación. No incluye examen oficial.
+
+
+## Cobertura de acciones · V7.5
+El laboratorio presenta la cantidad de acciones entregadas y esperadas, con aviso si faltan o sobran, y permite consultar la referencia sintética. No confunde igualdad de cantidades con equivalencia de significado. No añade acciones automáticamente ni altera las salidas originales. Se prueba sobre el caso histórico V7.4 que omitía el pago y V6 que duplicaba la matriculación. Es una mejora de la experiencia de revisión experimental, no un oráculo disponible para capturas reales.
