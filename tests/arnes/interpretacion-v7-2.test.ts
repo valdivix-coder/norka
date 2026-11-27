@@ -5,14 +5,14 @@ import {ejecutarComparacionV72,type CorpusEvaluable} from "../../evals/comparaci
 import {instruccionesCapturaV72} from "../../src/data/prompt-captura-v7-2";
 const base={tipo:"tarea" as const,titulo:"Ordenar la terraza",persona_a_cargo:"El hogar",ambito:"Hogar",plazo_fecha:null,plazo_hora:null,recurrencia:null,dirigida_a:null,confianza:"alta" as const};
 const corpus:CorpusEvaluable={fecha:"2027-02-24T12:00:00-03:00",zona_horaria:"America/Santiago",personas_a_cargo:["El hogar","Lina"],integrantes:["QA"],autor:"QA",ambitos:["Hogar","Compras"],casos:[1,2].map(id=>({id,texto:"Ordenar la terraza",esperado:{elementos:[base]}}))};
-const ctx={fecha:corpus.fecha,texto:"El miércoles ordenar la terraza a las 09:30",personas:corpus.personas_a_cargo,integrantes:corpus.integrantes,autor:corpus.autor,ambitos:corpus.ambitos};
+const ctx={fecha:corpus.fecha,texto:"El miércoles a las 09:30 ordenar la terraza",personas:corpus.personas_a_cargo,integrantes:corpus.integrantes,autor:corpus.autor,ambitos:corpus.ambitos};
 const interna=(extra:Record<string,unknown>={})=>({descartes:[],elementos:[{...base,persona_base:"nombrada" as const,tiempo:[],alcance:"ninguno" as const,motivo_nota:null,...extra}]});
 const respuesta=(v:boolean,extra:Record<string,unknown>={})=>Response.json({candidates:[{finishReason:"STOP",content:{parts:[{text:JSON.stringify(v?interna(extra):{elementos:[base]})}]}}]});
 const es72=(init?:RequestInit)=>Boolean(JSON.parse(String(init?.body)).generationConfig.responseJsonSchema.properties.descartes);
 describe("V7.2 decisiones autorizadas",()=>{
  it("D04 mismo día sin próximo: fecha nula y hora explícita conservada",()=>{
  const x={...base,plazo_fecha:"2027-03-03",plazo_hora:"09:30",persona_base:"nombrada" as const,tiempo:["El miércoles a las 09:30"],alcance:"propio" as const,motivo_nota:null};
- const r=validarV72({descartes:[],elementos:[{...x,tiempo:["El miércoles","a las 09:30"]}]},ctx);
+ const r=validarV72({descartes:[],elementos:[x]},ctx);
  expect(r.publica.elementos[0]).toMatchObject({plazo_fecha:null,plazo_hora:"09:30",confianza:"baja"});
  });
  it("D04 próximo explícito mantiene +7",()=>{const r=validarV72({descartes:[],elementos:[{...base,persona_base:"nombrada",tiempo:["El próximo miércoles"],alcance:"propio",motivo_nota:null}]},{...ctx,texto:"El próximo miércoles ordenar la terraza"});expect(r.publica.elementos[0].plazo_fecha).toBe("2027-03-03");});

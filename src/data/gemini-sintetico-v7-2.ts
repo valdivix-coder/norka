@@ -65,10 +65,11 @@ function crearV72({ clave, modelo, corpus, solicitar = fetch, observar = () => {
       const salidas = new Map<number, Interpretacion>(), b = new Map<number, Interpretacion>(), n = new Map<number, SalidaInternaV72>(), a = new Map<number, AjusteV72[]>();
       for (const f of filas) {
         const interna: SalidaInternaV72 = { descartes: f.descartes, elementos: f.elementos };
-        n.set(f.id, structuredClone(interna));
+        const original = (lote ? (objeto as {resultados:({id:number}&SalidaInternaV72)[]}).resultados.find(x=>x.id===f.id)! : objeto as SalidaInternaV72);
+        n.set(f.id, structuredClone({descartes:original.descartes,elementos:original.elementos}));
         etapa = "contrato_publico_v72";
-        const bruta = { elementos: interna.elementos.map(e => ({ tipo: e.tipo, titulo: e.titulo, persona_a_cargo: e.persona_a_cargo, ambito: e.ambito, plazo_fecha: e.plazo_fecha, plazo_hora: e.plazo_hora, recurrencia: e.recurrencia, dirigida_a: e.dirigida_a, confianza: e.confianza })) };
-        b.set(f.id, contratoInterpretacion.parse(bruta));
+        const bruta = { elementos: original.elementos.map(e => ({ tipo: e.tipo, titulo: e.titulo, persona_a_cargo: e.persona_a_cargo, ambito: e.ambito, plazo_fecha: e.plazo_fecha, plazo_hora: e.plazo_hora, recurrencia: e.recurrencia, dirigida_a: e.dirigida_a, confianza: e.confianza })) };
+        contratoInterpretacion.parse(bruta); b.set(f.id, bruta);
         const revisada = validarV72(interna, { fecha: contexto.fecha, texto: casos.get(f.id)!, personas: contexto.personas_a_cargo, integrantes: contexto.integrantes, ambitos: contexto.ambitos, autor: contexto.autor });
         salidas.set(f.id, contratoInterpretacion.parse(revisada.publica)); a.set(f.id, revisada.ajustes);
       }

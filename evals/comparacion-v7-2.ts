@@ -130,7 +130,7 @@ export async function ejecutarComparacionV72({ clave, corpus, modo = "aceptacion
           const causa = error instanceof ErrorGemini ? "HTTP " + error.estado : ultimo?.motivo ?? (error instanceof SinModelosDisponibles ? "sin_modelos" : "sin_salida_valida");
           if (intento === 0 && (causa === "HTTP 503" || causa === "timeout")) continue;
           Object.assign(registro(caso.id, version), { estado: "fallida", causa });
-          if (causa === "HTTP 429" || modo === "aceptacion") { parada = { motivo: causa === "HTTP 429" ? "cuota_429" : "cobertura_incompleta:" + causa, version, id: caso.id }; break externo; }
+          if (causa === "HTTP 429" || modo === "aceptacion" || version === "7.2") { parada = { motivo: causa === "HTTP 429" ? "cuota_429" : "cobertura_incompleta:" + causa, version, id: caso.id }; break externo; }
           break;
         }
       }
@@ -138,6 +138,7 @@ export async function ejecutarComparacionV72({ clave, corpus, modo = "aceptacion
     const c6 = registro(caso.id, "6.0"), c7 = registro(caso.id, "7.2");
     const marca = (d: Detalle) => d.metricas ? `${+d.metricas.bruta.principal}${+d.metricas.bruta.estricta}/${+d.metricas.normalizada.principal}${+d.metricas.normalizada.estricta}` : d.estado;
     registrar(`caso ${caso.id} · 6.0 ${marca(c6)} · 7.2 ${marca(c7)}${c7.alertas?.length ? " · alertas " + c7.alertas.join(",") : ""}`);
+    if(modo==="desarrollo" && (c7.alertas?.length||c6.alertas?.length)){parada={motivo:"alerta_invencion",version:c7.alertas?.length?"7.2":"6.0",id:caso.id};break;}
     if (modo === "aceptacion" && c6.metricas && c7.metricas) {
       const a = c6.metricas, b = c7.metricas;
       const regresion = (["bruta", "normalizada"] as const).some(k => (["principal", "estricta"] as const).some(m => a[k][m] && !b[k][m]));

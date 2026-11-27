@@ -1,6 +1,6 @@
 // Evaluación real 7.2 (solo CI, secreto GEMINI_API_KEY). Corpus exclusivamente sintéticos y versionados.
 // modo aceptacion: corpus oficial intacto, puertas y paradas del encargo; modo desarrollo: corpus de desarrollo,
-// sin puertas (nunca es aceptación). Además mide tokens de entrada con countTokens (no genera contenido).
+// sin puertas (nunca es aceptación). Mide tokens y latencia de las solicitudes reales vía usageMetadata.
 import { readFileSync, writeFileSync } from "node:fs";
 import { test, expect } from "vitest";
 import { ejecutarComparacionV72, type CorpusEvaluable } from "./comparacion-v7-2";
@@ -29,6 +29,9 @@ test("Gemini 7.2: evaluación sintética pareada", async () => {
   for (const b of [b6, b7]) { expect(b.validas).toBe(n); expect(b.fallidas).toBe(0); }
   for (const k of ["principalBruta", "estrictaBruta", "principalNormalizada", "estrictaNormalizada"] as const) expect(b7[k] / n).toBeGreaterThanOrEqual(.9);
   expect(b7.casosEmpeorados).toHaveLength(0);
+  expect(b7.consumo.sinMedicion).toBe(0);expect(b6.consumo.sinMedicion).toBe(0);
+  expect(b7.consumo.entrada).toBeLessThanOrEqual(b6.consumo.entrada*1.1);
+  expect(b7.medianaMs!).toBeLessThanOrEqual(b6.medianaMs!*1.3);
   expect(b7.camposBrutosDiscrepantes).toBe(0); expect(b7.porAccionBruta).toBe(0);
   expect(b7.camposInventados).toBe(0); expect(b7.porAccion).toBe(0);
 }, 4_500_000);

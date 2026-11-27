@@ -28,7 +28,7 @@ const DIA_MISMO = (fecha: string, fragmento: string) => {
   const d = norm(SEMANA[diaSemana(fecha.slice(0,10))]);
   const f = norm(fragmento);
   return new RegExp("(?:^|\\b)(?:el|este) "+d+"\\b").test(f) &&
-    !/\\b(proximo|hoy|\d{1,2} de (?:enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre))\b/.test(f);
+    !/\b(proximo|hoy|\d{1,2} de (?:enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre))\b/.test(f);
 };
 const VAGAS = /\b(la otra semana|la proxima semana|la semana que viene|el finde|fin de semana|fin de mes|a fin de mes|principios de|pronto|despues|en estos dias|un dia de estos|cuando pueda|algun dia|esta semana|el mes que viene|el proximo mes)\b/;
 const HOGAR = /\b(casa|hogar|depto|departamento|auto|camioneta|patio|jardin|terraza|living|cocina|bano|bodega|pieza|calefon|refrigerador|refri|lavadora|ventanas?|techo|plantas|reja|revision tecnica|permiso de circulacion|luz|agua|gas|internet|dividendo|arriendo|contribuciones|basura|gasfiter)\b/;
@@ -79,9 +79,9 @@ export function validarV72(interna: SalidaInternaV72, c: ContextoV72): { publica
           if (e.plazo_fecha !== null) { e.plazo_fecha = null; marcar("plazo_fecha", "sin_evidencia_temporal"); }
           if (e.plazo_hora !== null) { e.plazo_hora = null; marcar("plazo_hora", "sin_evidencia_temporal"); }
         } else if (e.plazo_fecha !== null || e.plazo_hora !== null) marcar("plazo", "sin_fragmento");
-      } else if (fr.some(f => DIA_MISMO(c.fecha,f))) {
+      } else if (fr.some(f => DIA_MISMO(c.fecha,f)) && !fr.some(f=>/\bhoy\b/.test(norm(f)))) {
         // Fecha ambigua de hoy vs semana siguiente. Preserva hora respaldada e independiente.
-        const t = resolverTiempo(c.fecha,fr.map(f=>norm(f).replace(new RegExp("\\b(?:el|este) "+norm(SEMANA[diaSemana(c.fecha.slice(0,10))])+"\\b"),"").trim()).filter(Boolean),null);
+        const t = resolverTiempo(c.fecha,fr.map(f=>f.normalize("NFD").replace(/\p{M}/gu,"").toLowerCase().replace(new RegExp("\\b(?:el|este) "+norm(SEMANA[diaSemana(c.fecha.slice(0,10))])+"\\b"),"").trim()).filter(Boolean),null);
         e.plazo_fecha=null; e.plazo_hora=t.hora; marcar("plazo_fecha","mismo_dia_ambiguo");
       } else if (fr.some(f => VAGAS.test(" " + norm(f) + " "))) {
         if (e.plazo_fecha !== null || e.plazo_hora !== null) { e.plazo_fecha = null; e.plazo_hora = null; marcar("plazo", "expresion_vaga"); }

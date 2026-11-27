@@ -14,11 +14,8 @@ const ejemplos: { t: string; r: { descartes?: Ej[]; elementos: Ej[] } }[] = [
   { t: "El viernes a las diez llevar a Renata al dentista y ordenar la bodega de la casa", r: { elementos: [
     el({ titulo: "Llevar a Renata al dentista", persona_base: "nombrada", persona_a_cargo: "Renata", ambito: "Salud", tiempo: ["El viernes a las diez"], alcance: "propio", plazo_fecha: "2027-08-13", plazo_hora: "10:00" }),
     el({ titulo: "Ordenar la bodega de la casa", persona_base: "nombrada", persona_a_cargo: "El hogar", ambito: "Hogar", alcance: "ninguno" })] } },
-  { t: "Llevar a Gaspar al oculista y pagar la consulta antes del 5", r: { elementos: [
-    el({ titulo: "Llevar a Gaspar al oculista", persona_base: "nombrada", persona_a_cargo: "Gaspar", ambito: "Salud", alcance: "ninguno" }),
-    el({ titulo: "Pagar la consulta", persona_base: "referida", persona_a_cargo: "Gaspar", ambito: "Pagos y finanzas", tiempo: ["antes del 5"], alcance: "propio", plazo_fecha: "2027-09-05" })] } },
-  { t: "Inscribir a Renata en danza y transferir 25 lucas del jardín", r: { elementos: [
-    el({ titulo: "Inscribir a Renata en danza", persona_base: "nombrada", persona_a_cargo: "Renata", ambito: "Colegio", alcance: "ninguno" }),
+  { t: "Inscribir a Renata en el taller de danza escolar y transferir 25 lucas del jardín", r: { elementos: [
+    el({ titulo: "Inscribir a Renata en el taller de danza", persona_base: "nombrada", persona_a_cargo: "Renata", ambito: "Colegio", alcance: "ninguno" }),
     el({ titulo: "Transferir 25 lucas del jardín", persona_base: "referida", persona_a_cargo: "Renata", ambito: "Pagos y finanzas", alcance: "ninguno" })] } },
   { t: "Transferir 25 lucas del jardín", r: { elementos: [
     el({ titulo: "Transferir 25 lucas del jardín", persona_base: "ninguna", ambito: "Pagos y finanzas", alcance: "ninguno", confianza: "baja" })] } },
