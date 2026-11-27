@@ -6,7 +6,7 @@ test("motor universal: conservación y confirmación local sobre replay sintéti
  const h=readFileSync("/tmp/revision-replay/laboratorio-norka.html","utf8");
  const m=h.match(/<script type="application\/json" id="datos">([\s\S]*?)<\/script>/);
  if(!m)throw Error("REPLAY_AUSENTE");
- const fixtures=JSON.parse(m[1]);
+ const fixtures=JSON.parse(m[1]) as {fuente:{modo:string;corpus:string};contexto:{integrantes:string[];autor:string;personas_a_cargo:string[];ambitos:string[]};casos:{texto:string;brazos:Record<string,{estado:string;resultado:unknown}>}[]}[];
  let capturas=0,respuestas=0,acciones=0,listas=0,pendientes=0,lotes=0,confirmadas=0,deshechas=0,perdidas=0;
  for(const f of fixtures){
   expect(f.fuente.modo).toBe("desarrollo");expect(f.fuente.corpus).not.toContain("oficial");
@@ -14,7 +14,7 @@ test("motor universal: conservación y confirmación local sobre replay sintéti
   const integrantes=ids(f.contexto.integrantes,"i"),autorId=integrantes.find(x=>x.nombre===f.contexto.autor)?.id;
   expect(autorId).toBeDefined();
   for(const c of f.casos){capturas++;
-   for(const b of Object.values(c.brazos) as any[]){
+   for(const b of Object.values(c.brazos)){
     if(b.estado!=="valida")continue;
     const entrada=contratoInterpretacion.parse(b.resultado);
     const s=iniciarRevision(entrada,{texto:c.texto,autorId:autorId!,personas:ids(f.contexto.personas_a_cargo,"p"),ambitos:ids(f.contexto.ambitos,"a"),integrantes})!;

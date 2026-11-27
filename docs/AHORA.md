@@ -210,3 +210,7 @@ Run 46039721333 completo: V6 10/12, V7.4 12/12, V7.5 11/12; 20/20 acciones candi
 
 ## Autorización de clasificación financiera y revisión universal
 Propietario aprueba ambas líneas. V7.6 experimental: solicitud V7.5 idéntica, validador adicional de pago literal con catálogo estándar y abstención conservadora. Motor de revisión local puro, edición y confirmación por lote sin escrituras. L2 hito 1 completado por aprobación del flujo de diseño; L2 restantes pendientes de prueba. Arnés anterior 285/285 confirmado. Replay V7.6 sobre 173 internas y arnés nuevo en verificación. No aceptación, no IA real, no fase 3. Ver docs/inteligencia/PLAN-V7.6-REVISION-UNIVERSAL.md.
+
+
+## Cierre parcial V7.6 y revisión universal
+Replay financiero 46042512690 aprobado: 156/173 vs 155/173, corrige caso 10 de resistencia, cero empeorados, misma solicitud V7.5 (no mejora bruta demostrada). Arnés 301/301 run 46042511640. Replay revisión 46042608442 aprobado: 367/367 reconocidas preservadas, 274 listas/93 pendientes, 202 lotes locales, 274 confirmadas y deshechas, sin efectos. Arnés 46042608295 falló por any en test nuevo, corregido tipo explícito; reejecución pendiente. L1 1/5 L2 2/5: 3/30 hitos, 11% ponderado (+8 pp); motor sin interfaz todavía. Informe docs/inteligencia/INFORME-V7.6-REVISION-UNIVERSAL.md. No aceptación ni fase 3, no llamadas nuevas ni cambios de versiones previas, BD, main o contrato. Próximo: editor del laboratorio y contraste financiero bruto/temporal antes de oficial.

@@ -67,3 +67,7 @@ Candidata 0724bfe, ajuste de lista de corpus ca1f72b, solicitud 2a630c6. Arnés 
 
 ## Resultado V7.5
 Run 46037265864 completo: V6 6/10, V7.4 7/10, V7.5 10/10 en desarrollo; 20/20 acciones V7.5, sin déficit/exceso; V6 24 y V7.4 21. 31 solicitudes, 30 válidas STOP y un 503 recuperado, una medición faltante; no certificar aceptación ni consumo total. Arnés 273/273, completo aprobado. Informe docs/inteligencia/INFORME-EVALUACION-V7.5.md. Próximo: resistencia dirigida y examen individual solo con criterios y cuota; no se inicia aquí. Laboratorio 95/224 con recuperación local aprobada, actualización 105/254 en prueba. V6 predeterminada, producción/main/corpus intactos.
+
+
+## Cierre parcial V7.6 y revisión universal
+Replay financiero 46042512690 aprobado: 156/173 vs 155/173, corrige caso 10 de resistencia, cero empeorados, misma solicitud V7.5 (no mejora bruta demostrada). Arnés 301/301 run 46042511640. Replay revisión 46042608442 aprobado: 367/367 reconocidas preservadas, 274 listas/93 pendientes, 202 lotes locales, 274 confirmadas y deshechas, sin efectos. Arnés 46042608295 falló por any en test nuevo, corregido tipo explícito; reejecución pendiente. L1 1/5 L2 2/5: 3/30 hitos, 11% ponderado (+8 pp); motor sin interfaz todavía. Informe docs/inteligencia/INFORME-V7.6-REVISION-UNIVERSAL.md. No aceptación ni fase 3, no llamadas nuevas ni cambios de versiones previas, BD, main o contrato. Próximo: editor del laboratorio y contraste financiero bruto/temporal antes de oficial.
