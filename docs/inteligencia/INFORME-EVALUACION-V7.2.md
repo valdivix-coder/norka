@@ -1,0 +1,23 @@
+# Informe V7.2 · desarrollo dirigido, 27-nov-2026
+
+**Resultado:** V7.2 mejora la precisión en desarrollo, pero no pasa la condición de no perder las clases de resistencia; no iniciar aceptación. V6 sigue siendo referencia predeterminada sintética; IA real no habilitada. Revisión técnica 979e8ef3, solicitud cb3ca45a, run [45928250323](https://github.com/valdivix-coder/norka/actions/runs/45928250323), artefacto 15166769133. ZIP descargado y SHA-256 comprobado: 350ae63f77b899727d7c6223fcb77dbddac3c68a0dfe6bb2c6ea0e13bb128c02. Arnés 241/241 (45928130490), completo (45928130458) aprobados.
+
+## Evidencia real
+
+12 pares válidos, 24 solicitudes STOP, sin fallos, sin repetición D19 (modo desarrollo). V6 principal/estricta bruta y normalizada 8/12 = 66,7%; V7.2 bruta 9/12 = 75%, normalizada 10/12 = 83,3%. Ganancia normalizada +16,7 pp; fallos 4→2. No es conjunto ciego ni examen oficial, no extrapolar al 96% de V6 agrupado. V7.1 había mejorado en otros conjuntos distintos.
+
+- Casos 1–3: vínculo contextual de escolar/financiero correcto, sin transferencia a pago del hogar no asociado; 3/3 ambos. Caso 4: dos beneficiarios ambiguos, V7.2 cumple contrato sin duplicar acción, V6 no.
+- Caso 5: rutina sin beneficiario: ambos null correcto. Caso 29: ambos copian El hogar a compra genérica independiente. Caso 38: regresión frente a V6, compra genérica sin ancla asignada a El hogar, validador solo reduce confianza. Señal automática ausente porque exime El hogar. Clasificar como atribución no respaldada respecto al contrato y oráculo; no afirmar cero invenciones. Requiere ancla por acción, no por captura completa, sin anular hogar legítimo.
+- D04: caso 6 modelo asigna +7 erróneamente bajo nueva convención, validador corrige fecha y conserva 09:30. Casos 7/8 próximo explícito/hoy correctos. El 6 es cambio de convención aprobado; no solo mejora de semántica frente a V6.
+- Alcance temporal: caso 9 ambos heredan fecha con hora posterior; caso 10 V7.2 evita copiar fecha a acción independiente, V6 no.
+- V6 mediana 954,5 ms, V7.2 1132 ms (+18,6%); p95 3719/3619 ms. Entrada 33561/36954 (+10,11%, ligeramente fuera del límite indicativo +10% en desarrollo); salida 1419/2356 (+66,0%). Por revisar 4/19 (21,1%) vs 6/18 (33,3%). No equivalen a errores por sí solos; los títulos y confianza no forman parte de métrica estricta. No hay montos numéricos en estos 12 casos; no validar preservación de montos. D03 tipos no evaluado con Gemini.
+- Mejora verificable del validador: 9/12→10/12 en misma salida V7.2, caso 6 corregido, ninguno empeorado por métrica. No es ablación de los demás módulos.
+- NO VERIFICADO: generalización, examen individual completo, auditoría independiente, latencia voz, cuota restante, comparación V7.2 tipada vs sin tipos.
+
+## Bloqueo de integración práctica
+
+src/core/usecases/interpretacion.ts (planInterpretacion) actualmente usa plazo_hora:e.plazo_fecha?e.plazo_hora:null; por tanto el caso 6 pierde 09:30 en la propuesta aplicable. Responsabilidad sin persona/ámbito/recurrencia se degrada a tarea, notas se convierten en sinClasificar con texto original. No afirmar que la salida del validador ya llega a la UI. src/core/usecases/procesar-captura.ts requiere bandera y no se invoca desde pantallas; src/app/familia/captura-acciones.ts solo guarda/edita. Probar extremo a extremo en laboratorio aislado; no tocar contrato real ni habilitar envío de capturas familiares.
+
+## Recomendación
+
+Preservar evidencia y revisión V7.2; siguiente candidato V7.3 si se autoriza, ancla de hogar por acción, conservando correcciones temporales y beneficiario contextual. Añadir contraejemplos nuevos y métricas de revisión. Proponer laboratorio privado sintético: 1) replay del artefacto sin proveedor, muestra bruta, normalizada y propuesta, no escribir a BD; 2) pruebas unitarias y ablations pareadas sobre frases nuevas comunes para cada módulo (misma entrada/modelo/configuración, cambio único, resultados por campo y pares); D03 comparar V7.2 con/sin tipos de manera aislada si se autoriza y hay cuota; 3) prototipo de revisión visual con fixtures ficticios predeterminados, solo local/preview protegida, sin entrada libre a Gemini gratuito; permitir dictado local solo para ejercicios ficticios si privacidad y navegador lo permiten, sin guardar; 4) A/B oficial completo solo después de criterios actuales, sin alterar puntos de parada; 5) beta real requiere aprobación explícita de privacidad, consentimiento, proveedor y flujo transaccional de edición/undo y E2E. Sin facturación, main ni cambio a corpus/umbral. No llamar más al proveedor ni editar candidato en esta revisión. 
