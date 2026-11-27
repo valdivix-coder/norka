@@ -23,6 +23,8 @@ with sync_playwright() as p:
     page.locator("#tema").click()
     assert page.locator("html").get_attribute("data-tema")=="claro"
     page.screenshot(path=str(out/"laboratorio-movil-claro.png"),full_page=True)
+    assert page.locator("#universal .universal-accion").count()>=1
+    assert page.evaluate("typeof NorkaRevision.iniciarRevision === 'function'")
     page.locator("#capa").select_option("aplicable")
     assert page.get_by_text("Precisión de propuesta: no medida").count()==2
     page.locator("#capa").select_option("resultado")
@@ -62,6 +64,21 @@ with sync_playwright() as p:
     page.locator("#caso").select_option("6")
     page.locator("#a").select_option("7.2")
     page.locator("#capa").select_option("aplicable")
+    u=page.locator("#universal")
+    assert u.get_by_text("Por completar: Fecha para la hora",exact=False).count()>=1
+    action=u.locator(".universal-accion").first
+    action.get_by_role("button",name="Completar o editar").click()
+    assert action.get_by_label("Hora",exact=True).input_value()=="09:30"
+    action.get_by_label("Fecha",exact=True).fill("2027-02-25")
+    action.get_by_label("He revisado los datos de esta acción").check()
+    action.get_by_role("button",name="Guardar revisión").click()
+    assert u.get_by_text("Lista para confirmar",exact=True).count()>=1
+    page.locator("#universal-confirmar").click()
+    assert u.get_by_text("Confirmada localmente",exact=True).count()>=1
+    page.locator("#universal").screenshot(path=str(out/"revision-universal-confirmada.png"))
+    page.locator("#universal-undo").click()
+    assert u.get_by_text("Confirmada localmente",exact=True).count()==0
+    page.locator("#universal").screenshot(path=str(out/"revision-universal-movil.png"))
     assert page.get_by_text("Hora sugerida: 09:30",exact=False).count()>=1
     page.set_viewport_size({"width":360,"height":800})
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")

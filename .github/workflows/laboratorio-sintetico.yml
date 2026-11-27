@@ -2,7 +2,7 @@ name: Laboratorio sintético · exportar y probar sin proveedor
 on:
   push:
     branches: [fase-2]
-    paths: ['src/laboratorio/plantilla.html','src/laboratorio/laboratorio.js','src/laboratorio/laboratorio.css','evals/laboratorio.eval.ts','tests/navegador/laboratorio.py','.github/workflows/laboratorio-sintetico.yml']
+    paths: ['src/laboratorio/plantilla.html','src/laboratorio/laboratorio.js','src/laboratorio/laboratorio.css','src/laboratorio/motor-revision-universal.ts','src/laboratorio/revision-sintetica.ts','evals/laboratorio.eval.ts','tests/navegador/laboratorio.py','.github/workflows/laboratorio-sintetico.yml']
   workflow_dispatch:
 permissions:
   contents: read

@@ -19,3 +19,7 @@ La revisión permite recuperar manualmente una acción de referencia ficticia me
 
 ## V7.5 · respuestas nuevas
 El workflow incluye la corrida 46037265864, 10 capturas/30 respuestas. La exportación ampliada espera 105 capturas y 254 respuestas; pendiente de nueva prueba de navegador. No incluye datos reales ni examen oficial.
+
+
+## Revisión universal conectada al motor
+El exportador compila el motor TypeScript existente mediante Vite (dependencia ya fijada de Vitest, no paquete nuevo), lo incluye en el HTML sin recursos externos y ejecuta directamente sus funciones. El panel antes de comparar permite editar título, tipo, beneficiario, ámbito, fecha, hora, recurrencia y destinatario; exige revisión explícita para elevar confianza, conserva original, confirma seleccionadas listas en un toque y deshace última confirmación. El comparador anterior y su práctica de recuperación siguen separados. No es IA en vivo ni modifica la app real. No se confirma una nota sin convertirla explícitamente ni una acción sin datos requeridos. Los estados y efectos siguen en memoria. Validar exportación y recorrido, no asumir Safari ni accesibilidad completa.

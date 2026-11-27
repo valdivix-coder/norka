@@ -1,4 +1,5 @@
 import {test,expect} from "vitest";
+import {build} from "vite";
 import {readFileSync,writeFileSync,mkdirSync,readdirSync} from "node:fs";
 import {createHash} from "node:crypto";
 import {join} from "node:path";
@@ -40,7 +41,7 @@ function propuesta(b:Brazo,c:Contexto,texto:string){
  const nombre=(xs:{id:string;nombre:string}[],id:string|null)=>xs.find(x=>x.id===id)?.nombre??null;
  return {elementos:p.map(e=>({tipo:e.tipo,titulo:e.titulo,persona_a_cargo:nombre(personas,e.persona_a_cargo_id),ambito:nombre(ambitos,e.ambito_id),plazo_fecha:e.plazo_fecha,plazo_hora:e.plazo_hora,recurrencia:e.recurrencia,dirigida_a:nombre(integrantes,e.dirigida_a_id),confianza:e.por_revisar?"Por revisar":"Sin marca de revisión"}))};
 }
-test("laboratorio aislado: exportación explícita con procedencia y propuesta real",()=>{
+test("laboratorio aislado: exportación explícita con procedencia y propuesta real",async()=>{
  if(process.env.NORKA_LABORATORIO!=="1")throw Error("LABORATORIO_DESHABILITADO");
  const base="src/laboratorio/fixtures",files=readdirSync(base).filter(f=>/^replay-\d+\.json$/.test(f)).sort();
  const fixtures=files.map(f=>parse(join(base,f)) as Fixture);
@@ -55,7 +56,12 @@ test("laboratorio aislado: exportación explícita con procedencia y propuesta r
  expect(casos).toBe(61+(process.env.NORKA_REPLAY_V73?22:0)+(process.env.NORKA_REPLAY_V74?12:0)+(process.env.NORKA_REPLAY_V75?10:0));
  expect(validas).toBe(122+(process.env.NORKA_REPLAY_V73?66:0)+(process.env.NORKA_REPLAY_V74?36:0)+(process.env.NORKA_REPLAY_V75?30:0));
  const d=JSON.stringify(limpio).replace(/</g,"\\u003c").replace(/\u2028/g,"\\u2028").replace(/\u2029/g,"\\u2029");
- const html=readFileSync("src/laboratorio/plantilla.html","utf8").replace("/*TOKENS*/",()=>readFileSync("src/app/tokens.css","utf8")).replace("/*ESTILOS*/",()=>readFileSync("src/laboratorio/laboratorio.css","utf8")).replace("/*DATOS*/",()=>d).replace("/*LOGICA*/",()=>readFileSync("src/laboratorio/laboratorio.js","utf8"));
+ const salida=await build({configFile:false,logLevel:"silent",build:{lib:{entry:"src/laboratorio/motor-revision-universal.ts",name:"NorkaRevision",formats:["iife"]},write:false,minify:true,target:"es2022"}});
+ const grupos=Array.isArray(salida)?salida:[salida];
+ const piezas=grupos.flatMap(g=>"output" in g?g.output:[]).filter(x=>x.type==="chunk");
+ if(piezas.length!==1||piezas[0].type!=="chunk")throw Error("MOTOR_NO_AUTONOMO");
+ const motor=piezas[0].code.replace(/<\/script/gi,"<\\/script");
+ const html=readFileSync("src/laboratorio/plantilla.html","utf8").replace("/*TOKENS*/",()=>readFileSync("src/app/tokens.css","utf8")).replace("/*ESTILOS*/",()=>readFileSync("src/laboratorio/laboratorio.css","utf8")).replace("/*DATOS*/",()=>d).replace("/*MOTOR*/",()=>motor).replace("/*LOGICA*/",()=>readFileSync("src/laboratorio/laboratorio.js","utf8"));
  const out=process.env.NORKA_LAB_OUT??"/tmp/norka-laboratorio";
  mkdirSync(out,{recursive:true});writeFileSync(join(out,"laboratorio-norka.html"),html);
  console.log("LABORATORIO",JSON.stringify({casos,validas,fuentes:fixtures.map(f=>({run:f.fuente.run,sha256:f.fuente.sha256Json})),sha256:createHash("sha256").update(html).digest("hex")}));
