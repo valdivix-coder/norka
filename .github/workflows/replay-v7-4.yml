@@ -1,0 +1,25 @@
+name: Replay independiente V7.4 sin proveedor
+on:
+  push:
+    branches: [fase-2]
+    paths: ['evals/replay-v7-4.eval.ts']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  replay:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: evaluacion-v7-3-desarrollo-desarrollo-v7-3
+          run-id: '45994191002'
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+          path: /tmp/replay-v73
+      - run: npx vitest run --config evals/vitest.replay-v7-4.mts
