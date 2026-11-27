@@ -24,3 +24,7 @@ Documento de planificación, no ejecución de la fase. Fuente de verdad: PROMPT-
 - Antes de cada pantalla, leer íntegramente la guía gráfica correspondiente y documentación Next instalada. Mantener marca exacta, tokens, palabras del glosario y roles.
 
 Estado: 0/11 implementadas en fase 3. Preparación de secuencia y criterios, no avance de código ni aceptación.
+
+
+## Plan transversal de inteligencia familiar por voz
+Nuevo plan docs/inteligencia/PLAN-INTELIGENCIA-FAMILIAR-POR-VOZ.md: 6 niveles, 30 hitos verificables, pesos 15/20/20/20/15/10. Base 1/30 hitos, 3% ponderado del nuevo objetivo (no avance total app); V7.5 80% y laboratorio previo 90% estimado. Primera parte: resistencia iniciada 20de483, run 46039721333, pendiente de resultado. Laboratorio ampliado 105/254 validado en 46037861623; artefacto 15217737998. Auditoría sobre 367 acciones: 13 con cambios de campos/tipo/título al aplicar, 5 horas y 2 recurrencias no preservadas; 93 por revisar. Propuesta de arquitectura tipada, revisión antes de ejecución y expansión por fase funcional. §6.2 hoy guarda y crea antes de editar; requiere decisión explícita para cambiar a guardar original/revisar/confirmar acciones. Fase 3 0/11, preparación permitida, ejecución solo con puerta y aprobación escrita. Sin cambios a contrato, BD, proveedor, presupuesto ni main. No se inicia aceptación oficial en esta etapa.
