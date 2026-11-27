@@ -61,3 +61,7 @@ El propietario solicita transferir a un modelo de razonamiento avanzado la sigui
 ## Estado del encargo V7.3 y laboratorio (27-nov-2026)
 
 Entrega I ejecutada hasta la aceptación; detenida en un punto de parada (alerta de invención del control V6, caso 3, run 45995259777). Entrega II bloqueada hasta la autorización del propietario. Decisiones pendientes y siguiente paso exacto: [TRASPASO-V7.3-LABORATORIO.md](TRASPASO-V7.3-LABORATORIO.md). No reanudar llamadas sin respuesta.
+
+
+## V7.4 y laboratorio independiente autorizados
+D21 implementada y probada; V7.4 desarrollo run 46034647175: 11/12 (91,7%), frente a V6 10/12 y 7.3 9/12. 36 STOP; caso 6 omite pago, clase de resistencia pendiente y no iniciar examen oficial. Replay independiente 46035205237: 95/105 ambos validadores, cero empeorados. Arnés 266/266, completo aprobado. Informe docs/inteligencia/INFORME-EVALUACION-V7.4.md. Laboratorio local HTML, 83 capturas y 188 respuestas verificadas en 46034931052; actualización 7.4 a 95/224 en verificación. Guía LABORATORIO-IA.md y validación LABORATORIO-IA-VALIDACION.md. No main, datos reales, proveedor nuevo, BD ni facturación. V6 referencia sintética; IA familiar deshabilitada. No certificar 7.4; siguiente corrección de segmentación y criterios de omisión. Reversión archivos nuevos y selector 6.0.
