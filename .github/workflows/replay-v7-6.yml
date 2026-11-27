@@ -1,0 +1,44 @@
+name: V7.6 · replay financiero y revisión universal
+on:
+  push:
+    branches: [fase-2]
+    paths: ['evals/replay-v7-6.eval.ts','src/core/usecases/validar-interpretacion-v7-6.ts','src/laboratorio/motor-revision-universal.ts']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  replay:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run arnes
+      - uses: actions/download-artifact@v4
+        with:
+          name: evaluacion-v7-3-desarrollo-desarrollo-v7-3
+          run-id: '45994191002'
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+          path: /tmp/replay-v73
+      - uses: actions/download-artifact@v4
+        with:
+          name: evaluacion-v7-4-desarrollo-desarrollo-v7-4
+          run-id: '46034647175'
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+          path: /tmp/replay-v74
+      - uses: actions/download-artifact@v4
+        with:
+          name: evaluacion-v7-5-desarrollo-desarrollo-v7-5
+          run-id: '46037265864'
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+          path: /tmp/replay-v75
+      - uses: actions/download-artifact@v4
+        with:
+          name: evaluacion-v7-5-desarrollo-desarrollo-v7-4
+          run-id: '46039721333'
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+          path: /tmp/replay-resistencia
+      - run: npx vitest run --config evals/vitest.replay-v7-6.mts

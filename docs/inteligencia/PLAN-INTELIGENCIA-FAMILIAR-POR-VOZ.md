@@ -56,3 +56,7 @@ Auditoría reproducible sin proveedor: `node --test scripts/auditar-aplicabilida
 
 ## Resistencia V7.5 y preparación revisión
 Run 46039721333 completo: V6 10/12, V7.4 12/12, V7.5 11/12; 20/20 acciones candidata, cero déficit/exceso, 36 STOP. Caso 10 regresión de ámbito (pago veterinario Mascotas vs Pagos y finanzas). Punto de parada: no oficial ni nuevas llamadas. Informe docs/inteligencia/INFORME-CONSOLIDACION-V7.5.md. Reparación runner del auditor (vitest, mismas pruebas) y prototipo puro de revisión en laboratorio, conserva reconocido y propuesta sin escrituras; pruebas CI pendientes. Avance formal L1 1/5, 3% ponderado; L2 trabajo parcial. V6 predeterminada, fase 3 0/11. No datos reales ni cambios contrato, main o BD.
+
+
+## Autorización de clasificación financiera y revisión universal
+Propietario aprueba ambas líneas. V7.6 experimental: solicitud V7.5 idéntica, validador adicional de pago literal con catálogo estándar y abstención conservadora. Motor de revisión local puro, edición y confirmación por lote sin escrituras. L2 hito 1 completado por aprobación del flujo de diseño; L2 restantes pendientes de prueba. Arnés anterior 285/285 confirmado. Replay V7.6 sobre 173 internas y arnés nuevo en verificación. No aceptación, no IA real, no fase 3. Ver docs/inteligencia/PLAN-V7.6-REVISION-UNIVERSAL.md.
