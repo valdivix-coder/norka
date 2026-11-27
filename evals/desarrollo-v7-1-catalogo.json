@@ -1,0 +1,261 @@
+{
+ "fecha": "2026-12-30T18:00:00-03:00",
+ "zona_horaria": "America/Santiago",
+ "personas_a_cargo": [
+  "Agustina",
+  "Canelo",
+  "El hogar"
+ ],
+ "integrantes": [
+  "Jorge",
+  "Daniela"
+ ],
+ "autor": "Daniela",
+ "ambitos": [
+  "Salud",
+  "Estudios",
+  "Cuentas",
+  "Casa",
+  "Animales",
+  "Papeleo",
+  "Supermercado",
+  "Rutina niños"
+ ],
+ "casos": [
+  {
+   "id": 1,
+   "grupos": [
+    "catalogo_pago"
+   ],
+   "texto": "Pagar el dividendo de la casa antes del 5",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Pagar el dividendo",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Cuentas",
+      "plazo_fecha": "2027-01-05",
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 2,
+   "grupos": [
+    "catalogo_escolar"
+   ],
+   "texto": "Comprar útiles para la Agustina el lunes",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar útiles para Agustina",
+      "persona_a_cargo": "Agustina",
+      "ambito": "Estudios",
+      "plazo_fecha": "2027-01-04",
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 3,
+   "grupos": [
+    "catalogo_hereda"
+   ],
+   "texto": "Llevar al Canelo al veterinario el sábado y a las diez comprar verduras",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Llevar a Canelo al veterinario",
+      "persona_a_cargo": "Canelo",
+      "ambito": "Animales",
+      "plazo_fecha": "2027-01-02",
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     },
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar verduras",
+      "persona_a_cargo": null,
+      "ambito": "Supermercado",
+      "plazo_fecha": "2027-01-02",
+      "plazo_hora": "10:00",
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 4,
+   "grupos": [
+    "catalogo_propuesta"
+   ],
+   "texto": "Que Jorge saque el certificado de nacimiento de la Agustina",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "propuesta",
+      "titulo": "Sacar el certificado de nacimiento de Agustina",
+      "persona_a_cargo": "Agustina",
+      "ambito": "Papeleo",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": "Jorge",
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 5,
+   "grupos": [
+    "catalogo_rutina"
+   ],
+   "texto": "Bañar a la Agustina todos los días",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "responsabilidad",
+      "titulo": "Bañar a Agustina",
+      "persona_a_cargo": "Agustina",
+      "ambito": "Rutina niños",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": {
+       "tipo": "diaria",
+       "cada": 1,
+       "dias": []
+      },
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 6,
+   "grupos": [
+    "catalogo_hogar"
+   ],
+   "texto": "Ordenar el living de la casa",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Ordenar el living",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Casa",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 7,
+   "grupos": [
+    "catalogo_sin_equivalente"
+   ],
+   "texto": "Comprar entradas para el cine",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar entradas para el cine",
+      "persona_a_cargo": null,
+      "ambito": null,
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "baja"
+     }
+    ]
+   }
+  },
+  {
+   "id": 8,
+   "grupos": [
+    "catalogo_autor"
+   ],
+   "texto": "Que Daniela pague la luz de la casa",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "nota",
+      "titulo": "Que Daniela pague la luz de la casa",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Cuentas",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "baja"
+     }
+    ]
+   }
+  },
+  {
+   "id": 9,
+   "grupos": [
+    "catalogo_hhmm"
+   ],
+   "texto": "Mañana a las 9:30 llevar a la Agustina al médico",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Llevar a Agustina al médico",
+      "persona_a_cargo": "Agustina",
+      "ambito": "Salud",
+      "plazo_fecha": "2026-12-31",
+      "plazo_hora": "09:30",
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 10,
+   "grupos": [
+    "catalogo_adulto"
+   ],
+   "texto": "El 2 de enero renovar la licencia de conducir de Jorge",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Renovar la licencia de conducir de Jorge",
+      "persona_a_cargo": null,
+      "ambito": "Papeleo",
+      "plazo_fecha": "2027-01-02",
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  }
+ ]
+}
