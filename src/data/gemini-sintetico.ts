@@ -79,11 +79,16 @@ export function crearGeminiSintetico({clave,modelo,corpus,respaldos=[],version="
       const filas=lote?contratoLoteInternoV7.parse(objeto).resultados:[{id:ids[0],...contratoInternoV7.parse(objeto)}];
       if(filas.length!==ids.length||new Set(filas.map(f=>f.id)).size!==ids.length||filas.some(f=>!ids.includes(f.id))){etapa="lote_incompleto";throw new Error("LOTE_INCOMPLETO");}
       const internasLocales=new Map<number,SalidaInterna>();
+      // Zod valida antes de guardar; el JSON original conserva orden y espacios de cadenas para auditoría.
+      type InternaValidada=z.infer<typeof contratoInternoV7>;
+      const filasOriginales=lote?(objeto as {resultados:({id:number}&InternaValidada)[]}).resultados:[{id:ids[0],...(objeto as InternaValidada)}];
       for(const f of filas){
         const interna={descartes:f.descartes,elementos:f.elementos};
-        internasLocales.set(f.id,structuredClone(interna));
+        const original=filasOriginales.find(x=>x.id===f.id)!;
+        internasLocales.set(f.id,structuredClone({descartes:original.descartes,elementos:original.elementos}));
         etapa="contrato_publico_v7";
-        const bruta=contratoInterpretacion.parse({elementos:f.elementos.map(e=>({tipo:e.tipo,titulo:e.titulo,persona_a_cargo:e.persona_a_cargo,ambito:e.ambito,plazo_fecha:e.plazo_fecha,plazo_hora:e.plazo_hora,recurrencia:e.recurrencia,dirigida_a:e.dirigida_a,confianza:e.confianza}))});
+        const bruta={elementos:original.elementos.map(e=>({tipo:e.tipo,titulo:e.titulo,persona_a_cargo:e.persona_a_cargo,ambito:e.ambito,plazo_fecha:e.plazo_fecha,plazo_hora:e.plazo_hora,recurrencia:e.recurrencia,dirigida_a:e.dirigida_a,confianza:e.confianza}))};
+        contratoInterpretacion.parse(bruta);
         originales.set(f.id,bruta);
         const revisada=validarV7(interna,{fecha:contexto.fecha,texto:casos.get(f.id)!,personas:contexto.personas_a_cargo,integrantes:contexto.integrantes,ambitos:contexto.ambitos,autor:contexto.autor});
         salidas.set(f.id,contratoInterpretacion.parse(revisada.publica));ajustes.set(f.id,revisada.ajustes);
@@ -102,12 +107,12 @@ export function crearGeminiSintetico({clave,modelo,corpus,respaldos=[],version="
     brutas=originales;
     const u=respuesta.usageMetadata;
     const tokens=(n:unknown)=>typeof n==="number"&&Number.isSafeInteger(n)&&n>=0?n:undefined;
-    observar({modelo:elegido,resultado:"valida",ms:Date.now()-inicio,tokensEntrada:tokens(u?.promptTokenCount),tokensSalida:tokens(u?.candidatesTokenCount),tokensRazonamiento:tokens(u?.thoughtsTokenCount),...(esV7?{finishReason}:{})});
+    observar({modelo:elegido,resultado:"valida",ms:Date.now()-inicio,tokensEntrada:tokens(u?.promptTokenCount),tokensSalida:tokens(u?.candidatesTokenCount),tokensRazonamiento:tokens(u?.thoughtsTokenCount),...(finishReason!==undefined?{finishReason}:{})});
     fallosTransitorios.delete(elegido);ultimoModelo=elegido;return salidas;
       }catch(error){
         ultimo=error;
         const motivo=error instanceof ErrorGemini?"HTTP "+error.estado:error instanceof Error&&["TimeoutError","AbortError"].includes(error.name)?"timeout":etapa;
-        observar({modelo:elegido,resultado:"fallida",ms:Date.now()-inicio,motivo,...(esV7?{finishReason}:{})});
+        observar({modelo:elegido,resultado:"fallida",ms:Date.now()-inicio,motivo,...(finishReason!==undefined?{finishReason}:{})});
         // Autenticación y errores de solicitud no se arreglan cambiando modelo.
         if(error instanceof ErrorGemini&&![404,408,429,500,502,503,504].includes(error.estado))throw error;
         // No insistir contra una cuota agotada ni un modelo ausente durante esta corrida.

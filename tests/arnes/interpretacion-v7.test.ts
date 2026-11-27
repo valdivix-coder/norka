@@ -5,6 +5,7 @@ import {join,resolve} from "node:path";
 import {spawnSync} from "node:child_process";
 import {crearGeminiSintetico} from "../../src/data/gemini-sintetico";
 import {instruccionesCaptura} from "../../src/data/prompt-captura";
+import {resolverTiempo} from "../../src/core/usecases/validar-interpretacion-v7";
 const corpus={fecha:"2026-11-26T12:00:00-03:00",zona_horaria:"America/Santiago",personas_a_cargo:["El hogar"],integrantes:["Rosa"],autor:"Rosa",ambitos:["Hogar"],casos:[{id:1,texto:"Mañana a las 09:30 limpiar el patio"},{id:2,texto:"Ordenar la casa"}]};
 const publico={tipo:"tarea",titulo:"Limpiar el patio",persona_a_cargo:"El hogar",ambito:"Hogar",plazo_fecha:"2026-11-27",plazo_hora:"09:30",recurrencia:null,dirigida_a:null,confianza:"alta"};
 const interna={descartes:[],elementos:[{...publico,evidencia:corpus.casos[0].texto,tiempo:["Mañana a las 09:30"],motivo_nota:null}]};
@@ -17,7 +18,7 @@ describe("V7: selector y aislamiento sintético",()=>{
  });
  it("V7 usa esquema ordenado, calendario, tres capas y no altera hora",async()=>{
   const solicitar=vi.fn(async(_u:RequestInfo|URL,init?:RequestInit)=>{const b=JSON.parse(String(init?.body));const datos=JSON.parse(b.contents[0].parts[0].text);expect(datos.texto).toBe(corpus.casos[0].texto);expect(datos.contexto.calendario.manana).toBe("2026-11-27");expect(Object.keys(b.generationConfig.responseJsonSchema.properties.elementos.items.properties).slice(0,2)).toEqual(["evidencia","tiempo"]);expect(b.generationConfig.maxOutputTokens).toBe(1024);return responder(interna);});
-  const ia=crearGeminiSintetico({clave:"qa",modelo,corpus,version:"7.0",solicitar});expect(await ia.evaluar(1)).toEqual({elementos:[publico]});expect(ia.bruta(1)).toEqual({elementos:[publico]});expect(ia.brutaInterna(1)).toEqual(interna);
+  const ia=crearGeminiSintetico({clave:"qa",modelo,corpus,version:"7.0",solicitar});expect(await ia.evaluar(1)).toEqual({elementos:[publico]});expect(ia.bruta(1)).toEqual({elementos:[publico]});expect(ia.brutaInterna(1)).toEqual(interna);expect(Object.keys(ia.brutaInterna(1)!.elementos[0])[0]).toBe("tipo");
  });
  it("V7 no comparte plazos entre casos y rechaza identificadores duplicados",async()=>{
   const segundo={...interna.elementos[0],evidencia:corpus.casos[1].texto,tiempo:[],titulo:"Ordenar la casa"};
@@ -45,4 +46,9 @@ describe("Anexos V7 originales y resistencia contra código integrado",()=>{
  for(const [archivo,esperado] of [["calendario.test.ts","69 ok, 0 fallos"],["validador.test.ts","72 ok, 0 fallos; mutaciones detectadas 20/22"],["regresion.test.ts","DESARROLLO: 50/50 sin cambio de campos"],["contrato.test.ts","referencias internas válidas: 50 / 50"],["resistencia.test.ts","Contraejemplos independientes: 12"]]){
   it(archivo,()=>{const r=spawnSync(process.execPath,["--experimental-strip-types",archivo],{cwd:dir,encoding:"utf8"});expect(r.status,r.stderr+"\n"+r.stdout).toBe(0);expect(r.stdout).toContain(esperado);if(archivo==="regresion.test.ts")expect(r.stdout).toContain("OFICIAL: 50/50 sin cambio de campos");},15000);
  }
+});
+
+it("horas explícitas: conserva formato de 24 horas, meridiano y alternativas",()=>{
+ const casos:[string[],string|null][]=[ [ ["mañana 09:30"],"09:30"],[["mañana a las 12:00 am"],"00:00"],[["mañana a las 12:00 pm"],"12:00"],[["mañana a las 09:30 o 10:30"],null],[["mañana","a las 09:30","a las 10:30"],null],[["mañana a las 9:3"],null],[["mañana a las 13:30 de la mañana"],null] ];
+ for(const [frags,hora] of casos)expect(resolverTiempo("2026-11-26",frags,null).hora,frags.join(" | ")).toBe(hora);
 });

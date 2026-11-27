@@ -59,22 +59,39 @@ export function resolverTiempo(fechaLocal: string, fragmentos: string[], anterio
     let periodo: "am" | "pm" | null = null;
     if (/\b(de|en|por) la manana\b/.test(s)) { periodo = "am"; s = s.replace(/\b(de|en|por) la manana\b/, " "); }
     if (/\b(de|en|por) la (tarde|noche)\b/.test(s)) { periodo = "pm"; s = s.replace(/\b(de|en|por) la (tarde|noche)\b/, " "); }
-    const mh = new RegExp("\\ba (?:las|la) " + NUMRE + "(?::(\\d{2})| y (media|cuarto))?(?: (?:hrs|horas|am|pm))?\\b").exec(s);
-    if (/\b(al|a) mediodia\b/.test(s)) { hora = "12:00"; reconocido++; s = s.replace(/\b(al|a) mediodia\b/, " "); }
-    else if (mh) {
-      reconocido++; s = s.replace(mh[0], " ");
-      let h = num(mh[1]); const min = mh[2] ? Number(mh[2]) : mh[3] === "media" ? 30 : mh[3] === "cuarto" ? 15 : 0;
-      if (/ pm\b/.test(mh[0])) periodo = "pm"; if (/ am\b/.test(mh[0])) periodo = "am";
-      if (h === undefined || h > 23 || min > 59) { horaAmbigua = true; h = -1; }
-      else if (mh[2] && !periodo) { /* HH:MM explícita en formato de 24 horas */ }
-      else if (h >= 13) { /* literal 24 h */ }
-      else if (periodo === "pm") { if (h === 12) { horaAmbigua = true; h = -1; } else h += 12; }
-      else if (periodo === "am") { if (h === 12) { horaAmbigua = true; h = -1; } }
-      else if (h >= 8 && h <= 12) { /* convención: mañana o mediodía */ }
-      else if (h >= 1 && h <= 6) { h += 12; } // convención propuesta (D-06): 1–6 sin período = tarde; no baja la confianza
-      else { horaAmbigua = true; h = -1; } // 7 y 0 sin período: no se adivina
-      if (h >= 0 && h <= 23) hora = `${pad(h)}:${pad(min)}`;
-    } else if (periodo) { reconocido++; /* franja sin número: no hay hora */ }
+    const horasNumericas = [...s.matchAll(/\b(\d{1,2}):(\d{1,2})(?:\s*(am|pm))?\b/g)];
+    const verbal = new RegExp("\\ba (?:las|la) " + NUMRE + "(?: y (media|cuarto))?(?: (?:hrs|horas|am|pm))?\\b","g");
+    const horasVerbales = [...s.replace(/\b\d{1,2}:\d{1,2}(?:\s*(?:am|pm))?\b/g," ").matchAll(verbal)];
+    const mediodia = /\b(al|a) mediodia\b/.test(s);
+    const guardarHora = (h: number, min: number) => {
+      const nueva = pad(h)+":"+pad(min);
+      if (hora && hora!==nueva) horaAmbigua=true;
+      else hora=nueva;
+    };
+    if (horasNumericas.length+horasVerbales.length+Number(mediodia)>1 ||
+        /\b\d{1,2}:/.test(s) && horasNumericas.length===0) {
+      horaAmbigua=true; reconocido++;
+    } else if (mediodia) {
+      guardarHora(12,0); reconocido++; s=s.replace(/\b(al|a) mediodia\b/," ");
+    } else if (horasNumericas.length===1 || horasVerbales.length===1) {
+      const numerica=horasNumericas.length===1;
+      const mh=numerica?horasNumericas[0]:horasVerbales[0];
+      reconocido++;
+      s=s.replace(mh[0]," ").replace(/\ba (?:las|la)\s+/g," ");
+      let h=num(mh[1]);
+      const min=numerica?Number(mh[2]):mh[2]==="media"?30:mh[2]==="cuarto"?15:0;
+      if (numerica && mh[3]==="pm" || / pm\b/.test(mh[0])) periodo="pm";
+      if (numerica && mh[3]==="am" || / am\b/.test(mh[0])) periodo="am";
+      if (h===undefined || h>23 || min>59 || numerica&&mh[2].length!==2) { horaAmbigua=true; h=-1; }
+      else if (periodo) {
+        if(h<1||h>12){horaAmbigua=true;h=-1;}
+        else if(periodo==="pm") h=h===12?12:h+12;
+        else if(h===12) h=0;
+      } else if(numerica || h>=13 || h>=8&&h<=12) { /* literal 24h o convención D-06 */ }
+      else if(h>=1&&h<=6) h+=12;
+      else {horaAmbigua=true;h=-1;}
+      if(h>=0&&h<=23) guardarHora(h,min);
+    } else if(periodo) reconocido++; // franja sin número
     // Fecha
     const marcarFecha = (f: string | null, c: Clase) => { fechas++; reconocido++; if (f === null) peor("ambigua"); else { if (fecha && fecha !== f) peor("ambigua"); fecha = f; peor(c); } };
     if (/\bpasado manana\b/.test(s)) marcarFecha(sumar(hoy, 2), "inequivoca");
