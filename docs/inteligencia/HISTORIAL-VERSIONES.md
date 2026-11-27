@@ -36,3 +36,8 @@ D-19: repetir una vez ambos brazos ante regresión ordinaria; detener y conserva
 ## V7.2 · Resultado de desarrollo y propuesta de laboratorio sintético
 
 Run 45928250323 completó 12/12 pares: V6 8/12 bruta y normalizada; V7.2 9/12 bruta y 10/12 normalizada. Regresión El hogar sin ancla en compra genérica (38); error compartido en 29. D04 recupera fecha null/hora 09:30, pero planInterpretacion descarta la hora sin fecha. Entrada +10,11%, mediana +18,6%, salida +66,0%, Por revisar 33,3% vs 21,1%. No congelar para aceptación ni lanzar más solicitudes hasta resolver/autorizar siguiente paso. Arnés completo 45928130458 aprobado; ZIP original verificado. Ver docs/inteligencia/INFORME-EVALUACION-V7.2.md para detalle y propuesta de laboratorio. V6 referencia; IA de datos reales sigue deshabilitada. Sin main ni cambios técnicos.
+
+
+## Traspaso V7.3 + laboratorio sintético
+
+El propietario solicita que un modelo avanzado optimice la siguiente candidata primero y construya después el laboratorio. Encargo detallado: docs/inteligencia/ENCARGO-V7.3-LABORATORIO.md; handoff actualizado. Base 594c98a. Primera entrega A–E y segunda L1–L5, ejecución 0/5 cada una. Sin código nuevo ni llamadas a Gemini en este traspaso. V7.2 desarrollo 12/12 pares, 83,3% vs 66,7% V6 normalizada; no aceptación por regresión de atribución hogar. Laboratorio solo replay sintético, aislado, sin BD ni proveedor, privado o local, deshabilitado por defecto. No utilizar para eludir puntos de parada ni habilitar IA familiar. Reversión: revertir commit documental. Retomar desde A con evidencia y gates originales.

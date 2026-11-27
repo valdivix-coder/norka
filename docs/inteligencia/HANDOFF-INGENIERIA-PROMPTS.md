@@ -51,3 +51,8 @@ Se congela V6 operativa en 3030411 como referencia de comparación y 9d9b63c com
 ## Estado del encargo 7.1 (27-nov-2026)
 
 Ejecutado A–C y E–F; D detenido en un punto de parada obligatorio (regresión en el caso 1 del A/B individual oficial, run 45924281334). Resultado, evidencia, decisiones pendientes (D-19 nueva, D-03, D-04) y siguiente paso exacto: [TRASPASO-V7.1.md](TRASPASO-V7.1.md). No reanudar llamadas sin la respuesta del propietario. V6 predeterminada; 7.1 congelado y no aprobado.
+
+
+## Encargo activo · V7.3 y laboratorio interno (27-nov-2026)
+
+El propietario solicita transferir a un modelo de razonamiento avanzado la siguiente optimización y, después, la implementación del laboratorio. **Nueva fuente de ejecución: [ENCARGO-V7.3-LABORATORIO.md](ENCARGO-V7.3-LABORATORIO.md)**. Reemplaza los encargos anteriores como tarea activa, preservando su historial. V7.2 desarrollo 10/12 normalizada frente a 8/12 V6; regresión hogar sin ancla, coste +10,11%, hora descartada al convertir propuesta. No iniciar nueva evaluación oficial sin resolver criterios. Entrega I A–E (optimizar/medir/informar); Entrega II L1–L5 (laboratorio replay privado y sintético, sin proveedor ni BD, después del informe y respetando paradas). V6 predeterminada sintética, IA real deshabilitada. El modelo receptor debe dejar TRASPASO-V7.3-LABORATORIO.md. No hay código V7.3 ni laboratorio implementados en este traspaso, ni nuevas llamadas. Sin main, cambios de contrato, privacidad, facturación, proveedor ni datos reales.
