@@ -1,0 +1,46 @@
+name: Laboratorio sintético · exportar y probar sin proveedor
+on:
+  push:
+    branches: [fase-2]
+    paths: ['src/laboratorio/plantilla.html','src/laboratorio/laboratorio.js','src/laboratorio/laboratorio.css','evals/laboratorio.eval.ts','tests/navegador/laboratorio.py','.github/workflows/laboratorio-sintetico.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  laboratorio:
+    if: github.ref == 'refs/heads/fase-2'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      NORKA_LABORATORIO: '1'
+      NORKA_LAB_OUT: /tmp/norka-laboratorio
+      NORKA_REPLAY_V73: /tmp/replay-v73
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: evaluacion-v7-3-desarrollo-desarrollo-v7-3
+          run-id: '45994191002'
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+          path: /tmp/replay-v73
+      - name: Exportar HTML aislado, comprobar corpus y propuesta
+        run: npx vitest run --config evals/vitest.laboratorio.mts
+      - name: Pruebas de navegador
+        run: |
+          python -m venv /tmp/norka-lab-venv
+          /tmp/norka-lab-venv/bin/pip install playwright==1.51.0
+          /tmp/norka-lab-venv/bin/python -m playwright install --with-deps chromium
+          /tmp/norka-lab-venv/bin/python tests/navegador/laboratorio.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: laboratorio-norka-sintetico
+          path: /tmp/norka-laboratorio
+          if-no-files-found: error
+          retention-days: 14
