@@ -81,7 +81,8 @@ export function validarV71(interna: SalidaInternaV71, c: ContextoV71): { publica
         if (t.clase === "inequivoca" || t.clase === "heredada") {
           if (e.plazo_fecha !== t.fecha) { e.plazo_fecha = t.fecha; marcar("plazo_fecha", "recalculada"); }
           if (e.plazo_hora !== t.hora) { e.plazo_hora = t.hora; marcar("plazo_hora", "recalculada"); }
-        } else if (t.clase === "convencion" || t.clase === "ambigua" || t.clase === "desconocida") marcar("plazo", t.clase);
+        } else if (t.clase === "convencion" || t.clase === "ambigua") marcar("plazo", t.clase);
+        else if (t.clase === "desconocida" && (e.plazo_fecha !== null || e.plazo_hora !== null)) marcar("plazo", "no_verificable"); // franja o repetición sin plazo: nada que revisar
       }
       anterior = e.plazo_fecha;
     }

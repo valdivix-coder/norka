@@ -1,6 +1,6 @@
 {
   "modo": "desarrollo",
-  "corpus": "desarrollo-v7-1",
+  "corpus": "desarrollo-v7-1-catalogo",
   "semilla": 20261127,
-  "nota": "Desarrollo previo a congelar 7.1; no es aceptación ni usa el corpus oficial."
+  "nota": "Desarrollo tras ajustes mínimos (destinatario desconocido, cada 15 días, falso Por revisar). No es aceptación."
 }

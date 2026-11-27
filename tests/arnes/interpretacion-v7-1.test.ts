@@ -222,3 +222,14 @@ describe("7.1 · separación de datos de desarrollo, demostraciones y examen", (
   });
   it("huella de la instrucción 7.1 es estable durante la ejecución", () => { expect(sha(instruccionesCapturaV71)).toHaveLength(64); });
 });
+
+describe("7.1 · ajustes tras desarrollo", () => {
+  it("una franja o repetición sin plazo no genera revisión innecesaria", () => {
+    const r = validarV71(sal(el({ tipo: "responsabilidad", titulo: "Hacer las tareas", persona_base: "nombrada", persona_a_cargo: "Benja", ambito: "Colegio", tiempo: ["todas las tardes"], alcance: "ninguno", recurrencia: { tipo: "diaria", cada: 1, dias: [] } })), ctx("Hacer las tareas con el Benja todas las tardes"));
+    expect(r.ajustes).toEqual([]); expect(r.publica.elementos[0].confianza).toBe("alta");
+  });
+  it("con un plazo no verificable sí se marca", () => {
+    const r = validarV71(sal(el({ titulo: "Hacer", tiempo: ["todas las tardes"], alcance: "propio", plazo_hora: "16:00" })), ctx("Hacer las tareas todas las tardes"));
+    expect(r.ajustes.map(a => a.motivo)).toContain("no_verificable");
+  });
+});
