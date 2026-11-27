@@ -233,3 +233,17 @@ describe("7.1 · ajustes tras desarrollo", () => {
     expect(r.ajustes.map(a => a.motivo)).toContain("no_verificable");
   });
 });
+
+describe("7.1 · alcance contradictorio", () => {
+  it("solo hora tras una acción fechada hereda el día aunque el modelo declare «ninguno»", () => {
+    const t = "Llevar al Rayo al veterinario el sábado y a las diez comprar verduras";
+    const r = validarV71(sal(
+      el({ titulo: "Llevar a Rayo al veterinario", persona_base: "nombrada", persona_a_cargo: "Rayo", ambito: "Mascotas", tiempo: ["el sábado"], alcance: "propio", plazo_fecha: "2027-02-27" }),
+      el({ titulo: "Comprar verduras", ambito: "Compras", tiempo: ["a las diez"], alcance: "ninguno", plazo_hora: "10:00" })), ctx(t));
+    expect(r.publica.elementos[1]).toMatchObject({ plazo_fecha: "2027-02-27", plazo_hora: "10:00" });
+  });
+  it("sin acción anterior fechada no inventa fecha", () => {
+    const r = validarV71(sal(el({ titulo: "Comprar verduras", ambito: "Compras", tiempo: ["a las diez"], alcance: "ninguno", plazo_hora: "10:00" })), ctx("A las diez comprar verduras"));
+    expect(r.publica.elementos[0].plazo_fecha).toBeNull();
+  });
+});

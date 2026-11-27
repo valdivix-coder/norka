@@ -1,0 +1,55 @@
+{
+  "version": "7.1",
+  "estado": "congelado para A/B individual; cualquier cambio exige 7.2 y reiniciar la evaluación",
+  "base": "efad13fb7d5fcc073d1f2f4d676a5122e954f584",
+  "huellas": {
+    "6.0": {
+      "instruccion": "2977309124e9c632908d5e996e4b097d893809a17f01b5ef8b24a2db3f653448",
+      "validador": "cbb520991abadf1a106a5275e87c483c02d7e548e59a101841eddd39dc41da76"
+    },
+    "7.1": {
+      "instruccion": "9aeb220e0e7fe003dc7c4aff1b980b5d051640c40f11f2068628946c1b9af035",
+      "individual": "c99e97e5512223eab4ceb9d6b058f84ebef608698cfb9462cd0899d6cf1176cc",
+      "lote": "fa235a3c22d1ec2bf241838ca4eadb3f878b212b6a07e92279db388da4874e6e",
+      "esquema": "75aa6cf3748dc8fc274dc479484a189bcb98713ab9594f0928a70ce606bfa506",
+      "esquemaLote": "b53883d322d801d1e09ccad63cc1e63dfd177ebc930c8559087cb012c076ee85",
+      "validador": "0bca0663fbb93c46afd27c4a6576a93d86c51ba690f0a5dd9b7afb7a7413758e",
+      "validadorBase70": "d8a282898d1ae7028c36ba6e62bfa4c9d3fa7f9e4631b96493bb835285bebfa2",
+      "adaptador": "1781ac7c6589911eec22cc292044d645f3927ca50d132a4447f3d7da3d44792b"
+    }
+  },
+  "archivos7_1": {
+    "contrato": "c1246492856aed917f175e60392a2110621f85188cdccbbc3732e9a66badf86f",
+    "prompt": "1d1ac0db6c8c54e36412a06657de4dda9abeba82ab7e0a69f3f26e4ec7d3e7e7",
+    "evaluador": "a2163333cdf0c52479d5ae27ec110df32ca34d5b1a340b6393d8919b4d9f9317"
+  },
+  "referencias": {
+    "v6Blob": "865b9191dbeff277e47a6730d5d48c6a3accc086",
+    "v6Validador": "cbb520991abadf1a106a5275e87c483c02d7e548e59a101841eddd39dc41da76",
+    "v70": {
+      "version": "7.0",
+      "referenciaV6": "3030411",
+      "candidato": "c5c8378ae4ebecc2f5eb1eb8cf11a5fa7c12368f",
+      "instruccion": "88d2e7a17c21abbb386db826ef91f586b2059b020bd630cb94f0d16671605ced",
+      "esquemaFuente": "1ee64941401b9989792ce3c74c39dbbfecaa499ad5865c2612a97c667493b13f",
+      "validador": "d8a282898d1ae7028c36ba6e62bfa4c9d3fa7f9e4631b96493bb835285bebfa2",
+      "corpusBlob": "8a1add2d3bda79cd82db2bfc9166a501aaec5ca6",
+      "modelo": "gemini-3.5-flash-lite",
+      "semilla": 20261126
+    },
+    "corpusBlob": "8a1add2d3bda79cd82db2bfc9166a501aaec5ca6"
+  },
+  "configuracion": {
+    "modelo": "gemini-3.5-flash-lite",
+    "respaldos": [],
+    "temperatura": 0,
+    "maxOutputTokens": {
+      "individual": 1024,
+      "lote": 4096
+    },
+    "semilla": 20261127,
+    "separacionMs": 4500,
+    "reintentos": "1 ante 503/timeout; 429 detiene",
+    "orden": "balanceado por semilla (mulberry32 + Fisher-Yates)"
+  }
+}

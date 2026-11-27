@@ -77,7 +77,8 @@ export function validarV71(interna: SalidaInternaV71, c: ContextoV71): { publica
         if (e.plazo_fecha !== null || e.plazo_hora !== null) { e.plazo_fecha = null; e.plazo_hora = null; marcar("plazo", "expresion_vaga"); }
         else marcar("plazo", "expresion_vaga");
       } else {
-        const t = resolverTiempo(c.fecha, fr, o.alcance === "hereda" || o.alcance === "propio" ? anterior : null);
+        // Con fragmentos literales, «ninguno» es contradictorio: se aplica la regla de herencia (solo hora o solo día tras una acción fechada).
+        const t = resolverTiempo(c.fecha, fr, o.alcance === "comun" ? null : anterior);
         if (t.clase === "inequivoca" || t.clase === "heredada") {
           if (e.plazo_fecha !== t.fecha) { e.plazo_fecha = t.fecha; marcar("plazo_fecha", "recalculada"); }
           if (e.plazo_hora !== t.hora) { e.plazo_hora = t.hora; marcar("plazo_hora", "recalculada"); }
