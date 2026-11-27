@@ -52,3 +52,7 @@ Retomar por resultado del run de resistencia. Si verde, evaluar temporal con pre
 
 
 Auditoría reproducible sin proveedor: `node --test scripts/auditar-aplicabilidad.test.mjs` (5/5 controles locales) y `node scripts/auditar-aplicabilidad.mjs /ruta/laboratorio-norka.html` sobre artefacto 15217737998. Resultado: 105 capturas, 254 respuestas, 367/367 acciones pareadas, 13 cambios, 93 por revisar. Script solo reporta cantidades, campos e identificadores de casos sintéticos; no imprime títulos/texto ni usa red. No se suma a los 273 tests del arnés, son 5 controles adicionales. No certifica equivalencia semántica o ejecución real.
+
+
+## Resistencia V7.5 y preparación revisión
+Run 46039721333 completo: V6 10/12, V7.4 12/12, V7.5 11/12; 20/20 acciones candidata, cero déficit/exceso, 36 STOP. Caso 10 regresión de ámbito (pago veterinario Mascotas vs Pagos y finanzas). Punto de parada: no oficial ni nuevas llamadas. Informe docs/inteligencia/INFORME-CONSOLIDACION-V7.5.md. Reparación runner del auditor (vitest, mismas pruebas) y prototipo puro de revisión en laboratorio, conserva reconocido y propuesta sin escrituras; pruebas CI pendientes. Avance formal L1 1/5, 3% ponderado; L2 trabajo parcial. V6 predeterminada, fase 3 0/11. No datos reales ni cambios contrato, main o BD.

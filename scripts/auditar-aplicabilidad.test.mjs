@@ -1,4 +1,4 @@
-import {test} from 'node:test';
+import {test} from 'vitest';
 import assert from 'node:assert/strict';
 import {auditarAplicabilidad} from './auditar-aplicabilidad.mjs';
 const base={tipo:'tarea',titulo:'Ejemplo ficticio',persona_a_cargo:null,ambito:null,plazo_fecha:null,plazo_hora:'09:30',recurrencia:null,dirigida_a:null};
