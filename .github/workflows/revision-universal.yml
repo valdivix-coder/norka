@@ -1,0 +1,25 @@
+name: Revisión universal · replay sin efectos
+on:
+  push:
+    branches: [fase-2]
+    paths: ['evals/revision-universal.eval.ts']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verificar:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: laboratorio-norka-sintetico
+          run-id: '46037861623'
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+          path: /tmp/revision-replay
+      - run: npx vitest run --config evals/vitest.revision-universal.mts
