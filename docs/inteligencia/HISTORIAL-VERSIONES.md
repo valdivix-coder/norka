@@ -8,3 +8,8 @@
 - v7–v10: candidatos futuros condicionados a evidencia, no versiones entregadas. v7 a cargo de propuesta externa; integrar solo después de revisar. Ninguna prueba autoriza fase 3 por sí sola.
 
 - Resultado v6 medido: 48/50 (96%) en ambas métricas, 50/50 válidas, 2 discrepancias por acción, 1 por contador anterior, 13 solicitudes. Run 45903011378; no aprobada por discrepancias y falta de evaluación individual.
+
+
+## V7.1 y V7.2 · candidato congelado y evaluación individual solicitada
+
+Candidato 7.0 corregido, revisión c5c8378a: arnés mínimo https://github.com/valdivix-coder/norka/actions/runs/45916370142 y completo https://github.com/valdivix-coder/norka/actions/runs/45916370070 aprobados. Horarios HH:MM, meridiano, horas alternativas y JSON bruto preservado. V6 predeterminada y corpus oficial intactos. Congelación SHA-256 en docs/inteligencia/CONGELACION-V7.json; no cambiar candidato durante A/B. Arnés A/B f3061539: 195/195 (23 archivos), cinco pruebas simuladas aprobadas: alternancia, ritmo, 429, 503, regresión y fallo de esquema: https://github.com/valdivix-coder/norka/actions/runs/45916508438. Evaluación individual solicitada con modelo fijo Lite, semilla 20261126, separación mínima 4.5 s, sin respaldos. NO VERIFICADO: cuota vigente, exactitud V7, generalización, auditoría manual, costo real y cobertura. No declarar cero invenciones. Se conservan decisiones D-xx de manera versionada y pendientes de aprobación específica para uso real; no todas tienen controles de configuración independientes. D-03 sin tipo en examen; clasificación dudosa se abstiene, posible regresión que deberá probarse. Sin datos reales, facturación, migraciones ni fusión; reversión mediante selector 6.0. No iniciar lote si la evaluación individual se detiene.

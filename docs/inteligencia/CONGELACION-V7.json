@@ -1,0 +1,11 @@
+{
+  "version": "7.0",
+  "referenciaV6": "3030411",
+  "candidato": "c5c8378ae4ebecc2f5eb1eb8cf11a5fa7c12368f",
+  "instruccion": "88d2e7a17c21abbb386db826ef91f586b2059b020bd630cb94f0d16671605ced",
+  "esquemaFuente": "1ee64941401b9989792ce3c74c39dbbfecaa499ad5865c2612a97c667493b13f",
+  "validador": "d8a282898d1ae7028c36ba6e62bfa4c9d3fa7f9e4631b96493bb835285bebfa2",
+  "corpusBlob": "8a1add2d3bda79cd82db2bfc9166a501aaec5ca6",
+  "modelo": "gemini-3.5-flash-lite",
+  "semilla": 20261126
+}

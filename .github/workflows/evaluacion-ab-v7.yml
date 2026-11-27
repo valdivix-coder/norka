@@ -21,7 +21,23 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Verificar huellas congeladas y arnés
-        run: npm run arnes
+        run: |
+          node --experimental-strip-types --input-type=module - <<'JS'
+          import assert from 'node:assert/strict';
+          import {createHash} from 'node:crypto';
+          import {readFileSync} from 'node:fs';
+          import {z} from 'zod';
+          import {instruccionesCapturaV7} from './src/data/prompt-captura-v7.ts';
+          import {contratoInternoV7,contratoLoteInternoV7} from './src/core/contracts/interpretacion-interna-v7.ts';
+          const f=JSON.parse(readFileSync('docs/inteligencia/CONGELACION-V7.json','utf8'));
+          const sha=x=>createHash('sha256').update(x).digest('hex');
+          assert.equal(sha(instruccionesCapturaV7),f.instruccion);
+          assert.equal(sha(readFileSync('src/core/contracts/interpretacion-interna-v7.ts')),f.esquemaFuente);
+          assert.equal(sha(readFileSync('src/core/usecases/validar-interpretacion-v7.ts')),f.validador);
+          console.log('Huellas verificadas',JSON.stringify({instruccion:f.instruccion,esquema:sha(JSON.stringify(z.toJSONSchema(contratoInternoV7))),esquemaLote:sha(JSON.stringify(z.toJSONSchema(contratoLoteInternoV7))),validador:f.validador}));
+          JS
+          test "$(git hash-object evals/captura-cl.json)" = "8a1add2d3bda79cd82db2bfc9166a501aaec5ca6"
+          npm run arnes
       - name: A/B individual, detener ante regresión, 429 o cobertura incompleta
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
