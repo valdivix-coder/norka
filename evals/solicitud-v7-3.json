@@ -1,6 +1,7 @@
 {
-  "modo": "desarrollo",
-  "corpus": "desarrollo-v7-3",
+  "modo": "aceptacion",
+  "corpus": "oficial",
   "semilla": 20261129,
-  "nota": "Comparación de sistemas V6, 7.2 y 7.3 sobre frases nuevas (M1 hogar, M2 calendario, M3 beneficiario). No es aceptación."
+  "candidato": "266549cdc95231c658a41606020f441ece039699",
+  "nota": "A/B individual V6 vs 7.3 congelado. Lite fijo, sin respaldos, D-19 y paradas activas."
 }
