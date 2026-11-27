@@ -1,0 +1,26 @@
+name: Auditoría independiente V7.3 sin proveedor
+on:
+  push:
+    branches: [fase-2]
+    paths: ['evals/auditoria-independiente-v7-3.eval.ts']
+permissions:
+  contents: read
+jobs:
+  auditar:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Corpus y referencia intactos
+        run: |
+          test "$(git hash-object evals/captura-cl.json)" = "8a1add2d3bda79cd82db2bfc9166a501aaec5ca6"
+          test "$(git hash-object src/data/prompt-captura.ts)" = "865b9191dbeff277e47a6730d5d48c6a3accc086"
+      - name: Arnés mínimo
+        run: npm run arnes
+      - name: Reproducir validadores y probar anclas sin Gemini
+        run: npx vitest run --config evals/vitest.auditoria-independiente-v7-3.mts
