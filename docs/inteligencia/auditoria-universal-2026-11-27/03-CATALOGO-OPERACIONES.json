@@ -1,0 +1,464 @@
+{
+  "version": "0.1-diseno",
+  "revisionBase": "bdccc7c092b074e150e23b3646a792126d8e0303",
+  "alcance": "Inventario de diseño, no API ni autorización de ejecución; no habilita fases",
+  "operaciones": [
+    {
+      "id": "captura.guardar_original",
+      "fase": "2.2",
+      "estado": "manual_existente",
+      "entrada": [
+        "texto",
+        "contexto_autorizado"
+      ],
+      "precondiciones": [
+        "sesion",
+        "familia"
+      ],
+      "efecto": "Guardar original y fallback manual conforme §6.2",
+      "prueba": "Red cortada, retorno, no duplicados",
+      "ejecucionIA": false
+    },
+    {
+      "id": "tarea.crear",
+      "fase": "2.4",
+      "estado": "borrador_sintetico",
+      "entrada": [
+        "titulo",
+        "beneficiario",
+        "ambito",
+        "fecha",
+        "hora"
+      ],
+      "precondiciones": [
+        "catalogo",
+        "confirmacion"
+      ],
+      "efecto": "Preparar tarea",
+      "prueba": "Fidelidad de campos y selección",
+      "ejecucionIA": false
+    },
+    {
+      "id": "responsabilidad.crear",
+      "fase": "2.4",
+      "estado": "borrador_sintetico",
+      "entrada": [
+        "titulo",
+        "beneficiario",
+        "ambito",
+        "recurrencia"
+      ],
+      "precondiciones": [
+        "catalogo",
+        "confirmacion"
+      ],
+      "efecto": "Preparar responsabilidad",
+      "prueba": "Recurrencia preservada",
+      "ejecucionIA": false
+    },
+    {
+      "id": "propuesta.preparar",
+      "fase": "2.4",
+      "estado": "borrador_sintetico",
+      "entrada": [
+        "titulo",
+        "destinatario",
+        "beneficiario",
+        "ambito",
+        "fecha",
+        "hora",
+        "recurrencia"
+      ],
+      "precondiciones": [
+        "destinatario_distinto",
+        "confirmacion"
+      ],
+      "efecto": "Preparar propuesta sin asignar ejecutor",
+      "prueba": "No suplanta aceptación",
+      "ejecucionIA": false
+    },
+    {
+      "id": "nota.conservar",
+      "fase": "2.4",
+      "estado": "borrador_sintetico",
+      "entrada": [
+        "texto_original"
+      ],
+      "precondiciones": [
+        "confirmacion_o_fallback"
+      ],
+      "efecto": "Conservar original sin inventar",
+      "prueba": "Información ambigua visible",
+      "ejecucionIA": false
+    },
+    {
+      "id": "captura.editar_titulo",
+      "fase": "2.7",
+      "estado": "manual_existente",
+      "entrada": [
+        "captura_id",
+        "tarea_id",
+        "revision",
+        "titulo"
+      ],
+      "precondiciones": [
+        "autor",
+        "familia",
+        "revision_vigente"
+      ],
+      "efecto": "Editar captura propia permitida",
+      "prueba": "Revisión obsoleta rechazada",
+      "ejecucionIA": false
+    },
+    {
+      "id": "captura.descartar_resultado",
+      "fase": "2.7",
+      "estado": "manual_existente",
+      "entrada": [
+        "captura_id",
+        "tarea_id",
+        "revision"
+      ],
+      "precondiciones": [
+        "autor",
+        "familia",
+        "revision_vigente"
+      ],
+      "efecto": "Descartar resultado permitido, no original",
+      "prueba": "Original conservado",
+      "ejecucionIA": false
+    },
+    {
+      "id": "persona.buscar",
+      "fase": "1.9",
+      "estado": "manual_existente",
+      "entrada": [
+        "consulta"
+      ],
+      "precondiciones": [
+        "sesion",
+        "familia"
+      ],
+      "efecto": "Mostrar coincidencias autorizadas",
+      "prueba": "No filtrar otra familia",
+      "ejecucionIA": false
+    },
+    {
+      "id": "persona.abrir_ficha",
+      "fase": "1.9",
+      "estado": "manual_existente",
+      "entrada": [
+        "persona_id"
+      ],
+      "precondiciones": [
+        "sesion",
+        "familia",
+        "objeto_activo"
+      ],
+      "efecto": "Abrir ficha exacta",
+      "prueba": "Id inválido/ajeno rechazado",
+      "ejecucionIA": false
+    },
+    {
+      "id": "plantilla.activar",
+      "fase": "3.1",
+      "estado": "futuro",
+      "entrada": [
+        "plantilla_id",
+        "beneficiario",
+        "titular"
+      ],
+      "precondiciones": [
+        "familia",
+        "catalogo",
+        "confirmacion"
+      ],
+      "efecto": "Activación según reglas de titular",
+      "prueba": "Sin asignación ajena",
+      "ejecucionIA": false
+    },
+    {
+      "id": "responsabilidad.generar_recurrencia",
+      "fase": "3.2",
+      "estado": "futuro",
+      "entrada": [
+        "responsabilidad_id",
+        "regla",
+        "fecha_referencia"
+      ],
+      "precondiciones": [
+        "familia",
+        "regla_valida"
+      ],
+      "efecto": "Servicio determinista genera horizonte",
+      "prueba": "Bisiesto, fin de mes, idempotencia",
+      "ejecucionIA": false
+    },
+    {
+      "id": "tarea.modificar_plazo",
+      "fase": "3.3",
+      "estado": "futuro",
+      "entrada": [
+        "tarea_id",
+        "revision",
+        "fecha",
+        "hora"
+      ],
+      "precondiciones": [
+        "familia",
+        "permiso",
+        "revision_vigente",
+        "confirmacion"
+      ],
+      "efecto": "Actualizar plazo",
+      "prueba": "Hora sin fecha no se pierde",
+      "ejecucionIA": false
+    },
+    {
+      "id": "tarea.completar",
+      "fase": "3.5",
+      "estado": "futuro",
+      "entrada": [
+        "tarea_id",
+        "revision"
+      ],
+      "precondiciones": [
+        "familia",
+        "permiso",
+        "revision_vigente",
+        "confirmacion"
+      ],
+      "efecto": "Completar tarea",
+      "prueba": "Sin duplicados; undo según revisión",
+      "ejecucionIA": false
+    },
+    {
+      "id": "tarea.posponer",
+      "fase": "3.5",
+      "estado": "futuro",
+      "entrada": [
+        "tarea_id",
+        "revision",
+        "fecha"
+      ],
+      "precondiciones": [
+        "familia",
+        "permiso",
+        "revision_vigente",
+        "confirmacion"
+      ],
+      "efecto": "Posponer tarea",
+      "prueba": "Conflicto obliga revisar",
+      "ejecucionIA": false
+    },
+    {
+      "id": "resolver.abrir",
+      "fase": "3.6",
+      "estado": "futuro",
+      "entrada": [
+        "filtro_permitido"
+      ],
+      "precondiciones": [
+        "familia"
+      ],
+      "efecto": "Navegar a Resolver",
+      "prueba": "Destino cerrado, sin URL generada",
+      "ejecucionIA": false
+    },
+    {
+      "id": "responsabilidad.editar",
+      "fase": "3.7",
+      "estado": "futuro",
+      "entrada": [
+        "responsabilidad_id",
+        "revision",
+        "campos_permitidos"
+      ],
+      "precondiciones": [
+        "familia",
+        "permiso",
+        "revision_vigente",
+        "confirmacion"
+      ],
+      "efecto": "Editar sin reasignar a tercero",
+      "prueba": "Cambio de titular vía propuesta",
+      "ejecucionIA": false
+    },
+    {
+      "id": "pago.preparar_ficha",
+      "fase": "3.8",
+      "estado": "futuro",
+      "entrada": [
+        "concepto",
+        "monto_clp",
+        "fecha",
+        "beneficiario"
+      ],
+      "precondiciones": [
+        "familia",
+        "monto_explicito_o_pendiente",
+        "confirmacion"
+      ],
+      "efecto": "Preparar ficha, no transferencia",
+      "prueba": "CLP entero y sin monto inventado",
+      "ejecucionIA": false
+    },
+    {
+      "id": "pago.registrar_manual",
+      "fase": "3.8",
+      "estado": "futuro",
+      "entrada": [
+        "ficha_id",
+        "revision",
+        "monto_clp",
+        "fecha"
+      ],
+      "precondiciones": [
+        "familia",
+        "permiso",
+        "confirmacion"
+      ],
+      "efecto": "Registrar pago declarado, no ejecutarlo",
+      "prueba": "Cuadratura, idempotencia",
+      "ejecucionIA": false
+    },
+    {
+      "id": "buscar.objetos",
+      "fase": "3.9",
+      "estado": "futuro",
+      "entrada": [
+        "consulta",
+        "tipo_permitido"
+      ],
+      "precondiciones": [
+        "familia"
+      ],
+      "efecto": "Buscar objetos autorizados",
+      "prueba": "Coincidencias múltiples no se adivinan",
+      "ejecucionIA": false
+    },
+    {
+      "id": "contacto.preparar",
+      "fase": "3.10",
+      "estado": "futuro",
+      "entrada": [
+        "integrante_id",
+        "canal"
+      ],
+      "precondiciones": [
+        "familia",
+        "permiso",
+        "confirmacion"
+      ],
+      "efecto": "Abrir contacto autorizado, no enviar automáticamente",
+      "prueba": "Teléfono nunca a IA",
+      "ejecucionIA": false
+    },
+    {
+      "id": "propuesta.enviar",
+      "fase": "4.1",
+      "estado": "futuro",
+      "entrada": [
+        "borrador_id",
+        "destinatario",
+        "revision"
+      ],
+      "precondiciones": [
+        "familia",
+        "permiso",
+        "confirmacion"
+      ],
+      "efecto": "Enviar propuesta revisada",
+      "prueba": "Solo destinatario acepta",
+      "ejecucionIA": false
+    },
+    {
+      "id": "aviso.preparar",
+      "fase": "4.2",
+      "estado": "futuro",
+      "entrada": [
+        "objeto_id",
+        "destinatario",
+        "categoria"
+      ],
+      "precondiciones": [
+        "familia",
+        "preferencias",
+        "confirmacion"
+      ],
+      "efecto": "Preparar aviso permitido",
+      "prueba": "Silencio y preferencias",
+      "ejecucionIA": false
+    },
+    {
+      "id": "plan.preparar",
+      "fase": "5",
+      "estado": "futuro",
+      "entrada": [
+        "evento_id",
+        "fecha",
+        "campos_permitidos"
+      ],
+      "precondiciones": [
+        "familia",
+        "confirmacion"
+      ],
+      "efecto": "Preparar plan, sin inventar estadías",
+      "prueba": "Reloj determinista",
+      "ejecucionIA": false
+    },
+    {
+      "id": "tratamiento.registrar_manual",
+      "fase": "6",
+      "estado": "no_enviar_a_ia",
+      "entrada": [
+        "referencia_local",
+        "registro_explicito"
+      ],
+      "precondiciones": [
+        "consentimiento_especifico",
+        "familia",
+        "confirmacion"
+      ],
+      "efecto": "Servicio local autorizado, sin interpretación por Gemini",
+      "prueba": "No inferir dosis ni toma",
+      "ejecucionIA": false
+    },
+    {
+      "id": "presupuesto.registrar_gasto",
+      "fase": "7",
+      "estado": "futuro",
+      "entrada": [
+        "concepto",
+        "monto_clp",
+        "ambito",
+        "fecha"
+      ],
+      "precondiciones": [
+        "familia",
+        "permiso",
+        "confirmacion"
+      ],
+      "efecto": "Registrar gasto declarado",
+      "prueba": "Cuadratura y roles",
+      "ejecucionIA": false
+    },
+    {
+      "id": "actividad.preparar_comentario",
+      "fase": "8",
+      "estado": "no_enviar_a_ia",
+      "entrada": [
+        "objeto_id",
+        "texto_local"
+      ],
+      "precondiciones": [
+        "familia",
+        "permiso",
+        "confirmacion"
+      ],
+      "efecto": "Edición local, sin enviar comentario a IA",
+      "prueba": "Privacidad y buen trato",
+      "ejecucionIA": false
+    }
+  ]
+}
