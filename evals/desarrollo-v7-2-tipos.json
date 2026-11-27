@@ -1,0 +1,110 @@
+{
+  "fecha": "2027-02-24T10:00:00-03:00",
+  "zona_horaria": "America/Santiago",
+  "personas_a_cargo": [
+    "Florencia",
+    "Benja",
+    "Rayo",
+    "El hogar"
+  ],
+  "integrantes": [
+    "Marcela",
+    "Rodrigo",
+    "Teresa"
+  ],
+  "autor": "Marcela",
+  "ambitos": [
+    "Salud",
+    "Colegio",
+    "Pagos y finanzas",
+    "Crianza diaria",
+    "Hogar",
+    "Mascotas",
+    "Trámites",
+    "Compras"
+  ],
+  "casos": [
+    {
+      "id": 1,
+      "texto": "Comprar comida para Benja",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar comida",
+            "persona_a_cargo": "Benja",
+            "ambito": "Compras",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "texto": "Comprar comida para Rayo",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar comida",
+            "persona_a_cargo": "Rayo",
+            "ambito": "Mascotas",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "texto": "Comprar champú para Florencia",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar champú",
+            "persona_a_cargo": "Florencia",
+            "ambito": "Compras",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "texto": "Comprar champú para Rayo",
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar champú",
+            "persona_a_cargo": "Rayo",
+            "ambito": "Mascotas",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    }
+  ],
+  "tipos_persona": {
+    "Florencia": "hijo",
+    "Benja": "hijo",
+    "Rayo": "mascota",
+    "El hogar": "hogar"
+  }
+}
