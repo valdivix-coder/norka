@@ -23,10 +23,11 @@ $("agregar-referencia").addEventListener("click",()=>{const titulo=caso().refere
 $("tema").addEventListener("click",()=>{const claro=document.documentElement.dataset.tema!=="claro";document.documentElement.dataset.tema=claro?"claro":"oscuro";$("tema").textContent=claro?"Modo oscuro":"Modo claro";$("tema").setAttribute("aria-pressed",String(claro));});
 $("corpus").addEventListener("change",grupos);$("grupo").addEventListener("change",casos);$("caso").addEventListener("change",versiones);$("comparar").addEventListener("click",render);$("capa").addEventListener("change",render);$("a").addEventListener("change",render);$("b").addEventListener("change",render);
 
-let universal=null, seleccionUniversal=new Set();
+let universal=null, seleccionUniversal=new Set(), editandoUniversal=null;
 const API=globalThis.NorkaRevision;
 const etiquetasPendientes={beneficiario:"Beneficiario",ambito:"Ámbito",fecha_para_hora:"Fecha para la hora",recurrencia:"Recurrencia",destinatario:"Destinatario",tipo:"Tipo de acción",titulo:"Título",interpretacion:"Revisar interpretación"};
 function iniciarUniversal(){
+ editandoUniversal=null;
  const f=fixture(),c=caso(),ids=(xs,p)=>xs.map((nombre,i)=>({id:p+i,nombre})),integrantes=ids(f.contexto.integrantes,"i");
  const autorId=integrantes.find(x=>x.nombre===f.contexto.autor)?.id;
  const b=c.brazos[$("a").value];
@@ -38,9 +39,12 @@ function resumenUniversal(){
  const items=universal?.items||[],listas=items.filter(i=>i.estado==="pendiente"&&i.borrador.estado==="lista"),pendientes=items.filter(i=>i.estado==="pendiente"&&i.borrador.estado!=="lista");
  for(const id of seleccionUniversal)if(!listas.some(i=>i.id===id))seleccionUniversal.delete(id);
  $("universal-resumen").textContent=listas.length+" listas · "+pendientes.length+" por completar · "+items.filter(i=>i.estado==="confirmada").length+" confirmadas";
- $("universal-confirmar").disabled=!seleccionUniversal.size;
+ const editando=editandoUniversal!==null;
+ $("universal-confirmar").disabled=editando||!seleccionUniversal.size;
  $("universal-confirmar").textContent="Confirmar "+seleccionUniversal.size+" seleccionadas";
- $("universal-undo").disabled=!universal||universal.recibos.at(-1)?.revision!==universal.revision;
+ $("universal-undo").disabled=editando||!universal||universal.recibos.at(-1)?.revision!==universal.revision;
+ for(const id of ["corpus","grupo","caso","a","universal-reset"])$(id).disabled=editando;
+ for(const btn of $("universal-items").querySelectorAll("button[data-accion-universal]"))btn.disabled=editando;
 }
 function operarUniversal(fn,msg){
  try{universal=fn();renderUniversal();$("universal-estado").textContent=msg;}
@@ -48,7 +52,8 @@ function operarUniversal(fn,msg){
 }
 function campoUniversal(panel,nombre,control){const label=nod("label",nombre);label.append(control);panel.append(label);return control;}
 function editorUniversal(item,host){
- if(host.querySelector(".editor-universal"))return;
+ if(editandoUniversal!==null||host.querySelector(".editor-universal"))return;
+ editandoUniversal=item.id;resumenUniversal();
  const e=structuredClone(item.actual),ctx=universal.contexto,form=nod("div",undefined,"campos editor-universal");
  const campo=(nombre,tipo,v)=>{const x=nod("input");x.type=tipo;x.value=v??"";return campoUniversal(form,nombre,x);};
  const elegir=(nombre,op,v)=>{const x=nod("select");fill(x,op,v??"");return campoUniversal(form,nombre,x);};
@@ -65,7 +70,7 @@ function editorUniversal(item,host){
  const diasBox=nod("fieldset",undefined,"dias-universal");diasBox.append(nod("legend","Días de la semana"));
  const checks=dias.map(d=>{const l=nod("label",d),ch=nod("input");ch.type="checkbox";ch.checked=e.recurrencia?.dias.includes(d)||false;l.prepend(ch);diasBox.append(l);return ch;});form.append(diasBox);
  const revisar=nod("input");revisar.type="checkbox";revisar.checked=false;
- campoUniversal(form,"He revisado los datos de esta acción",revisar).className="confirmar-check";
+ campoUniversal(form,"He revisado los datos de esta acción",revisar);revisar.parentElement.className="confirmar-check";
  const error=nod("p",undefined,"aviso-pendiente");error.setAttribute("role","status");
  const save=boton("Guardar revisión",()=>{
   if(!revisar.checked){error.textContent="Marca que revisaste esta acción.";return;}
@@ -73,10 +78,10 @@ function editorUniversal(item,host){
   const dato={tipo:tipo.value,titulo:titulo.value.trim(),persona_a_cargo:persona.value||null,ambito:ambito.value||null,plazo_fecha:fecha.value||null,plazo_hora:hora.value||null,dirigida_a:destinatario.value||null,recurrencia:periodo.value?{tipo:periodo.value,cada:Number(cada.value),dias:checks.flatMap((ch,i)=>ch.checked?[dias[i]]:[])}:null,confianza:"alta"};
   try{universal=API.editarRevision(universal,universal.revision,item.id,dato);
    const nuevo=universal.items.find(x=>x.id===item.id);if(nuevo.borrador.estado==="lista")seleccionUniversal.add(item.id);
-   renderUniversal();$("universal-estado").textContent=nuevo.borrador.estado==="lista"?"Acción revisada y lista.":"Revisión guardada; quedan datos por completar.";
+   editandoUniversal=null;renderUniversal();$("universal-estado").textContent=nuevo.borrador.estado==="lista"?"Acción revisada y lista.":"Revisión guardada; quedan datos por completar.";
   }catch{error.textContent="Los campos no son válidos. Revisa la fecha, hora y recurrencia.";}
  });
- form.append(save,boton("Cancelar edición",()=>{form.remove();host.querySelector("button")?.focus();}),error);host.append(form);titulo.focus();
+ form.append(save,boton("Cancelar edición",()=>{form.remove();editandoUniversal=null;resumenUniversal();host.querySelector("button")?.focus();}),error);host.append(form);titulo.focus();
 }
 function renderUniversal(){
  const cont=$("universal-items");cont.replaceChildren();
@@ -89,7 +94,7 @@ function renderUniversal(){
   if(i.estado==="pendiente"){
    if(i.borrador.pendientes.length)a.append(nod("p","Por completar: "+i.borrador.pendientes.map(p=>etiquetasPendientes[p]||p).join(", "),"aviso-pendiente"));
    if(i.borrador.estado==="lista"){const l=nod("label","Incluir en confirmación"),ch=nod("input");ch.type="checkbox";ch.checked=seleccionUniversal.has(i.id);ch.addEventListener("change",()=>{if(ch.checked)seleccionUniversal.add(i.id);else seleccionUniversal.delete(i.id);resumenUniversal();});l.prepend(ch);l.className="seleccion-universal";a.append(l);}
-   const acts=nod("div",undefined,"acciones");acts.append(boton("Completar o editar",()=>editorUniversal(i,a)),boton("Descartar acción",()=>operarUniversal(()=>API.descartarRevision(universal,universal.revision,i.id),"Acción descartada; el original se conserva.")));a.append(acts);
+   const acts=nod("div",undefined,"acciones");acts.append(boton("Completar o editar",()=>editorUniversal(i,a)),boton("Descartar acción",()=>operarUniversal(()=>API.descartarRevision(universal,universal.revision,i.id),"Acción descartada; el original se conserva.")));for(const b of acts.querySelectorAll("button"))b.dataset.accionUniversal="1";a.append(acts);
   }
   const original=nod("details");original.append(nod("summary","Interpretación original"),nod("p",i.original.titulo,"suave"));for(const [k,n] of camposVisibles)original.append(nod("p",n+": "+fmt(i.original[k]),"suave"));a.append(original);cont.append(a);
  }

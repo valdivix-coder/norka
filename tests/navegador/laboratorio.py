@@ -40,6 +40,23 @@ with sync_playwright() as p:
     assert page.get_by_text("Descartada (simulación)").count()==1
     page.locator("#reiniciar").click()
     assert page.get_by_role("heading",name="Prueba ficticia de edición").count()==0
+    page.locator("#corpus").select_option("46037265864")
+    page.locator("#caso").select_option("8")
+    page.locator("#a").select_option("7.5")
+    u=page.locator("#universal")
+    assert u.get_by_text("Lista para confirmar",exact=True).count()==3
+    u.get_by_label("Incluir en confirmación").nth(2).uncheck()
+    assert page.locator("#universal-confirmar").inner_text()=="Confirmar 2 seleccionadas"
+    u.locator(".universal-accion").first.get_by_role("button",name="Completar o editar").click()
+    assert page.locator("#universal-confirmar").is_disabled()
+    assert page.locator("#caso").is_disabled()
+    u.get_by_role("button",name="Cancelar edición").click()
+    assert not page.locator("#universal-confirmar").is_disabled()
+    page.locator("#universal-confirmar").click()
+    assert u.get_by_text("Confirmada localmente",exact=True).count()==2
+    assert u.get_by_text("Lista para confirmar",exact=True).count()==1
+    page.locator("#universal-undo").click()
+    assert u.get_by_text("Confirmada localmente",exact=True).count()==0
     page.locator("#corpus").select_option("46034647175")
     page.locator("#caso").select_option("6")
     page.locator("#a").select_option("7.4")
