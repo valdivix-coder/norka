@@ -197,3 +197,8 @@ Run 45928250323 completó 12/12 pares: V6 8/12 bruta y normalizada; V7.2 9/12 br
 ## Traspaso V7.3 + laboratorio sintético
 
 El propietario solicita que un modelo avanzado optimice la siguiente candidata primero y construya después el laboratorio. Encargo detallado: docs/inteligencia/ENCARGO-V7.3-LABORATORIO.md; handoff actualizado. Base 594c98a. Primera entrega A–E y segunda L1–L5, ejecución 0/5 cada una. Sin código nuevo ni llamadas a Gemini en este traspaso. V7.2 desarrollo 12/12 pares, 83,3% vs 66,7% V6 normalizada; no aceptación por regresión de atribución hogar. Laboratorio solo replay sintético, aislado, sin BD ni proveedor, privado o local, deshabilitado por defecto. No utilizar para eludir puntos de parada ni habilitar IA familiar. Reversión: revertir commit documental. Retomar desde A con evidencia y gates originales.
+
+
+## 27-nov-2026 · V7.3: punto de parada
+
+**27-nov-2026 · V7.3: PUNTO DE PARADA.** 7.3 congelada en `266549c`. Desarrollo real (22 frases nuevas): normalizada V6 13/22, 7.2 14/22, 7.3 21/22; hogar FP 7→0; entrada +6,0 %. Replay sin proveedor sobre 61 salidas reales: validador 7.3 55/61 frente a 53/61 de 7.2. A/B oficial (run 45995259777) detenido en el caso 3 por una alerta de invención del **control V6** (3/50 pares). Arnés 260/260. Esperar al propietario: D-21 (alerta del control), autorización del laboratorio independiente y decisión sobre 7.4. Traspaso: [TRASPASO-V7.3-LABORATORIO.md](../inteligencia/TRASPASO-V7.3-LABORATORIO.md). Sin datos reales, facturación, migraciones ni fusión.

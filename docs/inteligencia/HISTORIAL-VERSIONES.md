@@ -41,3 +41,8 @@ Run 45928250323 completó 12/12 pares: V6 8/12 bruta y normalizada; V7.2 9/12 br
 ## Traspaso V7.3 + laboratorio sintético
 
 El propietario solicita que un modelo avanzado optimice la siguiente candidata primero y construya después el laboratorio. Encargo detallado: docs/inteligencia/ENCARGO-V7.3-LABORATORIO.md; handoff actualizado. Base 594c98a. Primera entrega A–E y segunda L1–L5, ejecución 0/5 cada una. Sin código nuevo ni llamadas a Gemini en este traspaso. V7.2 desarrollo 12/12 pares, 83,3% vs 66,7% V6 normalizada; no aceptación por regresión de atribución hogar. Laboratorio solo replay sintético, aislado, sin BD ni proveedor, privado o local, deshabilitado por defecto. No utilizar para eludir puntos de parada ni habilitar IA familiar. Reversión: revertir commit documental. Retomar desde A con evidencia y gates originales.
+
+
+## Candidato 7.3 (27-nov-2026)
+
+Congelada en `266549c`. M1 hogar por acción (regla y validador por cláusula, D-20), M2 calendario D-04 en la representación y compactación (instrucción −4,6 %). Desarrollo de tres brazos (run 45994191002): normalizada V6 13/22, 7.2 14/22, 7.3 21/22. Replay de validadores sobre 61 salidas reales: 50 → 55 estricta. Aceptación (run 45995259777): parada en el caso 3 por una alerta del control V6; 3/50 pares. No aprobada ni rechazada. Ver INFORME-EVALUACION-V7.3.md.
