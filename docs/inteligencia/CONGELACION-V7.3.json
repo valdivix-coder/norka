@@ -1,0 +1,50 @@
+{
+  "version": "7.3",
+  "estado": "congelado para A/B individual; cualquier cambio exige 7.4 y reiniciar",
+  "base": "84bef5486fce5b6bfe8e2107d909b2a2782a9f29",
+  "huellas": {
+    "6.0": {
+      "instruccion": "2977309124e9c632908d5e996e4b097d893809a17f01b5ef8b24a2db3f653448",
+      "validador": "cbb520991abadf1a106a5275e87c483c02d7e548e59a101841eddd39dc41da76"
+    },
+    "7.2": {
+      "instruccion": "ee9c1d39a4e791f77894d7e1f8d66b24a7656738b034ec4bb4474df2ffc32569",
+      "validador": "6d2d74397dce24a7bd358b9adb16d12c125f1e9af9689fa2375b538289d22147",
+      "adaptador": "9b6875ea292a7871d4b473f76eab80bc5c8d2475714f456966fe2cb66800e764"
+    },
+    "7.3": {
+      "instruccion": "6e552592b3374f801ff3deb2e53cad3378f10876c05f58ec6b3acedf3fca0b28",
+      "individual": "c99e97e5512223eab4ceb9d6b058f84ebef608698cfb9462cd0899d6cf1176cc",
+      "lote": "fa235a3c22d1ec2bf241838ca4eadb3f878b212b6a07e92279db388da4874e6e",
+      "esquema": "75aa6cf3748dc8fc274dc479484a189bcb98713ab9594f0928a70ce606bfa506",
+      "esquemaLote": "b53883d322d801d1e09ccad63cc1e63dfd177ebc930c8559087cb012c076ee85",
+      "validador": "2015199c9e7455a6f8106faf8d0abb72f8a71cc6dc84db4b11d3fc434dcc178d",
+      "validadorBase70": "d8a282898d1ae7028c36ba6e62bfa4c9d3fa7f9e4631b96493bb835285bebfa2",
+      "adaptador": "33c8634bbc5cc27610886ed8ff2a5b33d052fcf82cbad650ce0737004919efd8",
+      "evaluador": "ec0c134d2bd38fd969138c8f3d692de146cf103895be450ea2c9c8635483c491"
+    }
+  },
+  "archivos7_3": {
+    "prompt": "27cccfbf0b2e5e55b280c6084a82cb9c611d4b2aad5dbb11696194ae2817ef07",
+    "validador": "2015199c9e7455a6f8106faf8d0abb72f8a71cc6dc84db4b11d3fc434dcc178d",
+    "adaptador": "33c8634bbc5cc27610886ed8ff2a5b33d052fcf82cbad650ce0737004919efd8",
+    "evaluador": "ec0c134d2bd38fd969138c8f3d692de146cf103895be450ea2c9c8635483c491",
+    "entrada": "4e664e0e990bdcc64fa9ad85b89812c053ae47cc7266725dd3f239f73def5b06"
+  },
+  "referencias": {
+    "v6Blob": "865b9191dbeff277e47a6730d5d48c6a3accc086",
+    "corpusBlob": "8a1add2d3bda79cd82db2bfc9166a501aaec5ca6",
+    "v72Revision": "979e8ef37390393f099f868bfa22917b1e45f42f",
+    "v71": "6deaaac21091e871423fe9fc726dce1d8e3953bf"
+  },
+  "configuracion": {
+    "modelo": "gemini-3.5-flash-lite",
+    "respaldos": [],
+    "temperatura": 0,
+    "maxOutputTokens": 1024,
+    "semilla": 20261129,
+    "separacionMs": 4500,
+    "reintentos": "1 ante 503/timeout; 429 detiene",
+    "d19": "una repetición diagnóstica por brazo invirtiendo el orden; la parada se mantiene"
+  }
+}
