@@ -46,3 +46,8 @@ Se congela V6 operativa en 3030411 como referencia de comparación y 9d9b63c com
 ## Encargo activo · candidato 7.1 (26-nov-2026)
 
 **Esta sección reemplaza como instrucción activa el antiguo encargo de propuesta V7.** Se conserva todo el texto anterior como historial. El propietario autorizó optimizar 7.1 y transferir la ejecución a un modelo de razonamiento avanzado. Lee y ejecuta [ENCARGO-OPTIMIZACION-V7.1.md](ENCARGO-OPTIMIZACION-V7.1.md), que contiene el plan A–F, resultados reales verificados, hipótesis, límites, gates y traspaso de retorno. V6 y V7.0 congeladas, V6 predeterminada. La evaluación 45916614102 se detuvo en caso 6; 6/50 pares válidos, no aprobación. No confundir tarea V7.1 de integración con nueva versión 7.1. No se ha implementado candidato nuevo ni lanzado llamadas en este traspaso. Próxima acción: A, auditoría por el modelo receptor. No fusionar ni cerrar fase 2.
+
+
+## Estado del encargo 7.1 (27-nov-2026)
+
+Ejecutado A–C y E–F; D detenido en un punto de parada obligatorio (regresión en el caso 1 del A/B individual oficial, run 45924281334). Resultado, evidencia, decisiones pendientes (D-19 nueva, D-03, D-04) y siguiente paso exacto: [TRASPASO-V7.1.md](TRASPASO-V7.1.md). No reanudar llamadas sin la respuesta del propietario. V6 predeterminada; 7.1 congelado y no aprobado.

@@ -21,3 +21,8 @@ A/B individual V7 detenido en caso 6 (run 45916614102): 6/50 válidas por brazo,
 ## Traspaso autorizado · nueva iteración 7.1
 
 El propietario aprueba optimizar el candidato a partir del A/B parcial y encarga la ejecución a un modelo de razonamiento avanzado. Fuente de verdad para la tarea siguiente: docs/inteligencia/ENCARGO-OPTIMIZACION-V7.1.md (A–F). Handoff actualizado; ZIP sintético 15162493127 verificado y resultados contrastados. V6 y V7.0 congeladas, V6 por defecto. No se ha escrito código nuevo de 7.1 ni realizado llamadas adicionales en este traspaso. Estado previo V7.0: 3 etapas completas, 6/50 pares de evaluación y auditoría parcial; no aprobado. El nuevo encargo A–F está definido, ejecución pendiente (0/6). El modelo receptor debe documentar resultado y próximo paso en TRASPASO-V7.1.md. Reversión del traspaso: revertir commit documental; no afecta producción, datos, contrato ni main.
+
+
+## Candidato 7.1 (27-nov-2026)
+
+Congelado en `6deaaac` (`CONGELACION-V7.1.json`). Desarrollo real: 39 frases (V6 32/30 bruta, 7.1 35/33) y 10 de catálogo propio (V6 3/3, 7.1 8/8); no son aceptación. A/B individual oficial (run 45924281334): parada en el caso 1 por regresión frente a V6 (beneficiario contextual omitido por `persona_base: ninguna`), en las capas bruta y normalizada; 1/50 pares, 49 no ejecutados por brazo. No aprobado. V6 sigue predeterminada. Próximo: 7.2 con un único cambio dirigido, solo con autorización (ver TRASPASO-V7.1.md).

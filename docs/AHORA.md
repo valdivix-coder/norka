@@ -1,6 +1,8 @@
 # Ahora
 
-**Actualizado:** 26 de noviembre de 2026.
+**Actualizado:** 27 de noviembre de 2026.
+
+**27-nov-2026 · candidato 7.1: PUNTO DE PARADA.** 7.1 congelado en `6deaaac`; A/B individual oficial (run 45924281334) detenido en el caso 1 por regresión de beneficiario contextual frente a V6, en las capas bruta y normalizada (1/50 pares). En desarrollo (49 frases nuevas, no ciegas) 7.1 superó a V6 (bruta 43/41 frente a 35/33 en principal/estricta). Tokens de entrada +9,2 %. Arnés 233/233 y arnés completo en CI aprobados. V6 predeterminada. Esperar al propietario: D-19 (no determinismo en la puerta de regresión), autorizar 7.2 (restaurar la cláusula V6 de beneficiario escolar) y D-03/D-04. Traspaso: [TRASPASO-V7.1.md](inteligencia/TRASPASO-V7.1.md).
 
 Fase 1 aprobada y fusionada por PR #1, main 75f8600, producción READY. Fase 2 en rama independiente. No avanzar a implementación formal de fase 3 sin la aprobación y metas de fase 2.
 
