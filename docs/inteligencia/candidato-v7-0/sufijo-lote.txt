@@ -1,0 +1,1 @@
+Cada entrada es independiente: no compartas datos entre entradas. Devuelve {resultados:[{id,descartes,elementos}]}, exactamente un resultado por id.

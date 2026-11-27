@@ -1,0 +1,17 @@
+import assert from "node:assert/strict";
+import { resolverTiempo, validarV7, type ElementoInterno } from "./postproceso-v7.ts";
+const fecha="2026-11-26";
+const hours=[["09:30","09:30"],["01:15","01:15"],["00:45","00:45"],["14:05","14:05"],["23:59","23:59"],["09:99",null]] as const;
+for(const [hora,esperada] of hours) assert.equal(resolverTiempo(fecha,["mañana a las "+hora],null).hora,esperada);
+const ctx=(texto:string)=>({texto,fecha,personas:["El hogar","Lina"],integrantes:["Rosa"],autor:"Rosa",ambitos:["Hogar","Salud","Pagos y finanzas","Compras"]});
+const e=(ev:string,extra:Partial<ElementoInterno>={}):ElementoInterno=>({evidencia:ev,tiempo:[],tipo:"tarea",titulo:ev,persona_a_cargo:"El hogar",ambito:"Hogar",plazo_fecha:null,plazo_hora:null,recurrencia:null,dirigida_a:null,confianza:"alta",motivo_nota:null,...extra});
+const run=(texto:string,elementos:ElementoInterno[])=>validarV7({descartes:[],elementos},ctx(texto));
+const a="Mañana a las 09:30 pagar el gas de la casa", b="limpiar el patio";
+let r=run(a+" y "+b,[e(a,{tiempo:["Mañana a las 09:30"],plazo_fecha:"2026-11-27",plazo_hora:"09:30"}),e(b,{tiempo:["Mañana"],plazo_fecha:"2026-11-27"})]);
+assert.equal(r.publica.elementos[0].plazo_hora,"09:30"); assert.equal(r.publica.elementos[1].plazo_fecha,null);
+r=run("Mañana: limpiar el patio y ordenar la casa",[e("limpiar el patio",{tiempo:["Mañana"]}),e("ordenar la casa",{tiempo:["Mañana"]})]); assert.equal(r.publica.elementos[1].plazo_fecha,"2026-11-27");
+r=run("No comprar jabón para la casa",[e("No comprar jabón para la casa",{titulo:"Comprar jabón"})]); assert.equal(r.publica.elementos[0].tipo,"nota"); assert.equal(r.publica.elementos[0].ambito,null);
+r=run("Encargarse de mantener el patio",[e("Encargarse de mantener el patio",{tipo:"responsabilidad"})]); assert.equal(r.publica.elementos[0].tipo,"responsabilidad");
+r=run("Pagar 8000 pesos del gas y comprar pan por 2000 pesos",[e("Pagar 8000 pesos del gas",{titulo:"Pagar 2000 pesos del gas"}),e("comprar pan por 2000 pesos")]); assert(r.ajustes.some(x=>x.indice===0&&x.motivo==="monto_ajeno_a_accion"));
+r=run("No sé lo del diagnóstico de Lina",[e("No sé lo del diagnóstico de Lina",{tipo:"nota",motivo_nota:"sin_accion"})]); assert.equal(r.publica.elementos[0].titulo,"Revisar captura");
+console.log("Contraejemplos independientes: 12 grupos de aserciones aprobados");
