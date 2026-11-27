@@ -1,47 +1,42 @@
 name: Exportar replay sintético (sin proveedor)
-# Lee artefactos sintéticos de DESARROLLO ya generados y los imprime con su SHA-256 para construir
-# fixtures del laboratorio. No llama a Gemini, no usa secretos de proveedor, no toca la base de datos.
-# Excluye deliberadamente cualquier artefacto del corpus oficial.
+# Convierte artefactos sintéticos de DESARROLLO ya generados en fixtures con procedencia y SHA-256,
+# y los guarda en fase-2. No llama a Gemini, no usa el secreto del proveedor, no toca la base de datos.
+# El script rechaza cualquier artefacto del corpus oficial.
 on:
   push:
     branches: [fase-2]
     paths: ['evals/solicitud-replay.json']
 permissions:
-  contents: read
+  contents: write
   actions: read
+concurrency:
+  group: norka-exportar-replay
+  cancel-in-progress: false
 jobs:
   exportar:
     if: github.ref == 'refs/heads/fase-2'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - run: '45922944781'
-            nombre: evaluacion-v7-1-desarrollo-desarrollo-v7-1
-          - run: '45923853986'
-            nombre: evaluacion-v7-1-desarrollo-desarrollo-v7-1-catalogo
-          - run: '45928250323'
-            nombre: evaluacion-v7-2-desarrollo-desarrollo-v7-2
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
         with:
-          name: ${{ matrix.nombre }}
-          run-id: ${{ matrix.run }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path: replay
-      - name: Imprimir JSON sintético por bloques con huella
+          node-version: 24
+      - uses: actions/download-artifact@v4
+        with: {name: evaluacion-v7-1-desarrollo-desarrollo-v7-1, run-id: '45922944781', github-token: '${{ secrets.GITHUB_TOKEN }}', path: r1}
+      - uses: actions/download-artifact@v4
+        with: {name: evaluacion-v7-1-desarrollo-desarrollo-v7-1-catalogo, run-id: '45923853986', github-token: '${{ secrets.GITHUB_TOKEN }}', path: r2}
+      - uses: actions/download-artifact@v4
+        with: {name: evaluacion-v7-2-desarrollo-desarrollo-v7-2, run-id: '45928250323', github-token: '${{ secrets.GITHUB_TOKEN }}', path: r3}
+      - name: Construir fixtures
         run: |
-          node -e '
-          const fs=require("fs"),c=require("crypto");
-          for(const f of fs.readdirSync("replay")){
-            const b=fs.readFileSync("replay/"+f);const j=JSON.parse(b);
-            if(j.corpus==="oficial")throw new Error("NO_EXPORTAR_OFICIAL");
-            const s=b.toString("base64");const n=Math.ceil(s.length/3000);
-            console.log("REPLAY_INICIO",process.env.RUN,f,c.createHash("sha256").update(b).digest("hex"),b.length,n);
-            for(let i=0;i<n;i++)console.log("REPLAY_BLOQUE",process.env.RUN,i,s.slice(i*3000,(i+1)*3000));
-            console.log("REPLAY_FIN",process.env.RUN);
-          }'
-        env:
-          RUN: ${{ matrix.run }}
+          node scripts/exportar-fixtures-laboratorio.mjs r1 45922944781 15165543123 evaluacion-v7-1-desarrollo-desarrollo-v7-1
+          node scripts/exportar-fixtures-laboratorio.mjs r2 45923853986 15165492608 evaluacion-v7-1-desarrollo-desarrollo-v7-1-catalogo
+          node scripts/exportar-fixtures-laboratorio.mjs r3 45928250323 15166769133 evaluacion-v7-2-desarrollo-desarrollo-v7-2
+      - name: Guardar en fase-2
+        run: |
+          git config user.name "norka-replay[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/laboratorio/fixtures
+          git commit -m "Fixtures de replay sintético exportados desde artefactos de desarrollo (sin proveedor)" || echo "sin cambios"
+          git push origin HEAD:fase-2
