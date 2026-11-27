@@ -1,0 +1,18 @@
+import {it,expect,vi} from "vitest";
+import {coberturaAcciones} from "../../evals/cobertura-acciones-v7-5";
+import {ejecutarComparacionV75,type CorpusEvaluable} from "../../evals/comparacion-v7-5";
+import {crearGeminiPorVersion} from "../../src/data/gemini-sintetico-v7-5";
+const a={tipo:"tarea" as const,titulo:"Retirar certificados",persona_a_cargo:null,ambito:"Trámites",plazo_fecha:null,plazo_hora:null,recurrencia:null,dirigida_a:null,confianza:"baja" as const};
+const b={...a,titulo:"Pagar arancel",ambito:"Pagos y finanzas"};
+const esperado={elementos:[a,b]};
+it("cuenta una acción omitida aunque los campos restantes sean correctos",()=>{expect(coberturaAcciones({elementos:[a]},esperado)).toEqual({esperadas:2,entregadas:1,deficit:1,excedente:0,cantidadCompleta:false});});
+it("detecta acción extra aunque todas las demás estén bien",()=>{expect(coberturaAcciones({elementos:[a,b,b]},esperado).excedente).toBe(1);});
+it("no confunde cardinalidad con equivalencia semántica",()=>{expect(coberturaAcciones({elementos:[a,a]},esperado).cantidadCompleta).toBe(true);});
+const corpus:CorpusEvaluable={fecha:"2027-04-15T10:00:00-03:00",zona_horaria:"America/Santiago",personas_a_cargo:["El hogar"],integrantes:["QA"],autor:"QA",ambitos:["Trámites","Pagos y finanzas"],casos:[1,2].map(id=>({id,texto:"Retirar certificados y pagar arancel",esperado}))};
+const interna=(es:typeof esperado.elementos)=>({descartes:[],elementos:es.map(e=>({...e,persona_base:"ninguna",tiempo:[],alcance:"ninguno",motivo_nota:null}))});
+const resp=(x:unknown)=>Response.json({candidates:[{finishReason:"STOP",content:{parts:[{text:JSON.stringify(x)}]}}]});
+const candidato=(i?:RequestInit)=>Boolean(JSON.parse(String(i?.body)).generationConfig.responseJsonSchema.properties.descartes);
+it("aceptación detiene por omisión compartida aunque no haya regresión de caso",async()=>{const solicitar=vi.fn(async(_u:RequestInfo|URL,i?:RequestInit)=>resp(candidato(i)?interna([a]):{elementos:[a]}));const r=await ejecutarComparacionV75({clave:"qa",corpus,solicitar,esperar:async()=>{}});expect(r.resumen.parada?.motivo).toBe("cobertura_acciones_incompleta");expect(r.resumen.brazos["7.5"].deficitBruto).toBe(1);expect(r.resumen.paresCompletos).toBe(1);});
+it("si V6 acierta y candidata omite, D19 mantiene la parada",async()=>{const solicitar=vi.fn(async(_u:RequestInfo|URL,i?:RequestInit)=>resp(candidato(i)?interna([a]):esperado));const r=await ejecutarComparacionV75({clave:"qa",corpus,solicitar,esperar:async()=>{}});expect(r.resumen.parada?.motivo).toBe("regresion_reproducida");expect(r.repeticiones).toHaveLength(1);});
+it("control y candidata completos: no parada",async()=>{const solicitar=vi.fn(async(_u:RequestInfo|URL,i?:RequestInit)=>resp(candidato(i)?interna([a,b]):esperado));const r=await ejecutarComparacionV75({clave:"qa",corpus,solicitar,esperar:async()=>{}});expect(r.resumen.parada).toBeNull();expect(r.resumen.brazos["7.5"].accionesEsperadas).toBe(4);});
+it("selector conserva V6 por defecto y V7.4",()=>{for(const version of [undefined,"7.4","7.5"] as const)expect(crearGeminiPorVersion({clave:"qa",modelo:"gemini-3.5-flash-lite",corpus,version}).version).toBe(version??"6.0");});

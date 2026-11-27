@@ -1,0 +1,357 @@
+{
+  "fecha": "2027-05-13T09:00:00-04:00",
+  "zona_horaria": "America/Santiago",
+  "personas_a_cargo": [
+    "Celia",
+    "Damián",
+    "Bruma",
+    "El hogar"
+  ],
+  "integrantes": [
+    "QA",
+    "Noelia"
+  ],
+  "autor": "QA",
+  "ambitos": [
+    "Salud",
+    "Colegio",
+    "Pagos y finanzas",
+    "Crianza diaria",
+    "Hogar",
+    "Mascotas",
+    "Trámites",
+    "Compras"
+  ],
+  "casos": [
+    {
+      "id": 1,
+      "texto": "Retirar los certificados de Celia y Damián y pagar el arancel del colegio",
+      "grupos": [
+        "segmentacion_v75"
+      ],
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Retirar certificados",
+            "persona_a_cargo": null,
+            "ambito": "Trámites",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "baja"
+          },
+          {
+            "tipo": "tarea",
+            "titulo": "Pagar arancel del colegio",
+            "persona_a_cargo": null,
+            "ambito": "Pagos y finanzas",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "baja"
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "texto": "Comprar los uniformes de Celia y Damián y llevar a Bruma al veterinario",
+      "grupos": [
+        "segmentacion_v75"
+      ],
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar uniformes",
+            "persona_a_cargo": null,
+            "ambito": "Colegio",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "baja"
+          },
+          {
+            "tipo": "tarea",
+            "titulo": "Llevar a Bruma al veterinario",
+            "persona_a_cargo": "Bruma",
+            "ambito": "Mascotas",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "texto": "Llevar a Celia y Damián al dentista y transferir el bono médico",
+      "grupos": [
+        "segmentacion_v75"
+      ],
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Llevar al dentista",
+            "persona_a_cargo": null,
+            "ambito": "Salud",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "baja"
+          },
+          {
+            "tipo": "tarea",
+            "titulo": "Transferir bono médico",
+            "persona_a_cargo": null,
+            "ambito": "Pagos y finanzas",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "baja"
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "texto": "Pagar el arriendo y recoger a Celia y Damián en el colegio",
+      "grupos": [
+        "segmentacion_v75"
+      ],
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Pagar arriendo",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Pagos y finanzas",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          },
+          {
+            "tipo": "tarea",
+            "titulo": "Recoger en colegio",
+            "persona_a_cargo": null,
+            "ambito": "Colegio",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "baja"
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "texto": "Comprar arroz, leche y huevos para la casa",
+      "grupos": [
+        "segmentacion_v75"
+      ],
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar arroz, leche y huevos",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Compras",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "texto": "Comprar un cuaderno escolar para Celia y retirar un certificado de Damián",
+      "grupos": [
+        "segmentacion_v75"
+      ],
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar cuaderno escolar",
+            "persona_a_cargo": "Celia",
+            "ambito": "Colegio",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          },
+          {
+            "tipo": "tarea",
+            "titulo": "Retirar certificado",
+            "persona_a_cargo": "Damián",
+            "ambito": "Trámites",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "texto": "No compres el uniforme de Celia; retirar el uniforme de Damián y pagar la cuota de su curso",
+      "grupos": [
+        "segmentacion_v75"
+      ],
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Retirar uniforme",
+            "persona_a_cargo": "Damián",
+            "ambito": "Colegio",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          },
+          {
+            "tipo": "tarea",
+            "titulo": "Pagar cuota de su curso",
+            "persona_a_cargo": "Damián",
+            "ambito": "Pagos y finanzas",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "texto": "Llevar a Damián a fono y comprar pan para la casa y pagar el bono médico de Damián",
+      "grupos": [
+        "segmentacion_v75"
+      ],
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Llevar a fono",
+            "persona_a_cargo": "Damián",
+            "ambito": "Salud",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          },
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar pan",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Compras",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          },
+          {
+            "tipo": "tarea",
+            "titulo": "Pagar bono médico",
+            "persona_a_cargo": "Damián",
+            "ambito": "Pagos y finanzas",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "texto": "Comprar comida para Bruma y limpiar el patio de la casa",
+      "grupos": [
+        "segmentacion_v75"
+      ],
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar comida",
+            "persona_a_cargo": "Bruma",
+            "ambito": "Mascotas",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          },
+          {
+            "tipo": "tarea",
+            "titulo": "Limpiar patio",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Hogar",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          }
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "texto": "Pagar la cuenta de luz y comprar los materiales escolares de Celia y Damián",
+      "grupos": [
+        "segmentacion_v75"
+      ],
+      "esperado": {
+        "elementos": [
+          {
+            "tipo": "tarea",
+            "titulo": "Pagar cuenta de luz",
+            "persona_a_cargo": "El hogar",
+            "ambito": "Pagos y finanzas",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "alta"
+          },
+          {
+            "tipo": "tarea",
+            "titulo": "Comprar materiales escolares",
+            "persona_a_cargo": null,
+            "ambito": "Colegio",
+            "plazo_fecha": null,
+            "plazo_hora": null,
+            "recurrencia": null,
+            "dirigida_a": null,
+            "confianza": "baja"
+          }
+        ]
+      }
+    }
+  ]
+}
