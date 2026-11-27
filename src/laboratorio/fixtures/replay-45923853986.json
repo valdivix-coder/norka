@@ -1,0 +1,1842 @@
+{
+ "fuente": {
+  "tipo": "replay_real_gemini",
+  "run": "45923853986",
+  "artefacto": "15165492608",
+  "nombreArtefacto": "evaluacion-v7-1-desarrollo-desarrollo-v7-1-catalogo",
+  "archivo": "salida-eval-v7-1.json",
+  "sha256Json": "b556a8e1f52594b7a509380c550498e490373bdb8e85a2be10721dbf7d55d529",
+  "corpus": "desarrollo-v7-1-catalogo",
+  "modo": "desarrollo",
+  "modelo": "gemini-3.5-flash-lite",
+  "semilla": 20261127,
+  "versiones": [
+   "6.0",
+   "7.1"
+  ],
+  "huellas": {
+   "6.0": {
+    "instruccion": "2977309124e9c632908d5e996e4b097d893809a17f01b5ef8b24a2db3f653448",
+    "validador": "cbb520991abadf1a106a5275e87c483c02d7e548e59a101841eddd39dc41da76"
+   },
+   "7.1": {
+    "instruccion": "9aeb220e0e7fe003dc7c4aff1b980b5d051640c40f11f2068628946c1b9af035",
+    "individual": "c99e97e5512223eab4ceb9d6b058f84ebef608698cfb9462cd0899d6cf1176cc",
+    "lote": "fa235a3c22d1ec2bf241838ca4eadb3f878b212b6a07e92279db388da4874e6e",
+    "esquema": "75aa6cf3748dc8fc274dc479484a189bcb98713ab9594f0928a70ce606bfa506",
+    "esquemaLote": "b53883d322d801d1e09ccad63cc1e63dfd177ebc930c8559087cb012c076ee85",
+    "validador": "f2798f887c0cea8b70408e2c71f8360f78d0022a6bc66593e0eb7cba02d1b6bb",
+    "validadorBase70": "d8a282898d1ae7028c36ba6e62bfa4c9d3fa7f9e4631b96493bb835285bebfa2",
+    "adaptador": "1781ac7c6589911eec22cc292044d645f3927ca50d132a4447f3d7da3d44792b"
+   }
+  }
+ },
+ "contexto": {
+  "fecha": "2026-12-30T18:00:00-03:00",
+  "zona_horaria": "America/Santiago",
+  "personas_a_cargo": [
+   "Agustina",
+   "Canelo",
+   "El hogar"
+  ],
+  "integrantes": [
+   "Jorge",
+   "Daniela"
+  ],
+  "autor": "Daniela",
+  "ambitos": [
+   "Salud",
+   "Estudios",
+   "Cuentas",
+   "Casa",
+   "Animales",
+   "Papeleo",
+   "Supermercado",
+   "Rutina niños"
+  ]
+ },
+ "casos": [
+  {
+   "id": 1,
+   "grupos": [
+    "catalogo_pago"
+   ],
+   "texto": "Pagar el dividendo de la casa antes del 5",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Pagar el dividendo",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Cuentas",
+      "plazo_fecha": "2027-01-05",
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Pagar el dividendo de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Pagos y finanzas",
+        "plazo_fecha": "2027-01-05",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Pagar el dividendo de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": null,
+        "plazo_fecha": "2027-01-05",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       }
+      ]
+     },
+     "ajustes": [
+      {
+       "indice": 0,
+       "campo": "ambito",
+       "motivo": "fuera_catalogo"
+      }
+     ],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "ambito": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "ambito": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 751,
+     "tokensEntrada": 2785,
+     "tokensSalida": 79,
+     "finishReason": "STOP"
+    },
+    "7.1": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Pagar el dividendo de la casa",
+        "persona_base": "nombrada",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Cuentas",
+        "tiempo": [
+         "antes del 5"
+        ],
+        "alcance": "propio",
+        "plazo_fecha": "2027-01-05",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Pagar el dividendo de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Cuentas",
+        "plazo_fecha": "2027-01-05",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Pagar el dividendo de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Cuentas",
+        "plazo_fecha": "2027-01-05",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 781,
+     "tokensEntrada": 3043,
+     "tokensSalida": 108,
+     "finishReason": "STOP"
+    }
+   }
+  },
+  {
+   "id": 2,
+   "grupos": [
+    "catalogo_escolar"
+   ],
+   "texto": "Comprar útiles para la Agustina el lunes",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar útiles para Agustina",
+      "persona_a_cargo": "Agustina",
+      "ambito": "Estudios",
+      "plazo_fecha": "2027-01-04",
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar útiles para la Agustina",
+        "persona_a_cargo": "Agustina",
+        "ambito": "Colegio",
+        "plazo_fecha": "2027-01-04",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar útiles para la Agustina",
+        "persona_a_cargo": "Agustina",
+        "ambito": null,
+        "plazo_fecha": "2027-01-04",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       }
+      ]
+     },
+     "ajustes": [
+      {
+       "indice": 0,
+       "campo": "ambito",
+       "motivo": "fuera_catalogo"
+      }
+     ],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "ambito": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "ambito": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 780,
+     "tokensEntrada": 2782,
+     "tokensSalida": 76,
+     "finishReason": "STOP"
+    },
+    "7.1": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar útiles para la Agustina",
+        "persona_base": "nombrada",
+        "persona_a_cargo": "Agustina",
+        "ambito": "Estudios",
+        "tiempo": [
+         "el lunes"
+        ],
+        "alcance": "propio",
+        "plazo_fecha": "2027-01-04",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar útiles para la Agustina",
+        "persona_a_cargo": "Agustina",
+        "ambito": "Estudios",
+        "plazo_fecha": "2027-01-04",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar útiles para la Agustina",
+        "persona_a_cargo": "Agustina",
+        "ambito": "Estudios",
+        "plazo_fecha": "2027-01-04",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 937,
+     "tokensEntrada": 3040,
+     "tokensSalida": 106,
+     "finishReason": "STOP"
+    }
+   }
+  },
+  {
+   "id": 3,
+   "grupos": [
+    "catalogo_hereda"
+   ],
+   "texto": "Llevar al Canelo al veterinario el sábado y a las diez comprar verduras",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Llevar a Canelo al veterinario",
+      "persona_a_cargo": "Canelo",
+      "ambito": "Animales",
+      "plazo_fecha": "2027-01-02",
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     },
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar verduras",
+      "persona_a_cargo": null,
+      "ambito": "Supermercado",
+      "plazo_fecha": "2027-01-02",
+      "plazo_hora": "10:00",
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Llevar al Canelo al veterinario",
+        "persona_a_cargo": "Canelo",
+        "ambito": "Animales",
+        "plazo_fecha": "2027-01-02",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar verduras",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Supermercado",
+        "plazo_fecha": null,
+        "plazo_hora": "10:00",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Llevar al Canelo al veterinario",
+        "persona_a_cargo": "Canelo",
+        "ambito": "Animales",
+        "plazo_fecha": "2027-01-02",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar verduras",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Supermercado",
+        "plazo_fecha": null,
+        "plazo_hora": "10:00",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "persona_a_cargo": 1,
+        "plazo_fecha": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "persona_a_cargo": 1,
+        "plazo_fecha": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 1018,
+     "tokensEntrada": 2790,
+     "tokensSalida": 225,
+     "finishReason": "STOP"
+    },
+    "7.1": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Llevar a Canelo al veterinario",
+        "persona_base": "nombrada",
+        "persona_a_cargo": "Canelo",
+        "ambito": "Animales",
+        "tiempo": [
+         "el sábado"
+        ],
+        "alcance": "propio",
+        "plazo_fecha": "2027-01-02",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar verduras",
+        "persona_base": "ninguna",
+        "persona_a_cargo": null,
+        "ambito": "Supermercado",
+        "tiempo": [
+         "a las diez"
+        ],
+        "alcance": "ninguno",
+        "plazo_fecha": null,
+        "plazo_hora": "10:00",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Llevar a Canelo al veterinario",
+        "persona_a_cargo": "Canelo",
+        "ambito": "Animales",
+        "plazo_fecha": "2027-01-02",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar verduras",
+        "persona_a_cargo": null,
+        "ambito": "Supermercado",
+        "plazo_fecha": null,
+        "plazo_hora": "10:00",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Llevar a Canelo al veterinario",
+        "persona_a_cargo": "Canelo",
+        "ambito": "Animales",
+        "plazo_fecha": "2027-01-02",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar verduras",
+        "persona_a_cargo": null,
+        "ambito": "Supermercado",
+        "plazo_fecha": null,
+        "plazo_hora": "10:00",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       }
+      ]
+     },
+     "ajustes": [
+      {
+       "indice": 1,
+       "campo": "plazo",
+       "motivo": "ambigua"
+      }
+     ],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "plazo_fecha": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "plazo_fecha": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 925,
+     "tokensEntrada": 3048,
+     "tokensSalida": 193,
+     "finishReason": "STOP"
+    }
+   }
+  },
+  {
+   "id": 4,
+   "grupos": [
+    "catalogo_propuesta"
+   ],
+   "texto": "Que Jorge saque el certificado de nacimiento de la Agustina",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "propuesta",
+      "titulo": "Sacar el certificado de nacimiento de Agustina",
+      "persona_a_cargo": "Agustina",
+      "ambito": "Papeleo",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": "Jorge",
+      "confianza": "alta"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "propuesta",
+        "titulo": "Sacar el certificado de nacimiento de la Agustina",
+        "persona_a_cargo": "Agustina",
+        "ambito": null,
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": "Jorge",
+        "confianza": "baja"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "propuesta",
+        "titulo": "Sacar el certificado de nacimiento de la Agustina",
+        "persona_a_cargo": "Agustina",
+        "ambito": null,
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": "Jorge",
+        "confianza": "baja"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "ambito": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "ambito": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 745,
+     "tokensEntrada": 2784,
+     "tokensSalida": 71,
+     "finishReason": "STOP"
+    },
+    "7.1": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "propuesta",
+        "titulo": "Sacar el certificado de nacimiento de la Agustina",
+        "persona_base": "nombrada",
+        "persona_a_cargo": "Agustina",
+        "ambito": "Papeleo",
+        "tiempo": [],
+        "alcance": "ninguno",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": "Jorge",
+        "confianza": "alta",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "propuesta",
+        "titulo": "Sacar el certificado de nacimiento de la Agustina",
+        "persona_a_cargo": "Agustina",
+        "ambito": "Papeleo",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": "Jorge",
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "propuesta",
+        "titulo": "Sacar el certificado de nacimiento de la Agustina",
+        "persona_a_cargo": "Agustina",
+        "ambito": "Papeleo",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": "Jorge",
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 860,
+     "tokensEntrada": 3042,
+     "tokensSalida": 99,
+     "finishReason": "STOP"
+    }
+   }
+  },
+  {
+   "id": 5,
+   "grupos": [
+    "catalogo_rutina"
+   ],
+   "texto": "Bañar a la Agustina todos los días",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "responsabilidad",
+      "titulo": "Bañar a Agustina",
+      "persona_a_cargo": "Agustina",
+      "ambito": "Rutina niños",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": {
+       "tipo": "diaria",
+       "cada": 1,
+       "dias": []
+      },
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "responsabilidad",
+        "titulo": "Bañar a la Agustina",
+        "persona_a_cargo": "Agustina",
+        "ambito": "Rutina niños",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": {
+         "tipo": "diaria",
+         "cada": 1,
+         "dias": []
+        },
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "responsabilidad",
+        "titulo": "Bañar a la Agustina",
+        "persona_a_cargo": "Agustina",
+        "ambito": "Rutina niños",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": {
+         "tipo": "diaria",
+         "cada": 1,
+         "dias": []
+        },
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 3002,
+     "tokensEntrada": 2783,
+     "tokensSalida": 81,
+     "finishReason": "STOP"
+    },
+    "7.1": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "responsabilidad",
+        "titulo": "Bañar a Agustina",
+        "persona_base": "nombrada",
+        "persona_a_cargo": "Agustina",
+        "ambito": "Rutina niños",
+        "tiempo": [],
+        "alcance": "ninguno",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": {
+         "tipo": "diaria",
+         "cada": 1,
+         "dias": []
+        },
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "responsabilidad",
+        "titulo": "Bañar a Agustina",
+        "persona_a_cargo": "Agustina",
+        "ambito": "Rutina niños",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": {
+         "tipo": "diaria",
+         "cada": 1,
+         "dias": []
+        },
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "responsabilidad",
+        "titulo": "Bañar a Agustina",
+        "persona_a_cargo": "Agustina",
+        "ambito": "Rutina niños",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": {
+         "tipo": "diaria",
+         "cada": 1,
+         "dias": []
+        },
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 850,
+     "tokensEntrada": 3041,
+     "tokensSalida": 107,
+     "finishReason": "STOP"
+    }
+   }
+  },
+  {
+   "id": 6,
+   "grupos": [
+    "catalogo_hogar"
+   ],
+   "texto": "Ordenar el living de la casa",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Ordenar el living",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Casa",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar el living de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Casa",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar el living de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Casa",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 834,
+     "tokensEntrada": 2779,
+     "tokensSalida": 64,
+     "finishReason": "STOP"
+    },
+    "7.1": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar el living de la casa",
+        "persona_base": "nombrada",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Casa",
+        "tiempo": [],
+        "alcance": "ninguno",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar el living de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Casa",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar el living de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Casa",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 805,
+     "tokensEntrada": 3037,
+     "tokensSalida": 91,
+     "finishReason": "STOP"
+    }
+   }
+  },
+  {
+   "id": 7,
+   "grupos": [
+    "catalogo_sin_equivalente"
+   ],
+   "texto": "Comprar entradas para el cine",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar entradas para el cine",
+      "persona_a_cargo": null,
+      "ambito": null,
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "baja"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar entradas para el cine",
+        "persona_a_cargo": null,
+        "ambito": "Supermercado",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar entradas para el cine",
+        "persona_a_cargo": null,
+        "ambito": "Supermercado",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "ambito": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "ambito": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 726,
+     "tokensEntrada": 2779,
+     "tokensSalida": 66,
+     "finishReason": "STOP"
+    },
+    "7.1": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar entradas para el cine",
+        "persona_base": "ninguna",
+        "persona_a_cargo": null,
+        "ambito": null,
+        "tiempo": [],
+        "alcance": "ninguno",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar entradas para el cine",
+        "persona_a_cargo": null,
+        "ambito": null,
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar entradas para el cine",
+        "persona_a_cargo": null,
+        "ambito": null,
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 905,
+     "tokensEntrada": 3037,
+     "tokensSalida": 90,
+     "finishReason": "STOP"
+    }
+   }
+  },
+  {
+   "id": 8,
+   "grupos": [
+    "catalogo_autor"
+   ],
+   "texto": "Que Daniela pague la luz de la casa",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "nota",
+      "titulo": "Que Daniela pague la luz de la casa",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Cuentas",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "baja"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "propuesta",
+        "titulo": "Pagar la luz de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": null,
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": "Daniela",
+        "confianza": "baja"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "nota",
+        "titulo": "Pagar la luz de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": null,
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       }
+      ]
+     },
+     "ajustes": [
+      {
+       "indice": 0,
+       "campo": "dirigida_a",
+       "motivo": "sin_evidencia_destinatario"
+      }
+     ],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "tipo": 1,
+        "ambito": 1,
+        "dirigida_a": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "ambito": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 889,
+     "tokensEntrada": 2782,
+     "tokensSalida": 68,
+     "finishReason": "STOP"
+    },
+    "7.1": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "nota",
+        "titulo": "Que Daniela pague la luz de la casa",
+        "persona_base": "ninguna",
+        "persona_a_cargo": null,
+        "ambito": null,
+        "tiempo": [],
+        "alcance": "ninguno",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja",
+        "motivo_nota": "destinatario_no_valido"
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "nota",
+        "titulo": "Que Daniela pague la luz de la casa",
+        "persona_a_cargo": null,
+        "ambito": null,
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "nota",
+        "titulo": "Que Daniela pague la luz de la casa",
+        "persona_a_cargo": null,
+        "ambito": null,
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "persona_a_cargo": 1,
+        "ambito": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "persona_a_cargo": 1,
+        "ambito": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 801,
+     "tokensEntrada": 3040,
+     "tokensSalida": 102,
+     "finishReason": "STOP"
+    }
+   }
+  },
+  {
+   "id": 9,
+   "grupos": [
+    "catalogo_hhmm"
+   ],
+   "texto": "Mañana a las 9:30 llevar a la Agustina al médico",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Llevar a Agustina al médico",
+      "persona_a_cargo": "Agustina",
+      "ambito": "Salud",
+      "plazo_fecha": "2026-12-31",
+      "plazo_hora": "09:30",
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Llevar a la Agustina al médico",
+        "persona_a_cargo": "Agustina",
+        "ambito": "Salud",
+        "plazo_fecha": "2026-12-31",
+        "plazo_hora": "09:30",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Llevar a la Agustina al médico",
+        "persona_a_cargo": "Agustina",
+        "ambito": "Salud",
+        "plazo_fecha": "2026-12-31",
+        "plazo_hora": "09:30",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 838,
+     "tokensEntrada": 2789,
+     "tokensSalida": 82,
+     "finishReason": "STOP"
+    },
+    "7.1": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Llevar a Agustina al médico",
+        "persona_base": "nombrada",
+        "persona_a_cargo": "Agustina",
+        "ambito": "Salud",
+        "tiempo": [
+         "Mañana a las 9:30"
+        ],
+        "alcance": "propio",
+        "plazo_fecha": "2026-12-31",
+        "plazo_hora": "09:30",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Llevar a Agustina al médico",
+        "persona_a_cargo": "Agustina",
+        "ambito": "Salud",
+        "plazo_fecha": "2026-12-31",
+        "plazo_hora": "09:30",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Llevar a Agustina al médico",
+        "persona_a_cargo": "Agustina",
+        "ambito": "Salud",
+        "plazo_fecha": "2026-12-31",
+        "plazo_hora": "09:30",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 938,
+     "tokensEntrada": 3047,
+     "tokensSalida": 117,
+     "finishReason": "STOP"
+    }
+   }
+  },
+  {
+   "id": 10,
+   "grupos": [
+    "catalogo_adulto"
+   ],
+   "texto": "El 2 de enero renovar la licencia de conducir de Jorge",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Renovar la licencia de conducir de Jorge",
+      "persona_a_cargo": null,
+      "ambito": "Papeleo",
+      "plazo_fecha": "2027-01-02",
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Renovar la licencia de conducir de Jorge",
+        "persona_a_cargo": null,
+        "ambito": "Trámites",
+        "plazo_fecha": "2027-01-02",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Renovar la licencia de conducir de Jorge",
+        "persona_a_cargo": null,
+        "ambito": null,
+        "plazo_fecha": "2027-01-02",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       }
+      ]
+     },
+     "ajustes": [
+      {
+       "indice": 0,
+       "campo": "ambito",
+       "motivo": "fuera_catalogo"
+      }
+     ],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "ambito": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "ambito": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 794,
+     "tokensEntrada": 2787,
+     "tokensSalida": 77,
+     "finishReason": "STOP"
+    },
+    "7.1": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Renovar la licencia de conducir de Jorge",
+        "persona_base": "ninguna",
+        "persona_a_cargo": null,
+        "ambito": "Papeleo",
+        "tiempo": [
+         "El 2 de enero"
+        ],
+        "alcance": "propio",
+        "plazo_fecha": "2027-01-02",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Renovar la licencia de conducir de Jorge",
+        "persona_a_cargo": null,
+        "ambito": "Papeleo",
+        "plazo_fecha": "2027-01-02",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Renovar la licencia de conducir de Jorge",
+        "persona_a_cargo": null,
+        "ambito": "Papeleo",
+        "plazo_fecha": "2027-01-02",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 901,
+     "tokensEntrada": 3044,
+     "tokensSalida": 108,
+     "finishReason": "STOP"
+    }
+   }
+  }
+ ],
+ "resumen": {
+  "6.0": {
+   "principalBruta": 3,
+   "estrictaBruta": 3,
+   "principalNormalizada": 3,
+   "estrictaNormalizada": 3,
+   "validas": 10,
+   "total": 10,
+   "medianaMs": 814,
+   "consumo": {
+    "entrada": 27840,
+    "salida": 889,
+    "razonamiento": 0,
+    "sinMedicion": 0
+   },
+   "tasaPorRevisar": 0.5454545454545454
+  },
+  "7.1": {
+   "principalBruta": 8,
+   "estrictaBruta": 8,
+   "principalNormalizada": 8,
+   "estrictaNormalizada": 8,
+   "validas": 10,
+   "total": 10,
+   "medianaMs": 880.5,
+   "consumo": {
+    "entrada": 30419,
+    "salida": 1121,
+    "razonamiento": 0,
+    "sinMedicion": 0
+   },
+   "tasaPorRevisar": 0.36363636363636365
+  }
+ }
+}

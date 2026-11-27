@@ -1,0 +1,2513 @@
+{
+ "fuente": {
+  "tipo": "replay_real_gemini",
+  "run": "45928250323",
+  "artefacto": "15166769133",
+  "nombreArtefacto": "evaluacion-v7-2-desarrollo-desarrollo-v7-2",
+  "archivo": "salida-eval-v7-2.json",
+  "sha256Json": "1799f3868e21a51a4285092316360f64c696d86bd68503625d4f8da02bafc076",
+  "corpus": "desarrollo-v7-2",
+  "modo": "desarrollo",
+  "modelo": "gemini-3.5-flash-lite",
+  "semilla": 20261128,
+  "versiones": [
+   "6.0",
+   "7.2"
+  ],
+  "huellas": {
+   "6.0": {
+    "instruccion": "2977309124e9c632908d5e996e4b097d893809a17f01b5ef8b24a2db3f653448",
+    "validador": "cbb520991abadf1a106a5275e87c483c02d7e548e59a101841eddd39dc41da76"
+   },
+   "7.2": {
+    "instruccion": "ee9c1d39a4e791f77894d7e1f8d66b24a7656738b034ec4bb4474df2ffc32569",
+    "individual": "c99e97e5512223eab4ceb9d6b058f84ebef608698cfb9462cd0899d6cf1176cc",
+    "lote": "fa235a3c22d1ec2bf241838ca4eadb3f878b212b6a07e92279db388da4874e6e",
+    "esquema": "75aa6cf3748dc8fc274dc479484a189bcb98713ab9594f0928a70ce606bfa506",
+    "esquemaLote": "b53883d322d801d1e09ccad63cc1e63dfd177ebc930c8559087cb012c076ee85",
+    "validador": "6d2d74397dce24a7bd358b9adb16d12c125f1e9af9689fa2375b538289d22147",
+    "validadorBase70": "d8a282898d1ae7028c36ba6e62bfa4c9d3fa7f9e4631b96493bb835285bebfa2",
+    "adaptador": "9b6875ea292a7871d4b473f76eab80bc5c8d2475714f456966fe2cb66800e764"
+   }
+  }
+ },
+ "contexto": {
+  "fecha": "2027-02-24T10:00:00-03:00",
+  "zona_horaria": "America/Santiago",
+  "personas_a_cargo": [
+   "Florencia",
+   "Benja",
+   "Rayo",
+   "El hogar"
+  ],
+  "integrantes": [
+   "Marcela",
+   "Rodrigo",
+   "Teresa"
+  ],
+  "autor": "Marcela",
+  "ambitos": [
+   "Salud",
+   "Colegio",
+   "Pagos y finanzas",
+   "Crianza diaria",
+   "Hogar",
+   "Mascotas",
+   "Trámites",
+   "Compras"
+  ]
+ },
+ "casos": [
+  {
+   "id": 1,
+   "grupos": [
+    "v72_dirigido"
+   ],
+   "texto": "Inscribir a Florencia en el taller de teatro escolar y transferir la mensualidad del liceo",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Inscribir en taller de teatro escolar",
+      "persona_a_cargo": "Florencia",
+      "ambito": "Colegio",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     },
+     {
+      "tipo": "tarea",
+      "titulo": "Transferir mensualidad del liceo",
+      "persona_a_cargo": "Florencia",
+      "ambito": "Pagos y finanzas",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Inscribir a Florencia en el taller de teatro escolar",
+        "persona_a_cargo": "Florencia",
+        "ambito": "Colegio",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Transferir la mensualidad del liceo",
+        "persona_a_cargo": "Florencia",
+        "ambito": "Pagos y finanzas",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Inscribir a Florencia en el taller de teatro escolar",
+        "persona_a_cargo": "Florencia",
+        "ambito": "Colegio",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Transferir la mensualidad del liceo",
+        "persona_a_cargo": "Florencia",
+        "ambito": "Pagos y finanzas",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 850,
+     "tokensEntrada": 2803,
+     "tokensSalida": 138,
+     "finishReason": "STOP"
+    },
+    "7.2": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Inscribir a Florencia en el taller de teatro",
+        "persona_base": "nombrada",
+        "persona_a_cargo": "Florencia",
+        "ambito": "Colegio",
+        "tiempo": [],
+        "alcance": "ninguno",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Transferir la mensualidad del liceo",
+        "persona_base": "referida",
+        "persona_a_cargo": "Florencia",
+        "ambito": "Pagos y finanzas",
+        "tiempo": [],
+        "alcance": "ninguno",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Inscribir a Florencia en el taller de teatro",
+        "persona_a_cargo": "Florencia",
+        "ambito": "Colegio",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Transferir la mensualidad del liceo",
+        "persona_a_cargo": "Florencia",
+        "ambito": "Pagos y finanzas",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Inscribir a Florencia en el taller de teatro",
+        "persona_a_cargo": "Florencia",
+        "ambito": "Colegio",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Transferir la mensualidad del liceo",
+        "persona_a_cargo": "Florencia",
+        "ambito": "Pagos y finanzas",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 1162,
+     "tokensEntrada": 3086,
+     "tokensSalida": 187,
+     "finishReason": "STOP"
+    }
+   }
+  },
+  {
+   "id": 2,
+   "grupos": [
+    "v72_dirigido"
+   ],
+   "texto": "Transferir la mensualidad del liceo",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Transferir mensualidad del liceo",
+      "persona_a_cargo": null,
+      "ambito": "Pagos y finanzas",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "baja"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Transferir la mensualidad del liceo",
+        "persona_a_cargo": null,
+        "ambito": "Pagos y finanzas",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Transferir la mensualidad del liceo",
+        "persona_a_cargo": null,
+        "ambito": "Pagos y finanzas",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 867,
+     "tokensEntrada": 2790,
+     "tokensSalida": 69,
+     "finishReason": "STOP"
+    },
+    "7.2": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Transferir la mensualidad del liceo",
+        "persona_base": "ninguna",
+        "persona_a_cargo": null,
+        "ambito": "Pagos y finanzas",
+        "tiempo": [],
+        "alcance": "ninguno",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Transferir la mensualidad del liceo",
+        "persona_a_cargo": null,
+        "ambito": "Pagos y finanzas",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Transferir la mensualidad del liceo",
+        "persona_a_cargo": null,
+        "ambito": "Pagos y finanzas",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 1061,
+     "tokensEntrada": 3073,
+     "tokensSalida": 97,
+     "finishReason": "STOP"
+    }
+   }
+  },
+  {
+   "id": 3,
+   "grupos": [
+    "v72_dirigido"
+   ],
+   "texto": "Inscribir a Florencia en el taller de teatro escolar y pagar el arriendo de la casa",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Inscribir en taller de teatro escolar",
+      "persona_a_cargo": "Florencia",
+      "ambito": "Colegio",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     },
+     {
+      "tipo": "tarea",
+      "titulo": "Pagar arriendo",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Pagos y finanzas",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Inscribir a Florencia en el taller de teatro escolar",
+        "persona_a_cargo": "Florencia",
+        "ambito": "Colegio",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Pagar el arriendo de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Pagos y finanzas",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Inscribir a Florencia en el taller de teatro escolar",
+        "persona_a_cargo": "Florencia",
+        "ambito": "Colegio",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Pagar el arriendo de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Pagos y finanzas",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 932,
+     "tokensEntrada": 2802,
+     "tokensSalida": 137,
+     "finishReason": "STOP"
+    },
+    "7.2": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Inscribir a Florencia en el taller de teatro escolar",
+        "persona_base": "nombrada",
+        "persona_a_cargo": "Florencia",
+        "ambito": "Colegio",
+        "tiempo": [],
+        "alcance": "ninguno",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Pagar el arriendo de la casa",
+        "persona_base": "nombrada",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Pagos y finanzas",
+        "tiempo": [],
+        "alcance": "ninguno",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Inscribir a Florencia en el taller de teatro escolar",
+        "persona_a_cargo": "Florencia",
+        "ambito": "Colegio",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Pagar el arriendo de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Pagos y finanzas",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Inscribir a Florencia en el taller de teatro escolar",
+        "persona_a_cargo": "Florencia",
+        "ambito": "Colegio",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Pagar el arriendo de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Pagos y finanzas",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 1306,
+     "tokensEntrada": 3085,
+     "tokensSalida": 302,
+     "finishReason": "STOP"
+    }
+   }
+  },
+  {
+   "id": 4,
+   "grupos": [
+    "v72_dirigido"
+   ],
+   "texto": "Retirar el uniforme escolar de Florencia y Benja y pagar la matrícula",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Retirar uniforme escolar",
+      "persona_a_cargo": null,
+      "ambito": "Colegio",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "baja"
+     },
+     {
+      "tipo": "tarea",
+      "titulo": "Pagar matrícula",
+      "persona_a_cargo": null,
+      "ambito": "Pagos y finanzas",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "baja"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Retirar el uniforme escolar de Florencia",
+        "persona_a_cargo": "Florencia",
+        "ambito": "Crianza diaria",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Retirar el uniforme escolar de Benja",
+        "persona_a_cargo": "Benja",
+        "ambito": "Crianza diaria",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Pagar la matrícula",
+        "persona_a_cargo": null,
+        "ambito": "Pagos y finanzas",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Retirar el uniforme escolar de Florencia",
+        "persona_a_cargo": "Florencia",
+        "ambito": "Crianza diaria",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Retirar el uniforme escolar de Benja",
+        "persona_a_cargo": "Benja",
+        "ambito": "Crianza diaria",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Pagar la matrícula",
+        "persona_a_cargo": null,
+        "ambito": "Pagos y finanzas",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "persona_a_cargo": 1,
+        "ambito": 1
+       },
+       "omitidas": 0,
+       "extras": 1
+      },
+      "normalizada": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "persona_a_cargo": 1,
+        "ambito": 1
+       },
+       "omitidas": 0,
+       "extras": 1
+      }
+     },
+     "ms": 1069,
+     "tokensEntrada": 2797,
+     "tokensSalida": 196,
+     "finishReason": "STOP"
+    },
+    "7.2": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Retirar el uniforme escolar de Florencia y Benja",
+        "persona_base": "nombrada",
+        "persona_a_cargo": null,
+        "ambito": "Colegio",
+        "tiempo": [],
+        "alcance": "ninguno",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja",
+        "motivo_nota": null
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Pagar la matrícula",
+        "persona_base": "ninguna",
+        "persona_a_cargo": null,
+        "ambito": "Pagos y finanzas",
+        "tiempo": [],
+        "alcance": "ninguno",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Retirar el uniforme escolar de Florencia y Benja",
+        "persona_a_cargo": null,
+        "ambito": "Colegio",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Pagar la matrícula",
+        "persona_a_cargo": null,
+        "ambito": "Pagos y finanzas",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Retirar el uniforme escolar de Florencia y Benja",
+        "persona_a_cargo": null,
+        "ambito": "Colegio",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Pagar la matrícula",
+        "persona_a_cargo": null,
+        "ambito": "Pagos y finanzas",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 1067,
+     "tokensEntrada": 3080,
+     "tokensSalida": 180,
+     "finishReason": "STOP"
+    }
+   }
+  },
+  {
+   "id": 5,
+   "grupos": [
+    "v72_dirigido"
+   ],
+   "texto": "Todos los martes preparar las colaciones",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "responsabilidad",
+      "titulo": "Preparar colaciones",
+      "persona_a_cargo": null,
+      "ambito": "Crianza diaria",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": {
+       "tipo": "semanal",
+       "cada": 1,
+       "dias": [
+        "martes"
+       ]
+      },
+      "dirigida_a": null,
+      "confianza": "baja"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "responsabilidad",
+        "titulo": "Preparar las colaciones",
+        "persona_a_cargo": null,
+        "ambito": "Crianza diaria",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": {
+         "tipo": "semanal",
+         "cada": 1,
+         "dias": [
+          "martes"
+         ]
+        },
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "responsabilidad",
+        "titulo": "Preparar las colaciones",
+        "persona_a_cargo": null,
+        "ambito": "Crianza diaria",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": {
+         "tipo": "semanal",
+         "cada": 1,
+         "dias": [
+          "martes"
+         ]
+        },
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 1314,
+     "tokensEntrada": 2789,
+     "tokensSalida": 81,
+     "finishReason": "STOP"
+    },
+    "7.2": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "responsabilidad",
+        "titulo": "Preparar las colaciones",
+        "persona_base": "ninguna",
+        "persona_a_cargo": null,
+        "ambito": "Crianza diaria",
+        "tiempo": [],
+        "alcance": "ninguno",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": {
+         "tipo": "semanal",
+         "cada": 1,
+         "dias": [
+          "martes"
+         ]
+        },
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "responsabilidad",
+        "titulo": "Preparar las colaciones",
+        "persona_a_cargo": null,
+        "ambito": "Crianza diaria",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": {
+         "tipo": "semanal",
+         "cada": 1,
+         "dias": [
+          "martes"
+         ]
+        },
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "responsabilidad",
+        "titulo": "Preparar las colaciones",
+        "persona_a_cargo": null,
+        "ambito": "Crianza diaria",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": {
+         "tipo": "semanal",
+         "cada": 1,
+         "dias": [
+          "martes"
+         ]
+        },
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 887,
+     "tokensEntrada": 3072,
+     "tokensSalida": 190,
+     "finishReason": "STOP"
+    }
+   }
+  },
+  {
+   "id": 6,
+   "grupos": [
+    "v72_dirigido"
+   ],
+   "texto": "El miércoles ordenar la terraza de la casa a las 09:30",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Ordenar terraza",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Hogar",
+      "plazo_fecha": null,
+      "plazo_hora": "09:30",
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "baja"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar la terraza de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "plazo_fecha": "2027-03-03",
+        "plazo_hora": "09:30",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar la terraza de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "plazo_fecha": "2027-03-03",
+        "plazo_hora": "09:30",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "plazo_fecha": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "plazo_fecha": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 756,
+     "tokensEntrada": 2798,
+     "tokensSalida": 78,
+     "finishReason": "STOP"
+    },
+    "7.2": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar la terraza de la casa",
+        "persona_base": "nombrada",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "tiempo": [
+         "El miércoles",
+         "a las 09:30"
+        ],
+        "alcance": "propio",
+        "plazo_fecha": "2027-03-03",
+        "plazo_hora": "09:30",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar la terraza de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "plazo_fecha": "2027-03-03",
+        "plazo_hora": "09:30",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar la terraza de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "plazo_fecha": null,
+        "plazo_hora": "09:30",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       }
+      ]
+     },
+     "ajustes": [
+      {
+       "indice": 0,
+       "campo": "plazo_fecha",
+       "motivo": "mismo_dia_ambiguo"
+      }
+     ],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "plazo_fecha": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 1102,
+     "tokensEntrada": 3081,
+     "tokensSalida": 191,
+     "finishReason": "STOP"
+    }
+   }
+  },
+  {
+   "id": 7,
+   "grupos": [
+    "v72_dirigido"
+   ],
+   "texto": "El próximo miércoles ordenar la terraza de la casa a las 09:30",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Ordenar terraza",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Hogar",
+      "plazo_fecha": "2027-03-03",
+      "plazo_hora": "09:30",
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar la terraza",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "plazo_fecha": "2027-03-03",
+        "plazo_hora": "09:30",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar la terraza",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "plazo_fecha": "2027-03-03",
+        "plazo_hora": "09:30",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 791,
+     "tokensEntrada": 2799,
+     "tokensSalida": 75,
+     "finishReason": "STOP"
+    },
+    "7.2": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar la terraza de la casa",
+        "persona_base": "nombrada",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "tiempo": [
+         "El próximo miércoles",
+         "a las 09:30"
+        ],
+        "alcance": "propio",
+        "plazo_fecha": "2027-03-03",
+        "plazo_hora": "09:30",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar la terraza de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "plazo_fecha": "2027-03-03",
+        "plazo_hora": "09:30",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar la terraza de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "plazo_fecha": "2027-03-03",
+        "plazo_hora": "09:30",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 917,
+     "tokensEntrada": 3082,
+     "tokensSalida": 192,
+     "finishReason": "STOP"
+    }
+   }
+  },
+  {
+   "id": 8,
+   "grupos": [
+    "v72_dirigido"
+   ],
+   "texto": "Hoy ordenar la terraza de la casa a las 09:30",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Ordenar terraza",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Hogar",
+      "plazo_fecha": "2027-02-24",
+      "plazo_hora": "09:30",
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar la terraza",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "plazo_fecha": "2027-02-24",
+        "plazo_hora": "09:30",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar la terraza",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "plazo_fecha": "2027-02-24",
+        "plazo_hora": "09:30",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 760,
+     "tokensEntrada": 2797,
+     "tokensSalida": 75,
+     "finishReason": "STOP"
+    },
+    "7.2": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar la terraza de la casa",
+        "persona_base": "nombrada",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "tiempo": [
+         "Hoy",
+         "a las 09:30"
+        ],
+        "alcance": "propio",
+        "plazo_fecha": "2027-02-24",
+        "plazo_hora": "09:30",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar la terraza de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "plazo_fecha": "2027-02-24",
+        "plazo_hora": "09:30",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar la terraza de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "plazo_fecha": "2027-02-24",
+        "plazo_hora": "09:30",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 871,
+     "tokensEntrada": 3080,
+     "tokensSalida": 115,
+     "finishReason": "STOP"
+    }
+   }
+  },
+  {
+   "id": 9,
+   "grupos": [
+    "v72_dirigido"
+   ],
+   "texto": "El viernes comprar arena para Rayo y a las seis llevar a Benja a fono",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar arena",
+      "persona_a_cargo": "Rayo",
+      "ambito": "Mascotas",
+      "plazo_fecha": "2027-02-26",
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     },
+     {
+      "tipo": "tarea",
+      "titulo": "Llevar a fono",
+      "persona_a_cargo": "Benja",
+      "ambito": "Salud",
+      "plazo_fecha": "2027-02-26",
+      "plazo_hora": "18:00",
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar arena para Rayo",
+        "persona_a_cargo": "Rayo",
+        "ambito": "Mascotas",
+        "plazo_fecha": "2027-02-26",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Llevar a Benja a fono",
+        "persona_a_cargo": "Benja",
+        "ambito": "Salud",
+        "plazo_fecha": "2027-02-26",
+        "plazo_hora": "18:00",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar arena para Rayo",
+        "persona_a_cargo": "Rayo",
+        "ambito": "Mascotas",
+        "plazo_fecha": "2027-02-26",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Llevar a Benja a fono",
+        "persona_a_cargo": "Benja",
+        "ambito": "Salud",
+        "plazo_fecha": "2027-02-26",
+        "plazo_hora": "18:00",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 995,
+     "tokensEntrada": 2800,
+     "tokensSalida": 151,
+     "finishReason": "STOP"
+    },
+    "7.2": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar arena para Rayo",
+        "persona_base": "nombrada",
+        "persona_a_cargo": "Rayo",
+        "ambito": "Mascotas",
+        "tiempo": [
+         "El viernes"
+        ],
+        "alcance": "propio",
+        "plazo_fecha": "2027-02-26",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Llevar a Benja a fono",
+        "persona_base": "nombrada",
+        "persona_a_cargo": "Benja",
+        "ambito": "Salud",
+        "tiempo": [
+         "a las seis"
+        ],
+        "alcance": "hereda",
+        "plazo_fecha": "2027-02-26",
+        "plazo_hora": "18:00",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar arena para Rayo",
+        "persona_a_cargo": "Rayo",
+        "ambito": "Mascotas",
+        "plazo_fecha": "2027-02-26",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Llevar a Benja a fono",
+        "persona_a_cargo": "Benja",
+        "ambito": "Salud",
+        "plazo_fecha": "2027-02-26",
+        "plazo_hora": "18:00",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar arena para Rayo",
+        "persona_a_cargo": "Rayo",
+        "ambito": "Mascotas",
+        "plazo_fecha": "2027-02-26",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Llevar a Benja a fono",
+        "persona_a_cargo": "Benja",
+        "ambito": "Salud",
+        "plazo_fecha": "2027-02-26",
+        "plazo_hora": "18:00",
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 1669,
+     "tokensEntrada": 3083,
+     "tokensSalida": 207,
+     "finishReason": "STOP"
+    }
+   }
+  },
+  {
+   "id": 10,
+   "grupos": [
+    "v72_dirigido"
+   ],
+   "texto": "El viernes comprar arena para Rayo y ordenar el patio de la casa",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar arena",
+      "persona_a_cargo": "Rayo",
+      "ambito": "Mascotas",
+      "plazo_fecha": "2027-02-26",
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     },
+     {
+      "tipo": "tarea",
+      "titulo": "Ordenar patio",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Hogar",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar arena para Rayo",
+        "persona_a_cargo": "Rayo",
+        "ambito": "Mascotas",
+        "plazo_fecha": "2027-02-26",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar el patio",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "plazo_fecha": "2027-02-26",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar arena para Rayo",
+        "persona_a_cargo": "Rayo",
+        "ambito": "Mascotas",
+        "plazo_fecha": "2027-02-26",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar el patio",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "plazo_fecha": "2027-02-26",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "plazo_fecha": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "plazo_fecha": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 1474,
+     "tokensEntrada": 2797,
+     "tokensSalida": 227,
+     "finishReason": "STOP"
+    },
+    "7.2": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar arena para Rayo",
+        "persona_base": "nombrada",
+        "persona_a_cargo": "Rayo",
+        "ambito": "Mascotas",
+        "tiempo": [
+         "El viernes"
+        ],
+        "alcance": "propio",
+        "plazo_fecha": "2027-02-26",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar el patio de la casa",
+        "persona_base": "nombrada",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "tiempo": [],
+        "alcance": "ninguno",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar arena para Rayo",
+        "persona_a_cargo": "Rayo",
+        "ambito": "Mascotas",
+        "plazo_fecha": "2027-02-26",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar el patio de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar arena para Rayo",
+        "persona_a_cargo": "Rayo",
+        "ambito": "Mascotas",
+        "plazo_fecha": "2027-02-26",
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Ordenar el patio de la casa",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 2059,
+     "tokensEntrada": 3079,
+     "tokensSalida": 310,
+     "finishReason": "STOP"
+    }
+   }
+  },
+  {
+   "id": 29,
+   "grupos": [
+    "compra_sin_beneficiario"
+   ],
+   "texto": "Llamar al gásfiter por la llave de la cocina y comprar leche",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Llamar al gásfiter por la llave de la cocina",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Hogar",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     },
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar leche",
+      "persona_a_cargo": null,
+      "ambito": "Compras",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Llamar al gásfiter por la llave de la cocina",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar leche",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Compras",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Llamar al gásfiter por la llave de la cocina",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar leche",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Compras",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "persona_a_cargo": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "persona_a_cargo": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 977,
+     "tokensEntrada": 2799,
+     "tokensSalida": 128,
+     "finishReason": "STOP"
+    },
+    "7.2": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Llamar al gásfiter por la llave de la cocina",
+        "persona_base": "nombrada",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "tiempo": [],
+        "alcance": "ninguno",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar leche",
+        "persona_base": "nombrada",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Compras",
+        "tiempo": [],
+        "alcance": "ninguno",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Llamar al gásfiter por la llave de la cocina",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar leche",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Compras",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Llamar al gásfiter por la llave de la cocina",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Hogar",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       },
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar leche",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Compras",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "persona_a_cargo": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "persona_a_cargo": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 1667,
+     "tokensEntrada": 3081,
+     "tokensSalida": 293,
+     "finishReason": "STOP"
+    }
+   }
+  },
+  {
+   "id": 38,
+   "grupos": [
+    "sin_beneficiario"
+   ],
+   "texto": "Comprar pañuelos desechables",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar pañuelos desechables",
+      "persona_a_cargo": null,
+      "ambito": "Compras",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   },
+   "brazos": {
+    "6.0": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": null,
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar pañuelos desechables",
+        "persona_a_cargo": null,
+        "ambito": "Compras",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar pañuelos desechables",
+        "persona_a_cargo": null,
+        "ambito": "Compras",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "ajustes": [],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": true,
+       "estricta": true,
+       "porCampo": {},
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 3719,
+     "tokensEntrada": 2790,
+     "tokensSalida": 64,
+     "finishReason": "STOP"
+    },
+    "7.2": {
+     "estado": "valida",
+     "causa": null,
+     "brutaInterna": {
+      "descartes": [],
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar pañuelos desechables",
+        "persona_base": "nombrada",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Compras",
+        "tiempo": [],
+        "alcance": "ninguno",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta",
+        "motivo_nota": null
+       }
+      ]
+     },
+     "bruta": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar pañuelos desechables",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Compras",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "alta"
+       }
+      ]
+     },
+     "resultado": {
+      "elementos": [
+       {
+        "tipo": "tarea",
+        "titulo": "Comprar pañuelos desechables",
+        "persona_a_cargo": "El hogar",
+        "ambito": "Compras",
+        "plazo_fecha": null,
+        "plazo_hora": null,
+        "recurrencia": null,
+        "dirigida_a": null,
+        "confianza": "baja"
+       }
+      ]
+     },
+     "ajustes": [
+      {
+       "indice": 0,
+       "campo": "persona_a_cargo",
+       "motivo": "hogar_sin_ancla"
+      }
+     ],
+     "alertas": [],
+     "metricas": {
+      "bruta": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "persona_a_cargo": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      },
+      "normalizada": {
+       "principal": false,
+       "estricta": false,
+       "porCampo": {
+        "persona_a_cargo": 1
+       },
+       "omitidas": 0,
+       "extras": 0
+      }
+     },
+     "ms": 3619,
+     "tokensEntrada": 3072,
+     "tokensSalida": 92,
+     "finishReason": "STOP"
+    }
+   }
+  }
+ ],
+ "resumen": {
+  "6.0": {
+   "principalBruta": 8,
+   "estrictaBruta": 8,
+   "principalNormalizada": 8,
+   "estrictaNormalizada": 8,
+   "validas": 12,
+   "total": 12,
+   "medianaMs": 954.5,
+   "consumo": {
+    "entrada": 33561,
+    "salida": 1419,
+    "razonamiento": 0,
+    "sinMedicion": 0
+   },
+   "tasaPorRevisar": 0.21052631578947367
+  },
+  "7.2": {
+   "principalBruta": 9,
+   "estrictaBruta": 9,
+   "principalNormalizada": 10,
+   "estrictaNormalizada": 10,
+   "validas": 12,
+   "total": 12,
+   "medianaMs": 1132,
+   "consumo": {
+    "entrada": 36954,
+    "salida": 2356,
+    "razonamiento": 0,
+    "sinMedicion": 0
+   },
+   "tasaPorRevisar": 0.3333333333333333
+  }
+ }
+}
