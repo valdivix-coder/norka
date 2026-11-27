@@ -1,0 +1,565 @@
+{
+ "version": "7.3",
+ "estado": "desarrollo; no ciego; nunca aceptación",
+ "aviso": "Frases ficticias nuevas (familia Isidora, Matías, Bruno; integrantes Carolina, Felipe, Ximena). No derivan del corpus oficial ni de capturas reales. Demostraciones del prompt (familia Renata/Gaspar/Chispa) separadas. El grupo indica el módulo que se prueba. D-04 aprobada: «el <día de hoy>» sin «próximo» deja fecha null y conserva la hora.",
+ "contexto": {
+  "fecha": "2027-05-13T09:00:00-04:00",
+  "zona_horaria": "America/Santiago",
+  "personas_a_cargo": [
+   "Isidora",
+   "Matías",
+   "Bruno",
+   "El hogar"
+  ],
+  "integrantes": [
+   "Carolina",
+   "Felipe",
+   "Ximena"
+  ],
+  "autor": "Carolina",
+  "ambitos": [
+   "Salud",
+   "Colegio",
+   "Pagos y finanzas",
+   "Crianza diaria",
+   "Hogar",
+   "Mascotas",
+   "Trámites",
+   "Compras"
+  ]
+ },
+ "casos": [
+  {
+   "id": 1,
+   "modulo": "M1_hogar_contraste",
+   "texto": "Arreglar la reja de la casa y comprar pilas",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Arreglar la reja de la casa",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Hogar",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     },
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar pilas",
+      "persona_a_cargo": null,
+      "ambito": "Compras",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 2,
+   "modulo": "M1_compra_para_casa",
+   "texto": "Comprar pilas para la casa",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar pilas para la casa",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Compras",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 3,
+   "modulo": "M1_compra_generica",
+   "texto": "Comprar servilletas",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar servilletas",
+      "persona_a_cargo": null,
+      "ambito": "Compras",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 4,
+   "modulo": "M1_compra_beneficiario",
+   "texto": "Comprar galletas para el Matías",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar galletas para Matías",
+      "persona_a_cargo": "Matías",
+      "ambito": "Compras",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 5,
+   "modulo": "M1_pago_hogar_y_compra",
+   "texto": "Pagar la luz y comprar velas",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Pagar la luz",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Pagos y finanzas",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     },
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar velas",
+      "persona_a_cargo": null,
+      "ambito": "Compras",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 6,
+   "modulo": "M1_hogar_sin_palabra_casa",
+   "texto": "Limpiar el refri",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Limpiar el refri",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Hogar",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 7,
+   "modulo": "M1_dos_acciones_hogar",
+   "texto": "Cambiar la ampolleta del baño y comprar detergente para la casa",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Cambiar la ampolleta del baño",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Hogar",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     },
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar detergente para la casa",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Compras",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 8,
+   "modulo": "M1_voz_minusculas",
+   "texto": "comprar lavalozas y barrer el patio",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar lavalozas",
+      "persona_a_cargo": null,
+      "ambito": "Compras",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     },
+     {
+      "tipo": "tarea",
+      "titulo": "Barrer el patio",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Hogar",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 9,
+   "modulo": "M2_d04_mismo_dia",
+   "texto": "El jueves a las 18:30 sacar la basura de la casa",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Sacar la basura",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Hogar",
+      "plazo_fecha": null,
+      "plazo_hora": "18:30",
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "baja"
+     }
+    ]
+   }
+  },
+  {
+   "id": 10,
+   "modulo": "M2_d04_proximo",
+   "texto": "El próximo jueves a las 18:30 sacar la basura de la casa",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Sacar la basura",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Hogar",
+      "plazo_fecha": "2027-05-20",
+      "plazo_hora": "18:30",
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 11,
+   "modulo": "M2_d04_hoy",
+   "texto": "Hoy a las 18:30 sacar la basura de la casa",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Sacar la basura",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Hogar",
+      "plazo_fecha": "2027-05-13",
+      "plazo_hora": "18:30",
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 12,
+   "modulo": "M2_hereda",
+   "texto": "El sábado llevar a Isidora al dentista y a las cinco comprar pan",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Llevar a Isidora al dentista",
+      "persona_a_cargo": "Isidora",
+      "ambito": "Salud",
+      "plazo_fecha": "2027-05-15",
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     },
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar pan",
+      "persona_a_cargo": null,
+      "ambito": "Compras",
+      "plazo_fecha": "2027-05-15",
+      "plazo_hora": "17:00",
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 13,
+   "modulo": "M2_ninguno",
+   "texto": "El sábado llevar a Isidora al dentista y comprar pan",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Llevar a Isidora al dentista",
+      "persona_a_cargo": "Isidora",
+      "ambito": "Salud",
+      "plazo_fecha": "2027-05-15",
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     },
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar pan",
+      "persona_a_cargo": null,
+      "ambito": "Compras",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 14,
+   "modulo": "M2_dia_n_cruza_mes",
+   "texto": "Antes del 2 pagar el agua de la casa",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Pagar el agua",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Pagos y finanzas",
+      "plazo_fecha": "2027-06-02",
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 15,
+   "modulo": "M3_referido_pago",
+   "texto": "Llevar a Matías al pediatra y pagar el bono",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Llevar a Matías al pediatra",
+      "persona_a_cargo": "Matías",
+      "ambito": "Salud",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     },
+     {
+      "tipo": "tarea",
+      "titulo": "Pagar el bono",
+      "persona_a_cargo": "Matías",
+      "ambito": "Pagos y finanzas",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 16,
+   "modulo": "M3_pago_sin_persona",
+   "texto": "Pagar el bono",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Pagar el bono",
+      "persona_a_cargo": null,
+      "ambito": "Pagos y finanzas",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "baja"
+     }
+    ]
+   }
+  },
+  {
+   "id": 17,
+   "modulo": "M3_no_transferir_a_hogar",
+   "texto": "Llevar a Matías al pediatra y pagar la luz de la casa",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Llevar a Matías al pediatra",
+      "persona_a_cargo": "Matías",
+      "ambito": "Salud",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     },
+     {
+      "tipo": "tarea",
+      "titulo": "Pagar la luz",
+      "persona_a_cargo": "El hogar",
+      "ambito": "Pagos y finanzas",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 18,
+   "modulo": "M3_propuesta_titular_beneficiario",
+   "texto": "Que Felipe compre el regalo de cumpleaños de la Isidora",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "propuesta",
+      "titulo": "Comprar el regalo de cumpleaños de Isidora",
+      "persona_a_cargo": "Isidora",
+      "ambito": "Compras",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": "Felipe",
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 19,
+   "modulo": "chileno_monto_correccion",
+   "texto": "Transferir 30 lucas al furgón de la Isidora el lunes, no, el martes",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Transferir 30 lucas al furgón",
+      "persona_a_cargo": "Isidora",
+      "ambito": "Pagos y finanzas",
+      "plazo_fecha": "2027-05-18",
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 20,
+   "modulo": "negacion",
+   "texto": "No compren más pan; hay que comprar queso",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar queso",
+      "persona_a_cargo": null,
+      "ambito": "Compras",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 21,
+   "modulo": "recurrencia_mascota",
+   "texto": "Día por medio darle el antiparasitario al Bruno",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "responsabilidad",
+      "titulo": "Darle el antiparasitario a Bruno",
+      "persona_a_cargo": "Bruno",
+      "ambito": "Mascotas",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": {
+       "tipo": "diaria",
+       "cada": 2,
+       "dias": []
+      },
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  },
+  {
+   "id": 22,
+   "modulo": "insumo_salud",
+   "texto": "Comprar remedio para la tos del Matías",
+   "esperado": {
+    "elementos": [
+     {
+      "tipo": "tarea",
+      "titulo": "Comprar remedio para la tos",
+      "persona_a_cargo": "Matías",
+      "ambito": "Salud",
+      "plazo_fecha": null,
+      "plazo_hora": null,
+      "recurrencia": null,
+      "dirigida_a": null,
+      "confianza": "alta"
+     }
+    ]
+   }
+  }
+ ]
+}

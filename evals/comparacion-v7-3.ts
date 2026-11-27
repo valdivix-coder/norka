@@ -1,0 +1,190 @@
+// Evaluador 7.3. Nuevo archivo: los evaluadores 7.0, 7.1 y 7.2 quedan intactos.
+// - Desarrollo: N brazos (control 6.0 + referencia 7.2 + candidata 7.3) sobre la misma entrada, orden por caso
+//   permutado de forma reproducible. Nunca es aceptación.
+// - Aceptación: exactamente 6.0 vs 7.3, mismas puertas y paradas que 7.2, incluida D-19 (una repetición
+//   diagnóstica por brazo invirtiendo el orden; la parada se mantiene aunque no se reproduzca).
+// - Métricas nuevas (se suman a los contadores históricos, no los sustituyen): hogar TP/FP/FN por capa,
+//   ablación del validador sobre la MISMA salida bruta interna (sin llamadas extra) y pérdidas al
+//   transformar en propuesta aplicable (planInterpretacion con identificadores sintéticos).
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+import { z } from "zod";
+import { ErrorGemini, SinModelosDisponibles, type IntentoGemini } from "../src/data/gemini-sintetico";
+import { crearGeminiPorVersion, type ContextoV73 } from "../src/data/gemini-sintetico-v7-3";
+import { instruccionesCaptura } from "../src/data/prompt-captura";
+import { instruccionesCapturaV72 } from "../src/data/prompt-captura-v7-2";
+import { instruccionesCapturaV73, sufijoIndividualV73, sufijoLoteV73 } from "../src/data/prompt-captura-v7-3";
+import { contratoInternoV71, contratoLoteInternoV71, type SalidaInternaV71 } from "../src/core/contracts/interpretacion-interna-v7-1";
+import { validarV72 } from "../src/core/usecases/validar-interpretacion-v7-2";
+import { validarV73 } from "../src/core/usecases/validar-interpretacion-v7-3";
+import { planInterpretacion } from "../src/core/usecases/interpretacion";
+import { contratoInterpretacion, type Interpretacion } from "../src/core/contracts/interpretacion";
+import { capa, alertasInvencion } from "./comparacion-v7-2";
+
+export type VersionV73 = "6.0" | "7.2" | "7.3";
+export type CasoEvaluable = { id: number; texto: string; esperado: Interpretacion };
+export type CorpusEvaluable = Omit<ContextoV73, "casos"> & { casos: CasoEvaluable[] };
+export const MODELO_AB = "gemini-3.5-flash-lite";
+const sha = (s: string | Buffer) => createHash("sha256").update(s).digest("hex");
+
+export function huellasV73() {
+  return {
+    "6.0": { instruccion: sha(instruccionesCaptura), validador: sha(readFileSync("src/core/usecases/revisar-interpretacion.ts")) },
+    "7.2": { instruccion: sha(instruccionesCapturaV72), validador: sha(readFileSync("src/core/usecases/validar-interpretacion-v7-2.ts")), adaptador: sha(readFileSync("src/data/gemini-sintetico-v7-2.ts")) },
+    "7.3": {
+      instruccion: sha(instruccionesCapturaV73), individual: sha(sufijoIndividualV73), lote: sha(sufijoLoteV73),
+      esquema: sha(JSON.stringify(z.toJSONSchema(contratoInternoV71))), esquemaLote: sha(JSON.stringify(z.toJSONSchema(contratoLoteInternoV71))),
+      validador: sha(readFileSync("src/core/usecases/validar-interpretacion-v7-3.ts")),
+      validadorBase70: sha(readFileSync("src/core/usecases/validar-interpretacion-v7.ts")),
+      adaptador: sha(readFileSync("src/data/gemini-sintetico-v7-3.ts")),
+      evaluador: sha(readFileSync("evals/comparacion-v7-3.ts")),
+    },
+  };
+}
+
+// Hogar por acción: compara la atribución a El hogar con el oráculo, emparejando por firma de campos no personales.
+export function metricasHogar(a: Interpretacion, e: Interpretacion) {
+  const esperadas = e.elementos.filter(x => x.persona_a_cargo === "El hogar").length;
+  const dadas = a.elementos.filter(x => x.persona_a_cargo === "El hogar").length;
+  const tp = Math.min(esperadas, dadas);
+  return { tp, fp: Math.max(0, dadas - esperadas), fn: Math.max(0, esperadas - dadas) };
+}
+
+// Propuesta aplicable: lo que realmente llegaría a la capa de aplicación con el contrato vigente.
+export function perdidasAplicacion(salida: Interpretacion, corpus: Omit<CorpusEvaluable, "casos">, texto: string) {
+  const ids = (xs: readonly string[]) => xs.map((nombre, i) => ({ id: "id-" + i + "-" + nombre, nombre }));
+  const plan = planInterpretacion(salida, { texto, autorId: "id-autor", personas: ids(corpus.personas_a_cargo), ambitos: ids(corpus.ambitos), integrantes: corpus.integrantes.map((n, i) => ({ id: n === corpus.autor ? "id-autor" : "id-int-" + i, nombre: n })) });
+  if (!plan) return { invalido: 1, horaPerdida: 0, responsabilidadDegradada: 0, notaSinClasificar: 0 };
+  let horaPerdida = 0, responsabilidadDegradada = 0, notaSinClasificar = 0;
+  salida.elementos.forEach((e, i) => {
+    const p = plan[i];
+    if (e.plazo_hora && !p.plazo_hora) horaPerdida++;
+    if (e.tipo === "responsabilidad" && p.tipo === "tarea") responsabilidadDegradada++;
+    if (e.tipo === "nota") notaSinClasificar++;
+  });
+  return { invalido: 0, horaPerdida, responsabilidadDegradada, notaSinClasificar };
+}
+
+function mulberry32(a: number) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+// Orden por caso: dos brazos → balanceado exacto; tres o más → permutación reproducible por caso.
+export function ordenesPorCaso<T>(n: number, versiones: readonly T[], semilla: number): T[][] {
+  const r = mulberry32(semilla);
+  if (versiones.length === 2) {
+    const o = Array.from({ length: n }, (_, i) => i < Math.ceil(n / 2));
+    for (let i = n - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [o[i], o[j]] = [o[j], o[i]]; }
+    return o.map(c => c ? [...versiones] : [...versiones].reverse());
+  }
+  return Array.from({ length: n }, () => { const p = [...versiones]; for (let i = p.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [p[i], p[j]] = [p[j], p[i]]; } return p; });
+}
+
+type Metricas = { bruta: ReturnType<typeof capa>; normalizada: ReturnType<typeof capa> };
+type Ablacion = { validador72: { principal: boolean; estricta: boolean }; validador73: { principal: boolean; estricta: boolean } };
+type Detalle = { id: number; version: VersionV73; estado: "no_ejecutada" | "fallida" | "valida"; causa?: string; brutaInterna?: unknown; bruta?: Interpretacion; resultado?: Interpretacion; ajustes?: { indice: number; campo: string; motivo: string }[]; metricas?: Metricas; alertas?: string[]; hogar?: { bruta: ReturnType<typeof metricasHogar>; normalizada: ReturnType<typeof metricasHogar> }; aplicacion?: ReturnType<typeof perdidasAplicacion>; ablacion?: Ablacion };
+type Solicitud = { version: VersionV73; id: number; intento: IntentoGemini; repeticion?: boolean };
+
+function resumenBrazo(det: Detalle[], solicitudes: Solicitud[]) {
+  const validas = det.filter(x => x.estado === "valida"), fallidas = det.filter(x => x.estado === "fallida");
+  const s = { principalBruta: 0, estrictaBruta: 0, principalNormalizada: 0, estrictaNormalizada: 0, porAccionBruta: 0, porAccion: 0, camposBrutosDiscrepantes: 0, camposInventados: 0, omitidasBrutas: 0, extrasBrutas: 0, omitidasNormalizadas: 0, extrasNormalizadas: 0, porCampoBruta: {} as Record<string, number>, porCampoNormalizada: {} as Record<string, number>, ajustesPorMotivo: {} as Record<string, number>, casosCorregidos: [] as number[], casosEmpeorados: [] as number[], alertas: [] as string[], fallosPorCausa: {} as Record<string, number>, finishReason: {} as Record<string, number>, totalElementos: 0, porRevisar: 0,
+    hogarBruta: { tp: 0, fp: 0, fn: 0 }, hogarNormalizada: { tp: 0, fp: 0, fn: 0 }, aplicacion: { invalido: 0, horaPerdida: 0, responsabilidadDegradada: 0, notaSinClasificar: 0 },
+    ablacion: { validador72: { principal: 0, estricta: 0 }, validador73: { principal: 0, estricta: 0 }, casos: 0 } };
+  const sum = (d: Record<string, number>, x: Record<string, number>) => { for (const [k, v] of Object.entries(x)) d[k] = (d[k] ?? 0) + v; };
+  for (const d of validas) {
+    const { bruta: b, normalizada: n } = d.metricas!;
+    s.principalBruta += +b.principal; s.estrictaBruta += +b.estricta; s.principalNormalizada += +n.principal; s.estrictaNormalizada += +n.estricta;
+    s.porAccionBruta += b.audit.discrepancias; s.porAccion += n.audit.discrepancias; s.camposBrutosDiscrepantes += b.discrepanciasGlobales; s.camposInventados += n.discrepanciasGlobales;
+    s.omitidasBrutas += b.audit.omitidas; s.extrasBrutas += b.audit.extras; s.omitidasNormalizadas += n.audit.omitidas; s.extrasNormalizadas += n.audit.extras;
+    sum(s.porCampoBruta, b.porCampo); sum(s.porCampoNormalizada, n.porCampo);
+    for (const a of d.ajustes ?? []) s.ajustesPorMotivo[a.motivo] = (s.ajustesPorMotivo[a.motivo] ?? 0) + 1;
+    if ((!b.principal && n.principal) || (!b.estricta && n.estricta)) s.casosCorregidos.push(d.id);
+    if ((b.principal && !n.principal) || (b.estricta && !n.estricta)) s.casosEmpeorados.push(d.id);
+    for (const a of d.alertas ?? []) s.alertas.push(d.id + ":" + a);
+    for (const e of d.resultado!.elementos) { s.totalElementos++; if (e.confianza === "baja" || e.persona_a_cargo === null || e.ambito === null) s.porRevisar++; }
+    if (d.hogar) { for (const k of ["tp", "fp", "fn"] as const) { s.hogarBruta[k] += d.hogar.bruta[k]; s.hogarNormalizada[k] += d.hogar.normalizada[k]; } }
+    if (d.aplicacion) for (const k of Object.keys(s.aplicacion) as (keyof typeof s.aplicacion)[]) s.aplicacion[k] += d.aplicacion[k];
+    if (d.ablacion) { s.ablacion.casos++; for (const v of ["validador72", "validador73"] as const) { s.ablacion[v].principal += +d.ablacion[v].principal; s.ablacion[v].estricta += +d.ablacion[v].estricta; } }
+  }
+  for (const q of solicitudes) { if (q.intento.resultado !== "valida") s.fallosPorCausa[q.intento.motivo ?? "desconocida"] = (s.fallosPorCausa[q.intento.motivo ?? "desconocida"] ?? 0) + 1; if (q.intento.finishReason) s.finishReason[q.intento.finishReason] = (s.finishReason[q.intento.finishReason] ?? 0) + 1; }
+  const lat = solicitudes.filter(x => x.intento.resultado === "valida").map(x => x.intento.ms).sort((a, b) => a - b);
+  const consumo = { entrada: 0, salida: 0, razonamiento: 0, sinMedicion: 0 };
+  for (const q of solicitudes) { const i = q.intento; if (i.tokensEntrada === undefined || i.tokensSalida === undefined) consumo.sinMedicion++; consumo.entrada += i.tokensEntrada ?? 0; consumo.salida += i.tokensSalida ?? 0; consumo.razonamiento += i.tokensRazonamiento ?? 0; }
+  return { ...s, total: det.length, validas: validas.length, fallidas: fallidas.length, noEjecutadas: det.length - validas.length - fallidas.length, tasaPorRevisar: s.totalElementos ? s.porRevisar / s.totalElementos : null, solicitudes: solicitudes.length, consumo, medianaMs: lat.length ? (lat[Math.floor((lat.length - 1) / 2)] + lat[Math.floor(lat.length / 2)]) / 2 : null, p95Ms: lat.length ? lat[Math.ceil(lat.length * .95) - 1] : null };
+}
+
+export async function ejecutarComparacionV73({ clave, corpus, modo = "aceptacion", versiones = modo === "aceptacion" ? ["6.0", "7.3"] : ["6.0", "7.2", "7.3"], semilla = 20261129, solicitar, esperar = ms => new Promise<void>(r => setTimeout(r, ms)), registrar = () => {} }: {
+  clave: string; corpus: CorpusEvaluable; modo?: "aceptacion" | "desarrollo"; versiones?: VersionV73[]; semilla?: number; solicitar?: typeof fetch; esperar?: (ms: number) => Promise<void>; registrar?: (linea: string) => void;
+}) {
+  if (!Number.isSafeInteger(semilla) || (modo !== "aceptacion" && modo !== "desarrollo")) throw new Error("CONFIG_AB_INVALIDA");
+  if (modo === "aceptacion" && JSON.stringify(versiones) !== JSON.stringify(["6.0", "7.3"])) throw new Error("ACEPTACION_SOLO_6_0_VS_7_3");
+  if (versiones[0] !== "6.0" || new Set(versiones).size !== versiones.length || versiones.length < 2) throw new Error("CONFIG_AB_INVALIDA");
+  if (new Set(corpus.casos.map(c => c.id)).size !== corpus.casos.length) throw new Error("CORPUS_AB_INVALIDO");
+  const candidata = versiones.at(-1)!;
+  const detalle: Detalle[] = versiones.flatMap(version => corpus.casos.map(c => ({ id: c.id, version, estado: "no_ejecutada" as const })));
+  const solicitudes: Solicitud[] = []; let idActual = 0; let primera = true; let repitiendo = false;
+  const repeticiones: { id: number; detalle: Detalle[]; clasificacion: string }[] = [];
+  const ia = new Map(versiones.map(version => [version, crearGeminiPorVersion({ clave, modelo: MODELO_AB, version, corpus, solicitar, observar: intento => solicitudes.push({ version, id: idActual, intento, ...(repitiendo ? { repeticion: true } : {}) }) })]));
+  const registro = (id: number, v: VersionV73) => detalle.find(d => d.id === id && d.version === v)!;
+  const ordenes = ordenesPorCaso(corpus.casos.length, versiones, semilla);
+  const contextoVal = (texto: string) => ({ fecha: corpus.fecha, texto, personas: corpus.personas_a_cargo, integrantes: corpus.integrantes, ambitos: corpus.ambitos, autor: corpus.autor });
+  const medir = (caso: CasoEvaluable, version: VersionV73, a: ReturnType<typeof crearGeminiPorVersion>, resultado: Interpretacion): Partial<Detalle> => {
+    const bruta = a.bruta(caso.id)!, interna = a.brutaInterna(caso.id) as SalidaInternaV71 | undefined;
+    let ablacion: Ablacion | undefined;
+    if ((version === "7.2" || version === "7.3") && interna) {
+      const r72 = contratoInterpretacion.parse(validarV72(structuredClone(interna), contextoVal(caso.texto)).publica), r73 = contratoInterpretacion.parse(validarV73(structuredClone(interna), contextoVal(caso.texto)).publica);
+      const m72 = capa(r72, caso.esperado), m73 = capa(r73, caso.esperado);
+      ablacion = { validador72: { principal: m72.principal, estricta: m72.estricta }, validador73: { principal: m73.principal, estricta: m73.estricta } };
+    }
+    return { estado: "valida", brutaInterna: interna, bruta, resultado, ajustes: a.ajustes(caso.id), metricas: { bruta: capa(bruta, caso.esperado), normalizada: capa(resultado, caso.esperado) },
+      alertas: [...alertasInvencion(caso.texto, bruta, corpus.personas_a_cargo, corpus.integrantes).map(x => "bruta:" + x), ...alertasInvencion(caso.texto, resultado, corpus.personas_a_cargo, corpus.integrantes).map(x => "normalizada:" + x)],
+      hogar: { bruta: metricasHogar(bruta, caso.esperado), normalizada: metricasHogar(resultado, caso.esperado) }, aplicacion: perdidasAplicacion(resultado, corpus, caso.texto), ablacion };
+  };
+  let parada: { motivo: string; version?: VersionV73; id: number } | null = null;
+  externo: for (const [k, caso] of corpus.casos.entries()) {
+    idActual = caso.id;
+    for (const version of ordenes[k]) {
+      const a = ia.get(version)!; const antes = solicitudes.length;
+      for (let intento = 0; intento < 2; intento++) {
+        if (!primera) await esperar(4500); primera = false;
+        try { const resultado = (await a.evaluarLote([caso.id])).get(caso.id)!; Object.assign(registro(caso.id, version), medir(caso, version, a, resultado)); break; }
+        catch (error) {
+          const ultimo = solicitudes.length > antes ? solicitudes.at(-1)?.intento : undefined;
+          const causa = error instanceof ErrorGemini ? "HTTP " + error.estado : ultimo?.motivo ?? (error instanceof SinModelosDisponibles ? "sin_modelos" : "sin_salida_valida");
+          if (intento === 0 && (causa === "HTTP 503" || causa === "timeout")) continue;
+          Object.assign(registro(caso.id, version), { estado: "fallida", causa });
+          if (causa === "HTTP 429" || modo === "aceptacion" || version === candidata) { parada = { motivo: causa === "HTTP 429" ? "cuota_429" : "cobertura_incompleta:" + causa, version, id: caso.id }; break externo; }
+          break;
+        }
+      }
+    }
+    const marca = (d: Detalle) => d.metricas ? `${+d.metricas.bruta.principal}${+d.metricas.bruta.estricta}/${+d.metricas.normalizada.principal}${+d.metricas.normalizada.estricta}` : d.estado;
+    const c6 = registro(caso.id, "6.0"), c7 = registro(caso.id, candidata);
+    registrar(`caso ${caso.id} · ` + versiones.map(v => v + " " + marca(registro(caso.id, v))).join(" · ") + (c7.alertas?.length ? " · alertas " + c7.alertas.join(",") : ""));
+    if (modo === "desarrollo") {
+      // En desarrollo una alerta se registra y se revisa a mano; solo detiene si viene de la candidata.
+      if (c7.alertas?.length) { parada = { motivo: "alerta_invencion", version: candidata, id: caso.id }; break; }
+      continue;
+    }
+    if (c6.metricas && c7.metricas) {
+      const a = c6.metricas, b = c7.metricas;
+      const regresion = (["bruta", "normalizada"] as const).some(k => (["principal", "estricta"] as const).some(m => a[k][m] && !b[k][m]));
+      const empeora = (b.bruta.estricta && !b.normalizada.estricta) || (b.bruta.principal && !b.normalizada.principal);
+      if (empeora || c7.alertas?.length || c6.alertas?.length) { parada = { motivo: empeora ? "validador_empeora" : "alerta_invencion", version: empeora || c7.alertas?.length ? candidata : "6.0", id: caso.id }; break; }
+      if (regresion) {
+        repitiendo = true; const repetidos: Detalle[] = [];
+        for (const version of [...ordenes[k]].reverse()) {
+          const adapter = ia.get(version)!; await esperar(4500);
+          try { const resultado = await adapter.evaluar(caso.id); const d = { id: caso.id, version, ...medir(caso, version, adapter, resultado) } as Detalle; repetidos.push(d); if (d.alertas?.length) { parada = { motivo: "alerta_invencion_en_repeticion", version, id: caso.id }; break; } }
+          catch (error) { const causa = error instanceof ErrorGemini ? "HTTP " + error.estado : solicitudes.at(-1)?.intento.motivo ?? "sin_salida_valida"; repetidos.push({ id: caso.id, version, estado: "fallida", causa }); parada = { motivo: causa === "HTTP 429" ? "cuota_429" : "cobertura_incompleta_repeticion:" + causa, version, id: caso.id }; break; }
+        }
+        const ra = repetidos.find(d => d.version === "6.0")?.metricas, rb = repetidos.find(d => d.version === candidata)?.metricas;
+        const reproduce = ra && rb && (["bruta", "normalizada"] as const).some(k => (["principal", "estricta"] as const).some(m => ra[k][m] && !rb[k][m]));
+        const clasificacion = parada ? "repeticion_interrumpida" : reproduce ? "regresion_reproducida" : "regresion_no_reproducida";
+        repeticiones.push({ id: caso.id, detalle: repetidos, clasificacion });
+        parada = parada ?? { motivo: clasificacion, version: candidata, id: caso.id };
+        repitiendo = false; break;
+      }
+    }
+  }
+  const brazos = Object.fromEntries(versiones.map(v => [v, resumenBrazo(detalle.filter(d => d.version === v), solicitudes.filter(q => q.version === v && !q.repeticion))])) as Record<VersionV73, ReturnType<typeof resumenBrazo>>;
+  const completos = corpus.casos.filter(c => versiones.every(v => registro(c.id, v).metricas)).length;
+  return { resumen: { modo, semilla, modelo: MODELO_AB, respaldos: [], versiones, huellas: huellasV73(), parada, brazos, paresCompletos: completos, comparacionCompleta: completos === corpus.casos.length, revisionManual: "Pendiente; discrepancia no equivale a invención; alertas automáticas no son confirmación." }, detalle, solicitudes, repeticiones };
+}

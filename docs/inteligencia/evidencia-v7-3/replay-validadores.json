@@ -1,0 +1,2050 @@
+{
+ "resumen": {
+  "casos": 61,
+  "brutaPrincipal": 52,
+  "brutaEstricta": 50,
+  "v7.1": {
+   "principal": 53,
+   "estricta": 53,
+   "corregidos": [
+    "45922944781#13",
+    "45922944781#30",
+    "45923853986#3"
+   ],
+   "empeorados": [],
+   "revisar": 19,
+   "elementos": 76
+  },
+  "v7.2": {
+   "principal": 53,
+   "estricta": 53,
+   "corregidos": [
+    "45922944781#13",
+    "45922944781#30",
+    "45923853986#3",
+    "45928250323#6"
+   ],
+   "empeorados": [
+    "45922944781#39"
+   ],
+   "revisar": 19,
+   "elementos": 76
+  },
+  "v7.3": {
+   "principal": 55,
+   "estricta": 55,
+   "corregidos": [
+    "45922944781#13",
+    "45922944781#30",
+    "45923853986#3",
+    "45928250323#6",
+    "45928250323#29",
+    "45928250323#38"
+   ],
+   "empeorados": [
+    "45922944781#39"
+   ],
+   "revisar": 20,
+   "elementos": 76
+  },
+  "reproduceGuardado": "59/61"
+ },
+ "filas": [
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 1,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 2,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 3,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 4,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 5,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 6,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 7,
+   "brazo": "7.1",
+   "bruta": [
+    false,
+    false
+   ],
+   "v7.1": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.2": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.3": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 8,
+   "brazo": "7.1",
+   "bruta": [
+    false,
+    false
+   ],
+   "v7.1": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.2": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.3": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 9,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 10,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 11,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 12,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 13,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    false
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [
+     "dirigida_a:sin_evidencia_destinatario"
+    ],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [
+     "dirigida_a:sin_evidencia_destinatario"
+    ],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [
+     "dirigida_a:sin_evidencia_destinatario"
+    ],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 14,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 15,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 16,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 17,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 18,
+   "brazo": "7.1",
+   "bruta": [
+    false,
+    false
+   ],
+   "v7.1": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 19,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 20,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 21,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 22,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 23,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 24,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 25,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 26,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 27,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 28,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [
+     "plazo:convencion"
+    ],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [
+     "plazo:convencion"
+    ],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [
+     "plazo:convencion"
+    ],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 29,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 2
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 2
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 2
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 30,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    false
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [
+     "recurrencia:unidad_explicita"
+    ],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [
+     "recurrencia:unidad_explicita"
+    ],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [
+     "recurrencia:unidad_explicita"
+    ],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 31,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 32,
+   "brazo": "7.1",
+   "bruta": [
+    false,
+    false
+   ],
+   "v7.1": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": false
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 33,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 34,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 35,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 36,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 37,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 38,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45922944781",
+   "corpus": "desarrollo-v7-1",
+   "id": 39,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [
+     "plazo:ambigua"
+    ],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [
+     "plazo_fecha:mismo_dia_ambiguo"
+    ],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [
+     "plazo_fecha:mismo_dia_ambiguo"
+    ],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45923853986",
+   "corpus": "desarrollo-v7-1-catalogo",
+   "id": 1,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45923853986",
+   "corpus": "desarrollo-v7-1-catalogo",
+   "id": 2,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45923853986",
+   "corpus": "desarrollo-v7-1-catalogo",
+   "id": 3,
+   "brazo": "7.1",
+   "bruta": [
+    false,
+    false
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [
+     "plazo_fecha:recalculada"
+    ],
+    "revisar": 1,
+    "elementos": 2
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [
+     "plazo_fecha:recalculada"
+    ],
+    "revisar": 1,
+    "elementos": 2
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [
+     "plazo_fecha:recalculada"
+    ],
+    "revisar": 1,
+    "elementos": 2
+   },
+   "reproduce": false
+  },
+  {
+   "run": "45923853986",
+   "corpus": "desarrollo-v7-1-catalogo",
+   "id": 4,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45923853986",
+   "corpus": "desarrollo-v7-1-catalogo",
+   "id": 5,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45923853986",
+   "corpus": "desarrollo-v7-1-catalogo",
+   "id": 6,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45923853986",
+   "corpus": "desarrollo-v7-1-catalogo",
+   "id": 7,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45923853986",
+   "corpus": "desarrollo-v7-1-catalogo",
+   "id": 8,
+   "brazo": "7.1",
+   "bruta": [
+    false,
+    false
+   ],
+   "v7.1": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45923853986",
+   "corpus": "desarrollo-v7-1-catalogo",
+   "id": 9,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45923853986",
+   "corpus": "desarrollo-v7-1-catalogo",
+   "id": 10,
+   "brazo": "7.1",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45928250323",
+   "corpus": "desarrollo-v7-2",
+   "id": 1,
+   "brazo": "7.2",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45928250323",
+   "corpus": "desarrollo-v7-2",
+   "id": 2,
+   "brazo": "7.2",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45928250323",
+   "corpus": "desarrollo-v7-2",
+   "id": 3,
+   "brazo": "7.2",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45928250323",
+   "corpus": "desarrollo-v7-2",
+   "id": 4,
+   "brazo": "7.2",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 2,
+    "elementos": 2
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 2,
+    "elementos": 2
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 2,
+    "elementos": 2
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45928250323",
+   "corpus": "desarrollo-v7-2",
+   "id": 5,
+   "brazo": "7.2",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45928250323",
+   "corpus": "desarrollo-v7-2",
+   "id": 6,
+   "brazo": "7.2",
+   "bruta": [
+    false,
+    false
+   ],
+   "v7.1": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [
+     "plazo:ambigua"
+    ],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [
+     "plazo_fecha:mismo_dia_ambiguo"
+    ],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [
+     "plazo_fecha:mismo_dia_ambiguo"
+    ],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45928250323",
+   "corpus": "desarrollo-v7-2",
+   "id": 7,
+   "brazo": "7.2",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45928250323",
+   "corpus": "desarrollo-v7-2",
+   "id": 8,
+   "brazo": "7.2",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 1
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45928250323",
+   "corpus": "desarrollo-v7-2",
+   "id": 9,
+   "brazo": "7.2",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45928250323",
+   "corpus": "desarrollo-v7-2",
+   "id": 10,
+   "brazo": "7.2",
+   "bruta": [
+    true,
+    true
+   ],
+   "v7.1": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.2": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45928250323",
+   "corpus": "desarrollo-v7-2",
+   "id": 29,
+   "brazo": "7.2",
+   "bruta": [
+    false,
+    false
+   ],
+   "v7.1": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.2": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [],
+    "revisar": 0,
+    "elementos": 2
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [
+     "persona_a_cargo:hogar_sin_ancla_compra"
+    ],
+    "revisar": 1,
+    "elementos": 2
+   },
+   "reproduce": true
+  },
+  {
+   "run": "45928250323",
+   "corpus": "desarrollo-v7-2",
+   "id": 38,
+   "brazo": "7.2",
+   "bruta": [
+    false,
+    false
+   ],
+   "v7.1": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [
+     "persona_a_cargo:hogar_sin_ancla"
+    ],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.2": {
+    "principal": false,
+    "estricta": false,
+    "ajustes": [
+     "persona_a_cargo:hogar_sin_ancla"
+    ],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "v7.3": {
+    "principal": true,
+    "estricta": true,
+    "ajustes": [
+     "persona_a_cargo:hogar_sin_ancla_compra"
+    ],
+    "revisar": 1,
+    "elementos": 1
+   },
+   "reproduce": true
+  }
+ ]
+}
