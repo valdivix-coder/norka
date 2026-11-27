@@ -1,0 +1,30 @@
+name: Preparar guía de marca y evidencia V7.3 (sin proveedor)
+on:
+  push:
+    branches: [fase-2]
+    paths: ['.github/workflows/preparar-laboratorio.yml']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  preparar:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/download-artifact@v4
+        with:
+          name: evaluacion-v7-3-desarrollo-desarrollo-v7-3
+          run-id: '45994191002'
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+          path: /tmp/replay-v73
+      - name: Preparar guía y corpus sintético
+        run: |
+          mkdir -p /tmp/norka-preparacion
+          cp docs/marca/GUIA-GRAFICA.pdf /tmp/norka-preparacion/
+          cp evals/desarrollo-v7-3.json /tmp/norka-preparacion/
+          cp /tmp/replay-v73/*.json /tmp/norka-preparacion/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: preparacion-laboratorio
+          path: /tmp/norka-preparacion
+          retention-days: 7
