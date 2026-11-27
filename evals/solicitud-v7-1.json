@@ -1,6 +1,7 @@
 {
-  "modo": "desarrollo",
-  "corpus": "desarrollo-v7-1-catalogo",
+  "modo": "aceptacion",
+  "corpus": "oficial",
   "semilla": 20261127,
-  "nota": "Desarrollo tras ajustes mínimos (destinatario desconocido, cada 15 días, falso Por revisar). No es aceptación."
+  "candidato": "6deaaac21091e871423fe9fc726dce1d8e3953bf",
+  "nota": "A/B individual V6 vs 7.1 congelado. Lite fijo, sin respaldos, paradas activas."
 }
