@@ -1,0 +1,51 @@
+name: Gemini · evaluación 7.4 (desarrollo multi-brazo o A/B individual)
+on:
+  push:
+    branches: [fase-2]
+    paths: ['evals/solicitud-v7-4.json']
+permissions:
+  contents: read
+concurrency:
+  group: norka-evaluacion-sintetica
+  cancel-in-progress: false
+jobs:
+  evaluar:
+    if: github.ref == 'refs/heads/fase-2'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 80
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Leer solicitud (solo modo, corpus y semilla permitidos)
+        run: |
+          node -e '
+          const s=require("./evals/solicitud-v7-4.json");
+          const modos=["desarrollo","aceptacion"],corpus=["oficial","desarrollo-v7-4","desarrollo-v7-3","desarrollo-v7-1","desarrollo-v7-1-catalogo"];
+          if(!modos.includes(s.modo)||!corpus.includes(s.corpus)||!Number.isSafeInteger(s.semilla))throw new Error("SOLICITUD_INVALIDA");
+          if(s.modo==="aceptacion"&&s.corpus!=="oficial")throw new Error("ACEPTACION_SOLO_OFICIAL");
+          require("fs").appendFileSync(process.env.GITHUB_ENV,`GEMINI_V74_MODO=${s.modo}\nGEMINI_V74_CORPUS=${s.corpus}\nGEMINI_AB_SEMILLA=${s.semilla}\n`);'
+      - name: Corpus oficial intacto y arnés
+        run: |
+          test "$(git hash-object evals/captura-cl.json)" = "8a1add2d3bda79cd82db2bfc9166a501aaec5ca6"
+          test "$(git hash-object src/data/prompt-captura.ts)" = "865b9191dbeff277e47a6730d5d48c6a3accc086"
+          npm run arnes
+      - name: Huellas congeladas 7.4 (solo aceptación)
+        if: env.GEMINI_V74_MODO == 'aceptacion'
+        run: npx vitest run --config evals/vitest.congelacion-v7-4.mts
+      - name: Evaluación pareada V6, 7.3 y 7.4
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_EVAL_ACTIVA: '1'
+        run: npx vitest run --config evals/vitest.v7-4.mts
+      - name: Artefacto exclusivamente sintético
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evaluacion-v7-4-${{ env.GEMINI_V74_MODO }}-${{ env.GEMINI_V74_CORPUS }}
+          path: evals/salida-eval-v7-4.json
+          if-no-files-found: ignore
+          retention-days: 14
