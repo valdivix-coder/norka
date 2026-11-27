@@ -137,3 +137,8 @@ Se congela V6 operativa en 3030411 como referencia de comparación y 9d9b63c com
 ## V7.0 · Auditoría independiente — punto de parada
 
 Paquete de cinco documentos recibido en 78a37c6, V6 y corpus oficial intactos. Pruebas reproducidas en CI aislado: https://github.com/valdivix-coder/norka/actions/runs/45913820767 (69/69, 72/72, 20/22 mutaciones detectadas, oficial/desarrollo 50/50, contrato 50/50). Contraejemplo adicional confirmado en rojo: «mañana a las 09:30» produce 09:00, clase inequívoca. PUNTO DE PARADA: no integrar ni llamar a Gemini. Ver docs/inteligencia/AUDITORIA-RECEPCION-V7.md para hallazgos, decisiones y reversión. Esperar respuesta del propietario para corregir prototipo sin editar originales. V6 sigue operativa, fase 2 abierta.
+
+
+## V7.0 corregida y V7.1 del encargo · integración experimental
+
+El propietario aprobó corregir la copia sin alterar cinco originales ni V6. Auditoría aislada https://github.com/valdivix-coder/norka/actions/runs/45916109626 aprobada: 69/69, 72/72, 20/22, 50/50 oficial y desarrollo, 50/50 contrato, 12 grupos independientes y horario 09:30 correcto. Se incorpora candidato exclusivamente sintético con selector V6 por defecto, contrato interno y tres capas; no se activa proveedor familiar ni se llama a Gemini en esta revisión. Arnés mínimo/completo pendientes de confirmar. No congelar candidato hasta ambos verdes. Los límites de inferencia semántica y privacidad real siguen pendientes. Reversión: revertir commit de integración, o usar selector 6.0; no hay migración.
