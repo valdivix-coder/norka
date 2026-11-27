@@ -14,8 +14,10 @@ with sync_playwright() as p:
     page.goto(url)
     page.get_by_role("heading",name="Laboratorio de IA").wait_for()
     assert page.locator("#resultados .version").count()==2
-    assert page.locator("#corpus option").count()==5
-    assert page.locator("#b").input_value()=="7.4"
+    assert page.locator("#corpus option").count()==6
+    assert page.locator("#b").input_value()=="7.5"
+    assert page.locator("#caso option").count()==10
+    assert page.get_by_text("2 de 2 acciones de referencia · Cantidad completa",exact=True).count()>=1
     page.screenshot(path=str(out/"laboratorio-movil-oscuro.png"),full_page=True)
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
     page.locator("#tema").click()
@@ -69,5 +71,5 @@ with sync_playwright() as p:
     assert page.get_by_role("heading",name="Prueba ficticia de edición").count()==0
     assert external==[],external
     assert errors==[],errors
-    print("LAB_BROWSER_OK: 5 fuentes, comparación, capas, hora pendiente, edición, confirmación, descarte, undo, reinicio, 360/390/1280, claro/oscuro, sin solicitudes externas")
+    print("LAB_BROWSER_OK: 6 fuentes, comparación, capas, hora pendiente, edición, confirmación, descarte, undo, reinicio, 360/390/1280, claro/oscuro, sin solicitudes externas")
     browser.close()

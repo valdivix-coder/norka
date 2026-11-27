@@ -17,6 +17,7 @@ jobs:
       NORKA_LAB_OUT: /tmp/norka-laboratorio
       NORKA_REPLAY_V73: /tmp/replay-v73
       NORKA_REPLAY_V74: /tmp/replay-v74
+      NORKA_REPLAY_V75: /tmp/replay-v75
     steps:
       - uses: actions/checkout@v7.0.1
       - uses: actions/setup-node@v7.1.0
@@ -36,6 +37,12 @@ jobs:
           run-id: '46034647175'
           github-token: '${{ secrets.GITHUB_TOKEN }}'
           path: /tmp/replay-v74
+      - uses: actions/download-artifact@v4
+        with:
+          name: evaluacion-v7-5-desarrollo-desarrollo-v7-5
+          run-id: '46037265864'
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+          path: /tmp/replay-v75
       - name: Exportar HTML aislado, comprobar corpus y propuesta
         run: npx vitest run --config evals/vitest.laboratorio.mts
       - name: Pruebas de navegador
