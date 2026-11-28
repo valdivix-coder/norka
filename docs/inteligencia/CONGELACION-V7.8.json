@@ -1,0 +1,27 @@
+{
+  "version": "7.8",
+  "estado": "instantanea_previa_desarrollo_sin_autorizacion_proveedor",
+  "revisionTecnica": "6263d1f218f47d694125c7f85cdf10208471ac62",
+  "runEvidencia": 46097130491,
+  "huellas": {
+    "instruccion": "e101e8b97bf07d934c4e9e5f8b40a50cf1927c03d3a3cc279dfc2f7ee3e7aadd",
+    "individual": "c99e97e5512223eab4ceb9d6b058f84ebef608698cfb9462cd0899d6cf1176cc",
+    "lote": "fa235a3c22d1ec2bf241838ca4eadb3f878b212b6a07e92279db388da4874e6e",
+    "esquema": "75aa6cf3748dc8fc274dc479484a189bcb98713ab9594f0928a70ce606bfa506",
+    "esquemaLote": "b53883d322d801d1e09ccad63cc1e63dfd177ebc930c8559087cb012c076ee85",
+    "archivos": {
+      "src/data/prompt-captura-v7-8.ts": "083da80cae407dc444f05e027c279c843bde91a674ada120db25f2fc5679792b",
+      "src/data/gemini-sintetico-v7-8.ts": "a69ddc0523cec44722f7a631b61cecb69f346d15a8f8fa44fd2a08cd8dc23b67",
+      "src/core/usecases/semantica-captura-v7-8.ts": "0a836b113b99ce0cf8aca424a8dec5a2329e9551a787c00c3e285a58cf70eac1",
+      "src/core/usecases/validar-interpretacion-v7-8.ts": "473e2a0861aed939ced56517439a37e20eeead477ad35f15470a80932ea12dfe",
+      "src/laboratorio/preseleccion-v7-8.ts": "8ed11fc626856c708294ba31f5594d9816a6a04732b0f5c106e1c66b49961ac3",
+      "evals/metricas-semanticas-v7-8.ts": "98d4f094a3154c14f7025c6f44f5f96cbbbe3535b9c6c8e614ff9625898009f0",
+      "evals/replay-v7-8.eval.ts": "7a063e94093233582568fda38871315f37fccfcde14f08f1ec67065feba4db0b",
+      "tests/arnes/interpretacion-v7-8.test.ts": "394999d39287a4d8d202cdc0da2556194b57f9d25a50a22b5bf5b7d470f1dc14",
+      "docs/inteligencia/CONGELACION-V7.7.json": "f6c18355382da05f778f19a8a28df0a919f0d64d53723499100d60459275325e",
+      "evals/captura-cl.json": "2f5872d1d911bf63ce81ff14e7103becac760b7790c13139310a296661736f16",
+      "docs/inteligencia/auditoria-universal-2026-11-27/resultados/casos-desarrollo-nuevos.json": "00b966f238fe53a45c9ba1f849fe965467d3247ffe6080cdd65d987685bd808c"
+    }
+  },
+  "limite": "No es congelación de aceptación. No autoriza Gemini. Nuevo ejecutor y gates completos requieren verificación y autorización expresa."
+}
