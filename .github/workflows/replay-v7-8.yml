@@ -2,7 +2,7 @@ name: V7.8 · ablación sin proveedor
 on:
   push:
     branches: [ia-universal-v7-8]
-    paths: ['evals/replay-v7-8.eval.ts','src/core/usecases/validar-interpretacion-v7-8.ts','src/core/usecases/semantica-captura-v7-8.ts','src/data/prompt-captura-v7-8.ts','src/data/gemini-sintetico-v7-8.ts','src/laboratorio/preseleccion-v7-8.ts','evals/metricas-semanticas-v7-8.ts','.github/workflows/replay-v7-8.yml']
+    paths: ['tests/arnes/interpretacion-v7-8.test.ts','evals/replay-v7-8.eval.ts','src/core/usecases/validar-interpretacion-v7-8.ts','src/core/usecases/semantica-captura-v7-8.ts','src/data/prompt-captura-v7-8.ts','src/data/gemini-sintetico-v7-8.ts','src/laboratorio/preseleccion-v7-8.ts','evals/metricas-semanticas-v7-8.ts','.github/workflows/replay-v7-8.yml']
 permissions:
   contents: read
   actions: read

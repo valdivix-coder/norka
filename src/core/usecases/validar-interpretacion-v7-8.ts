@@ -2,7 +2,7 @@
 import {validarV77} from "./validar-interpretacion-v7-7";
 import type {ContextoV74} from "./validar-interpretacion-v7-4";
 import type {SalidaInternaV71} from "../contracts/interpretacion-interna-v7-1";
-import {canonSem78,hayCondicion78,conservaCondicion78,realizadaUnica78,indicioRealizada78,contieneNombre78} from "./semantica-captura-v7-8";
+import {canonSem78,hayCondicion78,condicionUnica78,conservaCondicion78,realizadaUnica78,indicioRealizada78,contieneNombre78} from "./semantica-captura-v7-8";
 export const PASOS_V78=["B1","B2","B3","B4"] as const;
 type Paso=typeof PASOS_V78[number];
 export function validarV78(interna:SalidaInternaV71,c:ContextoV74,pasos:readonly Paso[]=PASOS_V78){
@@ -20,7 +20,7 @@ export function validarV78(interna:SalidaInternaV71,c:ContextoV74,pasos:readonly
   // B3: single conditional action: preserve original verbatim when condition is missing.
   // For a mixed capture don't attach a guessed condition to an arbitrary action: mark for review.
   if(activos.has("B3")&&e.tipo!=="nota"&&hayCondicion78(fuente)){
-   if(unica&&!conservaCondicion78(fuente,e.titulo)){e.titulo=fuente;marca("titulo","v78_condicion_literal");}
+   if(unica&&condicionUnica78(fuente)&&!conservaCondicion78(fuente,e.titulo)){e.titulo=fuente;marca("titulo","v78_condicion_literal");}
    if(e.confianza!=="baja")marca("confianza","v78_condicion_revision");
   }
   // B4: payment proposal with exact vocative and modal followed by literal title.
