@@ -2,6 +2,7 @@
 import {prepararDesarrollo77} from "./preparar-desarrollo-v7-7";
 import {crearGeminiPorVersion,solicitudV77} from "../src/data/gemini-sintetico-v7-7";
 import {ErrorGemini,type IntentoGemini} from "../src/data/gemini-sintetico";
+import {contratoInternoV71,type SalidaInternaV71} from "../src/core/contracts/interpretacion-interna-v7-1";
 import {validarV76} from "../src/core/usecases/validar-interpretacion-v7-6";
 import {contratoInterpretacion,type Interpretacion} from "../src/core/contracts/interpretacion";
 import {capa,alertasInvencion} from "./comparacion-v7-2";
@@ -27,7 +28,7 @@ function aplicacion(x:Entrada,s:Interpretacion){
  return {propuesta,medicion:medir(x,propuesta),listas:medirListas77(s,c.casos[0].esperado,ctx),preseleccion:preseleccionV77(rev),pendientes:rev.items.map(i=>({id:i.id,campos:i.borrador.pendientes})),horaPerdida:s.elementos.filter((e,i)=>e.plazo_hora&&!p[i].plazo_hora).length,responsabilidadDegradada:s.elementos.filter((e,i)=>e.tipo==="responsabilidad"&&p[i].tipo==="tarea").length,notaSinClasificar:s.elementos.filter(e=>e.tipo==="nota").length};
 }
 type Medidas=ReturnType<typeof medir>;
-type Valida={bruta:Interpretacion;v76:Interpretacion;v77:Interpretacion;interna:NonNullable<ReturnType<ReturnType<typeof crearGeminiPorVersion>["brutaInterna"]>>;ajustes76:ReturnType<typeof validarV76>["ajustes"];ajustes77:{indice:number;campo:string;motivo:string}[];medidas:{bruta:Medidas;v76:Medidas;v77:Medidas;aplicacion:Medidas};aplicacion:ReturnType<typeof aplicacion>;alertas:string[]};
+type Valida={bruta:Interpretacion;v76:Interpretacion;v77:Interpretacion;interna:SalidaInternaV71;ajustes76:ReturnType<typeof validarV76>["ajustes"];ajustes77:{indice:number;campo:string;motivo:string}[];medidas:{bruta:Medidas;v76:Medidas;v77:Medidas;aplicacion:Medidas};aplicacion:ReturnType<typeof aplicacion>;alertas:string[]};
 type Fila={id:string;grupo:string;decision:string|null;capa:string;soloDiagnostico:boolean;estado:"no_ejecutada"|"local"|"valida"|"fallida";causa?:string;datos?:Valida;intentos:IntentoGemini[]};
 const capas=["bruta","v76","v77","aplicacion"] as const;
 export function resumirB(filas:Fila[]){
@@ -68,7 +69,7 @@ export async function ejecutarB77({clave,transporte,esperar,progreso=()=>{}}:{cl
   }
   if(!salida){publicar();break;}
   try{
-   const bruta=ia.bruta(q.id)!,interna=ia.brutaInterna(q.id)!;
+   const bruta=ia.bruta(q.id)!,interna=contratoInternoV71.parse(ia.brutaInterna(q.id));
    const ctx={fecha:c.fecha,texto:q.texto,personas:c.personas_a_cargo,integrantes:c.integrantes,autor:c.autor,ambitos:c.ambitos};
    const anterior=validarV76(structuredClone(interna),ctx),v76=contratoInterpretacion.parse(anterior.publica),v77=salida;
    const ap=aplicacion(x,v77);
