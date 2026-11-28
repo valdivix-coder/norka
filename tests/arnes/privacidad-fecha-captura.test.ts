@@ -1,0 +1,11 @@
+import {test,expect} from "vitest";
+import {debeOmitirIA} from "../../src/core/usecases/prefiltro-ia";
+import {fechaCaptura} from "../../src/core/usecases/fecha-captura";
+import {desfaseSantiagoIANA} from "../../src/data/fecha-captura-zona";
+test.each([["Anotar +56 9 0000 0000","telefono"],["Anotar 900000000","telefono"],["Guardar celular de prueba","telefono"],["RUT ficticio 11.111.111-1","rut"],["11111111-K","rut"],["Correo ejemplo@invalid.example","correo"],["Tarjeta de débito de prueba","tarjeta_cuenta"],["0000 0000 0000 0000","tarjeta_cuenta"],["Darle 5 ml de jarabe cada 8 horas","tratamiento"],["Tomar 10 mg","tratamiento"],["Revisar tratamiento","tratamiento"]])("prefiltro %s",(t,m)=>expect(debeOmitirIA(t)).toEqual({omitir:true,motivo:m}));
+test.each(["Pagar 15 lucas","el 9 de junio","cada 15 días","Comprar pan","control dental a las 8","comprar 2 kilos de pan"])("control negativo %s",t=>expect(debeOmitirIA(t)).toEqual({omitir:false,motivo:null}));
+test("fecha civil nocturna y procesamiento posterior: no usa reloj",()=>{expect(fechaCaptura("2026-11-28T02:30:00Z",desfaseSantiagoIANA)).toEqual({fecha:"2026-11-27",hora:"23:30",zona:"America/Santiago",desfaseMinutos:-180});expect(fechaCaptura("2026-11-28T03:10:00Z",desfaseSantiagoIANA)?.fecha).toBe("2026-11-28");});
+test("invierno/verano, offset origen distinto, cambio de año y bisiesto",()=>{expect(fechaCaptura("2026-07-01T03:30:00Z",desfaseSantiagoIANA)).toMatchObject({fecha:"2026-06-30",hora:"23:30",desfaseMinutos:-240});expect(fechaCaptura("2027-01-01T02:30:00+01:00",()=>-180)).toMatchObject({fecha:"2026-12-31",hora:"22:30"});expect(fechaCaptura("2028-03-01T01:00:00Z",()=>-180)?.fecha).toBe("2028-02-29");});
+test("transición horaria: puerto dependiente del instante, no regla fija de meses",()=>{const p=({hora}:{hora:string})=>hora<"04:00"?-240:-180;expect(fechaCaptura("2026-09-06T03:59:00Z",p)?.hora).toBe("23:59");expect(fechaCaptura("2026-09-06T04:00:00Z",p)?.hora).toBe("01:00");});
+test.each(["2026-02-30T10:00:00Z","2026-11-27T24:00:00Z","2026-11-27T10:00:00","2026-11-27T10:00:00+15:00","2026-11-27T10:00:00-00:00"])("rechaza fecha inválida %s",x=>expect(fechaCaptura(x,()=>-180)).toBeNull());
+test("rechaza puerto sin dato",()=>expect(fechaCaptura("2026-11-27T10:00:00Z",()=>null)).toBeNull());
