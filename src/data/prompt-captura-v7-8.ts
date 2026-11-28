@@ -19,9 +19,9 @@ const ejemplos: { t: string; r: { descartes?: Ej[]; elementos: Ej[] } }[] = [
   { t: "Limpiar la cocina y comprar fósforos", r: { elementos: [
     el({ titulo: "Limpiar la cocina", persona_base: "nombrada", persona_a_cargo: "El hogar", ambito: "Hogar", alcance: "ninguno" }),
     el({ titulo: "Comprar fósforos", persona_base: "ninguna", ambito: "Compras", alcance: "ninguno" })] } },
-  { t: "Inscribir a Renata en el taller de danza escolar y transferir 25 lucas de la mensualidad de danza de Renata", r: { elementos: [
+  { t: "Inscribir a Renata en el taller de danza escolar y transferir 25 lucas de su mensualidad de danza", r: { elementos: [
     el({ titulo: "Inscribir a Renata en el taller de danza", persona_base: "nombrada", persona_a_cargo: "Renata", ambito: "Colegio", alcance: "ninguno" }),
-    el({ titulo: "Transferir 25 lucas de la mensualidad de danza de Renata", persona_base: "nombrada", persona_a_cargo: "Renata", ambito: "Pagos y finanzas", alcance: "ninguno" })] } },
+    el({ titulo: "Transferir 25 lucas de la mensualidad de danza de Renata", persona_base: "referida", persona_a_cargo: "Renata", ambito: "Pagos y finanzas", alcance: "ninguno" })] } },
   { t: "Retirar los diplomas de Renata y Gaspar y enviar el comprobante a la escuela", r: { elementos: [
     el({ titulo: "Retirar los diplomas de Renata y Gaspar", persona_base: "ninguna", ambito: "Colegio", alcance: "ninguno", confianza: "baja" }),
     el({ titulo: "Enviar el comprobante a la escuela", persona_base: "ninguna", ambito: "Colegio", alcance: "ninguno", confianza: "baja" })] } },
