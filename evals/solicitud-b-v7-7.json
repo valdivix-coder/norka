@@ -1,0 +1,10 @@
+{
+  "modo": "desarrollo-B",
+  "version": "7.7",
+  "maxCasos": 52,
+  "modelo": "gemini-3.5-flash-lite",
+  "presupuestoAdicional": 0,
+  "revisionTecnica": "34cc0c0b4f7428c9e8d948acbeed76544a9f9735",
+  "revisionEjecutor": "7c34020e00f3d062c710fe8554c51d28e460f2dd",
+  "autorizacion": "corrida B de 7.7; no examen oficial; presupuesto adicional cero"
+}
