@@ -37,8 +37,8 @@ test("contraste residual V7.8 sobre 187 respuestas sintéticas archivadas",()=>{
  const bytes=readFileSync("/tmp/replay-b77/salida-b-v7-7.json");
  expect(createHash("sha256").update(bytes).digest("hex")).toBe("94b2bea38f0a847fd077950b53166eac973c6874084da73140bffded99ff58ad");
  const jB=JSON.parse(bytes.toString("utf8"));expect(jB.parada).toBe("F14:alerta_candidata");expect(jB.resumen.validas).toBe(14);
- const pre=prepararDesarrollo77();
- for(const f of jB.filas){if(f.estado!=="valida")continue;const x=pre.entradas.find(x=>x.id===f.id)!;expect(x.local).toBe(false);const q=x.corpus.casos[0],c=x.corpus;casos.push({fuente:"B77",id:q.id,version:"7.7",ctx:{fecha:c.fecha,texto:q.texto,personas:c.personas_a_cargo,integrantes:c.integrantes,ambitos:c.ambitos,autor:c.autor},interna:f.datos.interna,bruta:f.datos.bruta,esperado:q.esperado});}
+ const preparacion=prepararDesarrollo77();
+ for(const f of jB.filas){if(f.estado!=="valida")continue;const x=preparacion.entradas.find(x=>x.id===f.id)!;expect(x.local).toBe(false);const q=x.corpus.casos[0],c=x.corpus;casos.push({fuente:"B77",id:q.id,version:"7.7",ctx:{fecha:c.fecha,texto:q.texto,personas:c.personas_a_cargo,integrantes:c.integrantes,ambitos:c.ambitos,autor:c.autor},interna:f.datos.interna,bruta:f.datos.bruta,esperado:q.esperado});}
  expect(casos.length).toBe(187);
 
  // Only archived synthetic development inputs. Never import a transport or real family store.
