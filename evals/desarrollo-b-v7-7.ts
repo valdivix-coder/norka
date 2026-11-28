@@ -55,13 +55,12 @@ export async function ejecutarB77({clave,transporte,esperar,progreso=()=>{}}:{cl
   const esperado=JSON.stringify(solicitudV77(c,[{id:q.id,texto:q.texto}]).cuerpo);
   const protegido:typeof fetch=async(u,init)=>{
    if(String(u)!==URL||init?.method!=="POST"||init.body!==esperado||solicitudes>=104||f.intentos.length>=2)throw Error("SOLICITUD_NO_AUTORIZADA");
-   if(solicitudes>0)await esperar(4500);
    solicitudes++;return transporte(u,init);
   };
   const ia=crearGeminiPorVersion({clave,modelo:MODELO,corpus:c,version:"7.7",solicitar:protegido,observar:d=>f.intentos.push(d)});
   let salida:Interpretacion|undefined;
   for(let k=0;k<2;k++){
-   try{salida=await ia.evaluar(q.id);break;}
+   try{if(solicitudes>0)await esperar(4500);salida=await ia.evaluar(q.id);break;}
    catch(err){const causa=err instanceof ErrorGemini?"HTTP "+err.estado:f.intentos.at(-1)?.motivo??"sin_salida_valida";
     if(k===0&&(causa==="HTTP 503"||causa==="timeout"))continue;
     f.estado="fallida";f.causa=causa;parada=x.id+":"+causa;break;
