@@ -6,8 +6,8 @@ import {validarV78,PASOS_V78} from "../src/core/usecases/validar-interpretacion-
 import {medirSemantica78} from "./metricas-semanticas-v7-8";
 import {prepararDesarrollo77} from "./preparar-desarrollo-v7-7";
 import {createHash} from "node:crypto";
-import {validarV77,PASOS_V77} from "../src/core/usecases/validar-interpretacion-v7-7";
-import {medirAcciones77,medirListas77} from "./metricas-acciones-v7-7";
+import {validarV77} from "../src/core/usecases/validar-interpretacion-v7-7";
+import {medirAcciones77} from "./metricas-acciones-v7-7";
 import {capa} from "./comparacion-v7-2";
 import {contratoInterpretacion,type Interpretacion} from "../src/core/contracts/interpretacion";
 import type {SalidaInternaV71} from "../src/core/contracts/interpretacion-interna-v7-1";
