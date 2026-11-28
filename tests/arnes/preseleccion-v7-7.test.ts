@@ -1,0 +1,10 @@
+import {test,expect} from "vitest";
+import {iniciarRevision} from "../../src/laboratorio/motor-revision-universal";
+import {preseleccionV77} from "../../src/laboratorio/preseleccion-v7-7";
+import type {ElementoInterpretado} from "../../src/core/contracts/interpretacion";
+const ctx={texto:"Captura ficticia",autorId:"i1",personas:[{id:"p1",nombre:"El hogar"}],ambitos:["Hogar","Salud","Pagos y finanzas","Personalizado"].map((nombre,i)=>({id:"a"+i,nombre})),integrantes:[{id:"i1",nombre:"A"},{id:"i2",nombre:"B"}]};
+const e:ElementoInterpretado={tipo:"tarea",titulo:"Limpiar terraza",persona_a_cargo:"El hogar",ambito:"Hogar",plazo_fecha:null,plazo_hora:null,recurrencia:null,dirigida_a:null,confianza:"alta"};
+const probar=(...elementos:ElementoInterpretado[])=>preseleccionV77(iniciarRevision({elementos},ctx)!);
+test("D39 permite selección de tareas claras de bajo riesgo",()=>expect(probar(e,{...e,titulo:"Ordenar bodega"})).toEqual([0,1]));
+test.each([{...e,ambito:"Pagos y finanzas",titulo:"Pagar luz"},{...e,ambito:"Salud",titulo:"Control dental"},{...e,tipo:"propuesta" as const,dirigida_a:"B"},{...e,ambito:"Personalizado"},{...e,titulo:"Pagar el arriendo"}])("D39 no preselecciona acción delicada ni lote mixto: $titulo",x=>{expect(probar(x)).toEqual([]);expect(probar(e,x)).toEqual([]);});
+test("no preselecciona acción por completar",()=>expect(probar({...e,confianza:"baja"})).toEqual([]));

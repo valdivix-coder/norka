@@ -3,7 +3,7 @@ import {readFileSync} from "node:fs";
 import {cargarFixtures} from "./replay-validadores";
 import {validarV76} from "../src/core/usecases/validar-interpretacion-v7-6";
 import {validarV77,PASOS_V77} from "../src/core/usecases/validar-interpretacion-v7-7";
-import {medirAcciones77} from "./metricas-acciones-v7-7";
+import {medirAcciones77,medirListas77} from "./metricas-acciones-v7-7";
 import {capa} from "./comparacion-v7-2";
 import {contratoInterpretacion,type Interpretacion} from "../src/core/contracts/interpretacion";
 import type {SalidaInternaV71} from "../src/core/contracts/interpretacion-interna-v7-1";
@@ -30,9 +30,9 @@ test("ablación V7.7 en salidas históricas, sin proveedor",()=>{
  for(const d of j.detalle){if(d.version==="6.0"||d.estado!=="valida"||!d.brutaInterna||!d.bruta)continue;const q=c.casos.find((x:{id:number})=>x.id===d.id);casos.push({fuente,id:d.id,version:d.version,ctx:{fecha:c.fecha,texto:q.texto,personas:c.personas_a_cargo,integrantes:c.integrantes,ambitos:c.ambitos,autor:c.autor},interna:d.brutaInterna,bruta:d.bruta,esperado:q.esperado});}
  }
  expect(antiguos).toBe(61);expect(casos.length).toBe(173);
- const medir=(c:Caso,pasos:readonly (typeof PASOS_V77)[number][])=>{const r=pasos.length?validarV77(structuredClone(c.interna),c.ctx,pasos):validarV76(structuredClone(c.interna),c.ctx);const a=contratoInterpretacion.parse(r.publica),m=capa(a,c.esperado),s=medirAcciones77(a,c.esperado);return {principal:m.principal,estricta:m.estricta,correctas:s.correctas,sustituidas:s.sustituidas,ajustes:r.ajustes.filter(a=>a.motivo.startsWith("v77_"))};};
+ const medir=(c:Caso,pasos:readonly (typeof PASOS_V77)[number][])=>{const r=pasos.length?validarV77(structuredClone(c.interna),c.ctx,pasos):validarV76(structuredClone(c.interna),c.ctx);const a=contratoInterpretacion.parse(r.publica),m=capa(a,c.esperado),s=medirAcciones77(a,c.esperado);const ids=(xs:readonly string[],p:string)=>xs.map((nombre,i)=>({nombre,id:p+i})),integrantes=ids(c.ctx.integrantes,"i"),autorId=integrantes.find(x=>x.nombre===c.ctx.autor)!.id;const listas=medirListas77(a,c.esperado,{texto:c.ctx.texto,autorId,personas:ids(c.ctx.personas,"p"),ambitos:ids(c.ctx.ambitos,"a"),integrantes});return {principal:m.principal,estricta:m.estricta,correctas:s.correctas,sustituidas:s.sustituidas,esperadas:s.esperadas,entregadas:s.entregadas,listas,ajustes:r.ajustes.filter(a=>a.motivo.startsWith("v77_"))};};
  let previo=casos.map(c=>medir(c,[]));
- const resumen=(f:typeof previo)=>({principal:f.filter(x=>x.principal).length,estricta:f.filter(x=>x.estricta).length,correctas:f.reduce((s,x)=>s+x.correctas,0),sustituidas:f.reduce((s,x)=>s+x.sustituidas,0)});
+ const resumen=(f:typeof previo)=>({principal:f.filter(x=>x.principal).length,estricta:f.filter(x=>x.estricta).length,correctas:f.reduce((s,x)=>s+x.correctas,0),sustituidas:f.reduce((s,x)=>s+x.sustituidas,0),esperadas:f.reduce((s,x)=>s+x.esperadas,0),entregadas:f.reduce((s,x)=>s+x.entregadas,0),listas:f.reduce((s,x)=>s+x.listas.listas,0),listasConError:f.reduce((s,x)=>s+x.listas.listasConError,0),pendientes:f.reduce((s,x)=>s+x.listas.pendientes,0)});
  expect(resumen(previo).estricta).toBe(156);
  const filas=[{paso:"A0",...resumen(previo),activaciones:0,empeoran:[] as string[]}];
  for(let i=1;i<=PASOS_V77.length;i++){
