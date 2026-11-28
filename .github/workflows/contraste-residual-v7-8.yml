@@ -1,0 +1,59 @@
+name: V7.8 · contraste residual sin proveedor
+on:
+  push:
+    branches: [ia-universal-v7-8]
+    paths: ['evals/contraste-residual-v7-8.eval.ts','evals/vitest.contraste-residual-v7-8.mts','.github/workflows/contraste-residual-v7-8.yml']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  replay:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run arnes
+      - uses: actions/download-artifact@v4
+        with:
+          name: evaluacion-v7-3-desarrollo-desarrollo-v7-3
+          run-id: '45994191002'
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+          path: /tmp/replay-v73
+      - uses: actions/download-artifact@v4
+        with:
+          name: evaluacion-v7-4-desarrollo-desarrollo-v7-4
+          run-id: '46034647175'
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+          path: /tmp/replay-v74
+      - uses: actions/download-artifact@v4
+        with:
+          name: evaluacion-v7-5-desarrollo-desarrollo-v7-5
+          run-id: '46037265864'
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+          path: /tmp/replay-v75
+      - uses: actions/download-artifact@v4
+        with:
+          name: evaluacion-v7-5-desarrollo-desarrollo-v7-4
+          run-id: '46039721333'
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+          path: /tmp/replay-resistencia
+      - uses: actions/download-artifact@v4
+        with:
+          name: desarrollo-b-v7-7
+          run-id: '46091406954'
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+          path: /tmp/replay-b77
+      - run: npx vitest run --config evals/vitest.contraste-residual-v7-8.mts
+      - run: npx vitest run --config evals/vitest.congelacion-v7-7.mts
+      - run: npx vitest run --config evals/vitest.huellas-v7-8.mts
+      - run: npx vitest run --config evals/vitest.congelacion-v7-8.mts
+      - uses: actions/upload-artifact@v4
+        with:
+          name: contraste-residual-v7-8
+          path: /tmp/contraste-residual-v78.json
+          if-no-files-found: error
+          retention-days: 30
