@@ -2,7 +2,7 @@ name: V7.7 · ablación sin proveedor
 on:
   push:
     branches: [ia-universal-v7-7]
-    paths: ['evals/replay-v7-7.eval.ts','src/core/usecases/validar-interpretacion-v7-7.ts','evals/metricas-acciones-v7-7.ts','.github/workflows/replay-v7-7.yml','evals/listas-v7-7.eval.ts','evals/huellas-v7-7.eval.ts','evals/preparar-desarrollo-v7-7.ts','evals/puertas-v7-7.ts','src/laboratorio/preseleccion-v7-7.ts']
+    paths: ['evals/replay-v7-7.eval.ts','src/core/usecases/validar-interpretacion-v7-7.ts','evals/metricas-acciones-v7-7.ts','.github/workflows/replay-v7-7.yml','evals/listas-v7-7.eval.ts','evals/huellas-v7-7.eval.ts','evals/preparar-desarrollo-v7-7.ts','evals/puertas-v7-7.ts','src/laboratorio/preseleccion-v7-7.ts','docs/inteligencia/CONGELACION-V7.7.json','evals/congelacion-v7-7.eval.ts']
 permissions:
   contents: read
   actions: read
@@ -51,3 +51,4 @@ jobs:
       - run: npx vitest run --config evals/vitest.listas-v7-7.mts
       - run: npx vitest run --config evals/vitest.auditoria-universal.mts
       - run: npx vitest run --config evals/vitest.huellas-v7-7.mts
+      - run: npx vitest run --config evals/vitest.congelacion-v7-7.mts

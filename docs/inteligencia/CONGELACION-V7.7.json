@@ -1,0 +1,57 @@
+{
+  "version": "7.7",
+  "revisionTecnica": "34cc0c0b4f7428c9e8d948acbeed76544a9f9735",
+  "estado": "congelacion_previa_desarrollo_sin_autorizacion_de_proveedor",
+  "runEvidencia": 46088002607,
+  "huellas": {
+    "6.0": {
+      "instruccion": "2977309124e9c632908d5e996e4b097d893809a17f01b5ef8b24a2db3f653448",
+      "validador": "cbb520991abadf1a106a5275e87c483c02d7e548e59a101841eddd39dc41da76"
+    },
+    "7.5": {
+      "instruccion": "df6f9b87af4b9cf25b4e0eecc9e91078dd3c75e89f11045555989f799f2d5a3c",
+      "validador": "c0c1a241dc8af7185fd4ce6ec75118b374910961fe47e925004a94ce885bf172",
+      "adaptador": "fab6294677d4b4d2c687406dfd2798d43f586602d0748607f6ef650e0ad7d55b"
+    },
+    "7.7": {
+      "instruccion": "df6f9b87af4b9cf25b4e0eecc9e91078dd3c75e89f11045555989f799f2d5a3c",
+      "individual": "c99e97e5512223eab4ceb9d6b058f84ebef608698cfb9462cd0899d6cf1176cc",
+      "lote": "fa235a3c22d1ec2bf241838ca4eadb3f878b212b6a07e92279db388da4874e6e",
+      "esquema": "75aa6cf3748dc8fc274dc479484a189bcb98713ab9594f0928a70ce606bfa506",
+      "esquemaLote": "b53883d322d801d1e09ccad63cc1e63dfd177ebc930c8559087cb012c076ee85",
+      "validador": "deb45ef3f88d3583da7547ea30cc8e2e30b6ba5ac2d9f61317b60904c8a18308",
+      "base76": "328515d188f85424bbaba7cb3b72e36b69bc8a6b1019a6637060a8ce06af695d",
+      "base74": "c0c1a241dc8af7185fd4ce6ec75118b374910961fe47e925004a94ce885bf172",
+      "corpusOficial": "2f5872d1d911bf63ce81ff14e7103becac760b7790c13139310a296661736f16",
+      "metricas": "b3da3925106e2b09980fff28527e2533c864cb3262bf7fa8f1eb45eba93edf10",
+      "validadorBase70": "d8a282898d1ae7028c36ba6e62bfa4c9d3fa7f9e4631b96493bb835285bebfa2",
+      "adaptador": "0de535a1c6b847e6a72248ab7a1defa2383931b61366e19007d1b50fca42b9c8",
+      "evaluador": "dda7710eb1bf7403d8bea8a5f235fbcf27e15a8be013098441e883b358b1843b",
+      "cobertura": "756dd01528018253250bc71ca4ac3b134cf6b4424f5e8707f63542550a501e8f"
+    }
+  },
+  "archivos": {
+    "evals/captura-cl.json": "2f5872d1d911bf63ce81ff14e7103becac760b7790c13139310a296661736f16",
+    "docs/inteligencia/auditoria-universal-2026-11-27/resultados/casos-desarrollo-nuevos.json": "00b966f238fe53a45c9ba1f849fe965467d3247ffe6080cdd65d987685bd808c",
+    "src/core/contracts/interpretacion.ts": "1b2214877038e3ead58fe181341aef7cee15ca5f3d5cc17a79476f2d825ef1f2",
+    "src/core/contracts/interpretacion-interna-v7-1.ts": "c1246492856aed917f175e60392a2110621f85188cdccbbc3732e9a66badf86f",
+    "src/core/usecases/prefiltro-ia.ts": "e999f02d5b9136a44bfc48a9baeb24015b3d3e2e3e9d0e8f83668ca06e9efb69",
+    "src/core/usecases/fecha-captura.ts": "ad0aad4d4088210582b809cf3b30966a201257ca959835857cff3fa7daa04ff3",
+    "src/data/fecha-captura-zona.ts": "b11926750704dbbb67dbe9450dd944f90d4f9097d528a57c5e4c359fba615dac",
+    "src/core/usecases/calendario-captura.ts": "1ada3a8d40f33d63273c113b6d934e66ca70be6055aa323523174162774059af",
+    "src/core/usecases/interpretacion.ts": "47ab5f7840945ba68a49ecd72a12a91ffb0d6078c5c90eaaf2e40f014ea78aab",
+    "src/laboratorio/revision-sintetica.ts": "c1428cc9f9d44aa516758439b1734f8dce7344309531cdf0b7322b0bd919a758",
+    "src/laboratorio/motor-revision-universal.ts": "30b11abafa8202dd85818fc8f0008bc447222cf2a7000737c886123efec29f80",
+    "src/laboratorio/preseleccion-v7-7.ts": "b4803c0d8b0d3694e7f1bcd9e93ff76b9ef12565fde2d3bf3693157a603278c5",
+    "evals/auditar-acciones.ts": "74c5839e78ded5546f8b2687fd76aaf199494cce0fe926dcb8673ef5b58ccf2f",
+    "evals/comparacion-v7-2.ts": "deaa3fc48fc6057f241aa71bcb39ff99a1b4ce43d85a72fa73f3bb99eb2eeda3",
+    "evals/metricas-acciones-v7-7.ts": "b3da3925106e2b09980fff28527e2533c864cb3262bf7fa8f1eb45eba93edf10",
+    "evals/preparar-desarrollo-v7-7.ts": "dbf7361dd3b706d63e7463c0f28b34a50d2252925f66ea949b8be52e346ad82e",
+    "evals/puertas-v7-7.ts": "b07e2d8836bc7c94973a2947c90673a14989edfd002a565268c220a680ea064d",
+    "evals/replay-v7-7.eval.ts": "4268444ee7783c8131a206249ff38c0941f7f42a9842af270be06015cbcc8a99",
+    "evals/listas-v7-7.eval.ts": "4889de6d432da0b07bcac1a1aac9591dd078048e413d4f96936c81b650593e22",
+    "src/data/gemini-sintetico.ts": "551376e492c2e37c5aa6e7cf9addf1a00646597c1bbcb741e438bf62ca9b4b60",
+    "src/data/gemini-sintetico-v7-6.ts": "f164c019fd4af8fc8ff950adb179729275b9bc0222a2673929a19b0f0d453059",
+    "src/core/usecases/revisar-interpretacion.ts": "cbb520991abadf1a106a5275e87c483c02d7e548e59a101841eddd39dc41da76"
+  }
+}
