@@ -122,7 +122,7 @@ export async function ejecutarComparacionV77({ clave, corpus, modo = "aceptacion
   if (!solicitar) throw new Error("SIN_AUTORIZACION_DE_PROVEEDOR: solo transporte explícito de prueba");
   if (!Number.isSafeInteger(semilla) || (modo !== "aceptacion" && modo !== "desarrollo")) throw new Error("CONFIG_AB_INVALIDA");
   if (modo === "aceptacion" && JSON.stringify(versiones) !== JSON.stringify(["6.0", "7.7"])) throw new Error("ACEPTACION_SOLO_6_0_VS_7_7");
-  if (versiones[0] !== "6.0" || new Set(versiones).size !== versiones.length || versiones.length < 2) throw new Error("CONFIG_AB_INVALIDA");
+  if (versiones[0] !== "6.0" || versiones.at(-1)!=="7.7" || new Set(versiones).size !== versiones.length || versiones.length < 2) throw new Error("CONFIG_AB_INVALIDA");
   if (new Set(corpus.casos.map(c => c.id)).size !== corpus.casos.length) throw new Error("CORPUS_AB_INVALIDO");
   const candidata = versiones.at(-1)!;
   const detalle: Detalle[] = versiones.flatMap(version => corpus.casos.map(c => ({ id: c.id, version, estado: "no_ejecutada" as const })));

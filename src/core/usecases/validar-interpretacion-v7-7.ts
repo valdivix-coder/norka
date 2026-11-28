@@ -38,7 +38,8 @@ export function validarV77(interna:SalidaInternaV71,c:ContextoV74,pasos:readonly
    if(activos.has("A1")&&ambigua)fecha(null,"v77_fecha_alternativa");
    if(activos.has("A2")&&!ambigua&&!repeticion){
     const m=diaNumero.exec(f);
-    if(m){
+    const relojTrasDia=new RegExp("\\b(?:"+dias+") \\d{1,2}(?:[.h:]\\d{2}|\\s*(?:am|pm)\\b)").test(literal);
+    if(m&&!relojTrasDia){
      const raw=o.plazo_fecha, civil=raw&&leerFechaCivil(raw);
      const mes=meses.findIndex(x=>new RegExp("\\bde "+x+"\\b").test(f))+1;
      const anio=/\b(?:de|del) (\d{4})\b/.exec(f);
@@ -52,7 +53,12 @@ export function validarV77(interna:SalidaInternaV71,c:ContextoV74,pasos:readonly
    }
    if(activos.has("A4")&&!ambigua&&!/\b(?:12|doce) de la noche\b/.test(f)&&/\b\d{1,2}[.h:]\d{2}\b|\b\d{1,2}\s*(?:am|pm)\b|\b(?:a eso de|como a las|tipo)\b/.test(literal)){
     // Restore only original hour. Literal verification is incomplete; mark explicitly.
-    if(o.plazo_hora!==null&&e.plazo_hora!==o.plazo_hora)hora(o.plazo_hora,"v77_hora_no_verificada");
+    const explicita=/\b(\d{1,2})[.h:](\d{2})\b/.exec(literal),ampm=/\b(\d{1,2})\s*(am|pm)\b/.exec(literal);
+    const hh=explicita?Number(explicita[1]):ampm?Number(ampm[1])%12+(ampm[2]==="pm"?12:0):null;
+    const mm=explicita?Number(explicita[2]):ampm?0:null;
+    const compatible=hh===null||mm===null||o.plazo_hora===String(hh).padStart(2,"0")+":"+String(mm).padStart(2,"0");
+    if(o.plazo_hora!==null&&e.plazo_hora!==o.plazo_hora&&compatible)hora(o.plazo_hora,"v77_hora_no_verificada");
+    else if(!compatible)marcar("plazo_hora","v77_hora_contradictoria");
     else if(/\b(?:a eso de|como a las|tipo)\b/.test(literal))marcar("plazo_hora","v77_hora_aproximada");
    }
    if(activos.has("A5")&&/\b(?:cada mes|de cada mes|todos los meses)\b/.test(f)&&!/\b(?:desde|a partir|hasta|comenzando|empieza)\b/.test(f)&&e.plazo_fecha!==null)fecha(null,"v77_repeticion_sin_plazo");
