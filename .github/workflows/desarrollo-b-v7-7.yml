@@ -1,0 +1,42 @@
+name: V7.7 · desarrollo B autorizado
+on:
+  push:
+    branches: [ia-universal-v7-7]
+    paths: ['evals/solicitud-b-v7-7.json']
+permissions:
+  contents: read
+concurrency:
+  group: norka-evaluacion-sintetica
+  cancel-in-progress: false
+jobs:
+  desarrollo:
+    if: github.ref == 'refs/heads/ia-universal-v7-7' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verificar corpus, V6, congelación y ejecutor
+        run: |
+          test "$(git hash-object evals/captura-cl.json)" = "8a1add2d3bda79cd82db2bfc9166a501aaec5ca6"
+          test "$(git hash-object src/data/prompt-captura.ts)" = "865b9191dbeff277e47a6730d5d48c6a3accc086"
+          npm run arnes
+          npx vitest run --config evals/vitest.congelacion-v7-7.mts
+          npx vitest run --config evals/vitest.huellas-v7-7.mts
+      - name: B de un brazo, sin respaldo ni examen oficial
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          NORKA_B77_AUTORIZADA: '1'
+        run: npx vitest run --config evals/vitest.desarrollo-b-v7-7.mts
+      - name: Evidencia sintética incluso si hay parada
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: desarrollo-b-v7-7
+          path: evals/salida-b-v7-7.json
+          if-no-files-found: ignore
+          retention-days: 14
